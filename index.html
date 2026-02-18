@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Turn-Based RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="card">
+    <h1>Turn‑Based RPG</h1>
+
+    <p><strong>Player HP:</strong></p>
+    <div class="health-bar"><div id="playerHPBar" class="health-fill"></div></div>
+
+    <p><strong>Enemy HP:</strong></p>
+    <div class="health-bar"><div id="enemyHPBar" class="health-fill"></div></div>
+
+    <p><strong>Action Points:</strong> <span id="ap"></span></p>
+  </div>
+
+  <div class="card">
+    <button onclick="playerAttack()">Attack (1 AP)</button>
+    <button onclick="playerDefend()">Defend (0 AP)</button>
+    <button onclick="playerSkill()">Skill (2 AP)</button>
+  </div>
+
+  <div class="card">
+    <div id="log"></div>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
