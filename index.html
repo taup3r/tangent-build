@@ -21,20 +21,32 @@
   </div>
 
   <div class="card">
-    <button onclick="playerAttack()">Attack (1 AP)</button>
-    <button onclick="playerDefend()">Defend (0 AP)</button>
-    <button onclick="playerSkill()">Skill (2 AP)</button>
+    <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
+    <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
+    <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
   </div>
 
   <div class="card">
     <div id="log"></div>
   </div>
 
+  <!-- TIMING MINI-GAME -->
   <div class="card" id="timingCard" style="display:none;">
-    <p><strong>Timed Hit!</strong> Press SPACE when the marker is in the green zone.</p>
+    <p><strong>Timed Hit!</strong> Click the button when the marker is in the green zone.</p>
 
     <div class="timing-bar">
       <div class="timing-zone"></div>
+      <div class="timing-marker" id="timingMarker"></div>
+    </div>
+
+    <button id="timingButton" style="margin-top:10px;">HIT!</button>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>      <div class="timing-zone"></div>
       <div class="timing-marker" id="timingMarker"></div>
     </div>
   </div>
