@@ -94,16 +94,61 @@ function playerDefend() {
   enemyTurn();
 }
 
+let timingActive = false;
+let timingPos = 0;
+let timingDir = 1;
+let timingInterval = null;
+
 function playerSkill() {
   if (player.ap < 2) return log("Not enough AP!");
 
   player.ap -= 2;
-  let dmg = (Math.floor(Math.random() * 6) + 4) * 2;
+  log("Skill activated! Time your hit...");
 
-  enemy.hp -= dmg;
+  startTimingMiniGame();
+}
+
+function startTimingMiniGame() {
+  timingActive = true;
+  timingPos = 0;
+  timingDir = 1;
+
+  document.getElementById("timingCard").style.display = "block";
+
+  timingInterval = setInterval(() => {
+    timingPos += timingDir * 2;
+
+    if (timingPos >= 100) timingDir = -1;
+    if (timingPos <= 0) timingDir = 1;
+
+    document.getElementById("timingMarker").style.left = timingPos + "%";
+  }, 16); // ~60fps
+
+  window.addEventListener("keydown", timingKeyPress);
+}
+
+function timingKeyPress(e) {
+  if (!timingActive) return;
+  if (e.code !== "Space") return;
+
+  stopTimingMiniGame();
+}
+
+function stopTimingMiniGame() {
+  timingActive = false;
+  clearInterval(timingInterval);
+  document.getElementById("timingCard").style.display = "none";
+  window.removeEventListener("keydown", timingKeyPress);
+
+  let success = timingPos >= 40 && timingPos <= 60;
+
+  let base = Math.floor(Math.random() * 6) + 4;
+  let dmg = success ? base * 2.5 : base * 2;
+
+  log(success ? "Perfect timing! 2.5x damage!" : "Good hit! 2x damage.");
+
+  enemy.hp -= Math.floor(dmg);
   if (enemy.hp < 0) enemy.hp = 0;
-
-  log("You unleash a Skill for " + dmg + "!");
 
   updateUI();
 
