@@ -7,8 +7,14 @@ let player = {
 
 let enemy = {
   hp: 30,
-  max: 30
+  max: 30,
+  ap: 0
 };
+
+function clampAP() {
+  if (player.ap > 2) player.ap = 2;
+  if (enemy.ap > 2) enemy.ap = 2;
+}
 
 function updateUI() {
   document.getElementById("ap").textContent = player.ap;
@@ -28,6 +34,7 @@ function log(msg) {
 
 function startTurn() {
   player.ap += 1;
+  clampAP();
   player.defending = false;
   log("\n--- Player Turn ---");
   updateUI();
@@ -35,6 +42,9 @@ function startTurn() {
 
 function enemyTurn() {
   log("\n--- Enemy Turn ---");
+
+  enemy.ap += 1;
+  clampAP();
 
   let dmg = Math.floor(Math.random() * 6) + 3;
 
@@ -60,7 +70,15 @@ function enemyTurn() {
 }
 
 function disableButtons() {
-  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  document.getElementById("attackBtn").disabled = true;
+  document.getElementById("defendBtn").disabled = true;
+  document.getElementById("skillBtn").disabled = true;
+}
+
+function enableButtons() {
+  document.getElementById("attackBtn").disabled = false;
+  document.getElementById("defendBtn").disabled = false;
+  document.getElementById("skillBtn").disabled = false;
 }
 
 function checkWin() {
@@ -76,6 +94,8 @@ function playerAttack() {
   if (player.ap < 1) return log("Not enough AP!");
 
   player.ap -= 1;
+  clampAP();
+
   let dmg = Math.floor(Math.random() * 6) + 4;
 
   enemy.hp -= dmg;
@@ -103,8 +123,11 @@ function playerSkill() {
   if (player.ap < 2) return log("Not enough AP!");
 
   player.ap -= 2;
+  clampAP();
+
   log("Skill activated! Time your hit...");
 
+  disableButtons();
   startTimingMiniGame();
 }
 
@@ -122,23 +145,17 @@ function startTimingMiniGame() {
     if (timingPos <= 0) timingDir = 1;
 
     document.getElementById("timingMarker").style.left = timingPos + "%";
-  }, 16); // ~60fps
+  }, 16);
 
-  window.addEventListener("keydown", timingKeyPress);
-}
-
-function timingKeyPress(e) {
-  if (!timingActive) return;
-  if (e.code !== "Space") return;
-
-  stopTimingMiniGame();
+  document.getElementById("timingButton").onclick = stopTimingMiniGame;
 }
 
 function stopTimingMiniGame() {
+  if (!timingActive) return;
+
   timingActive = false;
   clearInterval(timingInterval);
   document.getElementById("timingCard").style.display = "none";
-  window.removeEventListener("keydown", timingKeyPress);
 
   let success = timingPos >= 40 && timingPos <= 60;
 
@@ -153,6 +170,8 @@ function stopTimingMiniGame() {
   updateUI();
 
   if (!checkWin()) enemyTurn();
+
+  enableButtons();
 }
 
 updateUI();
