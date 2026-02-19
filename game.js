@@ -400,8 +400,7 @@ function showResultModal(victory) {
   document.getElementById("resultTitle").textContent =
     victory ? "Victory!" : "Defeat";
 
-  document.getElementById("resultLog").textContent =
-    document.getElementById("log").textContent;
+document.getElementById("resultLog").innerHTML =  document.getElementById("log").innerHTML.replace(/\n/g, "<br>");
 
   document.getElementById("resultModal").style.display = "flex";
 }
