@@ -1,0 +1,61 @@
+/* ============================================
+   ANIMATIONS — ATTACK, SKILL, DEFEND, FLOATING DMG
+============================================ */
+
+/* Attack animation */
+.attack-anim {
+  animation: attackAnim 0.25s ease-out;
+}
+
+@keyframes attackAnim {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(-14px); }
+  100% { transform: translateX(0); }
+}
+
+/* Skill animation */
+.skill-anim {
+  animation: skillAnim 0.25s ease-out;
+}
+
+@keyframes skillAnim {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(-20px) scale(1.05); }
+  100% { transform: translateX(0); }
+}
+
+/* Defend glow */
+.defend-glow {
+  box-shadow: 0 0 14px #4cff9c inset, 0 0 6px #4cff9c;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Floating damage */
+#floatingContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3000;
+}
+
+.floating-dmg {
+  position: absolute;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff5f6d;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+
+/* Fade-in for cards */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
