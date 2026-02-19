@@ -20,15 +20,23 @@ body {
   left: 0;
   width: 100%;
   background: #1c1c28;
-  padding: 8px 0;
-  text-align: center;
+  padding: 8px 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   z-index: 1000;
 }
 
-.game-title {
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-icon {
   font-size: 1.2rem;
-  margin: 0;
+}
+
+.header-title {
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
@@ -197,18 +205,96 @@ button:disabled {
   cursor: default;
 }
 
+/* Colored action buttons */
+.btn-attack { background: #ff5f6d; }
+.btn-defend { background: #4cff9c; }
+.btn-skill  { background: #6d8bff; }
+
+.btn-attack:hover { background: #ff7a85; }
+.btn-defend:hover { background: #6dffb4; }
+.btn-skill:hover  { background: #8aa2ff; }
+
 /* ------------------------------
-   LOG WINDOW
+   LOG WINDOW (hidden)
 ------------------------------ */
 
 #log {
+  display: none;
+}
+
+/* ------------------------------
+   FLOATING DAMAGE
+------------------------------ */
+
+#floatingContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3000;
+}
+
+.floating-dmg {
+  position: absolute;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff5f6d;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+
+/* ------------------------------
+   MODAL
+------------------------------ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #1c1c28;
+  padding: 20px;
+  width: 90%;
+  max-width: 380px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+
+.modal-log {
   background: #14141f;
   padding: 12px;
-  border-radius: 10px;
-  height: 160px;
+  height: 180px;
   overflow-y: auto;
+  border-radius: 8px;
+  margin: 12px 0;
   font-size: 13px;
-  line-height: 1.35;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  background: #4cff9c;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ------------------------------
