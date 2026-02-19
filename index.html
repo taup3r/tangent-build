@@ -3,12 +3,16 @@
 <head>
   <title>Arcane Duel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Spectral+SC:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
 
-<!-- Fixed Header -->
 <header class="game-header">
   <div class="header-left">
     <span class="header-icon">⚔️</span>
@@ -27,13 +31,11 @@
         <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
       </div>
 
-      <!-- Enemy Name + AP Row -->
       <div class="name-ap-row">
         <div id="enemyAPIcons" class="ap-icon-row"></div>
         <h3 id="enemyName" class="small-name"></h3>
       </div>
 
-      <!-- HP Bar -->
       <div class="health-bar">
         <div id="enemyHPBar" class="health-fill"></div>
         <div id="enemyHPText" class="hp-text"></div>
@@ -50,45 +52,34 @@
         <img id="playerPortrait" class="portrait" alt="Player Portrait">
       </div>
 
-      <!-- Player Name + AP Row -->
       <div class="name-ap-row">
         <h3 class="small-name">Player</h3>
         <div id="playerAPIcons" class="ap-icon-row"></div>
       </div>
 
-      <!-- HP Bar -->
       <div class="health-bar">
         <div id="playerHPBar" class="health-fill"></div>
         <div id="playerHPText" class="hp-text"></div>
       </div>
 
-      <!-- Action Buttons -->
       <div class="action-row">
-        <button id="attackBtn" class="btn-attack" onclick="playerAttack()">🗡️ Attack</button>
-        <button id="defendBtn" class="btn-defend" onclick="playerDefend()">🛡️ Defend</button>
-        <button id="skillBtn" class="btn-skill" onclick="playerSkill()">✨ Skill</button>
+        <button id="attackBtn" class="btn-attack">🗡️ Attack</button>
+        <button id="defendBtn" class="btn-defend">🛡️ Defend</button>
+        <button id="skillBtn" class="btn-skill">✨ Skill</button>
       </div>
 
-      <!-- Hit Button -->
-      <button id="hitBtn" onclick="playerHit()" class="hit-button" style="display:none;">
-        Hit!
-      </button>
+      <button id="hitBtn" class="hit-button" style="display:none;">Hit!</button>
 
     </div>
 
   </div>
 
-  <!-- Log Window (hidden during battle, used for modal) -->
-  <div class="card" style="display:none;">
-    <div id="log"></div>
-  </div>
+  <div id="log" style="display:none;"></div>
 
 </div>
 
-<!-- Floating Damage Container -->
 <div id="floatingContainer"></div>
 
-<!-- Victory/Defeat Modal -->
 <div id="resultModal" class="modal" style="display:none;">
   <div class="modal-content">
     <h2 id="resultTitle"></h2>
@@ -97,6 +88,14 @@
   </div>
 </div>
 
-<script src="game.js"></script>
+<!-- JS -->
+<script src="js/state.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/skillTiming.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/enemyAI.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

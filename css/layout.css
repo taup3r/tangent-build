@@ -1,0 +1,64 @@
+/* ============================================
+   LAYOUT — HEADER, CONTAINERS, CARDS
+============================================ */
+
+/* Header */
+.game-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1c1c28;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-icon {
+  font-size: 1.2rem;
+}
+
+.header-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Main container */
+.battle-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Battlefield layout */
+.battlefield {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Cards */
+.card {
+  background: #1c1c28;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Landscape mode */
+@media (min-width: 700px) {
+  .battlefield {
+    flex-direction: row;
+  }
+
+  .enemy-card, .player-card {
+    width: 48%;
+  }
+}
