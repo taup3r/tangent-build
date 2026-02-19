@@ -111,25 +111,83 @@ function removeDefendGlow(cardId) {
 }
 
 /* -------------------------
-   TURN SYSTEM
+   SKILL TIMING SYSTEM
 ------------------------- */
 
-function startTurn() {
-  player.ap += 1;
+let skillTimingActive = false;
+let skillTimingStart = 0;
+let skillTimingWindow = 100;   // 100ms perfect window
+let skillTimingFailTime = 200; // auto-fail after 200ms
+
+function playerSkill() {
+  if (player.ap < 2) return log("Not enough AP!");
+
+  player.ap -= 2;
   clampAP();
-  player.defending = false;
-  removeDefendGlow("playerCard");
-  log("\n--- Player Turn ---");
-  updateUI();
+
+  log("Skill activated! Prepare to strike...");
+
+  disableButtons();
+
+  // Show Hit button
+  document.getElementById("hitBtn").style.display = "block";
+
+  // First animation
+  animateCard("enemyCard", "skill-anim", 300);
+
+  // Second animation triggers timing window
+  setTimeout(() => {
+    animateCard("enemyCard", "skill-anim", 300);
+
+    skillTimingActive = true;
+    skillTimingStart = performance.now();
+
+    // Auto-fail after fail time
+    setTimeout(() => {
+      if (skillTimingActive) {
+        skillTimingActive = false;
+        document.getElementById("hitBtn").style.display = "none";
+        log("Too slow! Skill deals reduced damage.");
+        applySkillDamage(false);
+      }
+    }, skillTimingFailTime);
+
+  }, 1000);
 }
 
-function checkWin() {
-  if (enemy.hp <= 0) {
-    log("You defeated " + enemy.name + "!");
-    disableButtons();
-    return true;
+function playerHit() {
+  if (!skillTimingActive) return;
+
+  const now = performance.now();
+  const delta = now - skillTimingStart;
+
+  skillTimingActive = false;
+  document.getElementById("hitBtn").style.display = "none";
+
+  const success = delta <= skillTimingWindow;
+
+  log(success ? "Perfect timing! Massive damage!" : "Good hit, but not perfect.");
+
+  applySkillDamage(success);
+}
+
+function applySkillDamage(success) {
+  let base = Math.floor(Math.random() * 6) + 4;
+  let dmg = success ? base * 2.5 : base * 2;
+
+  if (enemy.defending) {
+    dmg = Math.floor(dmg / 2);
+    log(enemy.name + " defended! Damage halved.");
   }
-  return false;
+
+  enemy.hp -= Math.floor(dmg);
+  if (enemy.hp < 0) enemy.hp = 0;
+
+  updateUI();
+
+  if (!checkWin()) enemyTurn();
+
+  enableButtons();
 }
 
 /* -------------------------
@@ -166,77 +224,6 @@ function playerDefend() {
   applyDefendGlow("playerCard");
   log("You brace for impact...");
   enemyTurn();
-}
-
-/* -------------------------
-   TIMING MINI-GAME
-------------------------- */
-
-let timingActive = false;
-let timingPos = 0;
-let timingDir = 1;
-let timingInterval = null;
-
-function playerSkill() {
-  if (player.ap < 2) return log("Not enough AP!");
-
-  player.ap -= 2;
-  clampAP();
-
-  log("Skill activated! Time your hit...");
-
-  disableButtons();
-  startTimingMiniGame();
-}
-
-function startTimingMiniGame() {
-  timingActive = true;
-  timingPos = 0;
-  timingDir = 1;
-
-  document.getElementById("timingCard").style.display = "block";
-
-  timingInterval = setInterval(() => {
-    timingPos += timingDir * 2;
-
-    if (timingPos >= 100) timingDir = -1;
-    if (timingPos <= 0) timingDir = 1;
-
-    document.getElementById("timingMarker").style.left = timingPos + "%";
-  }, 16);
-
-  document.getElementById("timingButton").onclick = stopTimingMiniGame;
-}
-
-function stopTimingMiniGame() {
-  if (!timingActive) return;
-
-  timingActive = false;
-  clearInterval(timingInterval);
-  document.getElementById("timingCard").style.display = "none";
-
-  let success = timingPos >= 40 && timingPos <= 60;
-
-  let base = Math.floor(Math.random() * 6) + 4;
-  let dmg = success ? base * 2.5 : base * 2;
-
-  animateSkillDouble("enemyCard");
-
-  log(success ? "Perfect timing! 2.5x damage!" : "Good hit! 2x damage.");
-
-  if (enemy.defending) {
-    dmg = Math.floor(dmg / 2);
-    log(enemy.name + " defended! Damage halved.");
-  }
-
-  enemy.hp -= Math.floor(dmg);
-  if (enemy.hp < 0) enemy.hp = 0;
-
-  updateUI();
-
-  if (!checkWin()) enemyTurn();
-
-  enableButtons();
 }
 
 /* -------------------------
