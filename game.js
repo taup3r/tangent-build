@@ -31,6 +31,21 @@ let enemy = {
   name: randomName()
 };
 
+/* -------------------------
+   PORTRAITS
+------------------------- */
+
+const enemyPortraits = {
+  aggressive: "https://i.imgur.com/8Q1ZQ7L.jpeg",
+  defensive: "https://i.imgur.com/6uQ1YpC.jpeg",
+  warlock: "https://i.imgur.com/1gkYt8F.jpeg"
+};
+
+const playerPortraitURL = "https://i.imgur.com/3QeQ7kN.jpeg";
+
+document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
+document.getElementById("playerPortrait").src = playerPortraitURL;
+
 document.getElementById("enemyName").textContent = enemy.name;
 document.getElementById("enemyHint").textContent = enemy.hint;
 
@@ -73,6 +88,29 @@ function enableButtons() {
 }
 
 /* -------------------------
+   ANIMATIONS
+------------------------- */
+
+function animateCard(cardId, animClass, duration = 300) {
+  const card = document.getElementById(cardId);
+  card.classList.add(animClass);
+  setTimeout(() => card.classList.remove(animClass), duration);
+}
+
+function animateSkillDouble(cardId) {
+  animateCard(cardId, "skill-anim", 300);
+  setTimeout(() => animateCard(cardId, "skill-anim", 300), 1000);
+}
+
+function applyDefendGlow(cardId) {
+  document.getElementById(cardId).classList.add("defend-glow");
+}
+
+function removeDefendGlow(cardId) {
+  document.getElementById(cardId).classList.remove("defend-glow");
+}
+
+/* -------------------------
    TURN SYSTEM
 ------------------------- */
 
@@ -80,6 +118,7 @@ function startTurn() {
   player.ap += 1;
   clampAP();
   player.defending = false;
+  removeDefendGlow("playerCard");
   log("\n--- Player Turn ---");
   updateUI();
 }
@@ -103,6 +142,8 @@ function playerAttack() {
   player.ap -= 1;
   clampAP();
 
+  animateCard("enemyCard", "attack-anim");
+
   let dmg = Math.floor(Math.random() * 6) + 4;
 
   if (enemy.defending) {
@@ -122,6 +163,7 @@ function playerAttack() {
 
 function playerDefend() {
   player.defending = true;
+  applyDefendGlow("playerCard");
   log("You brace for impact...");
   enemyTurn();
 }
@@ -178,6 +220,8 @@ function stopTimingMiniGame() {
   let base = Math.floor(Math.random() * 6) + 4;
   let dmg = success ? base * 2.5 : base * 2;
 
+  animateSkillDouble("enemyCard");
+
   log(success ? "Perfect timing! 2.5x damage!" : "Good hit! 2x damage.");
 
   if (enemy.defending) {
@@ -205,11 +249,14 @@ function enemyTurn() {
   enemy.ap += 1;
   clampAP();
   enemy.defending = false;
+  removeDefendGlow("enemyCard");
 
   let action = decideEnemyAction();
 
   if (action === "skill") {
     enemy.ap -= 2;
+
+    animateSkillDouble("playerCard");
 
     let base = Math.floor(Math.random() * 6) + 4;
     let dmg = base * 2;
@@ -228,6 +275,8 @@ function enemyTurn() {
   else if (action === "attack") {
     enemy.ap -= 1;
 
+    animateCard("playerCard", "attack-anim");
+
     let dmg = Math.floor(Math.random() * 6) + 3;
 
     if (player.defending) {
@@ -243,6 +292,7 @@ function enemyTurn() {
 
   else if (action === "defend") {
     enemy.defending = true;
+    applyDefendGlow("enemyCard");
     log(enemy.name + " braces for impact.");
   }
 
@@ -288,19 +338,3 @@ function decideEnemyAction() {
 
 updateUI();
 startTurn();
-
-/* -------------------------
-   PORTRAITS
-------------------------- */
-
-const enemyPortraits = {
-  aggressive: "https://i.imgur.com/8Q1ZQ7L.jpeg",
-  defensive: "https://i.imgur.com/6uQ1YpC.jpeg",
-  warlock: "https://i.imgur.com/1gkYt8F.jpeg"
-};
-
-const playerPortraitURL = "https://i.imgur.com/3QeQ7kN.jpeg";
-
-/* After enemy is created */
-document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
-document.getElementById("playerPortrait").src = playerPortraitURL;
