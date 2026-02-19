@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Turn-Based RPG</title>
+  <title>BattleCry RPG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -38,20 +38,11 @@
     <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
     <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
     <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
+
+    <!-- NEW HIT BUTTON -->
+    <button id="hitBtn" onclick="playerHit()" style="display:none;">Hit!</button>
   </div>
 
-</div>
-
-<!-- TIMING MINI-GAME -->
-<div class="card" id="timingCard" style="display:none;">
-  <p><strong>Timed Hit!</strong> Tap the button when the marker is in the green zone.</p>
-
-  <div class="timing-bar">
-    <div class="timing-zone"></div>
-    <div class="timing-marker" id="timingMarker"></div>
-  </div>
-
-  <button id="timingButton" style="margin-top:10px;">HIT!</button>
 </div>
 
 <div class="card">
