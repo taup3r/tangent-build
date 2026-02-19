@@ -10,10 +10,13 @@ import { initializePortraits } from "./state.js";
 import { updateUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
+import { startNewBattle } from "./modal.js";
 
 /* -------------------------
    INITIAL SETUP
 ------------------------- */
+
+window.startNewBattle = startNewBattle;
 
 window.addEventListener("DOMContentLoaded", () => {
   
