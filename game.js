@@ -1,3 +1,7 @@
+/* -------------------------
+   PLAYER + ENEMY SETUP
+------------------------- */
+
 let player = {
   hp: 30,
   max: 30,
@@ -5,12 +9,34 @@ let player = {
   defending: false
 };
 
+const enemyTypes = [
+  { type: "Aggressive Fighter", behavior: "aggressive" },
+  { type: "Defensive Guard", behavior: "defensive" },
+  { type: "Cunning Warlock", behavior: "warlock" }
+];
+
+function randomName() {
+  const first = ["Gor", "Thal", "Rin", "Vor", "Kel", "Zar", "Mor", "Fen"];
+  const last = ["Bloodfang", "Ironhide", "Nightweaver", "Stormborn", "Ashclaw"];
+  return first[Math.floor(Math.random() * first.length)] + " " +
+         last[Math.floor(Math.random() * last.length)];
+}
+
 let enemy = {
   hp: 30,
   max: 30,
   ap: 0,
-  defending: false
+  defending: false,
+  ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
+  name: randomName()
 };
+
+document.getElementById("enemyName").textContent = enemy.name;
+document.getElementById("enemyType").textContent = enemy.type;
+
+/* -------------------------
+   UI + HELPERS
+------------------------- */
 
 function clampAP() {
   if (player.ap > 2) player.ap = 2;
@@ -19,6 +45,7 @@ function clampAP() {
 
 function updateUI() {
   document.getElementById("ap").textContent = player.ap;
+  document.getElementById("enemyAP").textContent = enemy.ap;
 
   document.getElementById("playerHPBar").style.width =
     (player.hp / player.max * 100) + "%";
@@ -33,84 +60,6 @@ function log(msg) {
   logBox.scrollTop = logBox.scrollHeight;
 }
 
-function startTurn() {
-  player.ap += 1;
-  clampAP();
-  player.defending = false;
-  log("\n--- Player Turn ---");
-  updateUI();
-}
-
-function enemyTurn() {
-  log("\n--- Enemy Turn ---");
-
-  enemy.ap += 1;
-  clampAP();
-  enemy.defending = false;
-
-  let action = null;
-
-  if (enemy.ap >= 2) {
-    action = Math.random() < 0.4 ? "skill" : "attack";
-  } else if (enemy.ap >= 1) {
-    action = "attack";
-  } else {
-    action = Math.random() < 0.5 ? "defend" : "skip";
-  }
-
-  if (action === "skill") {
-    enemy.ap -= 2;
-
-    let base = Math.floor(Math.random() * 6) + 4;
-    let dmg = base * 2;
-
-    if (player.defending) {
-      dmg = Math.floor(dmg / 2);
-      log("You defended! Damage halved.");
-    }
-
-    player.hp -= dmg;
-    if (player.hp < 0) player.hp = 0;
-
-    log("Enemy uses SKILL for " + dmg + " damage!");
-  }
-
-  else if (action === "attack") {
-    enemy.ap -= 1;
-
-    let dmg = Math.floor(Math.random() * 6) + 3;
-
-    if (player.defending) {
-      dmg = Math.floor(dmg / 2);
-      log("You defended! Damage halved.");
-    }
-
-    player.hp -= dmg;
-    if (player.hp < 0) player.hp = 0;
-
-    log("Enemy attacks for " + dmg + "!");
-  }
-
-  else if (action === "defend") {
-    enemy.defending = true;
-    log("Enemy braces for impact (Defend).");
-  }
-
-  else if (action === "skip") {
-    log("Enemy has no AP and skips the turn.");
-  }
-
-  updateUI();
-
-  if (player.hp <= 0) {
-    log("You were defeated!");
-    disableButtons();
-    return;
-  }
-
-  startTurn();
-}
-
 function disableButtons() {
   document.getElementById("attackBtn").disabled = true;
   document.getElementById("defendBtn").disabled = true;
@@ -123,14 +72,30 @@ function enableButtons() {
   document.getElementById("skillBtn").disabled = false;
 }
 
+/* -------------------------
+   TURN SYSTEM
+------------------------- */
+
+function startTurn() {
+  player.ap += 1;
+  clampAP();
+  player.defending = false;
+  log("\n--- Player Turn ---");
+  updateUI();
+}
+
 function checkWin() {
   if (enemy.hp <= 0) {
-    log("You defeated the enemy!");
+    log("You defeated " + enemy.name + "!");
     disableButtons();
     return true;
   }
   return false;
 }
+
+/* -------------------------
+   PLAYER ACTIONS
+------------------------- */
 
 function playerAttack() {
   if (player.ap < 1) return log("Not enough AP!");
@@ -142,7 +107,7 @@ function playerAttack() {
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
-    log("Enemy defended! Damage halved.");
+    log(enemy.name + " defended! Damage halved.");
   }
 
   enemy.hp -= dmg;
@@ -161,7 +126,10 @@ function playerDefend() {
   enemyTurn();
 }
 
-/* TIMING MINI-GAME */
+/* -------------------------
+   TIMING MINI-GAME
+------------------------- */
+
 let timingActive = false;
 let timingPos = 0;
 let timingDir = 1;
@@ -214,7 +182,7 @@ function stopTimingMiniGame() {
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
-    log("Enemy defended! Damage halved.");
+    log(enemy.name + " defended! Damage halved.");
   }
 
   enemy.hp -= Math.floor(dmg);
@@ -226,6 +194,97 @@ function stopTimingMiniGame() {
 
   enableButtons();
 }
+
+/* -------------------------
+   ENEMY AI
+------------------------- */
+
+function enemyTurn() {
+  log("\n--- Enemy Turn (" + enemy.name + ") ---");
+
+  enemy.ap += 1;
+  clampAP();
+  enemy.defending = false;
+
+  let action = decideEnemyAction();
+
+  if (action === "skill") {
+    enemy.ap -= 2;
+
+    let base = Math.floor(Math.random() * 6) + 4;
+    let dmg = base * 2;
+
+    if (player.defending) {
+      dmg = Math.floor(dmg / 2);
+      log("You defended! Damage halved.");
+    }
+
+    player.hp -= dmg;
+    if (player.hp < 0) player.hp = 0;
+
+    log(enemy.name + " uses SKILL for " + dmg + " damage!");
+  }
+
+  else if (action === "attack") {
+    enemy.ap -= 1;
+
+    let dmg = Math.floor(Math.random() * 6) + 3;
+
+    if (player.defending) {
+      dmg = Math.floor(dmg / 2);
+      log("You defended! Damage halved.");
+    }
+
+    player.hp -= dmg;
+    if (player.hp < 0) player.hp = 0;
+
+    log(enemy.name + " attacks for " + dmg + "!");
+  }
+
+  else if (action === "defend") {
+    enemy.defending = true;
+    log(enemy.name + " braces for impact (Defend).");
+  }
+
+  else {
+    log(enemy.name + " has no AP and skips the turn.");
+  }
+
+  updateUI();
+
+  if (player.hp <= 0) {
+    log("You were defeated!");
+    disableButtons();
+    return;
+  }
+
+  startTurn();
+}
+
+/* -------------------------
+   ENEMY AI DECISION LOGIC
+------------------------- */
+
+function decideEnemyAction() {
+  const type = enemy.behavior;
+
+  if (enemy.ap >= 2) {
+    if (type === "aggressive") return Math.random() < 0.6 ? "skill" : "attack";
+    if (type === "warlock") return Math.random() < 0.75 ? "skill" : "attack";
+    if (type === "defensive") return Math.random() < 0.2 ? "skill" : "defend";
+  }
+
+  if (enemy.ap >= 1) {
+    if (type === "defensive") return Math.random() < 0.5 ? "defend" : "attack";
+    return "attack";
+  }
+
+  return Math.random() < 0.5 ? "defend" : "skip";
+}
+
+/* -------------------------
+   INIT
+------------------------- */
 
 updateUI();
 startTurn();
