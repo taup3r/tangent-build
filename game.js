@@ -185,9 +185,11 @@ function applySkillDamage(success) {
 
   updateUI();
 
-  if (!checkWin()) enemyTurn();
-
-  enableButtons();
+  if (!checkWin()) {
+    enemyTurn();
+  } else {
+    enableButtons();
+  }
 }
 
 /* -------------------------
@@ -295,7 +297,9 @@ function enemyTurn() {
     return;
   }
 
+  // FIX: Player AP now increments again
   startTurn();
+  enableButtons();
 }
 
 /* -------------------------
@@ -322,6 +326,15 @@ function decideEnemyAction() {
 /* -------------------------
    INIT
 ------------------------- */
+
+function startTurn() {
+  player.ap += 1;
+  clampAP();
+  player.defending = false;
+  removeDefendGlow("playerCard");
+  log("\n--- Player Turn ---");
+  updateUI();
+}
 
 updateUI();
 startTurn();
