@@ -1,9 +1,15 @@
 /* ------------------------------
+   FONTS
+------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Spectral+SC:wght@400;600&display=swap');
+
+/* ------------------------------
    GLOBAL
 ------------------------------ */
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Spectral SC', serif;
   background: #0f0f17;
   color: #f5f5f7;
   margin: 0;
@@ -36,6 +42,7 @@ body {
 }
 
 .header-title {
+  font-family: 'Cinzel', serif;
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -98,6 +105,7 @@ body {
 }
 
 .small-name {
+  font-family: 'Cinzel', serif;
   font-size: 0.95rem;
   margin: 0;
 }
@@ -154,6 +162,7 @@ body {
   line-height: 22px;
   color: #fff;
   font-weight: 600;
+  font-family: 'Cinzel', serif;
 }
 
 /* ------------------------------
@@ -190,6 +199,7 @@ button {
   background: #3d3d55;
   color: #fff;
   transition: transform 0.15s ease, background 0.2s ease;
+  font-family: 'Cinzel', serif;
 }
 
 button:hover {
@@ -215,14 +225,6 @@ button:disabled {
 .btn-skill:hover  { background: #8aa2ff; }
 
 /* ------------------------------
-   LOG WINDOW (hidden)
------------------------------- */
-
-#log {
-  display: none;
-}
-
-/* ------------------------------
    FLOATING DAMAGE
 ------------------------------ */
 
@@ -242,6 +244,7 @@ button:disabled {
   font-weight: 700;
   color: #ff5f6d;
   animation: floatUp 1s ease-out forwards;
+  font-family: 'Cinzel', serif;
 }
 
 @keyframes floatUp {
@@ -279,11 +282,14 @@ button:disabled {
 .modal-log {
   background: #14141f;
   padding: 12px;
-  height: 180px;
+  height: 220px;
   overflow-y: auto;
   border-radius: 8px;
   margin: 12px 0;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: normal;
+  font-family: 'Spectral SC', serif;
 }
 
 .modal-button {
@@ -295,6 +301,7 @@ button:disabled {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  font-family: 'Cinzel', serif;
 }
 
 /* ------------------------------
