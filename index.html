@@ -10,8 +10,10 @@
 <div class="battlefield">
 
   <!-- Enemy Card -->
-  <div class="card enemy-card">
-    <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
+  <div class="card enemy-card" id="enemyCard">
+    <div class="portrait-container">
+      <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
+    </div>
     <h2 id="enemyName"></h2>
     <p id="enemyHint" class="enemy-hint"></p>
 
@@ -22,8 +24,10 @@
   </div>
 
   <!-- Player Card -->
-  <div class="card player-card">
-    <img id="playerPortrait" class="portrait" alt="Player Portrait">
+  <div class="card player-card" id="playerCard">
+    <div class="portrait-container">
+      <img id="playerPortrait" class="portrait" alt="Player Portrait">
+    </div>
     <h2>Player</h2>
 
     <p><strong>HP:</strong></p>
@@ -34,26 +38,3 @@
     <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
     <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
     <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
-  </div>
-
-</div>
-
-<!-- TIMING MINI-GAME (moved above logs) -->
-<div class="card" id="timingCard" style="display:none;">
-  <p><strong>Timed Hit!</strong> Tap the button when the marker is in the green zone.</p>
-
-  <div class="timing-bar">
-    <div class="timing-zone"></div>
-    <div class="timing-marker" id="timingMarker"></div>
-  </div>
-
-  <button id="timingButton" style="margin-top:10px;">HIT!</button>
-</div>
-
-<div class="card">
-  <div id="log"></div>
-</div>
-
-<script src="game.js"></script>
-</body>
-</html>
