@@ -11,6 +11,7 @@
 
   <!-- Enemy Card -->
   <div class="card enemy-card">
+    <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
     <h2 id="enemyName"></h2>
     <p id="enemyHint" class="enemy-hint"></p>
 
@@ -22,6 +23,7 @@
 
   <!-- Player Card -->
   <div class="card player-card">
+    <img id="playerPortrait" class="portrait" alt="Player Portrait">
     <h2>Player</h2>
 
     <p><strong>HP:</strong></p>
@@ -36,11 +38,7 @@
 
 </div>
 
-<div class="card">
-  <div id="log"></div>
-</div>
-
-<!-- TIMING MINI-GAME -->
+<!-- TIMING MINI-GAME (moved above logs) -->
 <div class="card" id="timingCard" style="display:none;">
   <p><strong>Timed Hit!</strong> Tap the button when the marker is in the green zone.</p>
 
@@ -50,6 +48,10 @@
   </div>
 
   <button id="timingButton" style="margin-top:10px;">HIT!</button>
+</div>
+
+<div class="card">
+  <div id="log"></div>
 </div>
 
 <script src="game.js"></script>

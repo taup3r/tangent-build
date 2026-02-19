@@ -26,6 +26,12 @@ body {
   animation: fadeIn 0.6s ease;
 }
 
+.portrait {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
 .enemy-hint {
   font-style: italic;
   color: #9aa0ff;
@@ -113,7 +119,7 @@ button:active {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* MOBILE */
+/* MOBILE PORTRAIT */
 @media (max-width: 700px) {
   .battlefield {
     flex-direction: column;
@@ -121,5 +127,10 @@ button:active {
 
   .enemy-card, .player-card {
     width: 100%;
+  }
+
+  .portrait {
+    max-height: 200px;
+    object-fit: cover;
   }
 }
