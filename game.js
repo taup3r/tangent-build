@@ -32,16 +32,16 @@ let enemy = {
 };
 
 /* -------------------------
-   PORTRAITS
+   PORTRAITS (LOCAL PNG FILES)
 ------------------------- */
 
 const enemyPortraits = {
-  aggressive: "https://i.imgur.com/8Q1ZQ7L.jpeg",
-  defensive: "https://i.imgur.com/6uQ1YpC.jpeg",
-  warlock: "https://i.imgur.com/1gkYt8F.jpeg"
+  aggressive: "assets/enemy_aggressive.png",
+  defensive: "assets/enemy_defensive.png",
+  warlock: "assets/enemy_warlock.png"
 };
 
-const playerPortraitURL = "https://i.imgur.com/3QeQ7kN.jpeg";
+const playerPortraitURL = "assets/player.png";
 
 document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
 document.getElementById("playerPortrait").src = playerPortraitURL;
