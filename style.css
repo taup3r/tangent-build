@@ -92,37 +92,7 @@ button:active {
   line-height: 1.4;
 }
 
-/* TIMING MINI-GAME */
-.timing-bar {
-  position: relative;
-  height: 24px;
-  background: #2b2b3d;
-  border-radius: 12px;
-  margin-top: 10px;
-  overflow: hidden;
-}
-
-.timing-zone {
-  position: absolute;
-  left: 40%;
-  width: 20%;
-  height: 100%;
-  background: #4cff9c;
-  opacity: 0.7;
-  top: 0;
-}
-
-.timing-marker {
-  position: absolute;
-  width: 12px;
-  height: 100%;
-  background: #ffe066;
-  border-radius: 6px;
-  left: 0%;
-  top: 0;
-}
-
-/* ATTACK ANIMATIONS */
+/* ATTACK ANIMATION */
 .attack-anim {
   animation: attackAnim 0.25s ease-out;
 }
