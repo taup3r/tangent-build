@@ -41,10 +41,8 @@ const enemyPortraits = {
   warlock: "assets/enemy_warlock.png"
 };
 
-const playerPortraitURL = "assets/player.png";
-
 document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
-document.getElementById("playerPortrait").src = playerPortraitURL;
+document.getElementById("playerPortrait").src = "assets/player.png";
 
 document.getElementById("enemyName").textContent = enemy.name;
 
@@ -75,8 +73,14 @@ function renderAPIcons() {
   }
 }
 
+function updateHPText() {
+  document.getElementById("playerHPText").textContent = `${player.hp}/${player.max}`;
+  document.getElementById("enemyHPText").textContent = `${enemy.hp}/${enemy.max}`;
+}
+
 function updateUI() {
   renderAPIcons();
+  updateHPText();
 
   document.getElementById("playerHPBar").style.width =
     (player.hp / player.max * 100) + "%";
