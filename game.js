@@ -45,6 +45,7 @@ document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
 document.getElementById("playerPortrait").src = "assets/player.png";
 
 document.getElementById("enemyName").textContent = enemy.name;
+document.getElementById("enemyHint").textContent = enemy.hint;
 
 /* -------------------------
    UI HELPERS
@@ -112,6 +113,29 @@ function resetHitButton() {
   hit.style.display = "none";
   hit.disabled = true;
   skillTimingActive = false;
+}
+
+/* -------------------------
+   FLOATING DAMAGE
+------------------------- */
+
+function floatDamage(amount, targetId) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  const rect = target.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 4;
+
+  const el = document.createElement("div");
+  el.className = "floating-dmg";
+  el.textContent = amount;
+  el.style.left = x + "px";
+  el.style.top = y + "px";
+
+  document.getElementById("floatingContainer").appendChild(el);
+
+  setTimeout(() => el.remove(), 1000);
 }
 
 /* -------------------------
@@ -213,9 +237,11 @@ function applySkillDamage(success) {
     log(enemy.name + " defended! Damage halved.");
   }
 
-  enemy.hp -= Math.floor(dmg);
+  dmg = Math.floor(dmg);
+  enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
+  floatDamage(dmg, "enemyCard");
   updateUI();
 
   if (!checkWin()) {
@@ -252,6 +278,7 @@ function playerAttack() {
   if (enemy.hp < 0) enemy.hp = 0;
 
   log("You attack for " + dmg + "!");
+  floatDamage(dmg, "enemyCard");
 
   updateUI();
 
@@ -302,6 +329,7 @@ function enemyTurn() {
     if (player.hp < 0) player.hp = 0;
 
     log(enemy.name + " uses SKILL for " + dmg + " damage!");
+    floatDamage(dmg, "playerCard");
   }
 
   else if (action === "attack") {
@@ -320,6 +348,7 @@ function enemyTurn() {
     if (player.hp < 0) player.hp = 0;
 
     log(enemy.name + " attacks for " + dmg + "!");
+    floatDamage(dmg, "playerCard");
   }
 
   else if (action === "defend") {
@@ -334,8 +363,7 @@ function enemyTurn() {
 
   updateUI();
 
-  if (player.hp <= 0) {
-    log("You were defeated!");
+  if (checkWin()) {
     disableButtons();
     return;
   }
@@ -365,6 +393,24 @@ function decideEnemyAction() {
 }
 
 /* -------------------------
+   RESULT MODAL
+------------------------- */
+
+function showResultModal(victory) {
+  document.getElementById("resultTitle").textContent =
+    victory ? "Victory!" : "Defeat";
+
+  document.getElementById("resultLog").textContent =
+    document.getElementById("log").textContent;
+
+  document.getElementById("resultModal").style.display = "flex";
+}
+
+function startNewBattle() {
+  location.reload();
+}
+
+/* -------------------------
    TURN + WIN CHECK
 ------------------------- */
 
@@ -381,6 +427,12 @@ function startTurn() {
 function checkWin() {
   if (enemy.hp <= 0) {
     log("You defeated " + enemy.name + "!");
+    showResultModal(true);
+    return true;
+  }
+  if (player.hp <= 0) {
+    log("You were defeated!");
+    showResultModal(false);
     return true;
   }
   return false;
