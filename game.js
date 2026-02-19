@@ -190,6 +190,10 @@ function applySkillDamage(success) {
 ------------------------- */
 
 function playerAttack() {
+  // FIX: reset timing state
+  skillTimingActive = false;
+  document.getElementById("hitBtn").style.display = "none";
+
   if (player.ap < 1) return log("Not enough AP!");
 
   player.ap -= 1;
@@ -215,6 +219,10 @@ function playerAttack() {
 }
 
 function playerDefend() {
+  // FIX: reset timing state
+  skillTimingActive = false;
+  document.getElementById("hitBtn").style.display = "none";
+
   player.defending = true;
   applyDefendGlow("playerCard");
   log("You brace for impact...");
@@ -326,7 +334,7 @@ function startTurn() {
   removeDefendGlow("playerCard");
   log("\n--- Player Turn ---");
   updateUI();
-  enableButtons(); // <-- FIXED
+  enableButtons();
 }
 
 updateUI();
