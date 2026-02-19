@@ -32,7 +32,7 @@ let enemy = {
 };
 
 /* -------------------------
-   PORTRAITS (LOCAL PNG FILES)
+   PORTRAITS
 ------------------------- */
 
 const enemyPortraits = {
@@ -47,10 +47,9 @@ document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
 document.getElementById("playerPortrait").src = playerPortraitURL;
 
 document.getElementById("enemyName").textContent = enemy.name;
-document.getElementById("enemyHint").textContent = enemy.hint;
 
 /* -------------------------
-   UI + HELPERS
+   UI HELPERS
 ------------------------- */
 
 function clampAP() {
@@ -58,9 +57,26 @@ function clampAP() {
   if (enemy.ap > 2) enemy.ap = 2;
 }
 
+function renderAPIcons() {
+  const playerRow = document.getElementById("playerAPIcons");
+  const enemyRow = document.getElementById("enemyAPIcons");
+
+  playerRow.innerHTML = "";
+  enemyRow.innerHTML = "";
+
+  for (let i = 0; i < 3; i++) {
+    const p = document.createElement("div");
+    p.className = "ap-icon" + (i < player.ap ? " active" : "");
+    playerRow.appendChild(p);
+
+    const e = document.createElement("div");
+    e.className = "ap-icon" + (i < enemy.ap ? " active" : "");
+    enemyRow.appendChild(e);
+  }
+}
+
 function updateUI() {
-  document.getElementById("ap").textContent = player.ap;
-  document.getElementById("enemyAP").textContent = enemy.ap;
+  renderAPIcons();
 
   document.getElementById("playerHPBar").style.width =
     (player.hp / player.max * 100) + "%";
@@ -123,8 +139,8 @@ function removeDefendGlow(cardId) {
 
 let skillTimingActive = false;
 let skillTimingStart = 0;
-const skillTimingWindow = 100;   // ms
-const skillTimingFailTime = 200; // ms after second anim
+const skillTimingWindow = 100;
+const skillTimingFailTime = 200;
 
 function playerSkill() {
   resetHitButton();
@@ -142,10 +158,8 @@ function playerSkill() {
   hit.style.display = "block";
   hit.disabled = true;
 
-  // First animation
   animateCard("enemyCard", "skill-anim", 300);
 
-  // Second animation + timing window
   setTimeout(() => {
     animateCard("enemyCard", "skill-anim", 300);
 
