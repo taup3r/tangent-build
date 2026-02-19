@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Battle RPG</title>
+  <title>Turn-Based RPG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="battlefield">
+<div class="battle-container">
 
-  <!-- Enemy Card -->
-  <div class="card enemy-card" id="enemyCard">
-    <div class="portrait-container">
-      <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
+  <div class="battlefield">
+
+    <!-- Enemy Card -->
+    <div class="card enemy-card" id="enemyCard">
+      <div class="portrait-container">
+        <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
+      </div>
+
+      <h2 id="enemyName"></h2>
+      <p id="enemyHint" class="enemy-hint"></p>
+
+      <p><strong>HP:</strong></p>
+      <div class="health-bar">
+        <div id="enemyHPBar" class="health-fill"></div>
+      </div>
+
+      <p><strong>AP:</strong> <span id="enemyAP"></span></p>
     </div>
-    <h2 id="enemyName"></h2>
-    <p id="enemyHint" class="enemy-hint"></p>
 
-    <p><strong>HP:</strong></p>
-    <div class="health-bar"><div id="enemyHPBar" class="health-fill"></div></div>
+    <!-- Player Card -->
+    <div class="card player-card" id="playerCard">
+      <div class="portrait-container">
+        <img id="playerPortrait" class="portrait" alt="Player Portrait">
+      </div>
 
-    <p><strong>AP:</strong> <span id="enemyAP"></span></p>
+      <h2>Player</h2>
+
+      <p><strong>HP:</strong></p>
+      <div class="health-bar">
+        <div id="playerHPBar" class="health-fill"></div>
+      </div>
+
+      <p><strong>AP:</strong> <span id="ap"></span></p>
+
+      <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
+      <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
+      <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
+
+      <!-- Timing Hit Button -->
+      <button id="hitBtn" onclick="playerHit()" style="display:none;">Hit!</button>
+    </div>
+
   </div>
 
-  <!-- Player Card -->
-  <div class="card player-card" id="playerCard">
-    <div class="portrait-container">
-      <img id="playerPortrait" class="portrait" alt="Player Portrait">
-    </div>
-    <h2>Player</h2>
-
-    <p><strong>HP:</strong></p>
-    <div class="health-bar"><div id="playerHPBar" class="health-fill"></div></div>
-
-    <p><strong>AP:</strong> <span id="ap"></span></p>
-
-    <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
-    <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
-    <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
-
-    <!-- NEW HIT BUTTON -->
-    <button id="hitBtn" onclick="playerHit()" style="display:none;">Hit!</button>
+  <!-- Log Window -->
+  <div class="card">
+    <div id="log"></div>
   </div>
 
-</div>
-
-<div class="card">
-  <div id="log"></div>
 </div>
 
 <script src="game.js"></script>
