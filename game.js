@@ -8,7 +8,8 @@ let player = {
 let enemy = {
   hp: 30,
   max: 30,
-  ap: 0
+  ap: 0,
+  defending: false
 };
 
 function clampAP() {
@@ -45,18 +46,59 @@ function enemyTurn() {
 
   enemy.ap += 1;
   clampAP();
+  enemy.defending = false;
 
-  let dmg = Math.floor(Math.random() * 6) + 3;
+  let action = null;
 
-  if (player.defending) {
-    dmg = Math.floor(dmg / 2);
-    log("You defended! Damage halved.");
+  if (enemy.ap >= 2) {
+    action = Math.random() < 0.4 ? "skill" : "attack";
+  } else if (enemy.ap >= 1) {
+    action = "attack";
+  } else {
+    action = Math.random() < 0.5 ? "defend" : "skip";
   }
 
-  player.hp -= dmg;
-  if (player.hp < 0) player.hp = 0;
+  if (action === "skill") {
+    enemy.ap -= 2;
 
-  log("Enemy hits you for " + dmg + "!");
+    let base = Math.floor(Math.random() * 6) + 4;
+    let dmg = base * 2;
+
+    if (player.defending) {
+      dmg = Math.floor(dmg / 2);
+      log("You defended! Damage halved.");
+    }
+
+    player.hp -= dmg;
+    if (player.hp < 0) player.hp = 0;
+
+    log("Enemy uses SKILL for " + dmg + " damage!");
+  }
+
+  else if (action === "attack") {
+    enemy.ap -= 1;
+
+    let dmg = Math.floor(Math.random() * 6) + 3;
+
+    if (player.defending) {
+      dmg = Math.floor(dmg / 2);
+      log("You defended! Damage halved.");
+    }
+
+    player.hp -= dmg;
+    if (player.hp < 0) player.hp = 0;
+
+    log("Enemy attacks for " + dmg + "!");
+  }
+
+  else if (action === "defend") {
+    enemy.defending = true;
+    log("Enemy braces for impact (Defend).");
+  }
+
+  else if (action === "skip") {
+    log("Enemy has no AP and skips the turn.");
+  }
 
   updateUI();
 
@@ -98,6 +140,11 @@ function playerAttack() {
 
   let dmg = Math.floor(Math.random() * 6) + 4;
 
+  if (enemy.defending) {
+    dmg = Math.floor(dmg / 2);
+    log("Enemy defended! Damage halved.");
+  }
+
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
@@ -114,6 +161,7 @@ function playerDefend() {
   enemyTurn();
 }
 
+/* TIMING MINI-GAME */
 let timingActive = false;
 let timingPos = 0;
 let timingDir = 1;
@@ -163,6 +211,11 @@ function stopTimingMiniGame() {
   let dmg = success ? base * 2.5 : base * 2;
 
   log(success ? "Perfect timing! 2.5x damage!" : "Good hit! 2x damage.");
+
+  if (enemy.defending) {
+    dmg = Math.floor(dmg / 2);
+    log("Enemy defended! Damage halved.");
+  }
 
   enemy.hp -= Math.floor(dmg);
   if (enemy.hp < 0) enemy.hp = 0;
