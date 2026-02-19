@@ -32,7 +32,7 @@ let enemy = {
 };
 
 /* -------------------------
-   PORTRAITS
+   PORTRAITS (LOCAL PNG FILES)
 ------------------------- */
 
 const enemyPortraits = {
@@ -87,6 +87,13 @@ function enableButtons() {
   document.getElementById("skillBtn").disabled = false;
 }
 
+function resetHitButton() {
+  const hit = document.getElementById("hitBtn");
+  hit.style.display = "none";
+  hit.disabled = true;
+  skillTimingActive = false;
+}
+
 /* -------------------------
    ANIMATIONS
 ------------------------- */
@@ -116,10 +123,12 @@ function removeDefendGlow(cardId) {
 
 let skillTimingActive = false;
 let skillTimingStart = 0;
-let skillTimingWindow = 100;
-let skillTimingFailTime = 200;
+const skillTimingWindow = 100;   // ms
+const skillTimingFailTime = 200; // ms after second anim
 
 function playerSkill() {
+  resetHitButton();
+
   if (player.ap < 2) return log("Not enough AP!");
 
   player.ap -= 2;
@@ -128,20 +137,27 @@ function playerSkill() {
   log("Skill activated! Prepare to strike...");
 
   disableButtons();
-  document.getElementById("hitBtn").style.display = "block";
 
+  const hit = document.getElementById("hitBtn");
+  hit.style.display = "block";
+  hit.disabled = true;
+
+  // First animation
   animateCard("enemyCard", "skill-anim", 300);
 
+  // Second animation + timing window
   setTimeout(() => {
     animateCard("enemyCard", "skill-anim", 300);
 
     skillTimingActive = true;
     skillTimingStart = performance.now();
+    hit.disabled = false;
 
     setTimeout(() => {
       if (skillTimingActive) {
         skillTimingActive = false;
-        document.getElementById("hitBtn").style.display = "none";
+        hit.style.display = "none";
+        hit.disabled = true;
         log("Too slow! Skill deals reduced damage.");
         applySkillDamage(false);
       }
@@ -157,7 +173,9 @@ function playerHit() {
   const delta = now - skillTimingStart;
 
   skillTimingActive = false;
-  document.getElementById("hitBtn").style.display = "none";
+  const hit = document.getElementById("hitBtn");
+  hit.style.display = "none";
+  hit.disabled = true;
 
   const success = delta <= skillTimingWindow;
 
@@ -167,6 +185,8 @@ function playerHit() {
 }
 
 function applySkillDamage(success) {
+  resetHitButton();
+
   let base = Math.floor(Math.random() * 6) + 4;
   let dmg = success ? base * 2.5 : base * 2;
 
@@ -182,6 +202,8 @@ function applySkillDamage(success) {
 
   if (!checkWin()) {
     enemyTurn();
+  } else {
+    disableButtons();
   }
 }
 
@@ -190,14 +212,14 @@ function applySkillDamage(success) {
 ------------------------- */
 
 function playerAttack() {
-  // FIX: reset timing state
-  skillTimingActive = false;
-  document.getElementById("hitBtn").style.display = "none";
+  resetHitButton();
 
   if (player.ap < 1) return log("Not enough AP!");
 
   player.ap -= 1;
   clampAP();
+
+  disableButtons();
 
   animateCard("enemyCard", "attack-anim");
 
@@ -219,13 +241,13 @@ function playerAttack() {
 }
 
 function playerDefend() {
-  // FIX: reset timing state
-  skillTimingActive = false;
-  document.getElementById("hitBtn").style.display = "none";
+  resetHitButton();
 
   player.defending = true;
   applyDefendGlow("playerCard");
   log("You brace for impact...");
+
+  disableButtons();
   enemyTurn();
 }
 
@@ -234,6 +256,8 @@ function playerDefend() {
 ------------------------- */
 
 function enemyTurn() {
+  resetHitButton();
+
   log("\n--- Enemy Turn (" + enemy.name + ") ---");
 
   enemy.ap += 1;
@@ -298,7 +322,6 @@ function enemyTurn() {
     return;
   }
 
-  // FIX: Always start player's turn and unlock UI
   startTurn();
 }
 
@@ -324,7 +347,7 @@ function decideEnemyAction() {
 }
 
 /* -------------------------
-   INIT
+   TURN + WIN CHECK
 ------------------------- */
 
 function startTurn() {
@@ -336,6 +359,18 @@ function startTurn() {
   updateUI();
   enableButtons();
 }
+
+function checkWin() {
+  if (enemy.hp <= 0) {
+    log("You defeated " + enemy.name + "!");
+    return true;
+  }
+  return false;
+}
+
+/* -------------------------
+   INIT
+------------------------- */
 
 updateUI();
 startTurn();
