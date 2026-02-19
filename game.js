@@ -116,8 +116,8 @@ function removeDefendGlow(cardId) {
 
 let skillTimingActive = false;
 let skillTimingStart = 0;
-let skillTimingWindow = 100;   // 100ms perfect window
-let skillTimingFailTime = 200; // auto-fail after 200ms
+let skillTimingWindow = 100;
+let skillTimingFailTime = 200;
 
 function playerSkill() {
   if (player.ap < 2) return log("Not enough AP!");
@@ -128,21 +128,16 @@ function playerSkill() {
   log("Skill activated! Prepare to strike...");
 
   disableButtons();
-
-  // Show Hit button
   document.getElementById("hitBtn").style.display = "block";
 
-  // First animation
   animateCard("enemyCard", "skill-anim", 300);
 
-  // Second animation triggers timing window
   setTimeout(() => {
     animateCard("enemyCard", "skill-anim", 300);
 
     skillTimingActive = true;
     skillTimingStart = performance.now();
 
-    // Auto-fail after fail time
     setTimeout(() => {
       if (skillTimingActive) {
         skillTimingActive = false;
@@ -297,7 +292,7 @@ function enemyTurn() {
     return;
   }
 
-  // FIX: Player AP now increments again
+  // FIX: Always start player's turn and unlock UI
   startTurn();
   enableButtons();
 }
