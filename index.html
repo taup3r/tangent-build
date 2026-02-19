@@ -7,6 +7,11 @@
 </head>
 <body>
 
+<!-- Title Header -->
+<header class="game-header">
+  <h1 class="game-title">⚔️ Arcane Duel</h1>
+</header>
+
 <div class="battle-container">
 
   <div class="battlefield">
@@ -17,7 +22,7 @@
         <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
       </div>
 
-      <h2 id="enemyName"></h2>
+      <h3 id="enemyName" class="small-name"></h3>
       <p id="enemyHint" class="enemy-hint"></p>
 
       <p><strong>HP:</strong></p>
@@ -25,7 +30,8 @@
         <div id="enemyHPBar" class="health-fill"></div>
       </div>
 
-      <p><strong>AP:</strong> <span id="enemyAP"></span></p>
+      <p><strong>AP:</strong></p>
+      <div id="enemyAPIcons" class="ap-icon-row"></div>
     </div>
 
     <!-- Player Card -->
@@ -34,21 +40,27 @@
         <img id="playerPortrait" class="portrait" alt="Player Portrait">
       </div>
 
-      <h2>Player</h2>
+      <h3 class="small-name">Player</h3>
 
       <p><strong>HP:</strong></p>
       <div class="health-bar">
         <div id="playerHPBar" class="health-fill"></div>
       </div>
 
-      <p><strong>AP:</strong> <span id="ap"></span></p>
+      <p><strong>AP:</strong></p>
+      <div id="playerAPIcons" class="ap-icon-row"></div>
 
-      <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
-      <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
-      <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
+      <!-- Action Bar -->
+      <div class="action-row">
+        <button id="attackBtn" onclick="playerAttack()">Attack</button>
+        <button id="defendBtn" onclick="playerDefend()">Defend</button>
+        <button id="skillBtn" onclick="playerSkill()">Skill</button>
+      </div>
 
-      <!-- Timing Hit Button -->
-      <button id="hitBtn" onclick="playerHit()" style="display:none;">Hit!</button>
+      <!-- Hit Button (appears only when needed) -->
+      <button id="hitBtn" onclick="playerHit()" class="hit-button" style="display:none;">
+        Hit!
+      </button>
     </div>
 
   </div>
