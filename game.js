@@ -32,7 +32,7 @@ let enemy = {
 };
 
 /* -------------------------
-   PORTRAITS (LOCAL PNG FILES)
+   PORTRAITS
 ------------------------- */
 
 const enemyPortraits = {
@@ -182,8 +182,6 @@ function applySkillDamage(success) {
 
   if (!checkWin()) {
     enemyTurn();
-  } else {
-    enableButtons();
   }
 }
 
@@ -294,7 +292,6 @@ function enemyTurn() {
 
   // FIX: Always start player's turn and unlock UI
   startTurn();
-  enableButtons();
 }
 
 /* -------------------------
@@ -329,6 +326,7 @@ function startTurn() {
   removeDefendGlow("playerCard");
   log("\n--- Player Turn ---");
   updateUI();
+  enableButtons(); // <-- FIXED
 }
 
 updateUI();
