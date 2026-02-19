@@ -1,1 +1,17 @@
-test
+/* ============================================
+   BASE STYLES — FONTS, GLOBAL, COLORS
+============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Spectral+SC:wght@400;600&display=swap');
+
+body {
+  font-family: 'Spectral SC', serif;
+  background: #0f0f17;
+  color: #f5f5f7;
+  margin: 0;
+  padding-top: 60px; /* space for fixed header */
+}
+
+h1, h2, h3, button {
+  font-family: 'Cinzel', serif;
+}
