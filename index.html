@@ -9,7 +9,10 @@
 
 <!-- Fixed Header -->
 <header class="game-header">
-  <h1 class="game-title">⚔️ Arcane Duel</h1>
+  <div class="header-left">
+    <span class="header-icon">⚔️</span>
+    <span class="header-title">Arcane Duel</span>
+  </div>
 </header>
 
 <div class="battle-container">
@@ -60,9 +63,9 @@
 
       <!-- Action Buttons -->
       <div class="action-row">
-        <button id="attackBtn" onclick="playerAttack()">Attack</button>
-        <button id="defendBtn" onclick="playerDefend()">Defend</button>
-        <button id="skillBtn" onclick="playerSkill()">Skill</button>
+        <button id="attackBtn" class="btn-attack" onclick="playerAttack()">🗡️ Attack</button>
+        <button id="defendBtn" class="btn-defend" onclick="playerDefend()">🛡️ Defend</button>
+        <button id="skillBtn" class="btn-skill" onclick="playerSkill()">✨ Skill</button>
       </div>
 
       <!-- Hit Button -->
@@ -74,11 +77,23 @@
 
   </div>
 
-  <!-- Log Window -->
-  <div class="card">
+  <!-- Log Window (hidden during battle, used for modal) -->
+  <div class="card" style="display:none;">
     <div id="log"></div>
   </div>
 
+</div>
+
+<!-- Floating Damage Container -->
+<div id="floatingContainer"></div>
+
+<!-- Victory/Defeat Modal -->
+<div id="resultModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2 id="resultTitle"></h2>
+    <div id="resultLog" class="modal-log"></div>
+    <button class="modal-button" onclick="startNewBattle()">New Battle</button>
+  </div>
 </div>
 
 <script src="game.js"></script>
