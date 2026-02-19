@@ -6,42 +6,49 @@
 </head>
 <body>
 
-<div class="container">
+<div class="battlefield">
 
-  <div class="card">
-    <h1>Turn‑Based RPG</h1>
-
-    <p><strong>Player HP:</strong></p>
-    <div class="health-bar"><div id="playerHPBar" class="health-fill"></div></div>
+  <!-- Enemy Card -->
+  <div class="card enemy-card">
+    <h2 id="enemyName"></h2>
+    <p><strong>Type:</strong> <span id="enemyType"></span></p>
 
     <p><strong>Enemy HP:</strong></p>
     <div class="health-bar"><div id="enemyHPBar" class="health-fill"></div></div>
 
-    <p><strong>Action Points:</strong> <span id="ap"></span></p>
+    <p><strong>Enemy AP:</strong> <span id="enemyAP"></span></p>
   </div>
 
-  <div class="card">
+  <!-- Player Card -->
+  <div class="card player-card">
+    <h2>Player</h2>
+
+    <p><strong>Player HP:</strong></p>
+    <div class="health-bar"><div id="playerHPBar" class="health-fill"></div></div>
+
+    <p><strong>Action Points:</strong> <span id="ap"></span></p>
+
     <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
     <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
     <button id="skillBtn" onclick="playerSkill()">Skill (2 AP)</button>
   </div>
 
-  <div class="card">
-    <div id="log"></div>
+</div>
+
+<div class="card">
+  <div id="log"></div>
+</div>
+
+<!-- TIMING MINI-GAME -->
+<div class="card" id="timingCard" style="display:none;">
+  <p><strong>Timed Hit!</strong> Click the button when the marker is in the green zone.</p>
+
+  <div class="timing-bar">
+    <div class="timing-zone"></div>
+    <div class="timing-marker" id="timingMarker"></div>
   </div>
 
-  <!-- TIMING MINI-GAME -->
-  <div class="card" id="timingCard" style="display:none;">
-    <p><strong>Timed Hit!</strong> Click the button when the marker is in the green zone.</p>
-
-    <div class="timing-bar">
-      <div class="timing-zone"></div>
-      <div class="timing-marker" id="timingMarker"></div>
-    </div>
-
-    <button id="timingButton" style="margin-top:10px;">HIT!</button>
-  </div>
-
+  <button id="timingButton" style="margin-top:10px;">HIT!</button>
 </div>
 
 <script src="game.js"></script>
