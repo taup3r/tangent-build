@@ -73,12 +73,12 @@ button:active {
 }
 
 .timing-bar {
-  position: relative;
+  position: relative;   /* This is critical */
   height: 20px;
   background: #333;
   border-radius: 10px;
   margin-top: 10px;
-  overflow: hidden;
+  overflow: hidden;     /* Prevents anything from spilling out */
 }
 
 .timing-zone {
@@ -88,6 +88,7 @@ button:active {
   height: 100%;
   background: #3aff7a;
   opacity: 0.7;
+  top: 0;
 }
 
 .timing-marker {
@@ -97,6 +98,7 @@ button:active {
   background: #ffeb3b;
   border-radius: 5px;
   left: 0%;
+  top: 0;
 }
 
 @keyframes fadeIn {
