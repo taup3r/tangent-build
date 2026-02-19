@@ -1,57 +1,73 @@
+/* ------------------------------
+   GLOBAL
+------------------------------ */
+
 body {
   font-family: 'Segoe UI', sans-serif;
   background: #0f0f17;
   color: #f5f5f7;
   margin: 0;
-  padding: 20px;
+  padding: 10px;
 }
+
+.battle-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ------------------------------
+   CARD LAYOUT
+------------------------------ */
 
 .battlefield {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.enemy-card, .player-card {
-  width: 48%;
-  min-width: 280px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .card {
   background: #1c1c28;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  animation: fadeIn 0.6s ease;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  animation: fadeIn 0.4s ease;
 }
+
+/* ------------------------------
+   PORTRAITS
+------------------------------ */
 
 .portrait-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .portrait {
   width: 100%;
-  max-height: 220px;
+  max-height: 150px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
 }
+
+/* ------------------------------
+   TEXT + BARS
+------------------------------ */
 
 .enemy-hint {
   font-style: italic;
   color: #9aa0ff;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
 }
 
 .health-bar {
-  height: 22px;
+  height: 18px;
   background: #2e2e3f;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .health-fill {
@@ -61,13 +77,17 @@ body {
   transition: width 0.4s ease;
 }
 
+/* ------------------------------
+   BUTTONS
+------------------------------ */
+
 button {
   width: 100%;
-  padding: 14px;
-  margin: 6px 0;
-  font-size: 16px;
+  padding: 10px;
+  margin: 4px 0;
+  font-size: 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   background: #3d3d55;
   color: #fff;
@@ -82,60 +102,77 @@ button:active {
   transform: scale(0.96);
 }
 
-#log {
-  background: #14141f;
-  padding: 15px;
-  border-radius: 10px;
-  height: 200px;
-  overflow-y: auto;
-  font-size: 14px;
-  line-height: 1.4;
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
-/* ATTACK ANIMATION */
+/* ------------------------------
+   LOG WINDOW
+------------------------------ */
+
+#log {
+  background: #14141f;
+  padding: 12px;
+  border-radius: 10px;
+  height: 160px;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* ------------------------------
+   ANIMATIONS
+------------------------------ */
+
 .attack-anim {
   animation: attackAnim 0.25s ease-out;
 }
 
 @keyframes attackAnim {
   0% { transform: translateX(0); }
-  40% { transform: translateX(-20px); }
+  40% { transform: translateX(-14px); }
   100% { transform: translateX(0); }
 }
 
-/* SKILL DOUBLE STRIKE */
 .skill-anim {
   animation: skillAnim 0.25s ease-out;
 }
 
 @keyframes skillAnim {
   0% { transform: translateX(0); }
-  40% { transform: translateX(-30px) scale(1.05); }
+  40% { transform: translateX(-20px) scale(1.05); }
   100% { transform: translateX(0); }
 }
 
-/* DEFEND GLOW */
 .defend-glow {
-  box-shadow: 0 0 20px #4cff9c inset, 0 0 10px #4cff9c;
+  box-shadow: 0 0 14px #4cff9c inset, 0 0 6px #4cff9c;
   transition: box-shadow 0.3s ease;
 }
 
-/* RESPONSIVE */
-@media (max-width: 700px) {
+/* ------------------------------
+   RESPONSIVE LANDSCAPE
+------------------------------ */
+
+@media (min-width: 700px) {
   .battlefield {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .enemy-card, .player-card {
-    width: 100%;
+    width: 48%;
   }
 
   .portrait {
-    max-height: 180px;
+    max-height: 200px;
   }
 }
 
+/* ------------------------------
+   FADE-IN
+------------------------------ */
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
