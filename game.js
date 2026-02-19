@@ -10,9 +10,9 @@ let player = {
 };
 
 const enemyTypes = [
-  { type: "Aggressive Fighter", behavior: "aggressive" },
-  { type: "Defensive Guard", behavior: "defensive" },
-  { type: "Cunning Warlock", behavior: "warlock" }
+  { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
+  { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
+  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
 ];
 
 function randomName() {
@@ -32,7 +32,7 @@ let enemy = {
 };
 
 document.getElementById("enemyName").textContent = enemy.name;
-document.getElementById("enemyType").textContent = enemy.type;
+document.getElementById("enemyHint").textContent = enemy.hint;
 
 /* -------------------------
    UI + HELPERS
@@ -243,7 +243,7 @@ function enemyTurn() {
 
   else if (action === "defend") {
     enemy.defending = true;
-    log(enemy.name + " braces for impact (Defend).");
+    log(enemy.name + " braces for impact.");
   }
 
   else {
