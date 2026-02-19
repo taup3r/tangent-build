@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Turn-Based RPG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,22 +12,22 @@
   <!-- Enemy Card -->
   <div class="card enemy-card">
     <h2 id="enemyName"></h2>
-    <p><strong>Type:</strong> <span id="enemyType"></span></p>
+    <p id="enemyHint" class="enemy-hint"></p>
 
-    <p><strong>Enemy HP:</strong></p>
+    <p><strong>HP:</strong></p>
     <div class="health-bar"><div id="enemyHPBar" class="health-fill"></div></div>
 
-    <p><strong>Enemy AP:</strong> <span id="enemyAP"></span></p>
+    <p><strong>AP:</strong> <span id="enemyAP"></span></p>
   </div>
 
   <!-- Player Card -->
   <div class="card player-card">
     <h2>Player</h2>
 
-    <p><strong>Player HP:</strong></p>
+    <p><strong>HP:</strong></p>
     <div class="health-bar"><div id="playerHPBar" class="health-fill"></div></div>
 
-    <p><strong>Action Points:</strong> <span id="ap"></span></p>
+    <p><strong>AP:</strong> <span id="ap"></span></p>
 
     <button id="attackBtn" onclick="playerAttack()">Attack (1 AP)</button>
     <button id="defendBtn" onclick="playerDefend()">Defend (0 AP)</button>
@@ -41,7 +42,7 @@
 
 <!-- TIMING MINI-GAME -->
 <div class="card" id="timingCard" style="display:none;">
-  <p><strong>Timed Hit!</strong> Click the button when the marker is in the green zone.</p>
+  <p><strong>Timed Hit!</strong> Tap the button when the marker is in the green zone.</p>
 
   <div class="timing-bar">
     <div class="timing-zone"></div>
