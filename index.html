@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Turn-Based RPG</title>
+  <title>Arcane Duel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Title Header -->
+<!-- Fixed Header -->
 <header class="game-header">
   <h1 class="game-title">⚔️ Arcane Duel</h1>
 </header>
@@ -18,49 +18,58 @@
 
     <!-- Enemy Card -->
     <div class="card enemy-card" id="enemyCard">
+
       <div class="portrait-container">
         <img id="enemyPortrait" class="portrait" alt="Enemy Portrait">
       </div>
 
-      <h3 id="enemyName" class="small-name"></h3>
-      <p id="enemyHint" class="enemy-hint"></p>
-
-      <p><strong>HP:</strong></p>
-      <div class="health-bar">
-        <div id="enemyHPBar" class="health-fill"></div>
+      <!-- Enemy Name + AP Row -->
+      <div class="name-ap-row">
+        <div id="enemyAPIcons" class="ap-icon-row"></div>
+        <h3 id="enemyName" class="small-name"></h3>
       </div>
 
-      <p><strong>AP:</strong></p>
-      <div id="enemyAPIcons" class="ap-icon-row"></div>
+      <!-- HP Bar -->
+      <div class="health-bar">
+        <div id="enemyHPBar" class="health-fill"></div>
+        <div id="enemyHPText" class="hp-text"></div>
+      </div>
+
+      <p id="enemyHint" class="enemy-hint"></p>
+
     </div>
 
     <!-- Player Card -->
     <div class="card player-card" id="playerCard">
+
       <div class="portrait-container">
         <img id="playerPortrait" class="portrait" alt="Player Portrait">
       </div>
 
-      <h3 class="small-name">Player</h3>
-
-      <p><strong>HP:</strong></p>
-      <div class="health-bar">
-        <div id="playerHPBar" class="health-fill"></div>
+      <!-- Player Name + AP Row -->
+      <div class="name-ap-row">
+        <h3 class="small-name">Player</h3>
+        <div id="playerAPIcons" class="ap-icon-row"></div>
       </div>
 
-      <p><strong>AP:</strong></p>
-      <div id="playerAPIcons" class="ap-icon-row"></div>
+      <!-- HP Bar -->
+      <div class="health-bar">
+        <div id="playerHPBar" class="health-fill"></div>
+        <div id="playerHPText" class="hp-text"></div>
+      </div>
 
-      <!-- Action Bar -->
+      <!-- Action Buttons -->
       <div class="action-row">
         <button id="attackBtn" onclick="playerAttack()">Attack</button>
         <button id="defendBtn" onclick="playerDefend()">Defend</button>
         <button id="skillBtn" onclick="playerSkill()">Skill</button>
       </div>
 
-      <!-- Hit Button (appears only when needed) -->
+      <!-- Hit Button -->
       <button id="hitBtn" onclick="playerHit()" class="hit-button" style="display:none;">
         Hit!
       </button>
+
     </div>
 
   </div>
