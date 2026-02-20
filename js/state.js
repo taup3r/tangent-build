@@ -1,139 +1,72 @@
-/* ================================
-   LOAD / SAVE PLAYER PROGRESSION
-================================ */
+/* ============================================
+   STATE MODULE
+   Handles:
+   - Player stats
+   - Enemy stats
+   - Derived stat computation
+============================================ */
 
-export let playerStats = {
+export const playerStats = {
   level: 1,
   exp: 0,
   expToNext: 20,
-  statPoints: 0,
+
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0
+  CON: 0,
 };
 
-function loadProgress() {
-  const saved = localStorage.getItem("playerProgress");
-  if (!saved) return;
-  Object.assign(playerStats, JSON.parse(saved).playerStats);
-}
+export const player = {
+  baseDamage: 5,
+  baseMaxHP: 30,
 
-export function saveProgress() {
-  localStorage.setItem("playerProgress", JSON.stringify({ playerStats }));
-}
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0,
 
-loadProgress();
-
-/* ================================
-   PLAYER COMBAT STATE
-================================ */
-
-export let player = {
   hp: 30,
   max: 30,
-  ap: 0,
-  defending: false
+  ap: 3,
 };
 
-/* ================================
-   EXP + LEVELING
-================================ */
+export const enemy = {
+  baseDamage: 4,
+  baseMaxHP: 20,
 
-export function gainExp(amount) {
-  playerStats.exp += amount;
+  STR: 1,
+  DEX: 1,
+  AGI: 1,
+  CON: 1,
 
-  while (playerStats.exp >= playerStats.expToNext) {
-    playerStats.exp -= playerStats.expToNext;
-    playerStats.level++;
-    playerStats.statPoints += 3;
-    playerStats.expToNext = Math.floor(playerStats.expToNext * 1.25);
-  }
-
-  saveProgress();
-}
-
-export function loseExp(amount) {
-  playerStats.exp -= amount;
-  if (playerStats.exp < 0) playerStats.exp = 0;
-  saveProgress();
-}
-
-/* ================================
-   ENEMY TYPES
-================================ */
-
-const enemyTypes = [
-  { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
-  { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
-  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
-];
-
-function randomName() {
-  const first = ["Gor", "Thal", "Rin", "Vor", "Kel", "Zar", "Mor", "Fen"];
-  const last = ["Bloodfang", "Ironhide", "Nightweaver", "Stormborn", "Ashclaw"];
-  return first[Math.floor(Math.random() * first.length)] + " " +
-         last[Math.floor(Math.random() * last.length)];
-}
-
-/* ================================
-   ENEMY STATS MATCH PLAYER LEVEL
-================================ */
-
-function randomEnemyStats(level) {
-  const stats = { STR: 0, DEX: 0, AGI: 0, CON: 0 };
-  let points = (level - 1) * 3;
-  const keys = ["STR", "DEX", "AGI", "CON"];
-
-  while (points > 0) {
-    const k = keys[Math.floor(Math.random() * keys.length)];
-    stats[k]++;
-    points--;
-  }
-
-  return stats;
-}
-
-export let enemyStats = randomEnemyStats(playerStats.level);
-
-/* ================================
-   ENEMY OBJECT
-================================ */
-
-export let enemy = {
-  hp: 30,
-  max: 30,
-  ap: 0,
-  defending: false,
-  ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
-  name: randomName(),
-  level: playerStats.level,
-  stats: enemyStats
+  hp: 20,
+  max: 20,
+  ap: 3,
 };
 
-/* ================================
-   PORTRAITS
-================================ */
+/* -------------------------
+   DERIVED STAT CALCULATION
+------------------------- */
 
-const enemyPortraits = {
-  aggressive: "assets/enemy_aggressive.png",
-  defensive: "assets/enemy_defensive.png",
-  warlock: "assets/enemy_warlock.png"
-};
+export function computeDerivedStats(entity) {
+  entity.max = entity.baseMaxHP + (entity.CON * 5);
+  entity.hp = Math.min(entity.hp, entity.max);
+
+  entity.damage = entity.baseDamage + (entity.STR * 2);
+
+  entity.hitChance = 80 + (entity.DEX * 2);   // %
+  entity.evadeChance = 0 + (entity.AGI * 2);  // %
+}
+
+/* -------------------------
+   INITIALIZE PORTRAITS
+------------------------- */
 
 export function initializePortraits() {
-  document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
   document.getElementById("playerPortrait").src = "assets/player.png";
+  document.getElementById("enemyPortrait").src = "assets/enemy.png";
 
-  document.getElementById("enemyName").textContent = enemy.name;
-  document.getElementById("enemyHint").textContent = enemy.hint;
-}
-
-/* ================================
-   AP CLAMP
-================================ */
-
-export function clampAP() {
-  if (player.ap > 2) player.ap = 2;
-  if (enemy.ap > 2) enemy.ap = 2;
+  computeDerivedStats(player);
+  computeDerivedStats(enemy);
 }
