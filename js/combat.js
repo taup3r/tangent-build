@@ -1,39 +1,27 @@
 /* ============================================
    COMBAT MODULE
    Handles:
-   - Player attack / defend / skill
-   - Damage application
-   - Animations
-   - Turn transitions
+   - Player attack
+   - Player defend
+   - Player skill
+   - Enemy attack
+   - Turn flow
 ============================================ */
 
-import { player, enemy, clampAP } from "./state.js";
+import { player, enemy } from "./state.js";
 import { updateUI, log, disableButtons, enableButtons, floatDamage } from "./ui.js";
-import { startSkillTiming, resetSkillTiming } from "./skillTiming.js";
-import { enemyTurn } from "./enemyAI.js";
-import { checkWin } from "./modal.js";
+import { computeDerivedStats } from "./state.js";
 
 /* -------------------------
-   ANIMATION HELPERS
+   HIT / MISS ROLL
 ------------------------- */
 
-function animateCard(cardId, animClass, duration = 300) {
-  const card = document.getElementById(cardId);
-  card.classList.add(animClass);
-  setTimeout(() => card.classList.remove(animClass), duration);
-}
+function rollHit(attacker, defender) {
+  const hit = attacker.hitChance;
+  const evade = defender.evadeChance;
 
-function animateSkillDouble(cardId) {
-  animateCard(cardId, "skill-anim", 300);
-  setTimeout(() => animateCard(cardId, "skill-anim", 300), 1000);
-}
-
-function applyDefendGlow(cardId) {
-  document.getElementById(cardId).classList.add("defend-glow");
-}
-
-function removeDefendGlow(cardId) {
-  document.getElementById(cardId).classList.remove("defend-glow");
+  const finalChance = Math.max(5, Math.min(95, hit - evade));
+  return Math.random() * 100 < finalChance;
 }
 
 /* -------------------------
@@ -41,32 +29,20 @@ function removeDefendGlow(cardId) {
 ------------------------- */
 
 export function playerAttack() {
-  resetSkillTiming();
-
-  if (player.ap < 1) return log("Not enough AP!");
-
-  player.ap -= 1;
-  clampAP();
-
-  disableButtons();
-  animateCard("enemyCard", "attack-anim");
-
-  let dmg = Math.floor(Math.random() * 6) + 4;
-
-  if (enemy.defending) {
-    dmg = Math.floor(dmg / 2);
-    log(enemy.name + " defended! Damage halved.");
+  if (!rollHit(player, enemy)) {
+    log("You missed!");
+    endPlayerTurn();
+    return;
   }
 
-  enemy.hp -= dmg;
-  if (enemy.hp < 0) enemy.hp = 0;
+  const dmg = player.damage;
+  enemy.hp = Math.max(0, enemy.hp - dmg);
 
-  log(`You attack for ${dmg}!`);
   floatDamage(dmg, "enemyCard");
+  log(`You hit the enemy for ${dmg}!`);
 
   updateUI();
-
-  if (!checkWin()) enemyTurn();
+  endPlayerTurn();
 }
 
 /* -------------------------
@@ -74,15 +50,9 @@ export function playerAttack() {
 ------------------------- */
 
 export function playerDefend() {
-  resetSkillTiming();
-
   player.defending = true;
-  applyDefendGlow("playerCard");
-
-  log("You brace for impact...");
-
-  disableButtons();
-  enemyTurn();
+  log("You brace for impact.");
+  endPlayerTurn();
 }
 
 /* -------------------------
@@ -90,71 +60,56 @@ export function playerDefend() {
 ------------------------- */
 
 export function playerSkill() {
-  resetSkillTiming();
+  // Check hit BEFORE timing mini-game
+  if (!rollHit(player, enemy)) {
+    log("Your skill missed!");
+    endPlayerTurn();
+    return;
+  }
 
-  if (player.ap < 2) return log("Not enough AP!");
-
-  player.ap -= 2;
-  clampAP();
-
-  log("Skill activated! Prepare to strike...");
-
+  // If hit, show timing mini-game
+  document.getElementById("hitBtn").style.display = "block";
   disableButtons();
 
-  const hitBtn = document.getElementById("hitBtn");
-  hitBtn.style.display = "block";
-  hitBtn.disabled = true;
-
-  animateCard("enemyCard", "skill-anim", 300);
-
-  // Second animation before timing window opens
-  setTimeout(() => {
-    animateCard("enemyCard", "skill-anim", 300);
-    startSkillTiming();
-  }, 1000);
+  window.skillAttackPending = true;
 }
 
 /* -------------------------
-   APPLY SKILL DAMAGE
-   Called by skillTiming.js
+   ENEMY ATTACK
 ------------------------- */
 
-export function applySkillDamage(perfect) {
-  resetSkillTiming();
+export function enemyAttack() {
+  if (!rollHit(enemy, player)) {
+    log("Enemy missed!");
+    startPlayerTurn();
+    return;
+  }
 
-  let base = Math.floor(Math.random() * 6) + 4;
-  let dmg = perfect ? base * 2.5 : base * 2;
+  let dmg = enemy.damage;
 
-  if (enemy.defending) {
+  if (player.defending) {
     dmg = Math.floor(dmg / 2);
-    log(enemy.name + " defended! Damage halved.");
+    player.defending = false;
   }
 
-  dmg = Math.floor(dmg);
-  enemy.hp -= dmg;
-  if (enemy.hp < 0) enemy.hp = 0;
+  player.hp = Math.max(0, player.hp - dmg);
 
-  floatDamage(dmg, "enemyCard");
+  floatDamage(dmg, "playerCard");
+  log(`Enemy hits you for ${dmg}!`);
+
   updateUI();
-
-  if (!checkWin()) {
-    enemyTurn();
-  }
+  startPlayerTurn();
 }
 
 /* -------------------------
-   TURN START
+   TURN FLOW
 ------------------------- */
 
 export function startPlayerTurn() {
-  player.ap += 1;
-  clampAP();
-
-  player.defending = false;
-  removeDefendGlow("playerCard");
-
-  log("\n--- Player Turn ---");
-
-  updateUI();
   enableButtons();
+}
+
+export function endPlayerTurn() {
+  disableButtons();
+  setTimeout(enemyAttack, 600);
 }
