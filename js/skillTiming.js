@@ -7,7 +7,7 @@
 ============================================ */
 
 import { player } from "./state.js";
-import { log, resetHitButton } from "./ui.js";
+import { log } from "./ui.js";
 import { applySkillDamage } from "./combat.js";
 
 /* -------------------------
@@ -78,5 +78,4 @@ export function handleHitPress() {
 
 export function resetSkillTiming() {
   skillTimingActive = false;
-  resetHitButton();
 }
