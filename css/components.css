@@ -143,8 +143,8 @@ button:disabled {
   line-height: 1.3;
   color: #eaeaea;
   z-index: 5000;
-  width: 220px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  max-width: 240px;
   pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
   font-family: 'Spectral SC', serif;
 }
