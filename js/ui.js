@@ -30,6 +30,8 @@ export function renderAPIcons() {
     e.className = "ap-icon" + (i < enemy.ap ? " active" : "");
     enemyRow.appendChild(e);
   }
+
+  attachAPTooltips();
 }
 
 /* -------------------------
