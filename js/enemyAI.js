@@ -9,7 +9,7 @@
 
 import { player, enemy, clampAP } from "./state.js";
 import { updateUI, log, floatDamage } from "./ui.js";
-import { startPlayerTurn } from "./combat.js";
+import { startPlayerTurn, rollHit } from "./combat.js";
 import { checkWin } from "./modal.js";
 
 /* -------------------------
@@ -82,21 +82,27 @@ export function enemyTurn() {
   if (action === "skill") {
     enemy.ap -= 2;
 
-    animateSkillDouble("playerCard");
-
-    let base = Math.floor(Math.random() * 6) + 4;
-    let dmg = base * 2;
-
-    if (player.defending) {
-      dmg = Math.floor(dmg / 2);
-      log("You defended! Damage halved.");
+    // Hit check
+    if (!rollHit()) {
+      log("Enemy missed!");
     }
+    else {
+      animateSkillDouble("playerCard");
 
-    player.hp -= dmg;
-    if (player.hp < 0) player.hp = 0;
+      let base = Math.floor(Math.random() * 6) + 4;
+      let dmg = base * 2;
 
-    log(`${enemy.name} uses SKILL for ${dmg} damage!`);
-    floatDamage(dmg, "playerCard");
+      if (player.defending) {
+        dmg = Math.floor(dmg / 2);
+        log("You defended! Damage halved.");
+      }
+
+      player.hp -= dmg;
+      if (player.hp < 0) player.hp = 0;
+
+      log(`${enemy.name} uses SKILL for ${dmg} damage!`);
+      floatDamage(dmg, "playerCard");
+    }
   }
 
   /* -------------------------
@@ -105,20 +111,26 @@ export function enemyTurn() {
   else if (action === "attack") {
     enemy.ap -= 1;
 
-    animateCard("playerCard", "attack-anim");
-
-    let dmg = Math.floor(Math.random() * 6) + 3;
-
-    if (player.defending) {
-      dmg = Math.floor(dmg / 2);
-      log("You defended! Damage halved.");
+    // Hit check
+    if (!rollHit()) {
+      log("Enemy missed!");
     }
+    else {
+      animateCard("playerCard", "attack-anim");
 
-    player.hp -= dmg;
-    if (player.hp < 0) player.hp = 0;
+      let dmg = Math.floor(Math.random() * 6) + 3;
 
-    log(`${enemy.name} attacks for ${dmg}!`);
-    floatDamage(dmg, "playerCard");
+      if (player.defending) {
+        dmg = Math.floor(dmg / 2);
+        log("You defended! Damage halved.");
+      }
+
+      player.hp -= dmg;
+      if (player.hp < 0) player.hp = 0;
+
+      log(`${enemy.name} attacks for ${dmg}!`);
+      floatDamage(dmg, "playerCard");
+    }
   }
 
   /* -------------------------

@@ -14,6 +14,18 @@ import { enemyTurn } from "./enemyAI.js";
 import { checkWin } from "./modal.js";
 
 /* -------------------------
+   HIT / MISS CHECK
+------------------------- */
+
+export function rollHit() {
+  const hitChance = 80;   // base hit %
+  const evadeChance = 0;  // base evade %
+
+  const finalChance = hitChance - evadeChance;
+  return Math.random() * 100 < finalChance;
+}
+
+/* -------------------------
    ANIMATION HELPERS
 ------------------------- */
 
@@ -49,6 +61,14 @@ export function playerAttack() {
   clampAP();
 
   disableButtons();
+
+  // Hit check
+  if (!rollHit()) {
+    log("You missed!");
+    updateUI();
+    return enemyTurn();
+  }
+
   animateCard("enemyCard", "attack-anim");
 
   let dmg = Math.floor(Math.random() * 6) + 4;
@@ -96,6 +116,13 @@ export function playerSkill() {
 
   player.ap -= 2;
   clampAP();
+
+  // Hit check BEFORE timing mini-game
+  if (!rollHit()) {
+    log("Your skill missed!");
+    updateUI();
+    return enemyTurn();
+  }
 
   log("Skill activated! Prepare to strike...");
 
