@@ -40,17 +40,19 @@
           <img id="enemyPortrait" class="portrait" src="">
         </div>
 
-        <div class="name-ap-row" style="justify-content: space-between;">
-          <h3 id="enemyName" class="small-name" style="margin:0;">Enemy</h3>
-          <span id="enemyInfoBtn" style="cursor:pointer; font-size:1.2rem;">🔍</span>
+        <!-- ENEMY AP + NAME + SEARCH ICON -->
+        <div class="name-ap-row" style="justify-content: space-between; align-items:center;">
+
+          <div id="enemyAPIcons" class="ap-icon-row"></div>
+
+          <div style="display:flex; align-items:center; gap:6px;">
+            <h3 id="enemyName" class="small-name" style="margin:0;">Enemy</h3>
+            <span id="enemyInfoBtn" style="cursor:pointer; font-size:1.2rem;">🔍</span>
+          </div>
+
         </div>
 
         <p id="enemyHint" style="font-size: 0.8rem; opacity: 0.8;"></p>
-
-        <div class="name-ap-row">
-          <span>AP:</span>
-          <div id="enemyAPIcons" class="ap-icon-row"></div>
-        </div>
 
         <div class="health-bar">
           <div id="enemyHPBar" class="health-fill"></div>
@@ -66,10 +68,9 @@
           <img id="playerPortrait" class="portrait" src="">
         </div>
 
-        <h3 class="small-name">Player</h3>
-
-        <div class="name-ap-row">
-          <span>AP:</span>
+        <!-- PLAYER NAME + AP ICONS -->
+        <div class="name-ap-row" style="justify-content: space-between; align-items:center;">
+          <h3 class="small-name" style="margin:0;">Player</h3>
           <div id="playerAPIcons" class="ap-icon-row"></div>
         </div>
 
@@ -78,10 +79,11 @@
           <div id="playerHPText" class="hp-text"></div>
         </div>
 
+        <!-- ACTION BUTTONS WITH ICONS -->
         <div class="action-row">
-          <button id="attackBtn" class="btn-attack">Attack</button>
-          <button id="defendBtn" class="btn-defend">Defend</button>
-          <button id="skillBtn" class="btn-skill">Skill</button>
+          <button id="attackBtn" class="btn-attack">⚔️ Attack</button>
+          <button id="defendBtn" class="btn-defend">🛡️ Defend</button>
+          <button id="skillBtn" class="btn-skill">✨ Skill</button>
         </div>
 
         <button id="hitBtn" class="hit-button" style="display:none;">HIT!</button>
@@ -103,18 +105,23 @@
       <h2 id="resultTitle"></h2>
       <div id="resultLog" class="modal-log"></div>
 
-      <button id="statButton" class="modal-button" style="display:none;" onclick="openStatMenu()">
-        Distribute Stat Points
-      </button>
+      <!-- TRAIN + NEW BATTLE BUTTONS -->
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+        <button id="statButton" class="modal-button train-btn" style="display:none;" onclick="openStatMenu()">
+          Train
+        </button>
 
-      <button class="modal-button" onclick="startNewBattle()">New Battle</button>
+        <button class="modal-button newbattle-btn" onclick="startNewBattle()">
+          New Battle
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- STAT DISTRIBUTION MODAL -->
   <div id="statModal" class="modal" style="display:none;">
     <div class="modal-content">
-      <h2>Distribute Stat Points</h2>
+      <h2>Train</h2>
 
       <p id="statPointsLeft"></p>
 
