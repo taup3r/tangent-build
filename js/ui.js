@@ -122,29 +122,45 @@ export function log(msg) {
 }
 
 /* ============================================
-   AP TOOLTIP HANDLING
+   AP TOOLTIP HANDLING (dynamic AP + positioning)
 ============================================ */
 
 const tooltip = document.getElementById("apTooltip");
 
-const tooltipText = `
-<b>Action Points: 2</b><br>
-Attack: normal base attack, 1 action point<br>
-Defend: halves incoming damage, 0 action point<br>
-Skill: activate skill, 2 action points
-`;
+function getTooltipText(ap) {
+  return `
+    <b>Action Points: ${ap}</b><br>
+    Attack: normal base attack, 1 action point<br>
+    Defend: halves incoming damage, 0 action point<br>
+    Skill: activate skill, 2 action points
+  `;
+}
 
 export function attachAPTooltips() {
   const apIcons = document.querySelectorAll(".ap-icon");
 
   apIcons.forEach(icon => {
     icon.addEventListener("mouseenter", e => {
-      tooltip.innerHTML = tooltipText;
+      const isPlayer = e.target.closest("#playerAPIcons") !== null;
+      const isEnemy = e.target.closest("#enemyAPIcons") !== null;
+
+      // Determine AP value based on row
+      const apValue = isPlayer ? player.ap : enemy.ap;
+
+      tooltip.innerHTML = getTooltipText(apValue);
       tooltip.style.display = "block";
 
       const rect = e.target.getBoundingClientRect();
-      tooltip.style.left = rect.left + "px";
-      tooltip.style.top = rect.bottom + 6 + "px";
+
+      if (isPlayer) {
+        // Position tooltip at the RIGHT‑MOST TOP of the hovered icon
+        tooltip.style.left = rect.right + 6 + "px";
+        tooltip.style.top = rect.top - 4 + "px";
+      } else {
+        // Enemy tooltip stays BELOW the icon
+        tooltip.style.left = rect.left + "px";
+        tooltip.style.top = rect.bottom + 6 + "px";
+      }
     });
 
     icon.addEventListener("mouseleave", () => {
