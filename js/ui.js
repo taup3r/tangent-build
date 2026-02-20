@@ -144,7 +144,6 @@ export function attachAPTooltips() {
       const isPlayer = e.target.closest("#playerAPIcons") !== null;
       const isEnemy = e.target.closest("#enemyAPIcons") !== null;
 
-      // Determine AP value based on row
       const apValue = isPlayer ? player.ap : enemy.ap;
 
       tooltip.innerHTML = getTooltipText(apValue);
@@ -153,11 +152,11 @@ export function attachAPTooltips() {
       const rect = e.target.getBoundingClientRect();
 
       if (isPlayer) {
-        // Position tooltip at the RIGHT‑MOST TOP of the hovered icon
-        tooltip.style.left = rect.right + 6 + "px";
-        tooltip.style.top = rect.top - 4 + "px";
+        // Align tooltip RIGHT edge to icon RIGHT edge
+        tooltip.style.left = (rect.right - tooltip.offsetWidth) + "px";
+        tooltip.style.top = (rect.top - 4) + "px";
       } else {
-        // Enemy tooltip stays BELOW the icon
+        // Enemy tooltip stays below
         tooltip.style.left = rect.left + "px";
         tooltip.style.top = rect.bottom + 6 + "px";
       }
