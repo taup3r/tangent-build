@@ -62,3 +62,13 @@
   background: #4cff9c;
   border-radius: 6px;
 }
+
+.train-btn {
+  background-color: #4caf50; /* green */
+  color: white;
+}
+
+.newbattle-btn {
+  background-color: #2196f3; /* blue */
+  color: white;
+}
