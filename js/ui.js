@@ -114,8 +114,6 @@ export function floatDamage(amount, cardId) {
    AP TOOLTIP
 ------------------------- */
 
-const tooltip = document.getElementById("apTooltip");
-
 function getTooltipText(ap) {
   return `
     <b>Action Points: ${ap}</b><br>
@@ -126,6 +124,9 @@ function getTooltipText(ap) {
 }
 
 export function attachAPTooltips() {
+  const tooltip = document.getElementById("apTooltip");
+  if (!tooltip) return; // safety guard
+
   const apIcons = document.querySelectorAll(".ap-icon");
 
   apIcons.forEach(icon => {
