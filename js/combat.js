@@ -8,7 +8,7 @@
 ============================================ */
 
 import { player, enemy, clampAP } from "./state.js";
-import { updateUI, log, disableButtons, enableButtons, floatDamage, resetHitButton } from "./ui.js";
+import { updateUI, log, disableButtons, enableButtons, floatDamage } from "./ui.js";
 import { startSkillTiming, resetSkillTiming } from "./skillTiming.js";
 import { enemyTurn } from "./enemyAI.js";
 import { checkWin } from "./modal.js";
