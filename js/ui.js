@@ -30,6 +30,8 @@ export function renderAPIcons() {
     e.className = "ap-icon" + (i < enemy.ap ? " active" : "");
     enemyRow.appendChild(e);
   }
+
+  attachAPTooltips();
 }
 
 /* -------------------------
@@ -117,4 +119,36 @@ export function log(msg) {
   const logBox = document.getElementById("log");
   logBox.textContent += msg + "\n";
   logBox.scrollTop = logBox.scrollHeight;
+}
+
+/* ============================================
+   AP TOOLTIP HANDLING
+============================================ */
+
+const tooltip = document.getElementById("apTooltip");
+
+const tooltipText = `
+<b>Action Points: 2</b><br>
+Attack: normal base attack, 1 action point<br>
+Defend: halves incoming damage, 0 action point<br>
+Skill: activate skill, 2 action points
+`;
+
+export function attachAPTooltips() {
+  const apIcons = document.querySelectorAll(".ap-icon");
+
+  apIcons.forEach(icon => {
+    icon.addEventListener("mouseenter", e => {
+      tooltip.innerHTML = tooltipText;
+      tooltip.style.display = "block";
+
+      const rect = e.target.getBoundingClientRect();
+      tooltip.style.left = rect.left + "px";
+      tooltip.style.top = rect.bottom + 6 + "px";
+    });
+
+    icon.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+  });
 }
