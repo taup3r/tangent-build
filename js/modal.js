@@ -1,13 +1,9 @@
 /* ============================================
    MODAL MODULE
-   Handles:
-   - Victory / Defeat modal
-   - Log injection (line-by-line)
-   - Restarting the battle
-   - Win/Lose checks
 ============================================ */
 
 import { player, enemy } from "./state.js";
+import { playerStats, gainExp, loseExp } from "./state.js";
 
 /* -------------------------
    SHOW RESULT MODAL
@@ -18,13 +14,26 @@ export function showResultModal(victory) {
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
 
-  title.textContent = victory ? "Victory!" : "Defeat";
-
-  // Convert newline logs into <br> for readable formatting
   const rawLog = document.getElementById("log").textContent;
   logBox.innerHTML = rawLog.replace(/\n/g, "<br>");
 
+  if (victory) {
+    title.textContent = "Victory!";
+    const expGain = enemy.level * 10;
+    gainExp(expGain);
+    logBox.innerHTML += `<br><b>Gained ${expGain} EXP</b>`;
+  } else {
+    title.textContent = "Defeat";
+    const expLoss = Math.floor(enemy.level * 10 * 0.1);
+    loseExp(expLoss);
+    logBox.innerHTML += `<br><b>Lost ${expLoss} EXP</b>`;
+  }
+
   modal.style.display = "flex";
+
+  if (playerStats.statPoints > 0) {
+    document.getElementById("statButton").style.display = "block";
+  }
 }
 
 /* -------------------------
@@ -48,10 +57,46 @@ export function checkWin() {
 }
 
 /* -------------------------
-   START NEW BATTLE
+   STAT MENU
+------------------------- */
+
+export function openStatMenu() {
+  document.getElementById("statModal").style.display = "flex";
+  updateStatMenu();
+}
+
+export function closeStatMenu() {
+  document.getElementById("statModal").style.display = "none";
+}
+
+export function addStat(stat) {
+  if (playerStats.statPoints <= 0) return;
+
+  playerStats[stat]++;
+  playerStats.statPoints--;
+
+  updateStatMenu();
+}
+
+function updateStatMenu() {
+  document.getElementById("statPointsLeft").textContent =
+    `Points left: ${playerStats.statPoints}`;
+
+  document.getElementById("strVal").textContent = playerStats.STR;
+  document.getElementById("dexVal").textContent = playerStats.DEX;
+  document.getElementById("agiVal").textContent = playerStats.AGI;
+  document.getElementById("conVal").textContent = playerStats.CON;
+}
+
+/* Expose to window */
+window.openStatMenu = openStatMenu;
+window.closeStatMenu = closeStatMenu;
+window.addStat = addStat;
+
+/* -------------------------
+   RESTART
 ------------------------- */
 
 export function startNewBattle() {
-  // Easiest clean reset
   location.reload();
 }
