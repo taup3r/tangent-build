@@ -3,7 +3,7 @@
 ============================================ */
 
 import { player, enemy } from "./state.js";
-import { playerStats, gainExp, loseExp } from "./state.js";
+import { playerStats, gainExp, loseExp, saveProgress } from "./state.js";
 
 /* -------------------------
    SHOW RESULT MODAL
@@ -75,6 +75,7 @@ export function addStat(stat) {
   playerStats[stat]++;
   playerStats.statPoints--;
 
+  saveProgress();
   updateStatMenu();
 }
 
@@ -92,6 +93,34 @@ function updateStatMenu() {
 window.openStatMenu = openStatMenu;
 window.closeStatMenu = closeStatMenu;
 window.addStat = addStat;
+
+/* -------------------------
+   ENEMY PROFILE MODAL
+------------------------- */
+
+export function openEnemyInfo() {
+  document.getElementById("enemyInfoModal").style.display = "flex";
+
+  document.getElementById("enemyInfoPortrait").src =
+    document.getElementById("enemyPortrait").src;
+
+  document.getElementById("enemyInfoName").textContent = enemy.name;
+  document.getElementById("enemyInfoLevel").textContent = enemy.level;
+  document.getElementById("enemyInfoType").textContent = enemy.type;
+  document.getElementById("enemyInfoHint").textContent = enemy.hint;
+
+  document.getElementById("enemyInfoSTR").textContent = enemy.stats.STR;
+  document.getElementById("enemyInfoDEX").textContent = enemy.stats.DEX;
+  document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
+  document.getElementById("enemyInfoCON").textContent = enemy.stats.CON;
+}
+
+export function closeEnemyInfo() {
+  document.getElementById("enemyInfoModal").style.display = "none";
+}
+
+window.openEnemyInfo = openEnemyInfo;
+window.closeEnemyInfo = closeEnemyInfo;
 
 /* -------------------------
    RESTART
