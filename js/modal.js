@@ -129,3 +129,5 @@ window.closeEnemyInfo = closeEnemyInfo;
 export function startNewBattle() {
   location.reload();
 }
+
+window.startNewBattle = startNewBattle;
