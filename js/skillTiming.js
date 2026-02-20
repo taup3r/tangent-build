@@ -1,81 +1,32 @@
 /* ============================================
    SKILL TIMING MODULE
    Handles:
-   - Timing window activation
-   - Hit button logic
-   - Perfect vs. normal timing
+   - HIT button timing
+   - Skill damage resolution
 ============================================ */
 
-import { player } from "./state.js";
-import { log } from "./ui.js";
-import { applySkillDamage } from "./combat.js";
-
-/* -------------------------
-   TIMING CONFIG
-------------------------- */
-
-let skillTimingActive = false;
-let skillTimingStart = 0;
-
-const TIMING_WINDOW = 100;   // ms for perfect hit
-const FAIL_TIMEOUT = 200;    // ms after second animation
-
-/* -------------------------
-   START TIMING WINDOW
-------------------------- */
-
-export function startSkillTiming() {
-  const hitBtn = document.getElementById("hitBtn");
-
-  skillTimingActive = true;
-  skillTimingStart = performance.now();
-
-  hitBtn.disabled = false;
-  hitBtn.style.display = "block";
-
-  // If player never presses Hit → auto fail
-  setTimeout(() => {
-    if (skillTimingActive) {
-      skillTimingActive = false;
-      hitBtn.style.display = "none";
-      hitBtn.disabled = true;
-      log("Too slow! Skill deals reduced damage.");
-      applySkillDamage(false);
-    }
-  }, FAIL_TIMEOUT);
-}
-
-/* -------------------------
-   PLAYER PRESSES HIT
-------------------------- */
+import { player, enemy } from "./state.js";
+import { updateUI, log, floatDamage } from "./ui.js";
+import { endPlayerTurn } from "./combat.js";
 
 export function handleHitPress() {
-  if (!skillTimingActive) return;
+  const btn = document.getElementById("hitBtn");
+  btn.style.display = "none";
 
-  const now = performance.now();
-  const delta = now - skillTimingStart;
+  const isSkill = window.skillAttackPending === true;
+  window.skillAttackPending = false;
 
-  skillTimingActive = false;
+  let dmg = player.damage;
 
-  const hitBtn = document.getElementById("hitBtn");
-  hitBtn.style.display = "none";
-  hitBtn.disabled = true;
-
-  const perfect = delta <= TIMING_WINDOW;
-
-  if (perfect) {
-    log("Perfect timing! Massive damage!");
-  } else {
-    log("Good hit, but not perfect.");
+  if (isSkill) {
+    dmg = Math.floor(dmg * 1.5); // Skill multiplier
   }
 
-  applySkillDamage(perfect);
-}
+  enemy.hp = Math.max(0, enemy.hp - dmg);
 
-/* -------------------------
-   RESET (called by combat)
-------------------------- */
+  floatDamage(dmg, "enemyCard");
+  log(isSkill ? `Skill hit for ${dmg}!` : `You hit for ${dmg}!`);
 
-export function resetSkillTiming() {
-  skillTimingActive = false;
+  updateUI();
+  endPlayerTurn();
 }
