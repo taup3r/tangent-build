@@ -9,6 +9,43 @@ export let player = {
   defending: false
 };
 
+/* ================================
+   PLAYER PROGRESSION
+================================ */
+
+export let playerStats = {
+  level: 1,
+  exp: 0,
+  expToNext: 20,
+  statPoints: 0,
+
+  // Stats now start at 0
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
+};
+
+export function gainExp(amount) {
+  playerStats.exp += amount;
+
+  while (playerStats.exp >= playerStats.expToNext) {
+    playerStats.exp -= playerStats.expToNext;
+    playerStats.level++;
+    playerStats.statPoints += 3;
+    playerStats.expToNext = Math.floor(playerStats.expToNext * 1.25);
+  }
+}
+
+export function loseExp(amount) {
+  playerStats.exp -= amount;
+  if (playerStats.exp < 0) playerStats.exp = 0;
+}
+
+/* ================================
+   ENEMY TYPES
+================================ */
+
 const enemyTypes = [
   { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
   { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
@@ -22,17 +59,45 @@ function randomName() {
          last[Math.floor(Math.random() * last.length)];
 }
 
+/* ================================
+   ENEMY STATS MATCH PLAYER LEVEL
+================================ */
+
+function randomEnemyStats(level) {
+  // Stats now start at 0
+  const stats = { STR: 0, DEX: 0, AGI: 0, CON: 0 };
+
+  let points = (level - 1) * 3;
+  const keys = ["STR", "DEX", "AGI", "CON"];
+
+  while (points > 0) {
+    const k = keys[Math.floor(Math.random() * keys.length)];
+    stats[k]++;
+    points--;
+  }
+
+  return stats;
+}
+
+export let enemyStats = randomEnemyStats(playerStats.level);
+
+/* ================================
+   ENEMY OBJECT
+================================ */
+
 export let enemy = {
   hp: 30,
   max: 30,
   ap: 0,
   defending: false,
   ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
-  name: randomName()
+  name: randomName(),
+  level: playerStats.level,
+  stats: enemyStats
 };
 
 /* ================================
-   PORTRAIT SETUP
+   PORTRAITS
 ================================ */
 
 const enemyPortraits = {
