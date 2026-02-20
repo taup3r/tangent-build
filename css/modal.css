@@ -47,3 +47,18 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.stat-row button {
+  width: 32px;
+  padding: 4px;
+  font-size: 16px;
+  background: #4cff9c;
+  border-radius: 6px;
+}
