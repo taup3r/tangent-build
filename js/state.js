@@ -18,10 +18,12 @@ export let playerStats = {
   exp: 0,
   expToNext: 20,
   statPoints: 0,
-  STR: 1,
-  DEX: 1,
-  AGI: 1,
-  CON: 1
+
+  // Stats now start at 0
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
 };
 
 export function gainExp(amount) {
@@ -62,15 +64,18 @@ function randomName() {
 ================================ */
 
 function randomEnemyStats(level) {
-  const stats = { STR: 1, DEX: 1, AGI: 1, CON: 1 };
-  let points = (level - 1) * 3;
+  // Stats now start at 0
+  const stats = { STR: 0, DEX: 0, AGI: 0, CON: 0 };
 
+  let points = (level - 1) * 3;
   const keys = ["STR", "DEX", "AGI", "CON"];
+
   while (points > 0) {
     const k = keys[Math.floor(Math.random() * keys.length)];
     stats[k]++;
     points--;
   }
+
   return stats;
 }
 
