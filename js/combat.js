@@ -17,7 +17,7 @@ import { checkWin } from "./modal.js";
    HIT / MISS CHECK
 ------------------------- */
 
-function rollHit() {
+export function rollHit() {
   const hitChance = 80;   // base hit %
   const evadeChance = 0;  // base evade %
 
