@@ -1,17 +1,48 @@
 /* ============================================
    UI MODULE
    Handles:
+   - HP bars
    - AP icons
-   - HP bars + text
-   - Floating damage numbers
-   - Button enabling/disabling
-   - Logging (hidden, used for modal)
+   - Floating damage
+   - Log
+   - Buttons enable/disable
+   - Header stats (Level + EXP)
+   - AP tooltips
 ============================================ */
 
-import { player, enemy, clampAP } from "./state.js";
+import { player, enemy } from "./state.js";
+import { playerStats } from "./state.js";
 
 /* -------------------------
-   AP ICON RENDERING
+   UPDATE HEADER (LEVEL + EXP)
+------------------------- */
+
+export function updateHeaderStats() {
+  document.getElementById("playerLevelDisplay").textContent = `Lv ${playerStats.level}`;
+  document.getElementById("playerExpDisplay").textContent =
+    `EXP: ${playerStats.exp} / ${playerStats.expToNext}`;
+}
+
+/* -------------------------
+   UPDATE HP BARS
+------------------------- */
+
+function updateHP() {
+  const pFill = document.getElementById("playerHPBar");
+  const eFill = document.getElementById("enemyHPBar");
+
+  const pText = document.getElementById("playerHPText");
+  const eText = document.getElementById("enemyHPText");
+
+  pFill.style.width = (player.hp / player.max) * 100 + "%";
+  eFill.style.width = (enemy.hp / enemy.max) * 100 + "%";
+
+  pText.textContent = `${player.hp} / ${player.max}`;
+  eText.textContent = `${enemy.hp} / ${enemy.max}`;
+}
+
+/* -------------------------
+   AP ICONS
 ------------------------- */
 
 export function renderAPIcons() {
@@ -35,31 +66,12 @@ export function renderAPIcons() {
 }
 
 /* -------------------------
-   HP BAR + TEXT
+   LOGGING
 ------------------------- */
 
-export function updateHPText() {
-  document.getElementById("playerHPText").textContent = `${player.hp}/${player.max}`;
-  document.getElementById("enemyHPText").textContent = `${enemy.hp}/${enemy.max}`;
-}
-
-export function updateHPBars() {
-  document.getElementById("playerHPBar").style.width =
-    (player.hp / player.max * 100) + "%";
-
-  document.getElementById("enemyHPBar").style.width =
-    (enemy.hp / enemy.max * 100) + "%";
-}
-
-/* -------------------------
-   MAIN UI UPDATE
-------------------------- */
-
-export function updateUI() {
-  clampAP();
-  renderAPIcons();
-  updateHPText();
-  updateHPBars();
+export function log(text) {
+  const logBox = document.getElementById("log");
+  logBox.textContent += text + "\n";
 }
 
 /* -------------------------
@@ -79,51 +91,28 @@ export function enableButtons() {
 }
 
 /* -------------------------
-   HIT BUTTON RESET
+   FLOATING DAMAGE
 ------------------------- */
 
-export function resetHitButton() {
-  const hit = document.getElementById("hitBtn");
-  hit.style.display = "none";
-  hit.disabled = true;
+export function floatDamage(amount, cardId) {
+  const container = document.getElementById("floatingContainer");
+  const rect = document.getElementById(cardId).getBoundingClientRect();
+
+  const dmg = document.createElement("div");
+  dmg.className = "floating-dmg";
+  dmg.textContent = amount;
+
+  dmg.style.left = rect.left + rect.width / 2 + "px";
+  dmg.style.top = rect.top + "px";
+
+  container.appendChild(dmg);
+
+  setTimeout(() => dmg.remove(), 1000);
 }
 
 /* -------------------------
-   FLOATING DAMAGE NUMBERS
+   AP TOOLTIP
 ------------------------- */
-
-export function floatDamage(amount, targetId) {
-  const target = document.getElementById(targetId);
-  if (!target) return;
-
-  const rect = target.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 4;
-
-  const el = document.createElement("div");
-  el.className = "floating-dmg";
-  el.textContent = amount;
-  el.style.left = x + "px";
-  el.style.top = y + "px";
-
-  document.getElementById("floatingContainer").appendChild(el);
-
-  setTimeout(() => el.remove(), 1000);
-}
-
-/* -------------------------
-   LOGGING (hidden)
-------------------------- */
-
-export function log(msg) {
-  const logBox = document.getElementById("log");
-  logBox.textContent += msg + "\n";
-  logBox.scrollTop = logBox.scrollHeight;
-}
-
-/* ============================================
-   AP TOOLTIP HANDLING (dynamic AP + positioning)
-============================================ */
 
 const tooltip = document.getElementById("apTooltip");
 
@@ -142,8 +131,6 @@ export function attachAPTooltips() {
   apIcons.forEach(icon => {
     icon.addEventListener("mouseenter", e => {
       const isPlayer = e.target.closest("#playerAPIcons") !== null;
-      const isEnemy = e.target.closest("#enemyAPIcons") !== null;
-
       const apValue = isPlayer ? player.ap : enemy.ap;
 
       tooltip.innerHTML = getTooltipText(apValue);
@@ -152,11 +139,9 @@ export function attachAPTooltips() {
       const rect = e.target.getBoundingClientRect();
 
       if (isPlayer) {
-        // Align tooltip RIGHT edge to icon RIGHT edge
         tooltip.style.left = (rect.right - tooltip.offsetWidth) + "px";
         tooltip.style.top = (rect.top - 4) + "px";
       } else {
-        // Enemy tooltip stays below
         tooltip.style.left = rect.left + "px";
         tooltip.style.top = rect.bottom + 6 + "px";
       }
@@ -166,4 +151,14 @@ export function attachAPTooltips() {
       tooltip.style.display = "none";
     });
   });
+}
+
+/* -------------------------
+   MAIN UI UPDATE
+------------------------- */
+
+export function updateUI() {
+  updateHP();
+  renderAPIcons();
+  updateHeaderStats();
 }

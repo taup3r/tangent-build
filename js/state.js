@@ -1,5 +1,32 @@
 /* ================================
-   GAME STATE: PLAYER + ENEMY
+   LOAD / SAVE PLAYER PROGRESSION
+================================ */
+
+export let playerStats = {
+  level: 1,
+  exp: 0,
+  expToNext: 20,
+  statPoints: 0,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
+};
+
+function loadProgress() {
+  const saved = localStorage.getItem("playerProgress");
+  if (!saved) return;
+  Object.assign(playerStats, JSON.parse(saved).playerStats);
+}
+
+export function saveProgress() {
+  localStorage.setItem("playerProgress", JSON.stringify({ playerStats }));
+}
+
+loadProgress();
+
+/* ================================
+   PLAYER COMBAT STATE
 ================================ */
 
 export let player = {
@@ -10,21 +37,8 @@ export let player = {
 };
 
 /* ================================
-   PLAYER PROGRESSION
+   EXP + LEVELING
 ================================ */
-
-export let playerStats = {
-  level: 1,
-  exp: 0,
-  expToNext: 20,
-  statPoints: 0,
-
-  // Stats now start at 0
-  STR: 0,
-  DEX: 0,
-  AGI: 0,
-  CON: 0
-};
 
 export function gainExp(amount) {
   playerStats.exp += amount;
@@ -35,11 +49,14 @@ export function gainExp(amount) {
     playerStats.statPoints += 3;
     playerStats.expToNext = Math.floor(playerStats.expToNext * 1.25);
   }
+
+  saveProgress();
 }
 
 export function loseExp(amount) {
   playerStats.exp -= amount;
   if (playerStats.exp < 0) playerStats.exp = 0;
+  saveProgress();
 }
 
 /* ================================
@@ -64,9 +81,7 @@ function randomName() {
 ================================ */
 
 function randomEnemyStats(level) {
-  // Stats now start at 0
   const stats = { STR: 0, DEX: 0, AGI: 0, CON: 0 };
-
   let points = (level - 1) * 3;
   const keys = ["STR", "DEX", "AGI", "CON"];
 
