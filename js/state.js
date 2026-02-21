@@ -29,7 +29,7 @@ loadProgress();
    PLAYER COMBAT STATE
 ================================ */
 
-export const player = {
+export let player = {
   baseMaxHP: 30,
   hp: 30,
   max: 30,
