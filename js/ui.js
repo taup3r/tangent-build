@@ -8,6 +8,7 @@
    - Buttons enable/disable
    - Header stats (Level + EXP)
    - AP tooltips
+   - Animation helpers (moved from combat + enemyAI)
 ============================================ */
 
 import { player, enemy } from "./state.js";
@@ -91,7 +92,7 @@ export function enableButtons() {
 }
 
 /* -------------------------
-   FLOATING DAMAGE
+   FLOATING DAMAGE / MISS
 ------------------------- */
 
 export function floatDamage(amount, cardId) {
@@ -125,7 +126,7 @@ function getTooltipText(ap) {
 
 export function attachAPTooltips() {
   const tooltip = document.getElementById("apTooltip");
-  if (!tooltip) return; // safety guard
+  if (!tooltip) return;
 
   const apIcons = document.querySelectorAll(".ap-icon");
 
@@ -162,4 +163,27 @@ export function updateUI() {
   updateHP();
   renderAPIcons();
   updateHeaderStats();
+}
+
+/* -------------------------
+   ANIMATION HELPERS (MOVED HERE)
+------------------------- */
+
+export function animateCard(cardId, animClass, duration = 300) {
+  const card = document.getElementById(cardId);
+  card.classList.add(animClass);
+  setTimeout(() => card.classList.remove(animClass), duration);
+}
+
+export function animateSkillDouble(cardId) {
+  animateCard(cardId, "skill-anim", 300);
+  setTimeout(() => animateCard(cardId, "skill-anim", 300), 1000);
+}
+
+export function applyDefendGlow(cardId) {
+  document.getElementById(cardId).classList.add("defend-glow");
+}
+
+export function removeDefendGlow(cardId) {
+  document.getElementById(cardId).classList.remove("defend-glow");
 }
