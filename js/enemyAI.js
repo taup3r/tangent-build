@@ -85,6 +85,7 @@ export function enemyTurn() {
     // Hit check
     if (!rollHit()) {
       log("Enemy missed!");
+      floatDamage("MISS", "playerCard");
     }
     else {
       animateSkillDouble("playerCard");
@@ -114,6 +115,7 @@ export function enemyTurn() {
     // Hit check
     if (!rollHit()) {
       log("Enemy missed!");
+      floatDamage("MISS", "playerCard");
     }
     else {
       animateCard("playerCard", "attack-anim");
