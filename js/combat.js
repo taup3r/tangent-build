@@ -28,10 +28,23 @@ import { checkWin } from "./modal.js";
 ------------------------- */
 
 export function rollHit() {
-  const hitChance = 80;   // base hit %
-  const evadeChance = 0;  // base evade %
+  const baseHit = 80;   // base hit %
+  const baseEvade = 0;  // base evade %
 
-  const finalChance = hitChance - evadeChance;
+  // Safe stat extraction (handles NaN, undefined, null)
+  const dex = Number(attacker.DEX) || 0;
+  const agi = Number(defender.AGI) || 0;
+
+  // Scaling
+  const hitBonus = dex * 2;   // +2% hit per DEX
+  const evadeBonus = agi * 2; // +2% evade per AGI
+
+  // Final chance
+  let finalChance = baseHit + hitBonus - (baseEvade + evadeBonus);
+
+  // Clamp between 2% and 98% to avoid extremes
+  finalChance = Math.max(2, Math.min(98, finalChance));
+
   return Math.random() * 100 < finalChance;
 }
 
