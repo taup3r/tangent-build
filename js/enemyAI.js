@@ -9,7 +9,7 @@
 
 import { player, enemy, clampAP } from "./state.js";
 import { updateUI, log, floatDamage } from "./ui.js";
-import { startPlayerTurn, rollHit } from "./combat.js";
+import { startPlayerTurn, rollHit, computeDamage } from "./combat.js";
 import { checkWin } from "./modal.js";
 
 /* -------------------------
