@@ -3,12 +3,21 @@
    Handles:
    - Player attack / defend / skill
    - Damage application
-   - Animations
    - Turn transitions
 ============================================ */
 
 import { player, enemy, clampAP } from "./state.js";
-import { updateUI, log, disableButtons, enableButtons, floatDamage } from "./ui.js";
+import {
+  updateUI,
+  log,
+  disableButtons,
+  enableButtons,
+  floatDamage,
+  animateCard,
+  animateSkillDouble,
+  applyDefendGlow,
+  removeDefendGlow
+} from "./ui.js";
 import { startSkillTiming, resetSkillTiming } from "./skillTiming.js";
 import { enemyTurn } from "./enemyAI.js";
 import { checkWin } from "./modal.js";
@@ -31,29 +40,6 @@ export function rollHit() {
 
 export function computeDamage(baseRoll, STR) {
   return baseRoll + ((STR || 0) * 2);
-}
-
-/* -------------------------
-   ANIMATION HELPERS
-------------------------- */
-
-function animateCard(cardId, animClass, duration = 300) {
-  const card = document.getElementById(cardId);
-  card.classList.add(animClass);
-  setTimeout(() => card.classList.remove(animClass), duration);
-}
-
-function animateSkillDouble(cardId) {
-  animateCard(cardId, "skill-anim", 300);
-  setTimeout(() => animateCard(cardId, "skill-anim", 300), 1000);
-}
-
-function applyDefendGlow(cardId) {
-  document.getElementById(cardId).classList.add("defend-glow");
-}
-
-function removeDefendGlow(cardId) {
-  document.getElementById(cardId).classList.remove("defend-glow");
 }
 
 /* -------------------------
