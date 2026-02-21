@@ -30,7 +30,7 @@ export function rollHit() {
 ------------------------- */
 
 export function computeDamage(baseRoll, STR) {
-  return baseRoll + (STR * 2);
+  return baseRoll + ((STR || 0) * 2);
 }
 
 /* -------------------------
