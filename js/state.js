@@ -18,6 +18,7 @@ function loadProgress() {
   if (!saved) return;
   Object.assign(playerStats, JSON.parse(saved).playerStats);
   applyStatsToCombat(player, playerStats);
+  applyConstitution(player);
 }
 
 export function saveProgress() {
