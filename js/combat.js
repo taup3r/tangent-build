@@ -7,6 +7,7 @@
 ============================================ */
 
 import { player, enemy, clampAP } from "./state.js";
+import { applyConstitution } from "./state.js";
 import {
   updateUI,
   log,
@@ -240,6 +241,9 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  applyConstitution(player);
+  applyConstitution(enemy);
+
   player.ap += 1;
   clampAP();
 

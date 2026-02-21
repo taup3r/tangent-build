@@ -30,6 +30,7 @@ loadProgress();
 ================================ */
 
 export let player = {
+  baseMaxHP: 30,
   hp: 30,
   max: 30,
   ap: 0,
@@ -101,6 +102,7 @@ export let enemyStats = randomEnemyStats(playerStats.level);
 ================================ */
 
 export let enemy = {
+  baseMaxHP: 30,
   hp: 30,
   max: 30,
   ap: 0,
@@ -136,4 +138,25 @@ export function initializePortraits() {
 export function clampAP() {
   if (player.ap > 2) player.ap = 2;
   if (enemy.ap > 2) enemy.ap = 2;
+}
+
+/* -------------------------
+   APPLY CON STAT (MaxHP)
+------------------------- */
+
+export function applyConstitution(entity) {
+  const base = entity.baseMaxHP;
+  const con = entity.CON || 0;
+
+  entity.max = base + (con * 5);
+
+  // Clamp HP to new max
+  if (entity.hp > entity.max) {
+    entity.hp = entity.max;
+  }
+
+  // Prevent 0/0 HP display on initialization
+  if (entity.hp === 0 && entity.max > 0) {
+    entity.hp = entity.max;
+  }
 }
