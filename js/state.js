@@ -34,7 +34,11 @@ export let player = {
   hp: 30,
   max: 30,
   ap: 0,
-  defending: false
+  defending: false,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
 };
 
 /* ================================
@@ -107,6 +111,10 @@ export let enemy = {
   max: 30,
   ap: 0,
   defending: false,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0,
   ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
   name: randomName(),
   level: playerStats.level,
