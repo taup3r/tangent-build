@@ -137,3 +137,19 @@ export function clampAP() {
   if (player.ap > 2) player.ap = 2;
   if (enemy.ap > 2) enemy.ap = 2;
 }
+
+/* -------------------------
+   APPLY CON STAT (MaxHP)
+------------------------- */
+
+export function applyConstitution(entity) {
+  const base = entity.baseMaxHP || 0;
+  const con = entity.CON || 0;
+
+  entity.max = base + (con * 5);
+
+  // Clamp current HP to new max
+  if (entity.hp > entity.max) {
+    entity.hp = entity.max;
+  }
+}
