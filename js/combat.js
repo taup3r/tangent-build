@@ -26,6 +26,14 @@ export function rollHit() {
 }
 
 /* -------------------------
+   DAMAGE WITH STR MODIFIER
+------------------------- */
+
+export function computeDamage(baseRoll, STR) {
+  return baseRoll + (STR * 2);
+}
+
+/* -------------------------
    ANIMATION HELPERS
 ------------------------- */
 
@@ -72,7 +80,8 @@ export function playerAttack() {
 
   animateCard("enemyCard", "attack-anim");
 
-  let dmg = Math.floor(Math.random() * 6) + 4;
+  let base = Math.floor(Math.random() * 6) + 4;
+  let dmg = computeDamage(base, player.STR);
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
@@ -152,6 +161,8 @@ export function applySkillDamage(perfect) {
   resetSkillTiming();
 
   let base = Math.floor(Math.random() * 6) + 4;
+  base = computeDamage(base, player.STR);
+
   let dmg = perfect ? base * 2.5 : base * 2;
 
   if (enemy.defending) {
