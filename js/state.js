@@ -1,4 +1,20 @@
 /* ================================
+   PLAYER COMBAT STATE
+================================ */
+
+export let player = {
+  baseMaxHP: 30,
+  hp: 30,
+  max: 30,
+  ap: 0,
+  defending: false,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
+};
+
+/* ================================
    LOAD / SAVE PLAYER PROGRESSION
 ================================ */
 
@@ -26,22 +42,6 @@ export function saveProgress() {
 }
 
 loadProgress();
-
-/* ================================
-   PLAYER COMBAT STATE
-================================ */
-
-export let player = {
-  baseMaxHP: 30,
-  hp: 30,
-  max: 30,
-  ap: 0,
-  defending: false,
-  STR: 0,
-  DEX: 0,
-  AGI: 0,
-  CON: 0
-};
 
 /* ================================
    EXP + LEVELING
