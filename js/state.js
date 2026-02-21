@@ -149,13 +149,18 @@ export function clampAP() {
 ------------------------- */
 
 export function applyConstitution(entity) {
-  const base = entity.baseMaxHP || 0;
+  const base = entity.baseMaxHP;
   const con = entity.CON || 0;
 
   entity.max = base + (con * 5);
 
-  // Clamp current HP to new max
+  // Clamp HP to new max
   if (entity.hp > entity.max) {
+    entity.hp = entity.max;
+  }
+
+  // Prevent 0/0 HP display on initialization
+  if (entity.hp === 0 && entity.max > 0) {
     entity.hp = entity.max;
   }
 }
