@@ -109,7 +109,7 @@ export let enemyStats = randomEnemyStats(playerStats.level);
 
 export let enemy = {
   baseMaxHP: 30,
-  hp: 30,
+  hp: 0,
   max: 30,
   ap: 0,
   defending: false,
