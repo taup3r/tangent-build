@@ -7,6 +7,8 @@ import { openEnemyInfo } from "./modal.js";
 window.addEventListener("DOMContentLoaded", () => {
 
   initializePortraits();
+  applyConstitution(player);
+  applyConstitution(enemy);
   updateUI();
 
   document.getElementById("attackBtn").addEventListener("click", playerAttack);
