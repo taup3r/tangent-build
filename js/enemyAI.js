@@ -7,6 +7,7 @@
 ============================================ */
 
 import { enemy, clampAP } from "./state.js";
+import { applyConstitution } from "./state.js";
 import { log, updateUI } from "./ui.js";
 import { startPlayerTurn } from "./combat.js";
 import { checkWin } from "./modal.js";
@@ -47,6 +48,9 @@ function decideEnemyAction() {
 
 export function enemyTurn() {
   log(`\n--- Enemy Turn (${enemy.name}) ---`);
+
+  applyConstitution(player);
+  applyConstitution(enemy);
 
   // AP gain
   enemy.ap += 1;
