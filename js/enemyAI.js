@@ -8,32 +8,17 @@
 ============================================ */
 
 import { player, enemy, clampAP } from "./state.js";
-import { updateUI, log, floatDamage } from "./ui.js";
+import {
+  updateUI,
+  log,
+  floatDamage,
+  animateCard,
+  animateSkillDouble,
+  applyDefendGlow,
+  removeDefendGlow
+} from "./ui.js";
 import { startPlayerTurn, rollHit, computeDamage } from "./combat.js";
 import { checkWin } from "./modal.js";
-
-/* -------------------------
-   ANIMATION HELPERS
-------------------------- */
-
-function animateCard(cardId, animClass, duration = 300) {
-  const card = document.getElementById(cardId);
-  card.classList.add(animClass);
-  setTimeout(() => card.classList.remove(animClass), duration);
-}
-
-function animateSkillDouble(cardId) {
-  animateCard(cardId, "skill-anim", 300);
-  setTimeout(() => animateCard(cardId, "skill-anim", 300), 1000);
-}
-
-function applyDefendGlow(cardId) {
-  document.getElementById(cardId).classList.add("defend-glow");
-}
-
-function removeDefendGlow(cardId) {
-  document.getElementById(cardId).classList.remove("defend-glow");
-}
 
 /* -------------------------
    ENEMY DECISION LOGIC
@@ -91,8 +76,8 @@ export function enemyTurn() {
       animateSkillDouble("playerCard");
 
       let base = Math.floor(Math.random() * 6) + 4;
-      let dmg = computeDamage(base, enemy.STR);
-      dmg = base * 2;
+      base = computeDamage(base, enemy.STR);
+      let dmg = base * 2;
 
       if (player.defending) {
         dmg = Math.floor(dmg / 2);
@@ -122,7 +107,7 @@ export function enemyTurn() {
       animateCard("playerCard", "attack-anim");
 
       let base = Math.floor(Math.random() * 6) + 3;
-      let dmg = computeDamage(base, enemy.STR)
+      let dmg = computeDamage(base, enemy.STR);
 
       if (player.defending) {
         dmg = Math.floor(dmg / 2);
