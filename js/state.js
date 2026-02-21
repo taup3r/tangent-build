@@ -17,6 +17,7 @@ function loadProgress() {
   const saved = localStorage.getItem("playerProgress");
   if (!saved) return;
   Object.assign(playerStats, JSON.parse(saved).playerStats);
+  applyStatsToCombat(player, playerStats);
 }
 
 export function saveProgress() {
