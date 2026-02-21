@@ -3,7 +3,7 @@
 ============================================ */
 
 import { player, enemy } from "./state.js";
-import { playerStats, gainExp, loseExp, saveProgress } from "./state.js";
+import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 
 /* -------------------------
    SHOW RESULT MODAL
@@ -74,6 +74,7 @@ export function addStat(stat) {
 
   playerStats[stat]++;
   playerStats.statPoints--;
+  applyStatsToCombat(player, playerStats);
 
   saveProgress();
   updateStatMenu();
