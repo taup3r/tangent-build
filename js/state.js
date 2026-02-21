@@ -4,7 +4,7 @@
 
 export let player = {
   baseMaxHP: 30,
-  hp: 30,
+  hp: 0,
   max: 30,
   ap: 0,
   defending: false,
