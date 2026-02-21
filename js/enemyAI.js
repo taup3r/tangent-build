@@ -3,22 +3,19 @@
    Handles:
    - Enemy AP gain
    - Enemy action selection
-   - Enemy attack / defend / skill
    - Turn transitions
 ============================================ */
 
-import { player, enemy, clampAP } from "./state.js";
-import {
-  updateUI,
-  log,
-  floatDamage,
-  animateCard,
-  animateSkillDouble,
-  applyDefendGlow,
-  removeDefendGlow
-} from "./ui.js";
-import { startPlayerTurn, rollHit, computeDamage } from "./combat.js";
+import { enemy, clampAP } from "./state.js";
+import { log, updateUI } from "./ui.js";
+import { startPlayerTurn } from "./combat.js";
 import { checkWin } from "./modal.js";
+import {
+  enemyAttackAction,
+  enemySkillAction,
+  enemyDefendAction,
+  enemySkipAction
+} from "./combat.js";
 
 /* -------------------------
    ENEMY DECISION LOGIC
@@ -55,87 +52,20 @@ export function enemyTurn() {
   enemy.ap += 1;
   clampAP();
 
-  // Reset defending state
-  enemy.defending = false;
-  removeDefendGlow("enemyCard");
-
+  // Decide action
   const action = decideEnemyAction();
 
-  /* -------------------------
-     ENEMY SKILL
-  ------------------------- */
   if (action === "skill") {
-    enemy.ap -= 2;
-
-    // Hit check
-    if (!rollHit()) {
-      log("Enemy missed!");
-      floatDamage("MISS", "playerCard");
-    }
-    else {
-      animateSkillDouble("playerCard");
-
-      let base = Math.floor(Math.random() * 6) + 4;
-      base = computeDamage(base, enemy.STR);
-      let dmg = base * 2;
-
-      if (player.defending) {
-        dmg = Math.floor(dmg / 2);
-        log("You defended! Damage halved.");
-      }
-
-      player.hp -= dmg;
-      if (player.hp < 0) player.hp = 0;
-
-      log(`${enemy.name} uses SKILL for ${dmg} damage!`);
-      floatDamage(dmg, "playerCard");
-    }
+    enemySkillAction();
   }
-
-  /* -------------------------
-     ENEMY ATTACK
-  ------------------------- */
   else if (action === "attack") {
-    enemy.ap -= 1;
-
-    // Hit check
-    if (!rollHit()) {
-      log("Enemy missed!");
-      floatDamage("MISS", "playerCard");
-    }
-    else {
-      animateCard("playerCard", "attack-anim");
-
-      let base = Math.floor(Math.random() * 6) + 3;
-      let dmg = computeDamage(base, enemy.STR);
-
-      if (player.defending) {
-        dmg = Math.floor(dmg / 2);
-        log("You defended! Damage halved.");
-      }
-
-      player.hp -= dmg;
-      if (player.hp < 0) player.hp = 0;
-
-      log(`${enemy.name} attacks for ${dmg}!`);
-      floatDamage(dmg, "playerCard");
-    }
+    enemyAttackAction();
   }
-
-  /* -------------------------
-     ENEMY DEFEND
-  ------------------------- */
   else if (action === "defend") {
-    enemy.defending = true;
-    applyDefendGlow("enemyCard");
-    log(`${enemy.name} braces for impact.`);
+    enemyDefendAction();
   }
-
-  /* -------------------------
-     ENEMY SKIP
-  ------------------------- */
   else {
-    log(`${enemy.name} has no AP and skips the turn.`);
+    enemySkipAction();
   }
 
   updateUI();
