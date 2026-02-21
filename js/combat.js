@@ -169,6 +169,73 @@ export function applySkillDamage(perfect) {
 }
 
 /* -------------------------
+   ENEMY ACTIONS (MOVED FROM enemyAI.js)
+------------------------- */
+
+export function enemyAttackAction() {
+  enemy.ap -= 1;
+
+  if (!rollHit()) {
+    log("Enemy missed!");
+    floatDamage("MISS", "playerCard");
+    return;
+  }
+
+  animateCard("playerCard", "attack-anim");
+
+  let base = Math.floor(Math.random() * 6) + 3;
+  let dmg = computeDamage(base, enemy.STR);
+
+  if (player.defending) {
+    dmg = Math.floor(dmg / 2);
+    log("You defended! Damage halved.");
+  }
+
+  player.hp -= dmg;
+  if (player.hp < 0) player.hp = 0;
+
+  log(`${enemy.name} attacks for ${dmg}!`);
+  floatDamage(dmg, "playerCard");
+}
+
+export function enemySkillAction() {
+  enemy.ap -= 2;
+
+  if (!rollHit()) {
+    log("Enemy missed!");
+    floatDamage("MISS", "playerCard");
+    return;
+  }
+
+  animateSkillDouble("playerCard");
+
+  let base = Math.floor(Math.random() * 6) + 4;
+  base = computeDamage(base, enemy.STR);
+  let dmg = base * 2;
+
+  if (player.defending) {
+    dmg = Math.floor(dmg / 2);
+    log("You defended! Damage halved.");
+  }
+
+  player.hp -= dmg;
+  if (player.hp < 0) player.hp = 0;
+
+  log(`${enemy.name} uses SKILL for ${dmg} damage!`);
+  floatDamage(dmg, "playerCard");
+}
+
+export function enemyDefendAction() {
+  enemy.defending = true;
+  applyDefendGlow("enemyCard");
+  log(`${enemy.name} braces for impact.`);
+}
+
+export function enemySkipAction() {
+  log(`${enemy.name} has no AP and skips the turn.`);
+}
+
+/* -------------------------
    TURN START
 ------------------------- */
 
