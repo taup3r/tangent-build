@@ -168,3 +168,13 @@ export function applyConstitution(entity) {
     entity.hp = entity.max;
   }
 }
+
+/* -----------------------
+   APPLY STATS TO COMBAT
+------------------------ */
+export function applyStatsToCombat(player, playerStats) {
+  player.STR = Number(playerStats.STR) || 0;
+  player.DEX = Number(playerStats.DEX) || 0;
+  player.AGI = Number(playerStats.AGI) || 0;
+  player.CON = Number(playerStats.CON) || 0;
+}
