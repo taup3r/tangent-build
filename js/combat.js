@@ -65,6 +65,7 @@ export function playerAttack() {
   // Hit check
   if (!rollHit()) {
     log("You missed!");
+    floatDamage("MISS", "enemyCard");
     updateUI();
     return enemyTurn();
   }
@@ -120,6 +121,7 @@ export function playerSkill() {
   // Hit check BEFORE timing mini-game
   if (!rollHit()) {
     log("Your skill missed!");
+    floatDamage("MISS", "enemyCard");
     updateUI();
     return enemyTurn();
   }
