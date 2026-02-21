@@ -1,4 +1,20 @@
 /* ================================
+   PLAYER COMBAT STATE
+================================ */
+
+export let player = {
+  baseMaxHP: 30,
+  hp: 0,
+  max: 30,
+  ap: 0,
+  defending: false,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
+};
+
+/* ================================
    LOAD / SAVE PLAYER PROGRESSION
 ================================ */
 
@@ -17,6 +33,8 @@ function loadProgress() {
   const saved = localStorage.getItem("playerProgress");
   if (!saved) return;
   Object.assign(playerStats, JSON.parse(saved).playerStats);
+  applyStatsToCombat(player, playerStats);
+  applyConstitution(player);
 }
 
 export function saveProgress() {
@@ -24,18 +42,6 @@ export function saveProgress() {
 }
 
 loadProgress();
-
-/* ================================
-   PLAYER COMBAT STATE
-================================ */
-
-export let player = {
-  baseMaxHP: 30,
-  hp: 30,
-  max: 30,
-  ap: 0,
-  defending: false
-};
 
 /* ================================
    EXP + LEVELING
@@ -103,10 +109,14 @@ export let enemyStats = randomEnemyStats(playerStats.level);
 
 export let enemy = {
   baseMaxHP: 30,
-  hp: 30,
+  hp: 0,
   max: 30,
   ap: 0,
   defending: false,
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0,
   ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
   name: randomName(),
   level: playerStats.level,
@@ -145,8 +155,8 @@ export function clampAP() {
 ------------------------- */
 
 export function applyConstitution(entity) {
-  const base = entity.baseMaxHP;
-  const con = entity.CON || 0;
+  const base = Number(entity.baseMaxHP) || 0;
+  const con = Number(entity.CON) || 0;
 
   entity.max = base + (con * 5);
 
@@ -155,8 +165,18 @@ export function applyConstitution(entity) {
     entity.hp = entity.max;
   }
 
-  // Prevent 0/0 HP display on initialization
+  // If HP is 0 but max > 0 (fresh load), set HP to max
   if (entity.hp === 0 && entity.max > 0) {
     entity.hp = entity.max;
   }
+}
+
+/* -----------------------
+   APPLY STATS TO COMBAT
+------------------------ */
+export function applyStatsToCombat(player, playerStats) {
+  player.STR = Number(playerStats.STR) || 0;
+  player.DEX = Number(playerStats.DEX) || 0;
+  player.AGI = Number(playerStats.AGI) || 0;
+  player.CON = Number(playerStats.CON) || 0;
 }

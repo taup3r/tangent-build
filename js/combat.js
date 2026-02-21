@@ -7,7 +7,6 @@
 ============================================ */
 
 import { player, enemy, clampAP } from "./state.js";
-import { applyConstitution } from "./state.js";
 import {
   updateUI,
   log,
@@ -27,7 +26,7 @@ import { checkWin } from "./modal.js";
    HIT / MISS CHECK
 ------------------------- */
 
-export function rollHit() {
+export function rollHit(attacker = {}, defender = {}) {
   const baseHit = 80;   // base hit %
   const baseEvade = 0;  // base evade %
 
@@ -71,7 +70,7 @@ export function playerAttack() {
   disableButtons();
 
   // Hit check
-  if (!rollHit()) {
+  if (!rollHit(player, enemy)) {
     log("You missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
@@ -128,7 +127,7 @@ export function playerSkill() {
   clampAP();
 
   // Hit check BEFORE timing mini-game
-  if (!rollHit()) {
+  if (!rollHit(player, enemy)) {
     log("Your skill missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
@@ -189,7 +188,7 @@ export function applySkillDamage(perfect) {
 export function enemyAttackAction() {
   enemy.ap -= 1;
 
-  if (!rollHit()) {
+  if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
     return;
@@ -215,7 +214,7 @@ export function enemyAttackAction() {
 export function enemySkillAction() {
   enemy.ap -= 2;
 
-  if (!rollHit()) {
+  if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
     return;
@@ -254,9 +253,6 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
-  applyConstitution(player);
-  applyConstitution(enemy);
-
   player.ap += 1;
   clampAP();
 
