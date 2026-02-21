@@ -9,7 +9,7 @@
 
 import { player, enemy, clampAP } from "./state.js";
 import { updateUI, log, floatDamage } from "./ui.js";
-import { startPlayerTurn, rollHit } from "./combat.js";
+import { startPlayerTurn, rollHit, computeDamage } from "./combat.js";
 import { checkWin } from "./modal.js";
 
 /* -------------------------
@@ -91,7 +91,8 @@ export function enemyTurn() {
       animateSkillDouble("playerCard");
 
       let base = Math.floor(Math.random() * 6) + 4;
-      let dmg = base * 2;
+      let dmg = computeDamage(base, enemy.STR);
+      dmg = base * 2;
 
       if (player.defending) {
         dmg = Math.floor(dmg / 2);
@@ -120,7 +121,8 @@ export function enemyTurn() {
     else {
       animateCard("playerCard", "attack-anim");
 
-      let dmg = Math.floor(Math.random() * 6) + 3;
+      let base = Math.floor(Math.random() * 6) + 3;
+      let dmg = computeDamage(base, enemy.STR)
 
       if (player.defending) {
         dmg = Math.floor(dmg / 2);
