@@ -77,8 +77,33 @@ export function generateWeapon(inputRank) {
   const weapon = pickRandom(eligible);
 
   const remaining = inputRank - weapon.rank;
-  const statCount = weightedStatCount();
 
+  let stats = {};
+  let name = weapon.type;
+
+  // =========================
+  // CASE 1: No remaining rank → No stats, no prefix/suffix
+  // =========================
+  if (remaining === 0) {
+    const colorInfo = getColorByRank(inputRank);
+
+    return {
+      name,
+      type: weapon.type,
+      rarity: colorInfo.tier,
+      color: colorInfo.color,
+      baseRank: weapon.rank,
+      inputRank,
+      remainingRank: remaining,
+      damage: { min: weapon.min, max: weapon.max },
+      stats: {}
+    };
+  }
+
+  // =========================
+  // CASE 2: Normal stat generation
+  // =========================
+  const statCount = weightedStatCount();
   const statTypes = ["STR", "DEX", "AGI", "CON"];
   const chosenStats = [];
 
@@ -89,14 +114,42 @@ export function generateWeapon(inputRank) {
 
   const distribution = distributePoints(remaining, chosenStats.length);
 
-  const stats = {};
   chosenStats.forEach((s, i) => stats[s] = distribution[i]);
 
-  const dominantStat = chosenStats.sort((a, b) => stats[b] - stats[a])[0];
-  const prefix = pickRandom(prefixPools[dominantStat]);
-  const suffix = pickRandom(suffixPools[dominantStat]);
+  // Count stats with actual value
+  const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
 
-  const name = `${prefix} ${weapon.type} ${suffix}`;
+  // If no stats have value → base name only
+  if (statsWithValue.length === 0) {
+    const colorInfo = getColorByRank(inputRank);
+
+    return {
+      name,
+      type: weapon.type,
+      rarity: colorInfo.tier,
+      color: colorInfo.color,
+      baseRank: weapon.rank,
+      inputRank,
+      remainingRank: remaining,
+      damage: { min: weapon.min, max: weapon.max },
+      stats
+    };
+  }
+
+  // Determine dominant stat
+  const dominantStat = statsWithValue.sort((a, b) => b[1] - a[1])[0][0];
+
+  // Always apply prefix
+  const prefix = pickRandom(prefixPools[dominantStat]);
+
+  // Apply suffix ONLY if more than one stat has value
+  if (statsWithValue.length > 1) {
+    const suffix = pickRandom(suffixPools[dominantStat]);
+    name = `${prefix} ${weapon.type} ${suffix}`;
+  } else {
+    name = `${prefix} ${weapon.type}`;
+  }
+
   const colorInfo = getColorByRank(inputRank);
 
   return {
