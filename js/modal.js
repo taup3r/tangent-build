@@ -16,6 +16,7 @@ export function showResultModal(victory) {
   const logBox = document.getElementById("resultLog");
   document.getElementById("lootWeaponBtn").onclick = () => {
   openCompareWeaponModal();
+  document.getElementById("lootWeaponBtn").style.display = "none";
   };
   document.getElementById("victoryWeaponPreview").innerHTML =
   `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
@@ -97,7 +98,6 @@ export function openCompareWeaponModal() {
     updatePlayerWeaponUI();
     saveProgress();
     modal.style.display = "none";
-    document.getElementById("lootWeaponBtn").style.display = "none";
   };
 
   // Cancel button
