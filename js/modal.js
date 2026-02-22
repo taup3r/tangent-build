@@ -170,6 +170,7 @@ export function openPlayerInfoModal() {
 
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
+window.closePlayerInfo = closePlayerInfo;
 
 /* -------------------------
    RESTART
