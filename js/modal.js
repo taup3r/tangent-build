@@ -114,6 +114,9 @@ export function openEnemyInfo() {
   document.getElementById("enemyInfoDEX").textContent = enemy.stats.DEX;
   document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
   document.getElementById("enemyInfoCON").textContent = enemy.stats.CON;
+
+document.getElementById("enemyProfileWeapon").textContent = enemy.weapon.name;
+document.getElementById("enemyProfileWeapon").style.color = enemy.weapon.color;
 }
 
 export function closeEnemyInfo() {
