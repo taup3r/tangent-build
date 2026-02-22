@@ -196,8 +196,19 @@ export function enemyAttackAction() {
 
   animateCard("playerCard", "attack-anim");
 
-  let base = Math.floor(Math.random() * 6) + 3;
-  let dmg = computeDamage(base, enemy.STR);
+  const w = enemy.weapon;
+
+  // --- Weapon base damage roll ---
+  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+  // --- Weapon STR modifier ---
+  const weaponSTR = Number(w.stats.STR) || 0;
+
+  // --- Total STR used in computeDamage ---
+  const totalSTR = enemy.STR + weaponSTR;
+
+  // --- Final damage using your existing formula ---
+  let dmg = computeDamage(base, totalSTR);
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -207,7 +218,7 @@ export function enemyAttackAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} attacks for ${dmg}!`);
+  log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
 
