@@ -16,9 +16,6 @@ export function showResultModal(victory) {
   const logBox = document.getElementById("resultLog");
   document.getElementById("lootWeaponBtn").onclick = () => {
   openCompareWeaponModal();
-  applyConstitution(player); // weapon CON integration
-  updatePlayerWeaponUI();
-  saveProgress();
   document.getElementById("lootWeaponBtn").style.display = "none";
   };
   document.getElementById("victoryWeaponPreview").innerHTML =
@@ -97,6 +94,9 @@ export function openCompareWeaponModal() {
   // Equip button
   document.getElementById("compareEquipBtn").onclick = () => {
     player.weapon = enemyW;
+    applyConstitution(player); // weapon CON integration
+    updatePlayerWeaponUI();
+    saveProgress();
     modal.style.display = "none";
   };
 
