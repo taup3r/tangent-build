@@ -238,6 +238,44 @@
     </div>
   </div>
 
+  <!-- COMPARE WEAPON MODAL -->
+  <div id="compareWeaponModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Compare Weapons</h2>
+
+      <h3>Current Weapon</h3>
+      <div class="enemy-profile-row">
+        <span id="compareCurrentName" class="profile-value"></span>
+      </div>
+      <div class="enemy-profile-row">
+        <span class="profile-label">Damage:</span>
+        <span id="compareCurrentDamage" class="profile-value"></span>
+      </div>
+      <div class="enemy-profile-row">
+        <span class="profile-label">Modifiers:</span>
+        <span id="compareCurrentStats" class="profile-value"></span>
+      </div>
+
+      <h3>Enemy Weapon</h3>
+      <div class="enemy-profile-row">
+        <span id="compareEnemyName" class="profile-value"></span>
+      </div>
+      <div class="enemy-profile-row">
+        <span class="profile-label">Damage:</span>
+        <span id="compareEnemyDamage" class="profile-value"></span>
+      </div>
+      <div class="enemy-profile-row">
+        <span class="profile-label">Modifiers:</span>
+        <span id="compareEnemyStats" class="profile-value"></span>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+        <button id="compareEquipBtn" class="modal-button">Equip</button>
+        <button id="compareCancelBtn" class="modal-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <!-- AP TOOLTIP -->
   <div id="apTooltip" class="ap-tooltip" style="display:none;"></div>
 
