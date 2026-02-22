@@ -75,8 +75,16 @@
 
         <!-- PLAYER NAME + AP ICONS -->
         <div class="name-ap-row" style="justify-content: space-between; align-items:center;">
-          <h3 class="small-name" style="margin:0;">Player</h3>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <h3 class="small-name" style="margin:0;">Player</h3>
+            <span id="openPlayerModal" style="cursor:pointer; font-size:1.2rem;">🔍</span>
+          </div>
           <div id="playerAPIcons" class="ap-icon-row"></div>
+        </div>
+
+        <div id="playerWeaponRow" class="player-weapon-row">
+          <span class="player-weapon-icon">🗡️</span>
+          <span id="playerWeapon" class="player-weapon-name"></span>
         </div>
 
         <div class="health-bar">
@@ -110,11 +118,15 @@
       <h2 id="resultTitle"></h2>
       <div id="resultLog" class="modal-log"></div>
 
+      <div id="victoryWeaponPreview" class="victory-weapon-preview"></div>
+
       <!-- TRAIN + NEW BATTLE BUTTONS -->
       <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
         <button id="statButton" class="modal-button train-btn" style="display:none;" onclick="openStatMenu()">
           Train
         </button>
+
+        <button id="lootWeaponBtn" class="loot-button" style="display:none;">Loot Weapon</button>
 
         <button class="modal-button newbattle-btn" onclick="startNewBattle()">
           New Battle
@@ -188,6 +200,29 @@
       <p>CON: <span id="enemyInfoCON"></span></p>
 
       <button class="modal-button" onclick="closeEnemyInfo()">Close</button>
+    </div>
+  </div>
+
+  <div id="playerModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2>Player Info</h2>
+
+      <div class="player-profile-row">
+        <span class="profile-label">Level:</span>
+        <span id="playerProfileLevel" class="profile-value"></span>
+      </div>
+
+      <div class="player-profile-row">
+        <span class="profile-label">Stats:</span>
+        <span id="playerProfileStats" class="profile-value"></span>
+      </div>
+
+      <div class="player-profile-row">
+        <span class="profile-label">Weapon:</span>
+        <span id="playerProfileWeapon" class="profile-value"></span>
+      </div>
+
+    <button class="modal-button" onclick="closePlayerInfo()">Close</button>
     </div>
   </div>
 

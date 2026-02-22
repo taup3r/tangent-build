@@ -4,6 +4,7 @@
 
 import { player, enemy } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
+import { updatePlayerWeaponUI } from "./ui.js";
 
 /* -------------------------
    SHOW RESULT MODAL
@@ -13,6 +14,13 @@ export function showResultModal(victory) {
   const modal = document.getElementById("resultModal");
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
+  document.getElementById("lootWeaponBtn").onclick = () => {
+  player.weapon = enemy.weapon;
+  updatePlayerWeaponUI();
+  saveProgress();
+  };
+  document.getElementById("victoryWeaponPreview").innerHTML =
+  `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
 
   const rawLog = document.getElementById("log").textContent;
   logBox.innerHTML = rawLog.replace(/\n/g, "<br>");
@@ -33,6 +41,10 @@ export function showResultModal(victory) {
 
   if (playerStats.statPoints > 0) {
     document.getElementById("statButton").style.display = "block";
+  }
+
+  if (victory) {
+    document.getElementById("lootWeaponBtn").style.display = "block";
   }
 }
 
@@ -137,8 +149,29 @@ export function closeEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "none";
 }
 
+export function closePlayerInfo() {
+  document.getElementById("playerModal").style.display = "none";
+}
+
+export function openPlayerInfoModal() {
+ document.getElementById("playerModal").style.display = "flex";
+ document.getElementById("playerProfileLevel").textContent = playerStats.level;
+
+  document.getElementById("playerProfileStats").textContent =
+    `STR ${playerStats.STR}, DEX ${playerStats.DEX}, AGI ${playerStats.AGI}, CON ${playerStats.CON}`;
+
+  if (player.weapon) {
+    document.getElementById("playerProfileWeapon").textContent = player.weapon.name;
+    document.getElementById("playerProfileWeapon").style.color = player.weapon.color;
+  } else {
+    document.getElementById("playerProfileWeapon").textContent = "Unarmed";
+    document.getElementById("playerProfileWeapon").style.color = "#ccc";
+  }
+}
+
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
+window.closePlayerInfo = closePlayerInfo;
 
 /* -------------------------
    RESTART

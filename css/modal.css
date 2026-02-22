@@ -88,3 +88,14 @@
   text-align: right;
   font-weight: 500;
 }
+
+.loot-button {
+  padding: 8px 14px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}

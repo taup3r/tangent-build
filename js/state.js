@@ -13,7 +13,8 @@ export let player = {
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0
+  CON: 0,
+  weapon: null
 };
 
 /* ================================
@@ -28,19 +29,31 @@ export let playerStats = {
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0
+  CON: 0,
+  playerWeapon: null
 };
 
 function loadProgress() {
   const saved = localStorage.getItem("playerProgress");
   if (!saved) return;
-  Object.assign(playerStats, JSON.parse(saved).playerStats);
+
+  const data = JSON.parse(saved);
+
+  Object.assign(playerStats, data.playerStats);
+
+  // Load weapon if it exists
+  if (data.playerWeapon) {
+    player.weapon = data.playerWeapon;
+  }
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
 }
 
 export function saveProgress() {
-  localStorage.setItem("playerProgress", JSON.stringify({ playerStats }));
+  localStorage.setItem("playerProgress", JSON.stringify({
+    playerStats,
+    playerWeapon: player.weapon || null
+  }));
 }
 
 loadProgress();
