@@ -115,8 +115,22 @@ export function openEnemyInfo() {
   document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
   document.getElementById("enemyInfoCON").textContent = enemy.stats.CON;
 
-document.getElementById("enemyProfileWeapon").textContent = enemy.weapon.name;
-document.getElementById("enemyProfileWeapon").style.color = enemy.weapon.color;
+// Weapon name
+const w = enemy.weapon;
+document.getElementById("enemyProfileWeapon").textContent = w.name;
+document.getElementById("enemyProfileWeapon").style.color = w.color;
+
+// Damage range
+document.getElementById("enemyProfileWeaponDamage").textContent =
+  `${w.damage.min} – ${w.damage.max}`;
+
+// Stat modifiers (STR +1, DEX +2, etc.)
+const statStrings = Object.entries(w.stats)
+  .filter(([_, val]) => val > 0)
+  .map(([stat, val]) => `${stat} +${val}`);
+
+document.getElementById("enemyProfileWeaponStats").textContent =
+  statStrings.length > 0 ? statStrings.join(", ") : "None";
 }
 
 export function closeEnemyInfo() {
