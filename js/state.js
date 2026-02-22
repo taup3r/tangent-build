@@ -142,6 +142,12 @@ export function initializePortraits() {
 
   document.getElementById("enemyName").textContent = enemy.name;
   document.getElementById("enemyHint").textContent = enemy.hint;
+
+document.getElementById("enemyName").textContent = enemy.name;
+
+const weaponEl = document.getElementById("enemyWeapon");
+weaponEl.textContent = enemy.weapon.name;
+weaponEl.style.color = enemy.weapon.color;
 }
 
 /* ================================
