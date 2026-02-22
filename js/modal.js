@@ -148,6 +148,10 @@ export function closeEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "none";
 }
 
+export function closePlayerInfo() {
+  document.getElementById("playerInfoModal").style.display = "none";
+}
+
 export function openPlayerInfoModal() {
  document.getElementById("playerModal").style.display = "flex";
  document.getElementById("playerProfileLevel").textContent = playerStats.level;
