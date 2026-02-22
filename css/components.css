@@ -185,3 +185,9 @@ button:disabled {
   font-size: 0.9rem;
   font-weight: 600;
 }
+
+.player-profile-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
