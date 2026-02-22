@@ -233,9 +233,22 @@ export function enemySkillAction() {
 
   animateSkillDouble("playerCard");
 
-  let base = Math.floor(Math.random() * 6) + 4;
-  base = computeDamage(base, enemy.STR);
-  let dmg = base * 2;
+  const w = enemy.weapon;
+
+  // --- Weapon base damage roll ---
+  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+  // --- Weapon STR modifier ---
+  const weaponSTR = Number(w.stats.STR) || 0;
+
+  // --- Total STR used in computeDamage ---
+  const totalSTR = enemy.STR + weaponSTR;
+
+  // --- Final damage using your existing formula ---
+  let dmg = computeDamage(base, totalSTR);
+
+  // --- Skill multiplier (unchanged) ---
+  dmg *= 2;
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -245,7 +258,7 @@ export function enemySkillAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} uses SKILL for ${dmg} damage!`);
+  log(`${enemy.name} unleashes ${w.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 }
 
