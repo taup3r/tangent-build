@@ -178,16 +178,24 @@ export function clampAP() {
 
 export function applyConstitution(entity) {
   const base = Number(entity.baseMaxHP) || 0;
-  const con = Number(entity.CON) || 0;
 
-  entity.max = base + (con * 5);
+  // --- Total CON = base CON + weapon CON (if any) ---
+  let totalCON = Number(entity.CON) || 0;
 
-  // Clamp HP to new max
+  if (entity.weapon) {
+    const weaponCON = Number(entity.weapon.stats.CON) || 0;
+    totalCON += weaponCON;
+  }
+
+  // --- Final MaxHP ---
+  entity.max = base + (totalCON * 5);
+
+  // --- Adjust current HP if needed ---
   if (entity.hp > entity.max) {
     entity.hp = entity.max;
   }
 
-  // If HP is 0 but max > 0 (fresh load), set HP to max
+  // If HP is 0 (new entity), set to full
   if (entity.hp === 0 && entity.max > 0) {
     entity.hp = entity.max;
   }

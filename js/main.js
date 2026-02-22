@@ -10,12 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
   applyStatsToCombat(player, playerStats);
   applyStatsToCombat(enemy, enemyStats);
   applyConstitution(player);
-  
-  // Apply weapon CON bonus
-  const weaponCON = Number(enemy.weapon.stats.CON) || 0;
-  enemy.CON += weaponCON;
-
-  // Now apply constitution normally
   applyConstitution(enemy);
   updateUI();
   updatePlayerWeaponUI();
