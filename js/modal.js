@@ -4,6 +4,7 @@
 
 import { player, enemy } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
+import { updatePlayerWeaponUI } from "./ui.js";
 
 /* -------------------------
    SHOW RESULT MODAL
@@ -13,6 +14,10 @@ export function showResultModal(victory) {
   const modal = document.getElementById("resultModal");
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
+document.getElementById("lootWeaponBtn").onclick = () => {
+  player.weapon = enemy.weapon;
+  updatePlayerWeaponUI();
+};
 
   const rawLog = document.getElementById("log").textContent;
   logBox.innerHTML = rawLog.replace(/\n/g, "<br>");
@@ -33,6 +38,10 @@ export function showResultModal(victory) {
 
   if (playerStats.statPoints > 0) {
     document.getElementById("statButton").style.display = "block";
+  }
+
+  if (victory) {
+    document.getElementById("lootWeaponBtn").style.display = "block";
   }
 }
 
