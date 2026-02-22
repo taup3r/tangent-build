@@ -148,6 +148,29 @@ export function closeEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "none";
 }
 
+export function openPlayerInfoModal() {
+  document.getElementById("playerProfileLevel").textContent = playerStats.level;
+
+  document.getElementById("playerProfileStats").textContent =
+    `STR ${playerStats.STR}, DEX ${playerStats.DEX}, AGI ${playerStats.AGI}, CON ${playerStats.CON}`;
+
+  if (player.weapon) {
+    document.getElementById("playerProfileWeapon").textContent = player.weapon.name;
+    document.getElementById("playerProfileWeapon").style.color = player.weapon.color;
+  } else {
+    document.getElementById("playerProfileWeapon").textContent = "Unarmed";
+    document.getElementById("playerProfileWeapon").style.color = "#ccc";
+  }
+
+  document.getElementById("playerModal").classList.remove("hidden");
+}
+
+document.getElementById("closePlayerModal").onclick = () => {
+  document.getElementById("playerModal").classList.add("hidden");
+};
+
+document.getElementById("openPlayerModal").onclick = openPlayerInfoModal;
+
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
 
