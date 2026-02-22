@@ -1,5 +1,5 @@
 import { initializePortraits, player, playerStats, enemy, enemyStats, applyStatsToCombat, applyConstitution } from "./state.js";
-import { updateUI } from "./ui.js";
+import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
 import { openEnemyInfo } from "./modal.js";
@@ -18,6 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Now apply constitution normally
   applyConstitution(enemy);
   updateUI();
+  updatePlayerWeaponUI;
 
   document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
