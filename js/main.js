@@ -19,18 +19,13 @@ window.addEventListener("DOMContentLoaded", () => {
   applyConstitution(enemy);
   updateUI();
   updatePlayerWeaponUI();
-
-  document.getElementById("attackBtn").addEventListener("click", playerAttack);
+ document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
   document.getElementById("skillBtn").addEventListener("click", playerSkill);
 
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);
-
   document.getElementById("enemyInfoBtn").addEventListener("click", openEnemyInfo);
 
-  document.getElementById("closePlayerModal").onclick = () => {
-  document.getElementById("playerModal").classList.add("hidden");
-};
 
 document.getElementById("openPlayerModal").addEventListener("click", openPlayerInfoModal);
 
