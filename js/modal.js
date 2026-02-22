@@ -173,6 +173,7 @@ document.getElementById("openPlayerModal").onclick = openPlayerInfoModal;
 
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
+window.openPlayerInfoModal = openPlayerInfoModal;
 
 /* -------------------------
    RESTART
