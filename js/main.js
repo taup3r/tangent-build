@@ -2,7 +2,7 @@ import { initializePortraits, player, playerStats, enemy, enemyStats, applyStats
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
-import { openEnemyInfo } from "./modal.js";
+import { openEnemyInfo, openPlayerInfoModal } from "./modal.js";
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -27,6 +27,12 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);
 
   document.getElementById("enemyInfoBtn").addEventListener("click", openEnemyInfo);
+
+  document.getElementById("closePlayerModal").onclick = () => {
+  document.getElementById("playerModal").classList.add("hidden");
+};
+
+document.getElementById("openPlayerModal").onclick = openPlayerInfoModal;
 
   startPlayerTurn();
 });
