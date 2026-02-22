@@ -83,8 +83,25 @@ export function playerAttack() {
 
   animateCard("enemyCard", "attack-anim");
 
-  let base = Math.floor(Math.random() * 6) + 4;
-  let dmg = computeDamage(base, player.STR);
+  let base;
+
+  // --- Weapon damage roll if player has a weapon ---
+  if (player.weapon) {
+    const w = player.weapon;
+    base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+    // Add weapon STR to player STR
+    const weaponSTR = Number(w.stats.STR) || 0;
+    const totalSTR = player.STR + weaponSTR;
+
+    // Compute final damage
+    var dmg = computeDamage(base, totalSTR);
+
+  } else {
+    // --- Original unarmed damage ---
+    base = Math.floor(Math.random() * 6) + 4;
+    var dmg = computeDamage(base, player.STR);
+  }
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
