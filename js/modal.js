@@ -165,15 +165,8 @@ export function openPlayerInfoModal() {
   document.getElementById("playerModal").classList.remove("hidden");
 }
 
-document.getElementById("closePlayerModal").onclick = () => {
-  document.getElementById("playerModal").classList.add("hidden");
-};
-
-document.getElementById("openPlayerModal").onclick = openPlayerInfoModal;
-
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
-window.openPlayerInfoModal = openPlayerInfoModal;
 
 /* -------------------------
    RESTART
