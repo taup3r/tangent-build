@@ -93,7 +93,6 @@ export function openCompareWeaponModal() {
   // Equip button
   document.getElementById("compareEquipBtn").onclick = () => {
     player.weapon = enemyW;
-    applyConstitution(player); // weapon CON integration
     updatePlayerWeaponUI();
     saveProgress();
     modal.style.display = "none";
