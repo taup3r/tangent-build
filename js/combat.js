@@ -26,25 +26,29 @@ import { checkWin } from "./modal.js";
    HIT / MISS CHECK
 ------------------------- */
 
-export function rollHit(attacker = {}, defender = {}) {
-  const baseHit = 80;   // base hit %
-  const baseEvade = 0;  // base evade %
+export function rollHit(attacker, defender) {
+  // Base hit chance
+  let hitChance = 80;
 
-  // Safe stat extraction (handles NaN, undefined, null)
-  const dex = Number(attacker.DEX) || 0;
-  const agi = Number(defender.AGI) || 0;
+  // --- Attacker DEX bonus (accuracy) ---
+  let attackerDEX = attacker.DEX;
+  if (attacker.weapon) {
+    attackerDEX += Number(attacker.weapon.stats.DEX) || 0;
+  }
+  hitChance += attackerDEX * 2;
 
-  // Scaling
-  const hitBonus = dex * 2;   // +2% hit per DEX
-  const evadeBonus = agi * 2; // +2% evade per AGI
+  // --- Defender AGI bonus (evasion) ---
+  let defenderAGI = defender.AGI;
+  if (defender.weapon) {
+    defenderAGI += Number(defender.weapon.stats.AGI) || 0;
+  }
+  hitChance -= defenderAGI * 2;
 
-  // Final chance
-  let finalChance = baseHit + hitBonus - (baseEvade + evadeBonus);
+  // Clamp
+  if (hitChance < 2) hitChance = 2;
+  if (hitChance > 98) hitChance = 98;
 
-  // Clamp between 2% and 98% to avoid extremes
-  finalChance = Math.max(2, Math.min(98, finalChance));
-
-  return Math.random() * 100 < finalChance;
+  return Math.random() * 100 < hitChance;
 }
 
 /* -------------------------
