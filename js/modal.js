@@ -154,18 +154,49 @@ export function closePlayerInfo() {
 }
 
 export function openPlayerInfoModal() {
- document.getElementById("playerModal").style.display = "flex";
- document.getElementById("playerProfileLevel").textContent = playerStats.level;
+  const modal = document.getElementById("playerModal");
+  modal.style.display = "flex";
 
-  document.getElementById("playerProfileStats").textContent =
-    `STR ${playerStats.STR}, DEX ${playerStats.DEX}, AGI ${playerStats.AGI}, CON ${playerStats.CON}`;
+  // Portrait
+  document.getElementById("playerInfoPortrait").src =
+    document.getElementById("playerPortrait").src;
 
+  // Name + Level
+  document.getElementById("playerInfoName").textContent = "Player";
+  document.getElementById("playerInfoLevel").textContent = playerStats.level;
+
+  // Stats (after weapon bonuses)
+  document.getElementById("playerInfoSTR").textContent = player.STR;
+  document.getElementById("playerInfoDEX").textContent = player.DEX;
+  document.getElementById("playerInfoAGI").textContent = player.AGI;
+  document.getElementById("playerInfoCON").textContent = player.CON;
+
+  // Weapon section
   if (player.weapon) {
-    document.getElementById("playerProfileWeapon").textContent = player.weapon.name;
-    document.getElementById("playerProfileWeapon").style.color = player.weapon.color;
+    const w = player.weapon;
+
+    // Weapon name
+    document.getElementById("playerProfileWeapon").textContent = w.name;
+    document.getElementById("playerProfileWeapon").style.color = w.color;
+
+    // Damage range
+    document.getElementById("playerProfileWeaponDamage").textContent =
+      `${w.damage.min} – ${w.damage.max}`;
+
+    // Stat modifiers (STR +1, DEX +2, etc.)
+    const statStrings = Object.entries(w.stats)
+      .filter(([_, val]) => val > 0)
+      .map(([stat, val]) => `${stat} +${val}`);
+
+    document.getElementById("playerProfileWeaponStats").textContent =
+      statStrings.length > 0 ? statStrings.join(", ") : "None";
+
   } else {
+    // No weapon equipped
     document.getElementById("playerProfileWeapon").textContent = "Unarmed";
     document.getElementById("playerProfileWeapon").style.color = "#ccc";
+    document.getElementById("playerProfileWeaponDamage").textContent = "-";
+    document.getElementById("playerProfileWeaponStats").textContent = "-";
   }
 }
 
