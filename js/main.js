@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Now apply constitution normally
   applyConstitution(enemy);
   updateUI();
-  updatePlayerWeaponUI;
+  updatePlayerWeaponUI();
 
   document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
