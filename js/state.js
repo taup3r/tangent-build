@@ -1,3 +1,5 @@
+import { generateWeapon } from "./weapon.js";
+
 /* ================================
    PLAYER COMBAT STATE
 ================================ */
@@ -120,7 +122,8 @@ export let enemy = {
   ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
   name: randomName(),
   level: playerStats.level,
-  stats: enemyStats
+  stats: enemyStats,
+  weapon: generateWeapon(playerStats.level)
 };
 
 /* ================================
