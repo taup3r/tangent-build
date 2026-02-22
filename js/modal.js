@@ -15,9 +15,7 @@ export function showResultModal(victory) {
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
   document.getElementById("lootWeaponBtn").onclick = () => {
-  player.weapon = enemy.weapon;
-  updatePlayerWeaponUI();
-  saveProgress();   document.getElementById("lootWeaponBtn").style.display = "none";
+  openCompareWeaponModal();
   };
   document.getElementById("victoryWeaponPreview").innerHTML =
   `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
@@ -46,6 +44,66 @@ export function showResultModal(victory) {
   if (victory) {
     document.getElementById("lootWeaponBtn").style.display = "block";
   }
+}
+
+export function openCompareWeaponModal() {
+  const modal = document.getElementById("compareWeaponModal");
+  modal.style.display = "flex";
+
+  const current = player.weapon;
+  const enemyW = enemy.weapon;
+
+  // --- Current weapon ---
+  if (current) {
+    document.getElementById("compareCurrentName").textContent = current.name;
+    document.getElementById("compareCurrentName").style.color = current.color;
+
+    document.getElementById("compareCurrentDamage").textContent =
+      `${current.damage.min} – ${current.damage.max}`;
+
+    const mods = Object.entries(current.stats)
+      .filter(([_, v]) => v > 0)
+      .map(([k, v]) => `${k}+${v}`)
+      .join(", ");
+
+    document.getElementById("compareCurrentStats").textContent =
+      mods || "None";
+  } else {
+    document.getElementById("compareCurrentName").textContent = "Unarmed";
+    document.getElementById("compareCurrentName").style.color = "#ccc";
+    document.getElementById("compareCurrentDamage").textContent = "-";
+    document.getElementById("compareCurrentStats").textContent = "-";
+  }
+
+  // --- Enemy weapon ---
+  document.getElementById("compareEnemyName").textContent = enemyW.name;
+  document.getElementById("compareEnemyName").style.color = enemyW.color;
+
+  document.getElementById("compareEnemyDamage").textContent =
+    `${enemyW.damage.min} – ${enemyW.damage.max}`;
+
+  const enemyMods = Object.entries(enemyW.stats)
+    .filter(([_, v]) => v > 0)
+    .map(([k, v]) => `${k}+${v}`)
+    .join(", ");
+
+  document.getElementById("compareEnemyStats").textContent =
+    enemyMods || "None";
+
+  // Equip button
+  document.getElementById("compareEquipBtn").onclick = () => {
+    player.weapon = enemyW;
+    applyConstitution(player); // weapon CON integration
+    updatePlayerWeaponUI();
+    saveProgress();
+    modal.style.display = "none";
+    document.getElementById("lootWeaponBtn").style.display = "none";
+  };
+
+  // Cancel button
+  document.getElementById("compareCancelBtn").onclick = () => {
+    modal.style.display = "none";
+  };
 }
 
 /* -------------------------
@@ -203,6 +261,7 @@ export function openPlayerInfoModal() {
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
 window.closePlayerInfo = closePlayerInfo;
+window.openCompareWeaponModal = openCompareWeaponModal;
 
 /* -------------------------
    RESTART
