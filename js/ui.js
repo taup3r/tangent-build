@@ -165,6 +165,17 @@ export function updateUI() {
   updateHeaderStats();
 }
 
+export function updatePlayerWeaponUI() {
+  const el = document.getElementById("playerWeapon");
+  if (!player.weapon) {
+    el.textContent = "Unarmed";
+    el.style.color = "#ccc";
+    return;
+  }
+  el.textContent = player.weapon.name;
+  el.style.color = player.weapon.color;
+}
+
 /* -------------------------
    ANIMATION HELPERS (MOVED HERE)
 ------------------------- */
