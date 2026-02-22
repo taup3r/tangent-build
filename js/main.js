@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("playerModal").classList.add("hidden");
 };
 
-document.getElementById("openPlayerModal").onclick = openPlayerInfoModal;
+document.getElementById("openPlayerModal").addEventListener("click", openPlayerInfoModal);
 
   startPlayerTurn();
 });
