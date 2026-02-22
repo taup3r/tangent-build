@@ -17,6 +17,7 @@ export function showResultModal(victory) {
   document.getElementById("lootWeaponBtn").onclick = () => {
   player.weapon = enemy.weapon;
   updatePlayerWeaponUI();
+  saveProgress();
   };
   document.getElementById("victoryWeaponPreview").innerHTML =
   `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
