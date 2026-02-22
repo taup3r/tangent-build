@@ -14,10 +14,12 @@ export function showResultModal(victory) {
   const modal = document.getElementById("resultModal");
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
-document.getElementById("lootWeaponBtn").onclick = () => {
+  document.getElementById("lootWeaponBtn").onclick = () => {
   player.weapon = enemy.weapon;
   updatePlayerWeaponUI();
-};
+  };
+  document.getElementById("victoryWeaponPreview").innerHTML =
+  `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
 
   const rawLog = document.getElementById("log").textContent;
   logBox.innerHTML = rawLog.replace(/\n/g, "<br>");
