@@ -203,26 +203,38 @@
     </div>
   </div>
 
+  <!-- PLAYER INFO MODAL -->
   <div id="playerModal" class="modal" style="display:none;">
     <div class="modal-content">
-      <h2>Player Info</h2>
+      <h2>Player Profile</h2>
 
-      <div class="player-profile-row">
-        <span class="profile-label">Level:</span>
-        <span id="playerProfileLevel" class="profile-value"></span>
-      </div>
+      <img id="playerInfoPortrait" class="portrait" style="max-height:120px; margin-bottom:10px;">
 
-      <div class="player-profile-row">
-        <span class="profile-label">Stats:</span>
-        <span id="playerProfileStats" class="profile-value"></span>
-      </div>
+      <p><b>Name:</b> <span id="playerInfoName"></span></p>
+      <p><b>Level:</b> <span id="playerInfoLevel"></span></p>
 
-      <div class="player-profile-row">
-        <span class="profile-label">Weapon:</span>
+      <h3>Weapon</h3>
+      <div class="enemy-profile-row">
         <span id="playerProfileWeapon" class="profile-value"></span>
       </div>
 
-    <button class="modal-button" onclick="closePlayerInfo()">Close</button>
+      <div class="enemy-profile-row">
+        <span class="profile-label">Damage:</span>
+        <span id="playerProfileWeaponDamage" class="profile-value"></span>
+      </div>
+
+      <div class="enemy-profile-row">
+        <span class="profile-label">Modifiers:</span>
+        <span id="playerProfileWeaponStats" class="profile-value"></span>
+      </div>
+
+      <h3>Stats</h3>
+      <p>STR: <span id="playerInfoSTR"></span></p>
+      <p>DEX: <span id="playerInfoDEX"></span></p>
+      <p>AGI: <span id="playerInfoAGI"></span></p>
+      <p>CON: <span id="playerInfoCON"></span></p>
+
+      <button class="modal-button" onclick="closePlayerInfo()">Close</button>
     </div>
   </div>
 
