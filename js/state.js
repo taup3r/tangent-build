@@ -29,7 +29,8 @@ export let playerStats = {
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0
+  CON: 0,
+  playerWeapon: null
 };
 
 function loadProgress() {
