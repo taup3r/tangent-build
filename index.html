@@ -52,6 +52,11 @@
 
         </div>
 
+        <div id="enemyWeaponRow" class="enemy-weapon-row">
+          <span class="enemy-weapon-icon">🗡️</span>
+          <span id="enemyWeapon" class="enemy-weapon-name"></span>
+        </div>
+
         <p id="enemyHint" style="font-size: 0.8rem; opacity: 0.8;"></p>
 
         <div class="health-bar">
@@ -160,6 +165,21 @@
       <p><b>Level:</b> <span id="enemyInfoLevel"></span></p>
       <p><b>Type:</b> <span id="enemyInfoType"></span></p>
       <p><b>Hint:</b> <span id="enemyInfoHint"></span></p>
+
+      <h3>Weapon</h3>
+      <div class="enemy-profile-row">
+        <span id="enemyProfileWeapon" class="profile-value"></span>
+      </div>
+
+      <div class="enemy-profile-row">
+        <span class="profile-label">Damage:</span>
+        <span id="enemyProfileWeaponDamage" class="profile-value"></span>
+      </div>
+
+      <div class="enemy-profile-row">
+        <span class="profile-label">Modifiers:</span>
+        <span id="enemyProfileWeaponStats" class="profile-value"></span>
+      </div>
 
       <h3>Stats</h3>
       <p>STR: <span id="enemyInfoSTR"></span></p>

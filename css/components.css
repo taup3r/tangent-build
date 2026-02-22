@@ -148,3 +148,22 @@ button:disabled {
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
   font-family: 'Spectral SC', serif;
 }
+
+.enemy-weapon-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.enemy-weapon-icon {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.enemy-weapon-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: right;
+}

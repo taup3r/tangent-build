@@ -72,3 +72,19 @@
   background-color: #2196f3; /* blue */
   color: white;
 }
+
+.enemy-profile-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.profile-label {
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.profile-value {
+  text-align: right;
+  font-weight: 500;
+}

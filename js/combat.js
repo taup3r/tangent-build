@@ -26,25 +26,29 @@ import { checkWin } from "./modal.js";
    HIT / MISS CHECK
 ------------------------- */
 
-export function rollHit(attacker = {}, defender = {}) {
-  const baseHit = 80;   // base hit %
-  const baseEvade = 0;  // base evade %
+export function rollHit(attacker, defender) {
+  // Base hit chance
+  let hitChance = 80;
 
-  // Safe stat extraction (handles NaN, undefined, null)
-  const dex = Number(attacker.DEX) || 0;
-  const agi = Number(defender.AGI) || 0;
+  // --- Attacker DEX bonus (accuracy) ---
+  let attackerDEX = attacker.DEX;
+  if (attacker.weapon) {
+    attackerDEX += Number(attacker.weapon.stats.DEX) || 0;
+  }
+  hitChance += attackerDEX * 2;
 
-  // Scaling
-  const hitBonus = dex * 2;   // +2% hit per DEX
-  const evadeBonus = agi * 2; // +2% evade per AGI
+  // --- Defender AGI bonus (evasion) ---
+  let defenderAGI = defender.AGI;
+  if (defender.weapon) {
+    defenderAGI += Number(defender.weapon.stats.AGI) || 0;
+  }
+  hitChance -= defenderAGI * 2;
 
-  // Final chance
-  let finalChance = baseHit + hitBonus - (baseEvade + evadeBonus);
+  // Clamp
+  if (hitChance < 2) hitChance = 2;
+  if (hitChance > 98) hitChance = 98;
 
-  // Clamp between 2% and 98% to avoid extremes
-  finalChance = Math.max(2, Math.min(98, finalChance));
-
-  return Math.random() * 100 < finalChance;
+  return Math.random() * 100 < hitChance;
 }
 
 /* -------------------------
@@ -196,8 +200,19 @@ export function enemyAttackAction() {
 
   animateCard("playerCard", "attack-anim");
 
-  let base = Math.floor(Math.random() * 6) + 3;
-  let dmg = computeDamage(base, enemy.STR);
+  const w = enemy.weapon;
+
+  // --- Weapon base damage roll ---
+  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+  // --- Weapon STR modifier ---
+  const weaponSTR = Number(w.stats.STR) || 0;
+
+  // --- Total STR used in computeDamage ---
+  const totalSTR = enemy.STR + weaponSTR;
+
+  // --- Final damage using your existing formula ---
+  let dmg = computeDamage(base, totalSTR);
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -207,7 +222,7 @@ export function enemyAttackAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} attacks for ${dmg}!`);
+  log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
 
@@ -222,9 +237,22 @@ export function enemySkillAction() {
 
   animateSkillDouble("playerCard");
 
-  let base = Math.floor(Math.random() * 6) + 4;
-  base = computeDamage(base, enemy.STR);
-  let dmg = base * 2;
+  const w = enemy.weapon;
+
+  // --- Weapon base damage roll ---
+  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+  // --- Weapon STR modifier ---
+  const weaponSTR = Number(w.stats.STR) || 0;
+
+  // --- Total STR used in computeDamage ---
+  const totalSTR = enemy.STR + weaponSTR;
+
+  // --- Final damage using your existing formula ---
+  let dmg = computeDamage(base, totalSTR);
+
+  // --- Skill multiplier (unchanged) ---
+  dmg *= 2;
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -234,7 +262,7 @@ export function enemySkillAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} uses SKILL for ${dmg} damage!`);
+  log(`${enemy.name} unleashes ${w.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 }
 
