@@ -149,7 +149,7 @@ export function closeEnemyInfo() {
 }
 
 export function closePlayerInfo() {
-  document.getElementById("playerInfoModal").style.display = "none";
+  document.getElementById("playerModal").style.display = "none";
 }
 
 export function openPlayerInfoModal() {
