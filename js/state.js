@@ -48,6 +48,8 @@ export function loadProgress() {
 
   Object.assign(playerStats, data.playerStats);
 
+  player.Name = data.playerName;
+
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
