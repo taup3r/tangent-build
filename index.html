@@ -3,284 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RPG Battle</title>
+  <title>Tangent RPG</title>
 
-  <!-- CSS SPLIT -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/modal.css">
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0f0f17;
+      color: white;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .start-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .start-title {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px rgba(76, 255, 156, 0.6);
+      color: #4cff9c;
+    }
+
+    .start-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-top: -10px;
+    }
+
+    .start-button {
+      padding: 14px 20px;
+      background: #4cff9c;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 700;
+      border: none;
+      color: #0f0f17;
+      transition: 0.15s;
+    }
+
+    .start-button:hover {
+      background: #3be986;
+    }
+
+    .save-list {
+      background: #1c1c28;
+      padding: 20px;
+      border-radius: 12px;
+      width: 100%;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .save-item {
+      padding: 12px;
+      background: #2a2a3a;
+      margin: 8px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.15s;
+    }
+
+    .save-item:hover {
+      background: #3a3a4a;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <div class="game-header">
-    <div class="header-left">
-      <span class="header-icon">⚔️</span>
-      <span class="header-title">RPG Battle</span>
-    </div>
+  <div class="start-container">
+    <div class="start-title">Tangent RPG</div>
+    <div class="start-subtitle">A procedural combat adventure</div>
 
-    <div class="header-right">
-      <span id="playerLevelDisplay">Lv 1</span>
-      <span id="playerExpDisplay">EXP: 0 / 20</span>
-    </div>
+    <button id="newGameBtn" class="start-button">New Game</button>
+    <button id="continueBtn" class="start-button">Continue</button>
+
+    <div id="saveList" class="save-list"></div>
   </div>
 
-  <!-- MAIN BATTLE CONTAINER -->
-  <div class="battle-container">
-
-    <div class="battlefield">
-
-      <!-- ENEMY CARD -->
-      <div id="enemyCard" class="card enemy-card">
-
-        <div class="portrait-container">
-          <img id="enemyPortrait" class="portrait" src="">
-        </div>
-
-        <!-- ENEMY AP + NAME + SEARCH ICON -->
-        <div class="name-ap-row" style="justify-content: space-between; align-items:center;">
-
-          <div id="enemyAPIcons" class="ap-icon-row"></div>
-
-          <div style="display:flex; align-items:center; gap:6px;">
-            <h3 id="enemyName" class="small-name" style="margin:0;">Enemy</h3>
-            <span id="enemyInfoBtn" style="cursor:pointer; font-size:1.2rem;">🔍</span>
-          </div>
-
-        </div>
-
-        <div id="enemyWeaponRow" class="enemy-weapon-row">
-          <span class="enemy-weapon-icon">🗡️</span>
-          <span id="enemyWeapon" class="enemy-weapon-name"></span>
-        </div>
-
-        <p id="enemyHint" style="font-size: 0.8rem; opacity: 0.8;"></p>
-
-        <div class="health-bar">
-          <div id="enemyHPBar" class="health-fill"></div>
-          <div id="enemyHPText" class="hp-text"></div>
-        </div>
-
-      </div>
-
-      <!-- PLAYER CARD -->
-      <div id="playerCard" class="card player-card">
-
-        <div class="portrait-container">
-          <img id="playerPortrait" class="portrait" src="">
-        </div>
-
-        <!-- PLAYER NAME + AP ICONS -->
-        <div class="name-ap-row" style="justify-content: space-between; align-items:center;">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <h3 class="small-name" style="margin:0;">Player</h3>
-            <span id="openPlayerModal" style="cursor:pointer; font-size:1.2rem;">🔍</span>
-          </div>
-          <div id="playerAPIcons" class="ap-icon-row"></div>
-        </div>
-
-        <div id="playerWeaponRow" class="player-weapon-row">
-          <span class="player-weapon-icon">🗡️</span>
-          <span id="playerWeapon" class="player-weapon-name"></span>
-        </div>
-
-        <div class="health-bar">
-          <div id="playerHPBar" class="health-fill"></div>
-          <div id="playerHPText" class="hp-text"></div>
-        </div>
-
-        <!-- ACTION BUTTONS WITH ICONS -->
-        <div class="action-row">
-          <button id="attackBtn" class="btn-attack">⚔️ Attack</button>
-          <button id="defendBtn" class="btn-defend">🛡️ Defend</button>
-          <button id="skillBtn" class="btn-skill">✨ Skill</button>
-        </div>
-
-        <button id="hitBtn" class="hit-button" style="display:none;">HIT!</button>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- FLOATING DAMAGE -->
-  <div id="floatingContainer"></div>
-
-  <!-- HIDDEN LOG -->
-  <pre id="log" style="display:none;"></pre>
-
-  <!-- RESULT MODAL -->
-  <div id="resultModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2 id="resultTitle"></h2>
-      <div id="resultLog" class="modal-log"></div>
-
-      <div id="victoryWeaponPreview" class="victory-weapon-preview"></div>
-
-      <!-- TRAIN + NEW BATTLE BUTTONS -->
-      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
-        <button id="statButton" class="modal-button train-btn" style="display:none;" onclick="openStatMenu()">
-          Train
-        </button>
-
-        <button id="lootWeaponBtn" class="loot-button" style="display:none;">Loot Weapon</button>
-
-        <button class="modal-button newbattle-btn" onclick="startNewBattle()">
-          Continue Battle
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- STAT DISTRIBUTION MODAL -->
-  <div id="statModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Train</h2>
-
-      <p id="statPointsLeft"></p>
-
-      <div class="stat-row">
-        STR: <span id="strVal"></span>
-        <button onclick="addStat('STR')">+</button>
-      </div>
-
-      <div class="stat-row">
-        DEX: <span id="dexVal"></span>
-        <button onclick="addStat('DEX')">+</button>
-      </div>
-
-      <div class="stat-row">
-        AGI: <span id="agiVal"></span>
-        <button onclick="addStat('AGI')">+</button>
-      </div>
-
-      <div class="stat-row">
-        CON: <span id="conVal"></span>
-        <button onclick="addStat('CON')">+</button>
-      </div>
-
-      <button class="modal-button" onclick="closeStatMenu()">Done</button>
-    </div>
-  </div>
-
-  <!-- ENEMY INFO MODAL -->
-  <div id="enemyInfoModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Enemy Profile</h2>
-
-      <img id="enemyInfoPortrait" class="portrait" style="max-height:120px; margin-bottom:10px;">
-
-      <p><b>Name:</b> <span id="enemyInfoName"></span></p>
-      <p><b>Level:</b> <span id="enemyInfoLevel"></span></p>
-      <p><b>Type:</b> <span id="enemyInfoType"></span></p>
-      <p><b>Hint:</b> <span id="enemyInfoHint"></span></p>
-
-      <h3>Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="enemyProfileWeapon" class="profile-value"></span>
-      </div>
-
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="enemyProfileWeaponDamage" class="profile-value"></span>
-      </div>
-
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="enemyProfileWeaponStats" class="profile-value"></span>
-      </div>
-
-      <h3>Stats</h3>
-      <p>STR: <span id="enemyInfoSTR"></span></p>
-      <p>DEX: <span id="enemyInfoDEX"></span></p>
-      <p>AGI: <span id="enemyInfoAGI"></span></p>
-      <p>CON: <span id="enemyInfoCON"></span></p>
-
-      <button class="modal-button" onclick="closeEnemyInfo()">Close</button>
-    </div>
-  </div>
-
-  <!-- PLAYER INFO MODAL -->
-  <div id="playerModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Player Profile</h2>
-
-      <img id="playerInfoPortrait" class="portrait" style="max-height:120px; margin-bottom:10px;">
-
-      <p><b>Name:</b> <span id="playerInfoName"></span></p>
-      <p><b>Level:</b> <span id="playerInfoLevel"></span></p>
-
-      <h3>Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="playerProfileWeapon" class="profile-value"></span>
-      </div>
-
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="playerProfileWeaponDamage" class="profile-value"></span>
-      </div>
-
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="playerProfileWeaponStats" class="profile-value"></span>
-      </div>
-
-      <h3>Stats</h3>
-      <p>STR: <span id="playerInfoSTR"></span></p>
-      <p>DEX: <span id="playerInfoDEX"></span></p>
-      <p>AGI: <span id="playerInfoAGI"></span></p>
-      <p>CON: <span id="playerInfoCON"></span></p>
-
-      <button class="modal-button" onclick="closePlayerInfo()">Close</button>
-    </div>
-  </div>
-
-  <!-- COMPARE WEAPON MODAL -->
-  <div id="compareWeaponModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Compare Weapons</h2>
-
-      <h3>Current Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="compareCurrentName" class="profile-value"></span>
-      </div>
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="compareCurrentDamage" class="profile-value"></span>
-      </div>
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="compareCurrentStats" class="profile-value"></span>
-      </div>
-
-      <h3>Enemy Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="compareEnemyName" class="profile-value"></span>
-      </div>
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="compareEnemyDamage" class="profile-value"></span>
-      </div>
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="compareEnemyStats" class="profile-value"></span>
-      </div>
-
-      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
-        <button id="compareEquipBtn" class="modal-button">Equip</button>
-        <button id="compareCancelBtn" class="modal-button">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- AP TOOLTIP -->
-  <div id="apTooltip" class="ap-tooltip" style="display:none;"></div>
-
-  <!-- MAIN JS ENTRY POINT -->
-  <script type="module" src="js/main.js"></script>
-
+  <script type="module" src="js/start.js"></script>
 </body>
 </html>

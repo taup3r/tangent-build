@@ -160,6 +160,7 @@ export function attachAPTooltips() {
 ------------------------- */
 
 export function updateUI() {
+  document.getElementById("playerName").textContent = player.name;
   updateHP();
   renderAPIcons();
   updateHeaderStats();

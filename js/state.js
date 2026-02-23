@@ -5,6 +5,7 @@ import { generateWeapon } from "./weapon.js";
 ================================ */
 
 export let player = {
+  name: null,
   baseMaxHP: 30,
   hp: 0,
   max: 30,
@@ -33,24 +34,41 @@ export let playerStats = {
   playerWeapon: null
 };
 
-function loadProgress() {
-  const saved = localStorage.getItem("playerProgress");
+export function loadProgress() {
+  const params = new URLSearchParams(window.location.search);
+  const playerName = params.get("player");
+
+  if (!playerName) return;
+
+  const key = `save_${playerName}`;
+  const saved = localStorage.getItem(key);
+
   if (!saved) return;
 
   const data = JSON.parse(saved);
 
   Object.assign(playerStats, data.playerStats);
 
-  // Load weapon if it exists
+  player.name = playerName;
+
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
+
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
 }
 
 export function saveProgress() {
-  localStorage.setItem("playerProgress", JSON.stringify({
+  const params = new URLSearchParams(window.location.search);
+  const playerName = params.get("player");
+
+  if (!playerName) return;
+
+  const key = `save_${playerName}`;
+
+  localStorage.setItem(key, JSON.stringify({
+    playerName,
     playerStats,
     playerWeapon: player.weapon || null
   }));

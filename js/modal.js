@@ -219,7 +219,7 @@ export function openPlayerInfoModal() {
     document.getElementById("playerPortrait").src;
 
   // Name + Level
-  document.getElementById("playerInfoName").textContent = "Player";
+  document.getElementById("playerInfoName").textContent = player.name;
   document.getElementById("playerInfoLevel").textContent = playerStats.level;
 
   // Stats (after weapon bonuses)
