@@ -13,7 +13,7 @@ document.getElementById("newGameBtn").onclick = () => {
 
   const newSave = {
     playerName: name,
-    playerStats: { STR: 1, DEX: 1, AGI: 1, CON: 1, level: 1, exp: 0, statPoints: 0 },
+    playerStats: { STR: 0, DEX: 0, AGI: 0, CON: 0, level: 1, exp: 0, statPoints: 0 },
     playerWeapon: null
   };
 
