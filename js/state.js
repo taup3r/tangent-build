@@ -100,7 +100,7 @@ export function loseExp(amount) {
 }
 
 /* ================================
-   ENEMY TYPES
+   ENEMY TYPES + TIERS
 ================================ */
 
 const enemyTypes = [
@@ -108,6 +108,14 @@ const enemyTypes = [
   { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
   { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
 ];
+
+// Tier roll: 80% normal, 15% elite, 5% boss
+function rollEnemyTier() {
+  const r = Math.random();
+  if (r < 0.05) return "boss";
+  if (r < 0.20) return "elite";
+  return "normal";
+}
 
 function randomName() {
   const first = ["Gor", "Thal", "Rin", "Vor", "Kel", "Zar", "Mor", "Fen"];
@@ -134,28 +142,63 @@ function randomEnemyStats(level) {
   return stats;
 }
 
-export let enemyStats = randomEnemyStats(playerStats.level);
-
 /* ================================
-   ENEMY OBJECT
+   ENEMY GENERATOR (TIERED)
 ================================ */
 
-export let enemy = {
-  baseMaxHP: 30,
-  hp: 0,
-  max: 30,
-  ap: 0,
-  defending: false,
-  STR: 0,
-  DEX: 0,
-  AGI: 0,
-  CON: 0,
-  ...enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
-  name: randomName(),
-  level: playerStats.level,
-  stats: enemyStats,
-  weapon: generateWeapon(playerStats.level)
-};
+export function generateEnemy(playerLevel) {
+  const tier = rollEnemyTier();
+
+  // Level scaling
+  let level = playerLevel;
+  if (tier === "elite") level += 1;
+  if (tier === "boss") level += 3;
+
+  // Base type
+  const baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+
+  // Name prefix
+  let name = randomName();
+  if (tier === "elite") name = "Elite " + name;
+  if (tier === "boss") name = "Boss " + name;
+
+  // Tier hints
+  let tierHint = "";
+  if (tier === "elite") tierHint = "This enemy radiates dangerous strength.";
+  if (tier === "boss") tierHint = "A terrifying presence looms over you.";
+
+  const stats = randomEnemyStats(level);
+  const weapon = generateWeapon(level);
+
+  return {
+    baseMaxHP: 30,
+    hp: 0,
+    max: 30,
+    ap: 0,
+    defending: false,
+
+    // Combat stats
+    STR: stats.STR,
+    DEX: stats.DEX,
+    AGI: stats.AGI,
+    CON: stats.CON,
+
+    // Metadata
+    name,
+    level,
+    type: tier,
+    behavior: baseType.behavior,
+    hint: tierHint || baseType.hint,
+    stats,
+    weapon
+  };
+}
+
+/* ================================
+   INITIAL ENEMY INSTANCE
+================================ */
+
+export let enemy = generateEnemy(playerStats.level);
 
 /* ================================
    PORTRAITS
