@@ -5,6 +5,7 @@ import { generateWeapon } from "./weapon.js";
 ================================ */
 
 export let player = {
+  name: null,
   baseMaxHP: 30,
   hp: 0,
   max: 30,
