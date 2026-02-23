@@ -7,7 +7,6 @@ import { openEnemyInfo, openPlayerInfoModal } from "./modal.js";
 window.addEventListener("DOMContentLoaded", () => {
 
   initializePortraits();
-  document.getElementById("playerName").textContent = player.name;
   applyStatsToCombat(player, playerStats);
   applyStatsToCombat(enemy, enemyStats);
   applyConstitution(player);
