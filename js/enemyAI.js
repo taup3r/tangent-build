@@ -76,3 +76,11 @@ export function enemyTurn() {
   // Player's turn
   startPlayerTurn();
 }
+
+export function rollEnemyTier() {
+  const roll = Math.random();
+
+  if (roll < 0.05) return "boss";     // 5%
+  if (roll < 0.20) return "elite";    // next 15%
+  return "normal";                    // remaining 80%
+}
