@@ -214,14 +214,23 @@ export function initializePortraits() {
   document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
   document.getElementById("playerPortrait").src = "assets/player.png";
 
-  document.getElementById("enemyName").textContent = enemy.name;
+  // Tier color coding
+  const nameEl = document.getElementById("enemyName");
+
+  if (enemy.type === "elite") {
+    nameEl.style.color = "#ffcc00"; // gold
+  } else if (enemy.type === "boss") {
+    nameEl.style.color = "#ff4444"; // red
+  } else {
+    nameEl.style.color = ""; // default
+  }
+
+  nameEl.textContent = enemy.name;
   document.getElementById("enemyHint").textContent = enemy.hint;
 
-document.getElementById("enemyName").textContent = enemy.name;
-
-const weaponEl = document.getElementById("enemyWeapon");
-weaponEl.textContent = enemy.weapon.name;
-weaponEl.style.color = enemy.weapon.color;
+  const weaponEl = document.getElementById("enemyWeapon");
+  weaponEl.textContent = enemy.weapon.name;
+  weaponEl.style.color = enemy.weapon.color;
 }
 
 /* ================================
