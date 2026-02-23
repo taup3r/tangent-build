@@ -25,12 +25,12 @@ export function showResultModal(victory) {
 
   if (victory) {
     title.textContent = "Victory!";
-    const expGain = enemy.level * 10;
+    const expGain = (enemy.level+1) * 5;
     gainExp(expGain);
     logBox.innerHTML += `<br><b>Gained ${expGain} EXP</b>`;
   } else {
     title.textContent = "Defeat";
-    const expLoss = Math.floor(enemy.level * 10 * 0.1);
+    const expLoss = Math.floor((enemy.level+1) * 5 * 0.2);
     loseExp(expLoss);
     logBox.innerHTML += `<br><b>Lost ${expLoss} EXP</b>`;
   }
