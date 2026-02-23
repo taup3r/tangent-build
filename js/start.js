@@ -35,15 +35,41 @@ document.getElementById("continueBtn").onclick = () => {
     if (key.startsWith("save_")) {
       const name = key.replace("save_", "");
 
-      const div = document.createElement("div");
-      div.className = "save-item";
-      div.textContent = name;
+      const row = document.createElement("div");
+      row.className = "save-item";
+      row.style.display = "flex";
+      row.style.justifyContent = "space-between";
+      row.style.alignItems = "center";
 
-      div.onclick = () => {
+      // Save name (click to load)
+      const nameBtn = document.createElement("div");
+      nameBtn.textContent = name;
+      nameBtn.style.cursor = "pointer";
+      nameBtn.onclick = () => {
         window.location.href = `combat.html?player=${encodeURIComponent(name)}`;
       };
 
-      saveList.appendChild(div);
+      // Delete button
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "❌";
+      delBtn.style.background = "transparent";
+      delBtn.style.border = "none";
+      delBtn.style.color = "#ff6b6b";
+      delBtn.style.fontSize = "1.2rem";
+      delBtn.style.cursor = "pointer";
+
+      delBtn.onclick = (e) => {
+        e.stopPropagation(); // prevent triggering load
+
+        if (confirm(`Delete save "${name}"? This cannot be undone.`)) {
+          localStorage.removeItem(key);
+          row.remove(); // remove from UI
+        }
+      };
+
+      row.appendChild(nameBtn);
+      row.appendChild(delBtn);
+      saveList.appendChild(row);
     }
   }
 };
