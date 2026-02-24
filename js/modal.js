@@ -170,9 +170,6 @@ window.addStat = addStat;
 
 export function openEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "flex";
-
-  document.getElementById("enemyInfoType").textContent =
-  enemy.type.charAt(0).toUpperCase() + enemy.type.slice(1);
   document.getElementById("enemyInfoPortrait").src =
     document.getElementById("enemyPortrait").src;
 
