@@ -222,7 +222,7 @@ export function initializePortraits() {
   } else if (enemy.type === "boss") {
     nameEl.style.color = "#ff4444"; // red
   } else {
-    nameEl.style.color = ""; // default
+    nameEl.style.color = "#f5f5f7"; // default
   }
 
   nameEl.textContent = enemy.name;
