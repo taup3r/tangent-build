@@ -217,14 +217,6 @@ export function initializePortraits() {
   // Tier color coding
   const nameEl = document.getElementById("enemyName");
 
-  if (enemy.type === "elite") {
-    nameEl.style.color = "#ffcc00"; // gold
-  } else if (enemy.type === "boss") {
-    nameEl.style.color = "#ff4444"; // red
-  } else {
-    nameEl.style.color = "#f5f5f7"; // default
-  }
-
   nameEl.textContent = enemy.name;
   document.getElementById("enemyHint").textContent = enemy.hint;
 
