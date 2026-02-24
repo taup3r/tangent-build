@@ -218,6 +218,14 @@ export function initializePortraits() {
   const nameEl = document.getElementById("enemyName");
 
   nameEl.textContent = enemy.name;
+
+  if (enemy.type === "elite") {
+    nameEl.style.color = "#ffcc00";
+  } else if (enemy.type === "boss") {
+    nameEl.style.color = "#ff4444";
+  } else {
+    nameEl.style.color = "";
+  }
   document.getElementById("enemyHint").textContent = enemy.hint;
 
   const weaponEl = document.getElementById("enemyWeapon");
