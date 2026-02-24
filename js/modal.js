@@ -170,7 +170,6 @@ window.addStat = addStat;
 
 export function openEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "flex";
-
   document.getElementById("enemyInfoPortrait").src =
     document.getElementById("enemyPortrait").src;
 
