@@ -1,4 +1,4 @@
-import { initializePortraits, player, playerStats, enemy, enemyStats, applyStatsToCombat, applyConstitution } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   initializePortraits();
   applyStatsToCombat(player, playerStats);
-  applyStatsToCombat(enemy, enemyStats);
   applyConstitution(player);
   applyConstitution(enemy);
   updateUI();
