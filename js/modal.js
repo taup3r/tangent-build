@@ -6,6 +6,52 @@ import { player, enemy } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 
+/* ============================================
+   HELPERS: THEMES, EXP ANIMATION, DANGER RATING
+============================================ */
+
+// Color-coded modal themes based on enemy tier
+function applyModalTheme(modal, tier) {
+  const box = modal.querySelector(".modal-content");
+  if (!box) return;
+
+  if (tier === "elite") {
+    box.style.border = "3px solid #ffcc00";
+    box.style.boxShadow = "0 0 15px #ffcc00aa";
+  } else if (tier === "boss") {
+    box.style.border = "3px solid #ff4444";
+    box.style.boxShadow = "0 0 15px #ff4444aa";
+  } else {
+    box.style.border = "3px solid #4aa3ff";
+    box.style.boxShadow = "0 0 15px #4aa3ffaa";
+  }
+}
+
+// Animated EXP gain
+function animateExpGain(element, start, end, duration = 600) {
+  const diff = end - start;
+  const startTime = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.floor(start + diff * progress);
+    element.innerHTML = `<b>Gained ${value} EXP</b>`;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+// Danger rating (skulls)
+function getDangerRating(playerLevel, enemyLevel) {
+  const diff = enemyLevel - playerLevel;
+
+  if (diff <= 0) return "★";
+  if (diff === 1) return "★★";
+  if (diff === 2) return "★★★";
+  return "★★★★"; // Boss-level threat
+}
+
 /* -------------------------
    SHOW RESULT MODAL
 ------------------------- */
@@ -14,37 +60,60 @@ export function showResultModal(victory) {
   const modal = document.getElementById("resultModal");
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
-  document.getElementById("lootWeaponBtn").onclick = () => {
-  openCompareWeaponModal();
-};
-  document.getElementById("victoryWeaponPreview").innerHTML =
-  `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
 
+  // Loot preview
+  document.getElementById("lootWeaponBtn").onclick = () => {
+    openCompareWeaponModal();
+  };
+  document.getElementById("victoryWeaponPreview").innerHTML =
+    `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
+
+  // Battle log
   const rawLog = document.getElementById("log").textContent;
   logBox.innerHTML = rawLog.replace(/\n/g, "<br>");
 
+  // Danger rating
+  const danger = getDangerRating(playerStats.level, enemy.level);
+  logBox.innerHTML += `<br><span style="color:#ff6666">Danger Rating: ${danger}</span>`;
+
+  // Victory / Defeat
   if (victory) {
     title.textContent = "Victory!";
-    const expGain = (enemy.level+1) * 5;
+    const expGain = (enemy.level + 1) * 5;
+
+    // Animated EXP gain
+    const expLine = document.createElement("div");
+    logBox.appendChild(expLine);
+    animateExpGain(expLine, 0, expGain);
+
     gainExp(expGain);
-    logBox.innerHTML += `<br><b>Gained ${expGain} EXP</b>`;
+
   } else {
     title.textContent = "Defeat";
-    const expLoss = Math.floor((enemy.level+1) * 5 * 0.2);
+    const expLoss = Math.floor((enemy.level + 1) * 5 * 0.2);
     loseExp(expLoss);
     logBox.innerHTML += `<br><b>Lost ${expLoss} EXP</b>`;
   }
 
   modal.style.display = "flex";
 
+  // Apply color-coded theme
+  applyModalTheme(modal, enemy.type);
+
+  // Show stat button if points available
   if (playerStats.statPoints > 0) {
     document.getElementById("statButton").style.display = "block";
   }
 
+  // Show loot button only on victory
   if (victory) {
     document.getElementById("lootWeaponBtn").style.display = "block";
   }
 }
+
+/* -------------------------
+   WEAPON COMPARISON MODAL
+------------------------- */
 
 export function openCompareWeaponModal() {
   const modal = document.getElementById("compareWeaponModal");
@@ -53,7 +122,7 @@ export function openCompareWeaponModal() {
   const current = player.weapon;
   const enemyW = enemy.weapon;
 
-  // --- Current weapon ---
+  // Current weapon
   if (current) {
     document.getElementById("compareCurrentName").textContent = current.name;
     document.getElementById("compareCurrentName").style.color = current.color;
@@ -75,7 +144,7 @@ export function openCompareWeaponModal() {
     document.getElementById("compareCurrentStats").textContent = "-";
   }
 
-  // --- Enemy weapon ---
+  // Enemy weapon
   document.getElementById("compareEnemyName").textContent = enemyW.name;
   document.getElementById("compareEnemyName").style.color = enemyW.color;
 
@@ -159,7 +228,6 @@ function updateStatMenu() {
   document.getElementById("conVal").textContent = playerStats.CON;
 }
 
-/* Expose to window */
 window.openStatMenu = openStatMenu;
 window.closeStatMenu = closeStatMenu;
 window.addStat = addStat;
@@ -183,22 +251,24 @@ export function openEnemyInfo() {
   document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
   document.getElementById("enemyInfoCON").textContent = enemy.stats.CON;
 
-// Weapon name
-const w = enemy.weapon;
-document.getElementById("enemyProfileWeapon").textContent = w.name;
-document.getElementById("enemyProfileWeapon").style.color = w.color;
+  // Danger rating
+  document.getElementById("enemyInfoDanger").textContent =
+    getDangerRating(playerStats.level, enemy.level);
 
-// Damage range
-document.getElementById("enemyProfileWeaponDamage").textContent =
-  `${w.damage.min} – ${w.damage.max}`;
+  // Weapon
+  const w = enemy.weapon;
+  document.getElementById("enemyProfileWeapon").textContent = w.name;
+  document.getElementById("enemyProfileWeapon").style.color = w.color;
 
-// Stat modifiers (STR +1, DEX +2, etc.)
-const statStrings = Object.entries(w.stats)
-  .filter(([_, val]) => val > 0)
-  .map(([stat, val]) => `${stat} +${val}`);
+  document.getElementById("enemyProfileWeaponDamage").textContent =
+    `${w.damage.min} – ${w.damage.max}`;
 
-document.getElementById("enemyProfileWeaponStats").textContent =
-  statStrings.length > 0 ? statStrings.join(", ") : "None";
+  const statStrings = Object.entries(w.stats)
+    .filter(([_, val]) => val > 0)
+    .map(([stat, val]) => `${stat} +${val}`);
+
+  document.getElementById("enemyProfileWeaponStats").textContent =
+    statStrings.length > 0 ? statStrings.join(", ") : "None";
 }
 
 export function closeEnemyInfo() {
@@ -213,33 +283,26 @@ export function openPlayerInfoModal() {
   const modal = document.getElementById("playerModal");
   modal.style.display = "flex";
 
-  // Portrait
   document.getElementById("playerInfoPortrait").src =
     document.getElementById("playerPortrait").src;
 
-  // Name + Level
   document.getElementById("playerInfoName").textContent = player.name;
   document.getElementById("playerInfoLevel").textContent = playerStats.level;
 
-  // Stats (after weapon bonuses)
   document.getElementById("playerInfoSTR").textContent = player.STR;
   document.getElementById("playerInfoDEX").textContent = player.DEX;
   document.getElementById("playerInfoAGI").textContent = player.AGI;
   document.getElementById("playerInfoCON").textContent = player.CON;
 
-  // Weapon section
   if (player.weapon) {
     const w = player.weapon;
 
-    // Weapon name
     document.getElementById("playerProfileWeapon").textContent = w.name;
     document.getElementById("playerProfileWeapon").style.color = w.color;
 
-    // Damage range
     document.getElementById("playerProfileWeaponDamage").textContent =
       `${w.damage.min} – ${w.damage.max}`;
 
-    // Stat modifiers (STR +1, DEX +2, etc.)
     const statStrings = Object.entries(w.stats)
       .filter(([_, val]) => val > 0)
       .map(([stat, val]) => `${stat} +${val}`);
@@ -248,7 +311,6 @@ export function openPlayerInfoModal() {
       statStrings.length > 0 ? statStrings.join(", ") : "None";
 
   } else {
-    // No weapon equipped
     document.getElementById("playerProfileWeapon").textContent = "Unarmed";
     document.getElementById("playerProfileWeapon").style.color = "#ccc";
     document.getElementById("playerProfileWeaponDamage").textContent = "-";
