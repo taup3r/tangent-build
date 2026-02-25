@@ -61,14 +61,14 @@ export function showResultModal(victory) {
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
 
-  // Loot preview
-  document.getElementById("lootWeaponBtn").onclick = () => {
-  openCompareWeaponModal();
-};
-
   // Clear EXP display area
   const expDisplay = document.getElementById("expGainDisplay");
   expDisplay.innerHTML = "";
+
+  // Restore loot button click
+  document.getElementById("lootWeaponBtn").onclick = () => {
+    openCompareWeaponModal();
+  };
 
   // Determine enemy name color based on tier
   let enemyNameColor = "";
@@ -124,10 +124,11 @@ export function showResultModal(victory) {
   } else {
     title.textContent = "Defeat";
     const expLoss = Math.floor((enemy.level + 1) * 5 * 0.2);
-    loseExp(expLoss);
 
-    expDisplay.innerHTML = ""; // no exp on defeat
-    logBox.innerHTML += `<br><b>Lost ${expLoss} EXP</b>`;
+    // Animate LOST EXP (negative animation)
+    animateExpGain(expDisplay, 0, -expLoss);
+
+    loseExp(expLoss);
   }
 
   modal.style.display = "flex";
@@ -143,6 +144,8 @@ export function showResultModal(victory) {
   // Show loot button only on victory
   if (victory) {
     document.getElementById("lootWeaponBtn").style.display = "block";
+  } else {
+    document.getElementById("lootWeaponBtn").style.display = "none";
   }
 }
 
