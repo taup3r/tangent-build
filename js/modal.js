@@ -292,11 +292,22 @@ export function openEnemyInfo() {
   document.getElementById("enemyInfoPortrait").src =
     document.getElementById("enemyPortrait").src;
 
-  document.getElementById("enemyInfoName").textContent = enemy.name;
+  // Name header with tier color
+  const nameEl = document.getElementById("enemyInfoName");
+  nameEl.textContent = enemy.name;
+
+  if (enemy.type === "elite") nameEl.style.color = "#ffcc00";
+  else if (enemy.type === "boss") nameEl.style.color = "#ff4444";
+  else nameEl.style.color = ""; // normal
+
+  // Tier + Level
   document.getElementById("enemyInfoLevel").textContent = enemy.level;
   document.getElementById("enemyInfoType").textContent = enemy.type;
+
+  // Hint
   document.getElementById("enemyInfoHint").textContent = enemy.hint;
 
+  // Stats
   document.getElementById("enemyInfoSTR").textContent = enemy.stats.STR;
   document.getElementById("enemyInfoDEX").textContent = enemy.stats.DEX;
   document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
@@ -320,6 +331,13 @@ export function openEnemyInfo() {
 
   document.getElementById("enemyProfileWeaponStats").textContent =
     statStrings.length > 0 ? statStrings.join(", ") : "None";
+
+  // Weapon lore
+  if (w.lore && w.lore.trim() !== "") {
+    document.getElementById("enemyProfileWeaponLore").textContent = `"${w.lore}"`;
+  } else {
+    document.getElementById("enemyProfileWeaponLore").textContent = "";
+  }
 }
 
 export function closeEnemyInfo() {
