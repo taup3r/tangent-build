@@ -42,6 +42,19 @@ function animateExpGain(element, start, end, duration = 600) {
   requestAnimationFrame(tick);
 }
 
+function animateExpLoss(element, start, end, duration = 600) {
+  const startTime = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.floor(start + end * progress);
+    element.innerHTML = `<b style="color:#ff4444;">Lost ${value} EXP</b>`;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
 // Danger rating (skulls)
 function getDangerRating(playerLevel, enemyLevel) {
   const diff = enemyLevel - playerLevel;
@@ -125,8 +138,8 @@ export function showResultModal(victory) {
     title.textContent = "Defeat";
     const expLoss = Math.floor((enemy.level + 1) * 5 * 0.2);
 
-    // Animate LOST EXP (negative animation)
-    animateExpGain(expDisplay, 0, -expLoss);
+    // Animate LOST EXP (correct wording)
+    animateExpLoss(expDisplay, 0, expLoss);
 
     loseExp(expLoss);
   }
