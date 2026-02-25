@@ -99,3 +99,61 @@
   font-weight: 600;
   margin-top: 10px;
 }
+
+.enemy-info-box {
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+}
+
+.enemy-info-header {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.enemy-info-portrait {
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.enemy-info-subheader {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.enemy-info-danger {
+  margin: 6px 0;
+  font-weight: bold;
+  color: #ff6666;
+}
+
+.enemy-info-hint {
+  font-style: italic;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.enemy-info-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.enemy-info-weapon {
+  text-align: left;
+  margin: 0 auto 12px;
+  width: 80%;
+  line-height: 1.4;
+}
+
+.enemy-info-lore {
+  margin-top: 8px;
+  font-style: italic;
+  opacity: 0.85;
+  line-height: 1.3;
+}
