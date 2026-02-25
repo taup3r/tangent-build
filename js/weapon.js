@@ -21,7 +21,6 @@ const weapons = [
 // PREFIX / SUFFIX TIERS
 // =========================
 
-// 6 prefix tiers per stat (every 5 points)
 const prefixTiers = {
   STR: [
     "Ironbound", "Warborn", "Bonecrusher",
@@ -41,7 +40,6 @@ const prefixTiers = {
   ]
 };
 
-// Suffix tiers based on 2nd stat + number of extra stats
 const suffixTiers = {
   STR: ["of Force", "of the Iron Tempest", "of Breaking Might"],
   DEX: ["of Precision", "of the Silent Step", "of the Needle Fang"],
@@ -51,27 +49,25 @@ const suffixTiers = {
 
 // =========================
 // UNIQUE NAME POOLS
+// (keys are alphabetical: AGI+CON, DEX+STR, etc.)
 // =========================
 
-// Hybrid uniques (2 dominant stats)
 const hybridUniques = {
-  "STR+DEX": ["The Crimson Needle", "Razor of the Iron Tempest", "Blood‑Quick Edge", "The Split Fang", "Ironwind Severer"],
-  "STR+AGI": ["Stormbreaker’s Leap", "Thunderclad Arc", "Gale‑Sunder", "The Sky‑Hammer", "Tempest Rend"],
-  "STR+CON": ["The Immovable Wrath", "Ironheart Colossus", "Stone‑Split Fury", "The Granite Reaver", "Earthshatter Oathblade"],
-  "DEX+AGI": ["Windshadow Blade", "The Whispering Tempest", "Skyfang", "Stormstep Razor", "The Gale‑Thread Edge"],
-  "DEX+CON": ["The Silent Bulwark", "Ironthread Edge", "Quiet Bastion", "The Still Fang", "Stone‑Veil Cutter"],
+  "DEX+STR": ["The Crimson Needle", "Razor of the Iron Tempest", "Blood‑Quick Edge", "The Split Fang", "Ironwind Severer"],
+  "AGI+STR": ["Stormbreaker’s Leap", "Thunderclad Arc", "Gale‑Sunder", "The Sky‑Hammer", "Tempest Rend"],
+  "CON+STR": ["The Immovable Wrath", "Ironheart Colossus", "Stone‑Split Fury", "The Granite Reaver", "Earthshatter Oathblade"],
+  "AGI+DEX": ["Windshadow Blade", "The Whispering Tempest", "Skyfang", "Stormstep Razor", "The Gale‑Thread Edge"],
+  "CON+DEX": ["The Silent Bulwark", "Ironthread Edge", "Quiet Bastion", "The Still Fang", "Stone‑Veil Cutter"],
   "AGI+CON": ["Stormroot Edge", "Gale‑Forged Bulwark", "Earthwind Talon", "The Iron Gale", "Tempest‑Rooted Blade"]
 };
 
-// Tri‑hybrid uniques (3 dominant stats)
 const triUniques = {
-  "STR+DEX+AGI": ["The Trifold Tempest", "Storm‑Threaded Edge", "The Threefold Fang", "Gale‑Riven Trinity", "The Tri‑Strike Arc"],
-  "STR+DEX+CON": ["Iron‑Wrought Trinity", "The Stone‑Threaded Edge", "Tri‑Forged Bulwark", "The Iron Triad", "Colossus‑Thread Blade"],
-  "STR+AGI+CON": ["The Earthstorm Edge", "Tri‑Rooted Tempest", "The Mountain Gale", "Storm‑Shelled Reaver", "The Titan’s Breath"],
-  "DEX+AGI+CON": ["The Whispering Bastion", "Wind‑Wrought Sentinel", "The Silent Tempest", "Gale‑Bound Aegis", "The Veiled Trinity"]
+  "AGI+DEX+STR": ["The Trifold Tempest", "Storm‑Threaded Edge", "The Threefold Fang", "Gale‑Riven Trinity", "The Tri‑Strike Arc"],
+  "CON+DEX+STR": ["Iron‑Wrought Trinity", "The Stone‑Threaded Edge", "Tri‑Forged Bulwark", "The Iron Triad", "Colossus‑Thread Blade"],
+  "AGI+CON+STR": ["The Earthstorm Edge", "Tri‑Rooted Tempest", "The Mountain Gale", "Storm‑Shelled Reaver", "The Titan’s Breath"],
+  "AGI+CON+DEX": ["The Whispering Bastion", "Wind‑Wrought Sentinel", "The Silent Tempest", "Gale‑Bound Aegis", "The Veiled Trinity"]
 };
 
-// Mythic uniques (all 4 stats equal)
 const mythicUniques = [
   "Eclipse of the Worldforge",
   "The Last Dawn",
@@ -89,7 +85,6 @@ const mythicUniques = [
 // UNIQUE LORE TEXT
 // =========================
 
-// Hybrid lore
 const hybridLore = [
   "Forged where two forces meet, its edge carries the tension of opposing strengths.",
   "A weapon born of dual mastery, resonating with paired energies.",
@@ -98,7 +93,6 @@ const hybridLore = [
   "Its forging united rival clans, each contributing their essence."
 ];
 
-// Tri‑Hybrid lore
 const triLore = [
   "Threefold power hums beneath its surface, each force reinforcing the others.",
   "A rare creation said to require three masters working in perfect harmony.",
@@ -107,7 +101,6 @@ const triLore = [
   "Only those who embody balance in all things can wield it fully."
 ];
 
-// Mythic lore
 const mythicLore = [
   "A perfect convergence of all forces, its balance is said to mirror the cosmos.",
   "Legends claim it predates the written word, forged in the first dawn.",
@@ -117,8 +110,9 @@ const mythicLore = [
 ];
 
 // =========================
-// COLOR SYSTEM (BY 10s)
+// COLOR SYSTEM
 // =========================
+
 function getColorByRank(rank) {
   if (rank <= 10) return { tier: "Common",    color: "#C0C0C0" };
   if (rank <= 20) return { tier: "Uncommon",  color: "#4CAF50" };
@@ -129,8 +123,9 @@ function getColorByRank(rank) {
 }
 
 // =========================
-// UTILITY FUNCTIONS
+// UTILITY
 // =========================
+
 function weightedStatCount() {
   const roll = Math.random();
   if (roll < 0.50) return 1;
@@ -152,8 +147,9 @@ function distributePoints(total, count) {
 }
 
 // =========================
-// UNIQUE DETECTION
+/* UNIQUE DETECTION */
 // =========================
+
 function detectUnique(stats) {
   const entries = Object.entries(stats).filter(([_, v]) => v > 0);
   if (entries.length === 0) return { type: "NONE" };
@@ -171,8 +167,9 @@ function detectUnique(stats) {
 }
 
 // =========================
-// MAIN GENERATOR
+/* MAIN GENERATOR */
 // =========================
+
 export function generateWeapon(inputRank) {
   const eligible = weapons.filter(w => w.rank <= inputRank);
   const weapon = pickRandom(eligible);
@@ -185,9 +182,6 @@ export function generateWeapon(inputRank) {
   let isUnique = false;
   let uniqueType = "NONE";
 
-  // =========================
-  // CASE 1: No remaining rank → No stats, no prefix/suffix
-  // =========================
   if (remaining === 0) {
     const colorInfo = getColorByRank(inputRank);
 
@@ -205,9 +199,6 @@ export function generateWeapon(inputRank) {
     };
   }
 
-  // =========================
-  // CASE 2: Normal stat generation
-  // =========================
   const statCount = weightedStatCount();
   const statTypes = ["STR", "DEX", "AGI", "CON"];
   const chosenStats = [];
@@ -218,41 +209,36 @@ export function generateWeapon(inputRank) {
   }
 
   const distribution = distributePoints(remaining, chosenStats.length);
-
   chosenStats.forEach((s, i) => stats[s] = distribution[i]);
 
   const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
 
-  // =========================
-  // UNIQUE DETECTION
-  // =========================
   const unique = detectUnique(stats);
   uniqueType = unique.type;
 
-  // =========================
-  // UNIQUE NAMING + LORE
-  // =========================
   if (uniqueType === "MYTHIC") {
     name = pickRandom(mythicUniques);
     lore = pickRandom(mythicLore);
     isUnique = true;
-  }
-  else if (uniqueType === "TRI") {
+  } else if (uniqueType === "TRI") {
     const key = unique.stats.sort().join("+");
-    name = pickRandom(triUniques[key]);
-    lore = pickRandom(triLore);
-    isUnique = true;
-  }
-  else if (uniqueType === "HYBRID") {
+    const pool = triUniques[key];
+    if (pool && pool.length) {
+      name = pickRandom(pool);
+      lore = pickRandom(triLore);
+      isUnique = true;
+    }
+  } else if (uniqueType === "HYBRID") {
     const key = unique.stats.sort().join("+");
-    name = pickRandom(hybridUniques[key]);
-    lore = pickRandom(hybridLore);
-    isUnique = true;
+    const pool = hybridUniques[key];
+    if (pool && pool.length) {
+      name = pickRandom(pool);
+      lore = pickRandom(hybridLore);
+      isUnique = true;
+    }
   }
-  else {
-    // =========================
-    // NORMAL NAMING
-    // =========================
+
+  if (!isUnique) {
     if (statsWithValue.length > 0) {
       const highest = statsWithValue.sort((a, b) => b[1] - a[1])[0];
       const highestStat = highest[0];
@@ -273,21 +259,16 @@ export function generateWeapon(inputRank) {
     }
   }
 
-  // =========================
-  // UNIQUE DAMAGE TIGHTENING
-  // =========================
   let minDamage = weapon.min;
   let maxDamage = weapon.max;
 
   if (uniqueType === "HYBRID") {
     minDamage += 1;
     maxDamage -= 1;
-  }
-  else if (uniqueType === "TRI") {
+  } else if (uniqueType === "TRI") {
     minDamage += 2;
     maxDamage -= 2;
-  }
-  else if (uniqueType === "MYTHIC") {
+  } else if (uniqueType === "MYTHIC") {
     minDamage += 3;
     maxDamage -= 3;
   }
