@@ -61,6 +61,10 @@ export function showResultModal(victory) {
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
 
+  // Clear EXP display area
+  const expDisplay = document.getElementById("expGainDisplay");
+  expDisplay.innerHTML = "";
+
   // Loot preview
   document.getElementById("lootWeaponBtn").onclick = () => {
     openCompareWeaponModal();
@@ -81,10 +85,8 @@ export function showResultModal(victory) {
     title.textContent = "Victory!";
     const expGain = (enemy.level + 1) * 5;
 
-    // Animated EXP gain
-    const expLine = document.createElement("div");
-    logBox.appendChild(expLine);
-    animateExpGain(expLine, 0, expGain);
+    // NEW: Animate EXP above loot preview
+    animateExpGain(expDisplay, 0, expGain);
 
     gainExp(expGain);
 
@@ -92,6 +94,8 @@ export function showResultModal(victory) {
     title.textContent = "Defeat";
     const expLoss = Math.floor((enemy.level + 1) * 5 * 0.2);
     loseExp(expLoss);
+
+    expDisplay.innerHTML = ""; // no exp on defeat
     logBox.innerHTML += `<br><b>Lost ${expLoss} EXP</b>`;
   }
 
