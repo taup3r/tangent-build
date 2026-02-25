@@ -18,20 +18,51 @@ const weapons = [
 ];
 
 // =========================
-// PREFIX / SUFFIX POOLS
+// PREFIX / SUFFIX TIERS
 // =========================
-const prefixPools = {
-  STR: ["Ravager’s", "Ironbound", "Warborn", "Bonecrusher", "Stalwart"],
-  DEX: ["Keen‑Edged", "Shadowtip", "Needlepoint", "Quickhand", "Windlaced"],
-  AGI: ["Swift‑Edged", "Windpiercer", "Gale‑Forged", "Stormpiercer", "Lightfoot"],
-  CON: ["Stone‑Hewn", "Ironbound", "Stalwart", "Resolute", "Bulwark"]
+
+// 6 prefix tiers per stat (every 5 points)
+const prefixTiers = {
+  STR: [
+    "Ironbound", "Warborn", "Bonecrusher",
+    "Titan‑Forged", "Colossus‑Wrought", "Worldbreaker"
+  ],
+  DEX: [
+    "Keen‑Edged", "Shadowtip", "Needlepoint",
+    "Ghosthand", "Phantom‑Laced", "Specter‑Forged"
+  ],
+  AGI: [
+    "Swift‑Edged", "Windpiercer", "Gale‑Forged",
+    "Stormstride", "Tempest‑Wrought", "Hurricane‑Born"
+  ],
+  CON: [
+    "Stone‑Hewn", "Bulwark‑Forged", "Iron‑Rooted",
+    "Earthshaker", "Mountain‑Born", "Titan‑Shelled"
+  ]
 };
 
-const suffixPools = {
-  STR: ["of Ruinous Force", "of the Iron Tempest", "of Breaking Might"],
-  DEX: ["of the Needle Fang", "of Swift Precision", "of the Silent Step"],
-  AGI: ["of the Silent Gale", "of Piercing Winds", "of the Whirling Hunt"],
-  CON: ["of Enduring Might", "of the Iron Vanguard", "of Unbroken Steel"]
+// Suffix tiers based on 2nd stat + number of extra stats
+const suffixTiers = {
+  STR: [
+    "of Force",
+    "of the Iron Tempest",
+    "of Breaking Might"
+  ],
+  DEX: [
+    "of Precision",
+    "of the Silent Step",
+    "of the Needle Fang"
+  ],
+  AGI: [
+    "of the Gale",
+    "of Piercing Winds",
+    "of the Whirling Hunt"
+  ],
+  CON: [
+    "of Endurance",
+    "of the Iron Vanguard",
+    "of Unbroken Steel"
+  ]
 };
 
 // =========================
@@ -72,7 +103,7 @@ function distributePoints(total, count) {
 // =========================
 // MAIN GENERATOR
 // =========================
-export function generateWeapon(inputRank) {
+function generateWeapon(inputRank) {
   const eligible = weapons.filter(w => w.rank <= inputRank);
   const weapon = pickRandom(eligible);
 
@@ -136,15 +167,21 @@ export function generateWeapon(inputRank) {
     };
   }
 
-  // Determine dominant stat
-  const dominantStat = statsWithValue.sort((a, b) => b[1] - a[1])[0][0];
+  // Determine highest stat
+  const highest = statsWithValue.sort((a, b) => b[1] - a[1])[0];
+  const highestStat = highest[0];
+  const highestValue = highest[1];
 
-  // Always apply prefix
-  const prefix = pickRandom(prefixPools[dominantStat]);
+  // Determine prefix tier (6 tiers)
+  const prefixIndex = Math.min(Math.floor((highestValue - 1) / 5), 5);
+  const prefix = prefixTiers[highestStat][prefixIndex];
 
-  // Apply suffix ONLY if more than one stat has value
+  // Determine suffix (only if >1 stat)
   if (statsWithValue.length > 1) {
-    const suffix = pickRandom(suffixPools[dominantStat]);
+    const secondStat = statsWithValue[1][0];
+    const extraStats = statsWithValue.length - 1;
+    const suffixIndex = Math.min(extraStats - 1, 2);
+    const suffix = suffixTiers[secondStat][suffixIndex];
     name = `${prefix} ${weapon.type} ${suffix}`;
   } else {
     name = `${prefix} ${weapon.type}`;
