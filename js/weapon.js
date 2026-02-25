@@ -43,27 +43,78 @@ const prefixTiers = {
 
 // Suffix tiers based on 2nd stat + number of extra stats
 const suffixTiers = {
-  STR: [
-    "of Force",
-    "of the Iron Tempest",
-    "of Breaking Might"
-  ],
-  DEX: [
-    "of Precision",
-    "of the Silent Step",
-    "of the Needle Fang"
-  ],
-  AGI: [
-    "of the Gale",
-    "of Piercing Winds",
-    "of the Whirling Hunt"
-  ],
-  CON: [
-    "of Endurance",
-    "of the Iron Vanguard",
-    "of Unbroken Steel"
-  ]
+  STR: ["of Force", "of the Iron Tempest", "of Breaking Might"],
+  DEX: ["of Precision", "of the Silent Step", "of the Needle Fang"],
+  AGI: ["of the Gale", "of Piercing Winds", "of the Whirling Hunt"],
+  CON: ["of Endurance", "of the Iron Vanguard", "of Unbroken Steel"]
 };
+
+// =========================
+// UNIQUE NAME POOLS
+// =========================
+
+// Hybrid uniques (2 dominant stats)
+const hybridUniques = {
+  "STR+DEX": ["The Crimson Needle", "Razor of the Iron Tempest", "Blood‑Quick Edge", "The Split Fang", "Ironwind Severer"],
+  "STR+AGI": ["Stormbreaker’s Leap", "Thunderclad Arc", "Gale‑Sunder", "The Sky‑Hammer", "Tempest Rend"],
+  "STR+CON": ["The Immovable Wrath", "Ironheart Colossus", "Stone‑Split Fury", "The Granite Reaver", "Earthshatter Oathblade"],
+  "DEX+AGI": ["Windshadow Blade", "The Whispering Tempest", "Skyfang", "Stormstep Razor", "The Gale‑Thread Edge"],
+  "DEX+CON": ["The Silent Bulwark", "Ironthread Edge", "Quiet Bastion", "The Still Fang", "Stone‑Veil Cutter"],
+  "AGI+CON": ["Stormroot Edge", "Gale‑Forged Bulwark", "Earthwind Talon", "The Iron Gale", "Tempest‑Rooted Blade"]
+};
+
+// Tri‑hybrid uniques (3 dominant stats)
+const triUniques = {
+  "STR+DEX+AGI": ["The Trifold Tempest", "Storm‑Threaded Edge", "The Threefold Fang", "Gale‑Riven Trinity", "The Tri‑Strike Arc"],
+  "STR+DEX+CON": ["Iron‑Wrought Trinity", "The Stone‑Threaded Edge", "Tri‑Forged Bulwark", "The Iron Triad", "Colossus‑Thread Blade"],
+  "STR+AGI+CON": ["The Earthstorm Edge", "Tri‑Rooted Tempest", "The Mountain Gale", "Storm‑Shelled Reaver", "The Titan’s Breath"],
+  "DEX+AGI+CON": ["The Whispering Bastion", "Wind‑Wrought Sentinel", "The Silent Tempest", "Gale‑Bound Aegis", "The Veiled Trinity"]
+};
+
+// Mythic uniques (all 4 stats equal)
+const mythicUniques = [
+  "Eclipse of the Worldforge",
+  "The Last Dawn",
+  "Star‑Eater",
+  "The Shattered Sky",
+  "Oath of the Eternal Flame",
+  "Voidcarver",
+  "The First Blade",
+  "Sunsunder",
+  "The Pale King’s Judgment",
+  "Heart of the Fallen Star"
+];
+
+// =========================
+// UNIQUE LORE TEXT
+// =========================
+
+// Hybrid lore
+const hybridLore = [
+  "Forged where two forces meet, its edge carries the tension of opposing strengths.",
+  "A weapon born of dual mastery, resonating with paired energies.",
+  "Legends say it was wielded by one who walked two paths at once.",
+  "Balanced between two natures, it strikes with blended purpose.",
+  "Its forging united rival clans, each contributing their essence."
+];
+
+// Tri‑Hybrid lore
+const triLore = [
+  "Threefold power hums beneath its surface, each force reinforcing the others.",
+  "A rare creation said to require three masters working in perfect harmony.",
+  "Its tri‑woven essence makes it unpredictable yet devastating.",
+  "Forged at the convergence of three storms, its power is unmatched.",
+  "Only those who embody balance in all things can wield it fully."
+];
+
+// Mythic lore
+const mythicLore = [
+  "A perfect convergence of all forces, its balance is said to mirror the cosmos.",
+  "Legends claim it predates the written word, forged in the first dawn.",
+  "Its power is absolute equilibrium — neither chaos nor order dominates.",
+  "Sages say it chooses its wielder, not the other way around.",
+  "Said to be crafted from the heart of a fallen star, its harmony is flawless."
+];
 
 // =========================
 // COLOR SYSTEM (BY 10s)
@@ -101,6 +152,25 @@ function distributePoints(total, count) {
 }
 
 // =========================
+// UNIQUE DETECTION
+// =========================
+function detectUnique(stats) {
+  const entries = Object.entries(stats).filter(([_, v]) => v > 0);
+  if (entries.length === 0) return { type: "NONE" };
+
+  entries.sort((a, b) => b[1] - a[1]);
+
+  const highestValue = entries[0][1];
+  const tied = entries.filter(e => e[1] === highestValue).map(e => e[0]);
+
+  if (tied.length === 4) return { type: "MYTHIC" };
+  if (tied.length === 3) return { type: "TRI", stats: tied };
+  if (tied.length === 2) return { type: "HYBRID", stats: tied };
+
+  return { type: "NONE" };
+}
+
+// =========================
 // MAIN GENERATOR
 // =========================
 export function generateWeapon(inputRank) {
@@ -111,6 +181,9 @@ export function generateWeapon(inputRank) {
 
   let stats = {};
   let name = weapon.type;
+  let lore = null;
+  let isUnique = false;
+  let uniqueType = "NONE";
 
   // =========================
   // CASE 1: No remaining rank → No stats, no prefix/suffix
@@ -127,7 +200,8 @@ export function generateWeapon(inputRank) {
       inputRank,
       remainingRank: remaining,
       damage: { min: weapon.min, max: weapon.max },
-      stats: {}
+      stats: {},
+      lore: null
     };
   }
 
@@ -147,44 +221,75 @@ export function generateWeapon(inputRank) {
 
   chosenStats.forEach((s, i) => stats[s] = distribution[i]);
 
-  // Count stats with actual value
   const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
 
-  // If no stats have value → base name only
-  if (statsWithValue.length === 0) {
-    const colorInfo = getColorByRank(inputRank);
+  // =========================
+  // UNIQUE DETECTION
+  // =========================
+  const unique = detectUnique(stats);
+  uniqueType = unique.type;
 
-    return {
-      name,
-      type: weapon.type,
-      rarity: colorInfo.tier,
-      color: colorInfo.color,
-      baseRank: weapon.rank,
-      inputRank,
-      remainingRank: remaining,
-      damage: { min: weapon.min, max: weapon.max },
-      stats
-    };
+  // =========================
+  // UNIQUE NAMING + LORE
+  // =========================
+  if (uniqueType === "MYTHIC") {
+    name = pickRandom(mythicUniques);
+    lore = pickRandom(mythicLore);
+    isUnique = true;
+  }
+  else if (uniqueType === "TRI") {
+    const key = unique.stats.sort().join("+");
+    name = pickRandom(triUniques[key]);
+    lore = pickRandom(triLore);
+    isUnique = true;
+  }
+  else if (uniqueType === "HYBRID") {
+    const key = unique.stats.sort().join("+");
+    name = pickRandom(hybridUniques[key]);
+    lore = pickRandom(hybridLore);
+    isUnique = true;
+  }
+  else {
+    // =========================
+    // NORMAL NAMING
+    // =========================
+    if (statsWithValue.length > 0) {
+      const highest = statsWithValue.sort((a, b) => b[1] - a[1])[0];
+      const highestStat = highest[0];
+      const highestValue = highest[1];
+
+      const prefixIndex = Math.min(Math.floor((highestValue - 1) / 5), 5);
+      const prefix = prefixTiers[highestStat][prefixIndex];
+
+      if (statsWithValue.length > 1) {
+        const secondStat = statsWithValue[1][0];
+        const extraStats = statsWithValue.length - 1;
+        const suffixIndex = Math.min(extraStats - 1, 2);
+        const suffix = suffixTiers[secondStat][suffixIndex];
+        name = `${prefix} ${weapon.type} ${suffix}`;
+      } else {
+        name = `${prefix} ${weapon.type}`;
+      }
+    }
   }
 
-  // Determine highest stat
-  const highest = statsWithValue.sort((a, b) => b[1] - a[1])[0];
-  const highestStat = highest[0];
-  const highestValue = highest[1];
+  // =========================
+  // UNIQUE DAMAGE TIGHTENING
+  // =========================
+  let minDamage = weapon.min;
+  let maxDamage = weapon.max;
 
-  // Determine prefix tier (6 tiers)
-  const prefixIndex = Math.min(Math.floor((highestValue - 1) / 5), 5);
-  const prefix = prefixTiers[highestStat][prefixIndex];
-
-  // Determine suffix (only if >1 stat)
-  if (statsWithValue.length > 1) {
-    const secondStat = statsWithValue[1][0];
-    const extraStats = statsWithValue.length - 1;
-    const suffixIndex = Math.min(extraStats - 1, 2);
-    const suffix = suffixTiers[secondStat][suffixIndex];
-    name = `${prefix} ${weapon.type} ${suffix}`;
-  } else {
-    name = `${prefix} ${weapon.type}`;
+  if (uniqueType === "HYBRID") {
+    minDamage += 1;
+    maxDamage -= 1;
+  }
+  else if (uniqueType === "TRI") {
+    minDamage += 2;
+    maxDamage -= 2;
+  }
+  else if (uniqueType === "MYTHIC") {
+    minDamage += 3;
+    maxDamage -= 3;
   }
 
   const colorInfo = getColorByRank(inputRank);
@@ -192,12 +297,13 @@ export function generateWeapon(inputRank) {
   return {
     name,
     type: weapon.type,
-    rarity: colorInfo.tier,
-    color: colorInfo.color,
+    rarity: isUnique ? "Unique" : colorInfo.tier,
+    color: isUnique ? "#FFD700" : colorInfo.color,
     baseRank: weapon.rank,
     inputRank,
     remainingRank: remaining,
-    damage: { min: weapon.min, max: weapon.max },
-    stats
+    damage: { min: minDamage, max: maxDamage },
+    stats,
+    lore
   };
 }
