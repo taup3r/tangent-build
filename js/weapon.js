@@ -48,8 +48,7 @@ const suffixTiers = {
 };
 
 // =========================
-// UNIQUE NAME POOLS
-// (keys are alphabetical: AGI+CON, DEX+STR, etc.)
+// UNIQUE NAME POOLS (alphabetical keys)
 // =========================
 
 const hybridUniques = {
@@ -110,7 +109,7 @@ const mythicLore = [
 ];
 
 // =========================
-// COLOR SYSTEM
+// COLOR SYSTEM (Rank-based)
 // =========================
 
 function getColorByRank(rank) {
@@ -147,7 +146,7 @@ function distributePoints(total, count) {
 }
 
 // =========================
-/* UNIQUE DETECTION */
+// UNIQUE DETECTION
 // =========================
 
 function detectUnique(stats) {
@@ -167,7 +166,7 @@ function detectUnique(stats) {
 }
 
 // =========================
-/* MAIN GENERATOR */
+// MAIN GENERATOR
 // =========================
 
 export function generateWeapon(inputRank) {
@@ -223,7 +222,7 @@ export function generateWeapon(inputRank) {
   } else if (uniqueType === "TRI") {
     const key = unique.stats.sort().join("+");
     const pool = triUniques[key];
-    if (pool && pool.length) {
+    if (pool) {
       name = pickRandom(pool);
       lore = pickRandom(triLore);
       isUnique = true;
@@ -231,7 +230,7 @@ export function generateWeapon(inputRank) {
   } else if (uniqueType === "HYBRID") {
     const key = unique.stats.sort().join("+");
     const pool = hybridUniques[key];
-    if (pool && pool.length) {
+    if (pool) {
       name = pickRandom(pool);
       lore = pickRandom(hybridLore);
       isUnique = true;
@@ -275,11 +274,24 @@ export function generateWeapon(inputRank) {
 
   const colorInfo = getColorByRank(inputRank);
 
+  let rarityColor = colorInfo.color;
+  let rarityName = colorInfo.tier;
+
+  if (uniqueType === "HYBRID" || uniqueType === "TRI") {
+    rarityColor = "#FFD700"; // Gold
+    rarityName = "Unique";
+  }
+
+  if (uniqueType === "MYTHIC") {
+    rarityColor = "#B388FF"; // Cosmic Violet
+    rarityName = "Mythic Unique";
+  }
+
   return {
     name,
     type: weapon.type,
-    rarity: isUnique ? "Unique" : colorInfo.tier,
-    color: isUnique ? "#FFD700" : colorInfo.color,
+    rarity: rarityName,
+    color: rarityColor,
     baseRank: weapon.rank,
     inputRank,
     remainingRank: remaining,
