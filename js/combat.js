@@ -197,7 +197,14 @@ export function applySkillDamage(perfect) {
     base = computeDamage(base, player.STR);
   }
 
-  let dmg = perfect ? base * 2.5 : base * 2;
+  let dmg;
+  if (perfect === true) {
+    dmg = base * 2.5;      // Perfect timing
+  } else if (perfect === false) {
+    dmg = base * 2;        // Normal timing
+  } else {
+    dmg = base * 1;        // No click → 100%
+  }
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);

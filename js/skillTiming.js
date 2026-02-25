@@ -40,7 +40,7 @@ export function startSkillTiming() {
       hitBtn.style.display = "none";
       hitBtn.disabled = true;
       log("Too slow! Skill deals reduced damage.");
-      applySkillDamage(false);
+      applySkillDamage(null);
     }
   }, FAIL_TIMEOUT);
 }
