@@ -65,12 +65,38 @@ export function showResultModal(victory) {
   const expDisplay = document.getElementById("expGainDisplay");
   expDisplay.innerHTML = "";
 
-  // Loot preview
-  document.getElementById("lootWeaponBtn").onclick = () => {
-    openCompareWeaponModal();
-  };
-  document.getElementById("victoryWeaponPreview").innerHTML =
-    `<span style="color:${enemy.weapon.color}">🗡️ ${enemy.weapon.name}</span>`;
+  // Determine enemy name color based on tier
+  let enemyNameColor = "";
+  if (enemy.type === "elite") enemyNameColor = "#ffcc00";
+  else if (enemy.type === "boss") enemyNameColor = "#ff4444";
+  // Normal enemies → no color
+
+  const enemyNameStyled = enemyNameColor
+    ? `<span style="color:${enemyNameColor}; font-weight:bold;">${enemy.name}</span>`
+    : `<span style="font-weight:bold;">${enemy.name}</span>`;
+
+  // Loot preview (updated)
+  const lootBox = document.getElementById("victoryWeaponPreview");
+
+  if (victory) {
+    lootBox.innerHTML = `
+      <div style="margin-bottom:4px; opacity:0.9;">
+        ${enemyNameStyled} dropped:
+      </div>
+      <div style="color:${enemy.weapon.color}; font-weight:bold;">
+        🗡️ ${enemy.weapon.name}
+      </div>
+    `;
+  } else {
+    lootBox.innerHTML = `
+      <div style="margin-bottom:4px; opacity:0.9;">
+        ${enemyNameStyled} held on to:
+      </div>
+      <div style="color:${enemy.weapon.color}; font-weight:bold;">
+        🗡️ ${enemy.weapon.name}
+      </div>
+    `;
+  }
 
   // Battle log
   const rawLog = document.getElementById("log").textContent;
@@ -80,12 +106,12 @@ export function showResultModal(victory) {
   const danger = getDangerRating(playerStats.level, enemy.level);
   logBox.innerHTML += `<br><span style="color:#ff6666">Danger Rating: ${danger}</span>`;
 
-  // Victory / Defeat
+  // Victory / Defeat EXP logic
   if (victory) {
     title.textContent = "Victory!";
     const expGain = (enemy.level + 1) * 5;
 
-    // NEW: Animate EXP above loot preview
+    // Animate EXP above loot preview
     animateExpGain(expDisplay, 0, expGain);
 
     gainExp(expGain);
