@@ -168,40 +168,45 @@
   </div>
 
   <!-- ENEMY INFO MODAL -->
-  <div id="enemyInfoModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Enemy Profile</h2>
+  <div id="enemyInfoModal" class="modal">
+    <div class="modal-content enemy-info-box">
 
-      <img id="enemyInfoPortrait" class="portrait" style="max-height:120px; margin-bottom:10px;">
+      <!-- Header: Enemy Name -->
+      <h2 id="enemyInfoName" class="enemy-info-header"></h2>
 
-      <p><b>Name:</b> <span id="enemyInfoName"></span></p>
-      <p><b>Level:</b> <span id="enemyInfoLevel"></span></p>
-      <p><b>Type:</b> <span id="enemyInfoType"></span></p>
-      <p><b>Hint:</b> <span id="enemyInfoHint"></span></p>
-      <p>Danger: <span id="enemyInfoDanger"></span></p>
+      <!-- Portrait -->
+      <img id="enemyInfoPortrait" class="enemy-info-portrait" />
 
-      <h3>Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="enemyProfileWeapon" class="profile-value"></span>
+      <!-- Tier + Level -->
+      <div class="enemy-info-subheader">
+        <span id="enemyInfoType"></span> • Lv <span id="enemyInfoLevel"></span>
       </div>
 
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="enemyProfileWeaponDamage" class="profile-value"></span>
+      <!-- Danger Rating -->
+      <div class="enemy-info-danger">
+        Danger Rating: <span id="enemyInfoDanger"></span>
       </div>
 
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="enemyProfileWeaponStats" class="profile-value"></span>
+      <!-- Hint -->
+      <div id="enemyInfoHint" class="enemy-info-hint"></div>
+
+      <!-- Stats Grid -->
+      <div class="enemy-info-stats">
+        <div><b>STR:</b> <span id="enemyInfoSTR"></span></div>
+        <div><b>DEX:</b> <span id="enemyInfoDEX"></span></div>
+        <div><b>AGI:</b> <span id="enemyInfoAGI"></span></div>
+        <div><b>CON:</b> <span id="enemyInfoCON"></span></div>
       </div>
 
-      <h3>Stats</h3>
-      <p>STR: <span id="enemyInfoSTR"></span></p>
-      <p>DEX: <span id="enemyInfoDEX"></span></p>
-      <p>AGI: <span id="enemyInfoAGI"></span></p>
-      <p>CON: <span id="enemyInfoCON"></span></p>
+      <!-- Weapon Block -->
+      <div class="enemy-info-weapon">
+        <div><b>Weapon:</b> <span id="enemyProfileWeapon"></span></div>
+        <div><b>Damage:</b> <span id="enemyProfileWeaponDamage"></span></div>
+        <div><b>Stats:</b> <span id="enemyProfileWeaponStats"></span></div>
+        <div id="enemyProfileWeaponLore" class="enemy-info-lore"></div>
+      </div>
 
-      <button class="modal-button" onclick="closeEnemyInfo()">Close</button>
+      <button onclick="closeEnemyInfo()" class="close-btn">Close</button>
     </div>
   </div>
 
