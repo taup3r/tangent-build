@@ -61,6 +61,11 @@ export function showResultModal(victory) {
   const title = document.getElementById("resultTitle");
   const logBox = document.getElementById("resultLog");
 
+  // Loot preview
+  document.getElementById("lootWeaponBtn").onclick = () => {
+  openCompareWeaponModal();
+};
+
   // Clear EXP display area
   const expDisplay = document.getElementById("expGainDisplay");
   expDisplay.innerHTML = "";
