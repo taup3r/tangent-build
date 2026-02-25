@@ -103,7 +103,7 @@ function distributePoints(total, count) {
 // =========================
 // MAIN GENERATOR
 // =========================
-function generateWeapon(inputRank) {
+export function generateWeapon(inputRank) {
   const eligible = weapons.filter(w => w.rank <= inputRank);
   const weapon = pickRandom(eligible);
 
