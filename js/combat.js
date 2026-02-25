@@ -161,7 +161,7 @@ export function playerSkill() {
 
   const hitBtn = document.getElementById("hitBtn");
   hitBtn.style.display = "block";
-  hitBtn.disabled = true;
+  hitBtn.disabled = false;
 
   animateCard("enemyCard", "skill-anim", 300);
 
