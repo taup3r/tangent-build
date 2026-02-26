@@ -18,7 +18,7 @@ export setEnemiesLeft(count) {
 
 document.getElementById("battleBtn").onclick = () => {
   // Normal single battle
-  window.location.href = "combat.html";
+  window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
 
 document.getElementById("exploreBtn").onclick = () => {
@@ -26,7 +26,7 @@ document.getElementById("exploreBtn").onclick = () => {
   setDungeonMode(true);
   setEnemiesLeft(8);
 
-  window.location.href = "combat.html";
+  window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
 
 export let dungeonMode = localStorage.getItem("dungeonMode") === "true";
