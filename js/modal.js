@@ -447,7 +447,7 @@ export function startNewBattle() {
     // Dungeon complete → return to town
     setDungeonMode(false);
 
-    window.location.href = "town.html";
+    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
     return;
   }
 
