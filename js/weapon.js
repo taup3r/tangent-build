@@ -22,29 +22,17 @@ const weapons = [
 // =========================
 
 const prefixTiers = {
-  STR: [
-    "Ironbound", "Warborn", "Bonecrusher",
-    "Titan‑Forged", "Colossus‑Wrought", "Worldbreaker"
-  ],
-  DEX: [
-    "Keen‑Edged", "Shadowtip", "Needlepoint",
-    "Ghosthand", "Phantom‑Laced", "Specter‑Forged"
-  ],
-  AGI: [
-    "Swift‑Edged", "Windpiercer", "Gale‑Forged",
-    "Stormstride", "Tempest‑Wrought", "Hurricane‑Born"
-  ],
-  CON: [
-    "Stone‑Hewn", "Bulwark‑Forged", "Iron‑Rooted",
-    "Earthshaker", "Mountain‑Born", "Titan‑Shelled"
-  ]
+  STR: ["Ironbound","Warborn","Bonecrusher","Titan‑Forged","Colossus‑Wrought","Worldbreaker"],
+  DEX: ["Keen‑Edged","Shadowtip","Needlepoint","Ghosthand","Phantom‑Laced","Specter‑Forged"],
+  AGI: ["Swift‑Edged","Windpiercer","Gale‑Forged","Stormstride","Tempest‑Wrought","Hurricane‑Born"],
+  CON: ["Stone‑Hewn","Bulwark‑Forged","Iron‑Rooted","Earthshaker","Mountain‑Born","Titan‑Shelled"]
 };
 
 const suffixTiers = {
-  STR: ["of Force", "of the Iron Tempest", "of Breaking Might"],
-  DEX: ["of Precision", "of the Silent Step", "of the Needle Fang"],
-  AGI: ["of the Gale", "of Piercing Winds", "of the Whirling Hunt"],
-  CON: ["of Endurance", "of the Iron Vanguard", "of Unbroken Steel"]
+  STR: ["of Force","of the Iron Tempest","of Breaking Might"],
+  DEX: ["of Precision","of the Silent Step","of the Needle Fang"],
+  AGI: ["of the Gale","of Piercing Winds","of the Whirling Hunt"],
+  CON: ["of Endurance","of the Iron Vanguard","of Unbroken Steel"]
 };
 
 // =========================
@@ -52,32 +40,25 @@ const suffixTiers = {
 // =========================
 
 const hybridUniques = {
-  "DEX+STR": ["The Crimson Needle", "Razor of the Iron Tempest", "Blood‑Quick Edge", "The Split Fang", "Ironwind Severer"],
-  "AGI+STR": ["Stormbreaker’s Leap", "Thunderclad Arc", "Gale‑Sunder", "The Sky‑Hammer", "Tempest Rend"],
-  "CON+STR": ["The Immovable Wrath", "Ironheart Colossus", "Stone‑Split Fury", "The Granite Reaver", "Earthshatter Oathblade"],
-  "AGI+DEX": ["Windshadow Blade", "The Whispering Tempest", "Skyfang", "Stormstep Razor", "The Gale‑Thread Edge"],
-  "CON+DEX": ["The Silent Bulwark", "Ironthread Edge", "Quiet Bastion", "The Still Fang", "Stone‑Veil Cutter"],
-  "AGI+CON": ["Stormroot Edge", "Gale‑Forged Bulwark", "Earthwind Talon", "The Iron Gale", "Tempest‑Rooted Blade"]
+  "DEX+STR": ["The Crimson Needle","Razor of the Iron Tempest","Blood‑Quick Edge","The Split Fang","Ironwind Severer"],
+  "AGI+STR": ["Stormbreaker’s Leap","Thunderclad Arc","Gale‑Sunder","The Sky‑Hammer","Tempest Rend"],
+  "CON+STR": ["The Immovable Wrath","Ironheart Colossus","Stone‑Split Fury","The Granite Reaver","Earthshatter Oathblade"],
+  "AGI+DEX": ["Windshadow Blade","The Whispering Tempest","Skyfang","Stormstep Razor","The Gale‑Thread Edge"],
+  "CON+DEX": ["The Silent Bulwark","Ironthread Edge","Quiet Bastion","The Still Fang","Stone‑Veil Cutter"],
+  "AGI+CON": ["Stormroot Edge","Gale‑Forged Bulwark","Earthwind Talon","The Iron Gale","Tempest‑Rooted Blade"]
 };
 
 const triUniques = {
-  "AGI+DEX+STR": ["The Trifold Tempest", "Storm‑Threaded Edge", "The Threefold Fang", "Gale‑Riven Trinity", "The Tri‑Strike Arc"],
-  "CON+DEX+STR": ["Iron‑Wrought Trinity", "The Stone‑Threaded Edge", "Tri‑Forged Bulwark", "The Iron Triad", "Colossus‑Thread Blade"],
-  "AGI+CON+STR": ["The Earthstorm Edge", "Tri‑Rooted Tempest", "The Mountain Gale", "Storm‑Shelled Reaver", "The Titan’s Breath"],
-  "AGI+CON+DEX": ["The Whispering Bastion", "Wind‑Wrought Sentinel", "The Silent Tempest", "Gale‑Bound Aegis", "The Veiled Trinity"]
+  "AGI+DEX+STR": ["The Trifold Tempest","Storm‑Threaded Edge","The Threefold Fang","Gale‑Riven Trinity","The Tri‑Strike Arc"],
+  "CON+DEX+STR": ["Iron‑Wrought Trinity","The Stone‑Threaded Edge","Tri‑Forged Bulwark","The Iron Triad","Colossus‑Thread Blade"],
+  "AGI+CON+STR": ["The Earthstorm Edge","Tri‑Rooted Tempest","The Mountain Gale","Storm‑Shelled Reaver","The Titan’s Breath"],
+  "AGI+CON+DEX": ["The Whispering Bastion","Wind‑Wrought Sentinel","The Silent Tempest","Gale‑Bound Aegis","The Veiled Trinity"]
 };
 
 const mythicUniques = [
-  "Eclipse of the Worldforge",
-  "The Last Dawn",
-  "Star‑Eater",
-  "The Shattered Sky",
-  "Oath of the Eternal Flame",
-  "Voidcarver",
-  "The First Blade",
-  "Sunsunder",
-  "The Pale King’s Judgment",
-  "Heart of the Fallen Star"
+  "Eclipse of the Worldforge","The Last Dawn","Star‑Eater","The Shattered Sky",
+  "Oath of the Eternal Flame","Voidcarver","The First Blade","Sunsunder",
+  "The Pale King’s Judgment","Heart of the Fallen Star"
 ];
 
 // =========================
@@ -109,14 +90,14 @@ const mythicLore = [
 ];
 
 // =========================
-// COLOR SYSTEM (Rank-based)
+// COLOR SYSTEM
 // =========================
 
 function getColorByRank(rank) {
-  if (rank <= 10) return { tier: "Common",    color: "#C0C0C0" };
-  if (rank <= 20) return { tier: "Uncommon",  color: "#4CAF50" };
-  if (rank <= 30) return { tier: "Rare",      color: "#2196F3" };
-  if (rank <= 40) return { tier: "Epic",      color: "#9C27B0" };
+  if (rank <= 10) return { tier: "Common", color: "#C0C0C0" };
+  if (rank <= 20) return { tier: "Uncommon", color: "#4CAF50" };
+  if (rank <= 30) return { tier: "Rare", color: "#2196F3" };
+  if (rank <= 40) return { tier: "Epic", color: "#9C27B0" };
   if (rank <= 50) return { tier: "Legendary", color: "#FF9800" };
   return { tier: "Mythic", color: "#FF0000" };
 }
@@ -154,7 +135,6 @@ function detectUnique(stats) {
   if (entries.length === 0) return { type: "NONE" };
 
   entries.sort((a, b) => b[1] - a[1]);
-
   const highestValue = entries[0][1];
   const tied = entries.filter(e => e[1] === highestValue).map(e => e[0]);
 
@@ -183,7 +163,6 @@ export function generateWeapon(inputRank) {
 
   if (remaining === 0) {
     const colorInfo = getColorByRank(inputRank);
-
     return {
       name,
       type: weapon.type,
@@ -268,8 +247,9 @@ export function generateWeapon(inputRank) {
     minDamage += 2;
     maxDamage -= 2;
   } else if (uniqueType === "MYTHIC") {
-    minDamage += 3;
-    maxDamage -= 3;
+    const target = weapon.max - 2;
+    minDamage = Math.max(weapon.min, target);
+    maxDamage = target;
   }
 
   const colorInfo = getColorByRank(inputRank);
@@ -278,12 +258,12 @@ export function generateWeapon(inputRank) {
   let rarityName = colorInfo.tier;
 
   if (uniqueType === "HYBRID" || uniqueType === "TRI") {
-    rarityColor = "#FFD700"; // Gold
+    rarityColor = "#FFD700";
     rarityName = "Unique";
   }
 
   if (uniqueType === "MYTHIC") {
-    rarityColor = "#B388FF"; // Cosmic Violet
+    rarityColor = "#B388FF";
     rarityName = "Mythic Unique";
   }
 
