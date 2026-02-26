@@ -319,20 +319,25 @@ export function openEnemyInfo() {
 
   // Weapon
   const w = enemy.weapon;
-  document.getElementById("enemyProfileWeapon").textContent = w.name;
-  document.getElementById("enemyProfileWeapon").style.color = w.color;
 
+  // Weapon name (H3)
+  const weaponNameEl =   document.getElementById("enemyProfileWeapon");
+  weaponNameEl.textContent = w.name;
+  weaponNameEl.style.color = w.color;
+
+  // Damage
   document.getElementById("enemyProfileWeaponDamage").textContent =
-    `${w.damage.min} – ${w.damage.max}`;
+    `Damage: ${w.damage.min} – ${w.damage.max}`;
 
+  // Stat modifiers (no label)
   const statStrings = Object.entries(w.stats)
     .filter(([_, val]) => val > 0)
     .map(([stat, val]) => `${stat} +${val}`);
 
   document.getElementById("enemyProfileWeaponStats").textContent =
-    statStrings.length > 0 ? statStrings.join(", ") : "None";
+    statStrings.length > 0 ? statStrings.join(", ") : "";
 
-  // Weapon lore
+  // Lore
   if (w.lore && w.lore.trim() !== "") {
     document.getElementById("enemyProfileWeaponLore").textContent = `"${w.lore}"`;
   } else {
