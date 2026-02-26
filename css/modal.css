@@ -145,10 +145,33 @@
 }
 
 .enemy-info-weapon {
-  text-align: left;
+  text-align: center;
   margin: 0 auto 12px;
-  width: 80%;
+  width: 100%;
   line-height: 1.4;
+}
+
+.weapon-label {
+  font-weight: bold;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.weapon-name {
+  margin: 4px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.weapon-damage {
+  margin: 4px 0;
+  opacity: 0.9;
+}
+
+.weapon-mods {
+  margin: 4px 0;
+  opacity: 0.9;
 }
 
 .enemy-info-lore {
