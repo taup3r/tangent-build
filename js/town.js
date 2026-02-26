@@ -1,3 +1,5 @@
+import { player } from "./state.js";
+
 // Phase 1: Simple navigation + dungeon start
 
 export setDungeonMode(enable) {
