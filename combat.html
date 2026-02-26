@@ -298,10 +298,10 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const playerName = params.get("player");
+    const name = params.get("player");
     history.pushState(null, "", location.href);
     window.onpopstate = function () {
-      window.location.href = "combat.html";
+      window.location.href = `combat.html?player=${encodeURIComponent(name)}`;
     };
   </script>
 
