@@ -5,6 +5,7 @@
 import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
+import { generateWeapon } from "./weapon.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -428,6 +429,40 @@ window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
 /* -------------------------
+   DUNGEON SUMMARY
+------------------------- */
+
+function showDungeonSummary() {
+  const modal = document.getElementById("dungeonSummaryModal");
+  const preview = document.getElementById("dungeonRewardPreview");
+
+  // Generate reward weapon (player level + 5)
+  const rewardWeapon = generateWeapon(playerStats.level + 5);
+
+  // Store temporarily for compare modal
+  window.dungeonRewardWeapon = rewardWeapon;
+
+  preview.innerHTML = `
+    <div style="color:${rewardWeapon.color};">
+      🗡️ ${rewardWeapon.name}
+    </div>
+  `;
+
+  modal.style.display = "flex";
+
+  // Claim reward → open compare modal
+  document.getElementById("claimDungeonRewardBtn").onclick = () => {
+    openCompareWeaponModal(rewardWeapon);
+  };
+
+  // Return to town
+  document.getElementById("returnToTownBtn").onclick = () => {
+    setDungeonMode(false);
+    window.location.href = "town.html";
+  };
+}
+
+/* -------------------------
    RESTART
 ------------------------- */
 
@@ -446,8 +481,7 @@ export function startNewBattle() {
 
     // Dungeon complete → return to town
     setDungeonMode(false);
-
-    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+    showDungeonSummary();
     return;
   }
 
