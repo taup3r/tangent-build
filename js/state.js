@@ -238,8 +238,8 @@ export function initializePortraits() {
 ================================ */
 
 export function clampAP() {
-  if (player.ap > 2) player.ap = 2;
-  if (enemy.ap > 2) enemy.ap = 2;
+  if (player.ap > 3) player.ap = 3;
+  if (enemy.ap > 3) enemy.ap = 3;
 }
 
 /* -------------------------
