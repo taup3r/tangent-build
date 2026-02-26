@@ -12,3 +12,7 @@ document.getElementById("exploreBtn").onclick = () => {
 
   window.location.href = "combat.html";
 };
+
+export let dungeonMode = localStorage.getItem("dungeonMode") === "true";
+
+export let dungeonEnemiesLeft = Number(localStorage.getItem("dungeonEnemiesLeft") || 0);
