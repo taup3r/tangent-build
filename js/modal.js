@@ -5,6 +5,7 @@
 import { player, enemy } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
+import { dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./town.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -419,6 +420,26 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 ------------------------- */
 
 export function startNewBattle() {
+  if (dungeonMode) {
+    let left = dungeonEnemiesLeft;
+    left--;
+    
+    setEnemiesLeft(left);
+
+    if (left > 0) {
+      // Continue dungeon
+      location.reload();
+      return;
+    }
+
+    // Dungeon complete → return to town
+    setDungeonMode(false);
+
+    window.location.href = "town.html";
+    return;
+  }
+
+  // Normal battle mode
   location.reload();
 }
 
