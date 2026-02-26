@@ -2,20 +2,6 @@ import { player } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
-export function setDungeonMode(enable) {
-  if (enable) {
-    localStorage.setItem("dungeonMode", "true");
-  }
-  else {
-    localStorage.removeItem("dungeonMode");
-    localStorage.removeItem("dungeonEnemiesLeft");
-  }
-}
-
-export function setEnemiesLeft(count) {
-  localStorage.setItem("dungeonEnemiesLeft", count);
-}
-
 document.getElementById("battleBtn").onclick = () => {
   // Normal single battle
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
