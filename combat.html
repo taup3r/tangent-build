@@ -211,38 +211,39 @@
     </div>
   </div>
 
-  <!-- PLAYER INFO MODAL -->
+  <!-- Player Info Modal -->
   <div id="playerModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Player Profile</h2>
+    <div class="modal-content player-info-box">
 
-      <img id="playerInfoPortrait" class="portrait" style="max-height:120px; margin-bottom:10px;">
+      <!-- Header: Player Name -->
+      <h2 id="playerInfoName" class="player-info-header"></h2>
 
-      <p><b>Name:</b> <span id="playerInfoName"></span></p>
-      <p><b>Level:</b> <span id="playerInfoLevel"></span></p>
+      <!-- Portrait -->
+      <img id="playerInfoPortrait" class="player-info-portrait" />
 
-      <h3>Weapon</h3>
-      <div class="enemy-profile-row">
-        <span id="playerProfileWeapon" class="profile-value"></span>
+      <!-- Level -->
+      <div class="player-info-subheader">
+        Level <span id="playerInfoLevel"></span>
       </div>
 
-      <div class="enemy-profile-row">
-        <span class="profile-label">Damage:</span>
-        <span id="playerProfileWeaponDamage" class="profile-value"></span>
+      <!-- Stats Grid -->
+      <div class="player-info-stats">
+        <div><b>STR:</b> <span id="playerInfoSTR"></span></div>
+        <div><b>DEX:</b> <span id="playerInfoDEX"></span></div>
+        <div><b>AGI:</b> <span id="playerInfoAGI"></span></div>
+        <div><b>CON:</b> <span id="playerInfoCON"></span></div>
       </div>
 
-      <div class="enemy-profile-row">
-        <span class="profile-label">Modifiers:</span>
-        <span id="playerProfileWeaponStats" class="profile-value"></span>
+      <!-- Weapon Block -->
+      <div class="player-info-weapon">
+        <div class="weapon-label">Weapon</div>
+        <h3 id="playerProfileWeapon" class="weapon-name"></h3>
+        <div id="playerProfileWeaponDamage" class="weapon-damage"></div>
+        <div id="playerProfileWeaponStats" class="weapon-mods"></div>
+        <div id="playerProfileWeaponLore" class="player-info-lore"></div>
       </div>
 
-      <h3>Stats</h3>
-      <p>STR: <span id="playerInfoSTR"></span></p>
-      <p>DEX: <span id="playerInfoDEX"></span></p>
-      <p>AGI: <span id="playerInfoAGI"></span></p>
-      <p>CON: <span id="playerInfoCON"></span></p>
-
-      <button class="modal-button" onclick="closePlayerInfo()">Close</button>
+      <button onclick="closePlayerInfo()" class="close-btn">Close</button>
     </div>
   </div>
 
