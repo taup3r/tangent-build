@@ -165,7 +165,7 @@ export function showResultModal(victory) {
   // Town button logic (only if NOT in dungeon mode)
   const townBtn = document.getElementById("townBtn");
 
-  if (!dungeonMode) {
+  if (!dungeonMode || !victory) {
     townBtn.style.display = "block";
     townBtn.onclick = () => {
       window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
