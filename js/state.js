@@ -285,6 +285,10 @@ export function applyStatsToCombat(player, playerStats) {
    DUNGEON FUNCTIONS
 ------------------------ */
 
+export let dungeonMode = localStorage.getItem("dungeonMode") === "true";
+
+export let dungeonEnemiesLeft = Number(localStorage.getItem("dungeonEnemiesLeft") || 0);
+
 export function setDungeonMode(enable) {
   if (enable) {
     localStorage.setItem("dungeonMode", "true");
