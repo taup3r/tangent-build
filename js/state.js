@@ -280,3 +280,21 @@ export function applyStatsToCombat(player, playerStats) {
   player.AGI = Number(playerStats.AGI) || 0;
   player.CON = Number(playerStats.CON) || 0;
 }
+
+/* -----------------------
+   DUNGEON FUNCTIONS
+------------------------ */
+
+export function setDungeonMode(enable) {
+  if (enable) {
+    localStorage.setItem("dungeonMode", "true");
+  }
+  else {
+    localStorage.removeItem("dungeonMode");
+    localStorage.removeItem("dungeonEnemiesLeft");
+  }
+}
+
+export function setEnemiesLeft(count) {
+  localStorage.setItem("dungeonEnemiesLeft", count);
+}
