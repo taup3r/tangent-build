@@ -1,4 +1,4 @@
-import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
