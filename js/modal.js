@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 
@@ -106,6 +106,7 @@ export function showResultModal(victory) {
       </div>
     `;
   } else {
+    setDungeonMode(false);
     lootBox.innerHTML = `
       <div style="margin-bottom:4px; opacity:0.9;">
         ${enemyNameStyled} held on to:
@@ -159,6 +160,18 @@ export function showResultModal(victory) {
     document.getElementById("lootWeaponBtn").style.display = "block";
   } else {
     document.getElementById("lootWeaponBtn").style.display = "none";
+  }
+
+  // Town button logic (only if NOT in dungeon mode)
+  const townBtn = document.getElementById("townBtn");
+
+  if (!dungeonMode || !victory) {
+    townBtn.style.display = "block";
+    townBtn.onclick = () => {
+      window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+    };
+  } else {
+    townBtn.style.display = "none";
   }
 }
 
@@ -419,6 +432,26 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 ------------------------- */
 
 export function startNewBattle() {
+  if (dungeonMode) {
+    let left = dungeonEnemiesLeft;
+    left--;
+    
+    setEnemiesLeft(left);
+
+    if (left > 0) {
+      // Continue dungeon
+      location.reload();
+      return;
+    }
+
+    // Dungeon complete → return to town
+    setDungeonMode(false);
+
+    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+    return;
+  }
+
+  // Normal battle mode
   location.reload();
 }
 

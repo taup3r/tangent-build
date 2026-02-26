@@ -280,3 +280,28 @@ export function applyStatsToCombat(player, playerStats) {
   player.AGI = Number(playerStats.AGI) || 0;
   player.CON = Number(playerStats.CON) || 0;
 }
+
+/* -----------------------
+   DUNGEON FUNCTIONS
+------------------------ */
+
+const playerDungeonMode = `dungeonMode_${player.name}`;
+const playerDungeonEnemiesLeft = `dungeonEnemiesLeft_${player.name}`;
+
+export let dungeonMode = localStorage.getItem(playerDungeonMode) === "true";
+
+export let dungeonEnemiesLeft = Number(localStorage.getItem(playerDungeonEnemiesLeft) || 0);
+
+export function setDungeonMode(enable) {
+  if (enable) {
+    localStorage.setItem(playerDungeonMode, "true");
+  }
+  else {
+    localStorage.removeItem(playerDungeonMode);
+    localStorage.removeItem(playerDungeonEnemiesLeft);
+  }
+}
+
+export function setEnemiesLeft(count) {
+  localStorage.setItem(playerDungeonEnemiesLeft, count);
+}
