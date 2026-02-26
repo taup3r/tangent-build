@@ -297,6 +297,8 @@
   <script type="module" src="js/main.js"></script>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const playerName = params.get("player");
     history.pushState(null, "", location.href);
     window.onpopstate = function () {
       window.location.href = "combat.html";
