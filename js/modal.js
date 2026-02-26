@@ -458,7 +458,7 @@ function showDungeonSummary() {
   // Return to town
   document.getElementById("returnToTownBtn").onclick = () => {
     setDungeonMode(false);
-    window.location.href = "town.html";
+    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
   };
 }
 
