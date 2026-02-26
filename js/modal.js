@@ -180,12 +180,11 @@ export function showResultModal(victory) {
    WEAPON COMPARISON MODAL
 ------------------------- */
 
-export function openCompareWeaponModal() {
+export function openCompareWeaponModal(weapon = enemy.weapon) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
 
   const current = player.weapon;
-  const enemyW = enemy.weapon;
 
   // Current weapon
   if (current) {
@@ -209,14 +208,14 @@ export function openCompareWeaponModal() {
     document.getElementById("compareCurrentStats").textContent = "-";
   }
 
-  // Enemy weapon
-  document.getElementById("compareEnemyName").textContent = enemyW.name;
-  document.getElementById("compareEnemyName").style.color = enemyW.color;
+  // Weapon
+  document.getElementById("compareEnemyName").textContent = weapon.name;
+  document.getElementById("compareEnemyName").style.color = weapon.color;
 
   document.getElementById("compareEnemyDamage").textContent =
-    `${enemyW.damage.min} – ${enemyW.damage.max}`;
+    `${weapon.damage.min} – ${weapon.damage.max}`;
 
-  const enemyMods = Object.entries(enemyW.stats)
+  const enemyMods = Object.entries(weapon.stats)
     .filter(([_, v]) => v > 0)
     .map(([k, v]) => `${k}+${v}`)
     .join(", ");
@@ -226,7 +225,7 @@ export function openCompareWeaponModal() {
 
   // Equip button
   document.getElementById("compareEquipBtn").onclick = () => {
-    player.weapon = enemyW;
+    player.weapon = weapon;
     updatePlayerWeaponUI();
     saveProgress();
     modal.style.display = "none";
