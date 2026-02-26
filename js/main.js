@@ -4,6 +4,17 @@ import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./comb
 import { handleHitPress } from "./skillTiming.js";
 import { openEnemyInfo, openPlayerInfoModal } from "./modal.js";
 
+function updateBattleHeader() {
+  const header = document.getElementById("battleHeader");
+
+  if (!dungeonMode) {
+    header.textContent = "Random Encounter";
+    return;
+  }
+
+  header.textContent = `Dungeon – ${dungeonEnemiesLeft} Enemies Left`;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
 
   initializePortraits();
@@ -22,5 +33,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 document.getElementById("openPlayerModal").addEventListener("click", openPlayerInfoModal);
 
+  updateBattleHeader();
   startPlayerTurn();
 });
