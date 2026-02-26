@@ -285,20 +285,23 @@ export function applyStatsToCombat(player, playerStats) {
    DUNGEON FUNCTIONS
 ------------------------ */
 
-export let dungeonMode = localStorage.getItem("dungeonMode") === "true";
+const playerDungeonMode = `dungeonMode_${player.name}`;
+const playerDungeonEnemiesLeft = `dungeonEnemiesLeft_${player.name}`;
 
-export let dungeonEnemiesLeft = Number(localStorage.getItem("dungeonEnemiesLeft") || 0);
+export let dungeonMode = localStorage.getItem(playerDungeonMode) === "true";
+
+export let dungeonEnemiesLeft = Number(localStorage.getItem(playerDungeonEnemiesLeft) || 0);
 
 export function setDungeonMode(enable) {
   if (enable) {
-    localStorage.setItem("dungeonMode", "true");
+    localStorage.setItem(playerDungeonMode, "true");
   }
   else {
-    localStorage.removeItem("dungeonMode");
-    localStorage.removeItem("dungeonEnemiesLeft");
+    localStorage.removeItem(playerDungeonMode);
+    localStorage.removeItem(playerDungeonEnemiesLeft);
   }
 }
 
 export function setEnemiesLeft(count) {
-  localStorage.setItem("dungeonEnemiesLeft", count);
+  localStorage.setItem(playerDungeonEnemiesLeft, count);
 }
