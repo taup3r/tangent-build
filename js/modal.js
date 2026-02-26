@@ -2,10 +2,9 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
-import { dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./town.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
