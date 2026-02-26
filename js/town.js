@@ -6,6 +6,7 @@ export setDungeonMode(enable) {
   }
   else {
     localStorage.removeItem("dungeonMode");
+    localStorage.removeItem("dungeonEnemiesLeft");
   }
 }
 
