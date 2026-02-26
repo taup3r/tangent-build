@@ -292,11 +292,22 @@ export function openEnemyInfo() {
   document.getElementById("enemyInfoPortrait").src =
     document.getElementById("enemyPortrait").src;
 
-  document.getElementById("enemyInfoName").textContent = enemy.name;
+  // Name header with tier color
+  const nameEl = document.getElementById("enemyInfoName");
+  nameEl.textContent = enemy.name;
+
+  if (enemy.type === "elite") nameEl.style.color = "#ffcc00";
+  else if (enemy.type === "boss") nameEl.style.color = "#ff4444";
+  else nameEl.style.color = ""; // normal
+
+  // Tier + Level
   document.getElementById("enemyInfoLevel").textContent = enemy.level;
   document.getElementById("enemyInfoType").textContent = enemy.type;
+
+  // Hint
   document.getElementById("enemyInfoHint").textContent = enemy.hint;
 
+  // Stats
   document.getElementById("enemyInfoSTR").textContent = enemy.stats.STR;
   document.getElementById("enemyInfoDEX").textContent = enemy.stats.DEX;
   document.getElementById("enemyInfoAGI").textContent = enemy.stats.AGI;
@@ -308,18 +319,30 @@ export function openEnemyInfo() {
 
   // Weapon
   const w = enemy.weapon;
-  document.getElementById("enemyProfileWeapon").textContent = w.name;
-  document.getElementById("enemyProfileWeapon").style.color = w.color;
 
+  // Weapon name (H3)
+  const weaponNameEl =   document.getElementById("enemyProfileWeapon");
+  weaponNameEl.textContent = w.name;
+  weaponNameEl.style.color = w.color;
+
+  // Damage
   document.getElementById("enemyProfileWeaponDamage").textContent =
-    `${w.damage.min} – ${w.damage.max}`;
+    `Damage: ${w.damage.min} – ${w.damage.max}`;
 
+  // Stat modifiers (no label)
   const statStrings = Object.entries(w.stats)
     .filter(([_, val]) => val > 0)
     .map(([stat, val]) => `${stat} +${val}`);
 
   document.getElementById("enemyProfileWeaponStats").textContent =
-    statStrings.length > 0 ? statStrings.join(", ") : "None";
+    statStrings.length > 0 ? statStrings.join(", ") : "";
+
+  // Lore
+  if (w.lore && w.lore.trim() !== "") {
+    document.getElementById("enemyProfileWeaponLore").textContent = `"${w.lore}"`;
+  } else {
+    document.getElementById("enemyProfileWeaponLore").textContent = "";
+  }
 }
 
 export function closeEnemyInfo() {
