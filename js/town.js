@@ -2,7 +2,7 @@ import { player } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
-export setDungeonMode(enable) {
+export function setDungeonMode(enable) {
   if (enable) {
     localStorage.setItem("dungeonMode", "true");
   }
@@ -12,7 +12,7 @@ export setDungeonMode(enable) {
   }
 }
 
-export setEnemiesLeft(count) {
+export function setEnemiesLeft(count) {
   localStorage.setItem("dungeonEnemiesLeft", count);
 }
 
