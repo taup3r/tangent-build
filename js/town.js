@@ -2,6 +2,8 @@ import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js
 
 // Phase 1: Simple navigation + dungeon start
 
+loadProgress();
+
 document.getElementById("battleBtn").onclick = () => {
   // Normal single battle
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
