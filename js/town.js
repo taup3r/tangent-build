@@ -1,4 +1,4 @@
-import { player, setDungeonMode, setEnemiesLeft } from "./state.js";
+import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
