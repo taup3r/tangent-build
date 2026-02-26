@@ -1,4 +1,4 @@
-import { player } from "./state.js";
+import { player, setDungeonMode, setEnemiesLeft } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -14,7 +14,3 @@ document.getElementById("exploreBtn").onclick = () => {
 
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
-
-export let dungeonMode = localStorage.getItem("dungeonMode") === "true";
-
-export let dungeonEnemiesLeft = Number(localStorage.getItem("dungeonEnemiesLeft") || 0);
