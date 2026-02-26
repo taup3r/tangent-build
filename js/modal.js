@@ -161,6 +161,18 @@ export function showResultModal(victory) {
   } else {
     document.getElementById("lootWeaponBtn").style.display = "none";
   }
+
+  // Town button logic (only if NOT in dungeon mode)
+  const townBtn = document.getElementById("townBtn");
+
+  if (!dungeonMode) {
+    townBtn.style.display = "block";
+    townBtn.onclick = () => {
+      window.location.href = "town.html";
+    };
+  } else {
+    townBtn.style.display = "none";
+  }
 }
 
 /* -------------------------
