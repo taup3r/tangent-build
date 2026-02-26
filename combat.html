@@ -296,5 +296,12 @@
   <!-- MAIN JS ENTRY POINT -->
   <script type="module" src="js/main.js"></script>
 
+  <script>
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = "combat.html";
+    };
+  </script>
+
 </body>
 </html>

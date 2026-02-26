@@ -26,5 +26,12 @@
   </div>
 
   <script type="module" src="js/town.js"></script>
+
+  <script>
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = "town.html";
+    };
+  </script>
 </body>
 </html>

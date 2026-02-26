@@ -101,5 +101,12 @@
   </div>
 
   <script type="module" src="js/start.js"></script>
+
+  <script>
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = "index.html";
+    };
+  </script>
 </body>
 </html>
