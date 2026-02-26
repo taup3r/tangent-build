@@ -1,18 +1,36 @@
 body {
-  background: #111;
-  color: #eee;
-  font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
+  background: #0d0d0d;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#townWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 #townContainer {
-  margin-top: 80px;
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
 }
 
 .town-title {
-  font-size: 2rem;
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.town-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.75;
   margin-bottom: 40px;
 }
 
@@ -20,13 +38,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 200px;
+  width: 260px;
   margin: 0 auto;
 }
 
 .town-btn {
-  padding: 14px;
-  font-size: 1.2rem;
+  padding: 16px;
+  font-size: 1.3rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
