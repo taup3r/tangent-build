@@ -107,6 +107,7 @@ export function showResultModal(victory) {
       </div>
     `;
   } else {
+    setDungeonMode(false);
     lootBox.innerHTML = `
       <div style="margin-bottom:4px; opacity:0.9;">
         ${enemyNameStyled} held on to:
