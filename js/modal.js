@@ -168,7 +168,7 @@ export function showResultModal(victory) {
   if (!dungeonMode) {
     townBtn.style.display = "block";
     townBtn.onclick = () => {
-      window.location.href = "town.html";
+      window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
     };
   } else {
     townBtn.style.display = "none";
