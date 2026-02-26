@@ -1,0 +1,48 @@
+body {
+  background: #111;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#townContainer {
+  margin-top: 80px;
+}
+
+.town-title {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.town-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.town-btn {
+  padding: 14px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.town-btn:hover {
+  background: #444;
+}
+
+.town-btn.explore {
+  background: #4a7cff;
+}
+
+.town-btn.explore:hover {
+  background: #6a9cff;
+}
