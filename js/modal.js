@@ -452,6 +452,7 @@ function showDungeonSummary() {
   // Claim reward → open compare modal
   document.getElementById("claimDungeonRewardBtn").onclick = () => {
     openCompareWeaponModal(rewardWeapon);
+    modal.style.display = "none";
   };
 
   // Return to town
@@ -460,8 +461,6 @@ function showDungeonSummary() {
     window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
   };
 }
-
-window.showDungeonSummary = showDungeonSummary;
 
 /* -------------------------
    RESTART
