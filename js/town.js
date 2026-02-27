@@ -12,7 +12,7 @@ document.getElementById("battleBtn").onclick = () => {
 document.getElementById("exploreBtn").onclick = () => {
   // Start dungeon mode with 8 enemies
   setDungeonMode(true);
-  setEnemiesLeft(8);
+  setEnemiesLeft(2);
 
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
