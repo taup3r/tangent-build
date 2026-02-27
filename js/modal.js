@@ -432,7 +432,7 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 ------------------------- */
 
 function showDungeonSummary() {
-  document.getElementById("dungeonSummaryModal").style.diaplay = "flex";
+  document.getElementById("dungeonSummaryModal").style.display = "flex";
   const preview = document.getElementById("dungeonRewardPreview");
 
   // Generate reward weapon (player level + 5)
