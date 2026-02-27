@@ -438,22 +438,15 @@ function showDungeonSummary() {
   // Generate reward weapon (player level + 5)
   const rewardWeapon = generateWeapon(playerStats.level + 5);
 
-  // Store temporarily for compare modal
-  //window.dungeonRewardWeapon = rewardWeapon;
-
   preview.innerHTML = `
     <div style="color:${rewardWeapon.color};">
       🗡️ ${rewardWeapon.name}
     </div>
   `;
 
-  modal.style.display = "flex";
+  window.rewardWeapon = rewardWeapon;
 
-  // Claim reward → open compare modal
-  document.getElementById("claimDungeonRewardBtn").onclick = () => {
-    openCompareWeaponModal(rewardWeapon);
-    modal.style.display = "none";
-  };
+  modal.style.display = "flex";
 
   // Return to town
   document.getElementById("returnToTownBtn").onclick = () => {
@@ -461,6 +454,8 @@ function showDungeonSummary() {
     window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
   };
 }
+
+window.showDungeonSummary = showDungeonSummary;
 
 /* -------------------------
    RESTART
