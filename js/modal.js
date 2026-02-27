@@ -439,7 +439,7 @@ function showDungeonSummary() {
   const rewardWeapon = generateWeapon(playerStats.level + 5);
 
   // Store temporarily for compare modal
-  window.dungeonRewardWeapon = rewardWeapon;
+  //window.dungeonRewardWeapon = rewardWeapon;
 
   preview.innerHTML = `
     <div style="color:${rewardWeapon.color};">
@@ -460,6 +460,8 @@ function showDungeonSummary() {
     window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
   };
 }
+
+window.showDungeonSummary = showDungeonSummary;
 
 /* -------------------------
    RESTART
