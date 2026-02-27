@@ -195,7 +195,6 @@ export function showResultModal(victory) {
 export function openCompareWeaponModal(weapon = enemy.weapon) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
-  document.getElementById("dungeonSummaryModal").style.display = "none";
 
   const current = player.weapon;
 
@@ -247,9 +246,6 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 
   // Cancel button
   document.getElementById("compareCancelBtn").onclick = () => {
-    if (dungeonMode) {
-      document.getElementById("dungeonSummaryModal").style.display = "flex";
-    }
     modal.style.display = "none";
   };
 }
