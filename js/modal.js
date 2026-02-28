@@ -71,9 +71,9 @@ function getDangerRating(playerLevel, enemyLevel) {
 ------------------------- */
 
 export function showResultModal(victory) {
-  // Reset AP
+  // Reset player for combat
+  player.hp = 0;
   player.ap = 0;
-  enemy.ap = 0;
 
   const modal = document.getElementById("resultModal");
   const title = document.getElementById("resultTitle");
