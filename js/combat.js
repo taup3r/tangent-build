@@ -45,8 +45,8 @@ export function rollHit(attacker, defender) {
   hitChance -= defenderAGI * 2;
 
   // Clamp
-  if (hitChance < 2) hitChance = 2;
-  if (hitChance > 98) hitChance = 98;
+  if (hitChance < 1) hitChance = 1;
+  if (hitChance > 99) hitChance = 99;
 
   return Math.random() * 100 < hitChance;
 }
@@ -56,7 +56,7 @@ export function rollHit(attacker, defender) {
 ------------------------- */
 
 export function computeDamage(baseRoll, STR) {
-  return baseRoll + ((STR || 0) * 2);
+  return baseRoll + (STR || 0);
 }
 
 /* -------------------------
