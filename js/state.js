@@ -64,8 +64,6 @@ export function loadProgress() {
   }
   if (data.savedEnemy) {
     enemy = data.savedEnemy;
-  } else {
-    enemy = generateEnemy(playerStats.level);
   }
 
   applyStatsToCombat(player, playerStats);
@@ -90,6 +88,9 @@ export function saveProgress() {
 }
 
 loadProgress();
+if (!enemy) {
+  enemy = generateEnemy(playerStats.level);
+}
 
 /* ================================
    EXP + LEVELING
