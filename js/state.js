@@ -54,10 +54,10 @@ export function loadProgress() {
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
-  if (data.playerHp) {
+  if (data.playerHp != null) {
     player.hp = data.playerHp
   }
-  if (data.savedEnemy) {
+  if (data.savedEnemy != null) {
     enemy = data.savedEnemy;
   } else {
     enemy = generateEnemy(playerStats.level);
