@@ -448,7 +448,11 @@ function showDungeonSummary() {
     </div>
   `;
 
-  window.rewardWeapon = rewardWeapon;
+  // Claim Reward document.getElementById("claimDungeonRewardBtn").onclick = () => {
+    document.getElementById("dungeonSummaryModal").style.zIndex = "2";
+  document.getElementById("compareWeaponModal").style.zIndex = "3";
+    openCompareWeaponModal(rewardWeapon);
+  };
 
   // Return to town
   document.getElementById("returnToTownBtn").onclick = () => {
