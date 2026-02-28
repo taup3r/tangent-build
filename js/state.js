@@ -30,8 +30,7 @@ export let playerStats = {
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0,
-  playerWeapon: null
+  CON: 0
 };
 
 export function loadProgress() {
@@ -54,6 +53,9 @@ export function loadProgress() {
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
+  if (data.playerHp) {
+    player.hp = data.playerHp
+  }
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
@@ -70,7 +72,8 @@ export function saveProgress() {
   localStorage.setItem(key, JSON.stringify({
     playerName,
     playerStats,
-    playerWeapon: player.weapon || null
+    playerWeapon: player.weapon || null,
+    playerHp: player.hp
   }));
 }
 
