@@ -174,18 +174,6 @@ export function showResultModal(victory) {
   } else {
     townBtn.style.display = "none";
   }
-  if (victory && dungeonMode) {
-    let left = dungeonEnemiesLeft;
-    left--;
-    
-    setEnemiesLeft(left);
-
-    if (left < 1) {
-      // Dungeon complete → return to town
-      setDungeonMode(false);
-      showDungeonSummary();
-    }
-  }
 }
 
 /* -------------------------
@@ -475,6 +463,25 @@ window.showDungeonSummary = showDungeonSummary;
 ------------------------- */
 
 export function startNewBattle() {
+  if (dungeonMode) {
+    let left = dungeonEnemiesLeft;
+    left--;
+    
+    setEnemiesLeft(left);
+
+    if (left > 0) {
+      // Continue dungeon
+      location.reload();
+      return;
+    }
+
+    // Dungeon complete → return to town
+    setDungeonMode(false);
+    showDungeonSummary();
+    return;
+  }
+
+  // Normal battle mode
   location.reload();
 }
 
