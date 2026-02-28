@@ -6,7 +6,7 @@
    - Turn transitions
 ============================================ */
 
-import { player, enemy, clampAP } from "./state.js";
+import { player, enemy, clampAP, saveProgress } from "./state.js";
 import {
   updateUI,
   log,
@@ -262,6 +262,7 @@ export function enemyAttackAction() {
 
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
+  saveProgress();
 
   log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
@@ -302,6 +303,7 @@ export function enemySkillAction() {
 
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
+  saveProgress();
 
   log(`${enemy.name} unleashes ${w.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
