@@ -448,7 +448,8 @@ function showDungeonSummary() {
     </div>
   `;
 
-  // Claim Reward document.getElementById("claimDungeonRewardBtn").onclick = () => {
+  // Claim Reward
+ document.getElementById("claimDungeonRewardBtn").onclick = () => {
     document.getElementById("dungeonSummaryModal").style.zIndex = "2";
   document.getElementById("compareWeaponModal").style.zIndex = "3";
     openCompareWeaponModal(rewardWeapon);
@@ -459,8 +460,6 @@ function showDungeonSummary() {
     window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
   };
 }
-
-window.showDungeonSummary = showDungeonSummary;
 
 /* -------------------------
    RESTART
