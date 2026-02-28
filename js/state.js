@@ -19,6 +19,12 @@ export let player = {
 };
 
 /* ================================
+   INITIAL ENEMY INSTANCE
+================================ */
+
+export let enemy = null;
+
+/* ================================
    LOAD / SAVE PLAYER PROGRESSION
 ================================ */
 
@@ -59,6 +65,11 @@ export function loadProgress() {
   if (data.playerAp) {
     player.ap = data.playerAp;
   }
+  if (data.savedEnemy) {
+    enemy = data.savedEnemy;
+  } else {
+    enemy = generateEnemy(playerStats.level);
+  }
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
@@ -77,7 +88,8 @@ export function saveProgress() {
     playerStats,
     playerWeapon: player.weapon || null,
     playerHp: player.hp,
-    playerAp: player.ap
+    playerAp: player.ap,
+    savedEnemy: enemy
   }));
 }
 
@@ -200,12 +212,6 @@ export function generateEnemy(playerLevel) {
     weapon
   };
 }
-
-/* ================================
-   INITIAL ENEMY INSTANCE
-================================ */
-
-export let enemy = generateEnemy(playerStats.level);
 
 /* ================================
    PORTRAITS
