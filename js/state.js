@@ -54,6 +54,14 @@ export function loadProgress() {
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
+  if (data.playerHp) {
+    player.hp = data.playerHp
+  }
+  if (data.savedEnemy) {
+    enemy = data.savedEnemy;
+  } else {
+    enemy = generateEnemy(playerStats.level);
+  }
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
@@ -70,7 +78,9 @@ export function saveProgress() {
   localStorage.setItem(key, JSON.stringify({
     playerName,
     playerStats,
-    playerWeapon: player.weapon || null
+    playerWeapon: player.weapon || null,
+    playerHp: player.hp,
+    savedEnemy: enemy
   }));
 }
 
@@ -198,7 +208,7 @@ export function generateEnemy(playerLevel) {
    INITIAL ENEMY INSTANCE
 ================================ */
 
-export let enemy = generateEnemy(playerStats.level);
+export let enemy = null;
 
 /* ================================
    PORTRAITS
