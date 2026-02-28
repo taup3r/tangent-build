@@ -79,8 +79,8 @@ export function saveProgress() {
     playerName,
     playerStats,
     playerWeapon: player.weapon || null,
-    playerHp: player.hp,
-    savedEnemy: enemy
+    playerHp: player.hp || null,
+    savedEnemy: enemy || null
   }));
 }
 
