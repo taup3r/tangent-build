@@ -199,9 +199,9 @@ export function applySkillDamage(perfect) {
 
   let dmg;
   if (perfect === true) {
-    dmg = base * 2.5;      // Perfect timing
+    dmg = base * 2;      // Perfect timing
   } else if (perfect === false) {
-    dmg = base * 2;        // Normal timing
+    dmg = base * 1.5;        // Normal timing
   } else {
     dmg = base * 1;        // No click → 100%
   }
