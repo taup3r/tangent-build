@@ -19,6 +19,12 @@ export let player = {
 };
 
 /* ================================
+   INITIAL ENEMY INSTANCE
+================================ */
+
+export let enemy = null;
+
+/* ================================
    LOAD / SAVE PLAYER PROGRESSION
 ================================ */
 
@@ -30,10 +36,7 @@ export let playerStats = {
   STR: 0,
   DEX: 0,
   AGI: 0,
-  CON: 0,
-  playerWeapon: null,
-  playerHp: null,
-  savedEnemy: null
+  CON: 0
 };
 
 export function loadProgress() {
@@ -81,8 +84,8 @@ export function saveProgress() {
     playerName,
     playerStats,
     playerWeapon: player.weapon || null,
-    playerHp: player.hp || null,
-    savedEnemy: enemy || null
+    playerHp: player.hp,
+    savedEnemy: enemy
   }));
 }
 
@@ -205,12 +208,6 @@ export function generateEnemy(playerLevel) {
     weapon
   };
 }
-
-/* ================================
-   INITIAL ENEMY INSTANCE
-================================ */
-
-export let enemy = null;
 
 /* ================================
    PORTRAITS
