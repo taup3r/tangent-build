@@ -435,8 +435,8 @@ function showDungeonSummary() {
   const modal = document.getElementById("dungeonSummaryModal");
   modal.style.display = "flex";
   modal.style.zIndex = "3";
-  const weaponModal = document.getElementById("compareWeaponModal");
-  weaponModal.style.zIndex = "4";
+  document.getElementById("compareWeaponModal").style.zIndex = "2";
+  document.getElementById("resultModal").style.zIndex = "1";
   const preview = document.getElementById("dungeonRewardPreview");
 
   // Generate reward weapon (player level + 5)
