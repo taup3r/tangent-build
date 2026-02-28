@@ -27,6 +27,9 @@ import { checkWin } from "./modal.js";
 ------------------------- */
 
 export function rollHit(attacker, defender) {
+  // If defender defending, sure hit
+  if (defender.defending) return true;
+
   // Base hit chance
   let hitChance = 80;
 
