@@ -12,7 +12,7 @@ function updateBattleHeader() {
     return;
   }
 
-  header.textContent = `Dungeon – ${dungeonEnemiesLeft} Enemies Left`;
+  header.textContent = `Dungeon – ${dungeonEnemiesLeft} Left`;
 }
 
 window.addEventListener("DOMContentLoaded", () => {

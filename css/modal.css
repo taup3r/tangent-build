@@ -235,3 +235,14 @@
 .town-btn:hover {
   background: #dd4444;
 }
+
+.dungeon-summary-box {
+  width: 320px;
+  padding: 20px;
+  text-align: center;
+}
+
+.reward-preview {
+  margin: 12px 0;
+  font-weight: bold;
+}

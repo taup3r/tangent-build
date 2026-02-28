@@ -19,7 +19,7 @@
   <div class="game-header">
     <div class="header-left">
       <span class="header-icon">⚔️</span>
-      <span id="battleHeader" class="header-title">RPG Battle</span>
+      <span id="battleHeader" class="header-title"></span>
     </div>
 
     <div class="header-right">
@@ -270,7 +270,7 @@
         <span id="compareCurrentStats" class="profile-value"></span>
       </div>
 
-      <h3>Enemy Weapon</h3>
+      <h3>New Weapon</h3>
       <div class="enemy-profile-row">
         <span id="compareEnemyName" class="profile-value"></span>
       </div>
@@ -287,6 +287,29 @@
         <button id="compareEquipBtn" class="modal-button">Equip</button>
         <button id="compareCancelBtn" class="modal-button">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <!-- DUNGEON SUMMARY -->
+  <div id="dungeonSummaryModal" class="modal" style="display:none;">
+    <div class="modal-content dungeon-summary-box">
+
+      <h2>Dungeon Cleared!</h2>
+
+      <p>You defeated all enemies.</p>
+
+      <div id="dungeonRewardPreview" class="reward-preview"></div>
+
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+        <button id="claimDungeonRewardBtn" class="modal-btn">Claim Reward</button>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+        <button id="returnToTownBtn" class="modal-btn" style="background:#cc3333;">
+          Return to Town
+        </button>
+      </div>
+
     </div>
   </div>
 

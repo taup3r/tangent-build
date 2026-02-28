@@ -5,6 +5,7 @@
 import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
+import { generateWeapon } from "./weapon.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -179,12 +180,11 @@ export function showResultModal(victory) {
    WEAPON COMPARISON MODAL
 ------------------------- */
 
-export function openCompareWeaponModal() {
+export function openCompareWeaponModal(weapon = enemy.weapon) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
 
   const current = player.weapon;
-  const enemyW = enemy.weapon;
 
   // Current weapon
   if (current) {
@@ -208,14 +208,14 @@ export function openCompareWeaponModal() {
     document.getElementById("compareCurrentStats").textContent = "-";
   }
 
-  // Enemy weapon
-  document.getElementById("compareEnemyName").textContent = enemyW.name;
-  document.getElementById("compareEnemyName").style.color = enemyW.color;
+  // Weapon
+  document.getElementById("compareEnemyName").textContent = weapon.name;
+  document.getElementById("compareEnemyName").style.color = weapon.color;
 
   document.getElementById("compareEnemyDamage").textContent =
-    `${enemyW.damage.min} – ${enemyW.damage.max}`;
+    `${weapon.damage.min} – ${weapon.damage.max}`;
 
-  const enemyMods = Object.entries(enemyW.stats)
+  const enemyMods = Object.entries(weapon.stats)
     .filter(([_, v]) => v > 0)
     .map(([k, v]) => `${k}+${v}`)
     .join(", ");
@@ -225,7 +225,7 @@ export function openCompareWeaponModal() {
 
   // Equip button
   document.getElementById("compareEquipBtn").onclick = () => {
-    player.weapon = enemyW;
+    player.weapon = weapon;
     updatePlayerWeaponUI();
     saveProgress();
     modal.style.display = "none";
@@ -428,6 +428,40 @@ window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
 /* -------------------------
+   DUNGEON SUMMARY
+------------------------- */
+
+function showDungeonSummary() {
+  const modal = document.getElementById("dungeonSummaryModal");
+  modal.style.display = "flex";
+  modal.style.zIndex = "3";
+  document.getElementById("compareWeaponModal").style.zIndex = "2";
+  document.getElementById("resultModal").style.zIndex = "1";
+  const preview = document.getElementById("dungeonRewardPreview");
+
+  // Generate reward weapon (player level + 5)
+  const rewardWeapon = generateWeapon(playerStats.level + 5);
+
+  preview.innerHTML = `
+    <div style="color:${rewardWeapon.color};">
+      🗡️ ${rewardWeapon.name}
+    </div>
+  `;
+
+  // Claim Reward
+ document.getElementById("claimDungeonRewardBtn").onclick = () => {
+    document.getElementById("dungeonSummaryModal").style.zIndex = "2";
+  document.getElementById("compareWeaponModal").style.zIndex = "3";
+    openCompareWeaponModal(rewardWeapon);
+  };
+
+  // Return to town
+  document.getElementById("returnToTownBtn").onclick = () => {
+    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+  };
+}
+
+/* -------------------------
    RESTART
 ------------------------- */
 
@@ -446,8 +480,7 @@ export function startNewBattle() {
 
     // Dungeon complete → return to town
     setDungeonMode(false);
-
-    window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+    showDungeonSummary();
     return;
   }
 
