@@ -56,6 +56,9 @@ export function loadProgress() {
   if (data.playerHp) {
     player.hp = data.playerHp
   }
+  if (data.playerAp) {
+    player.ap = data.playerAp;
+  }
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
@@ -73,7 +76,8 @@ export function saveProgress() {
     playerName,
     playerStats,
     playerWeapon: player.weapon || null,
-    playerHp: player.hp
+    playerHp: player.hp,
+    playerAp: player.ap
   }));
 }
 
