@@ -31,7 +31,9 @@ export let playerStats = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  playerWeapon: null
+  playerWeapon: null,
+  playerHp: null,
+  savedEnemy: null
 };
 
 export function loadProgress() {
@@ -54,10 +56,10 @@ export function loadProgress() {
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
   }
-  if (data.playerHp != null) {
+  if (data.playerHp) {
     player.hp = data.playerHp
   }
-  if (data.savedEnemy != null) {
+  if (data.savedEnemy) {
     enemy = data.savedEnemy;
   } else {
     enemy = generateEnemy(playerStats.level);
