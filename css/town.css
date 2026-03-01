@@ -1,17 +1,3 @@
-
-
-html, body {
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
-  margin: 0;
-  padding: 0;
-  background: #0d0d0d;
-  color: #eee;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
-}
-
 #townWrapper {
   display: flex;
   justify-content: center;
