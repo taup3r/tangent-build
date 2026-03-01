@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, generateEnemy } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
@@ -478,7 +478,8 @@ export function startNewBattle() {
 
     if (left > 0) {
       // Continue dungeon
-      enemy = generateEnemy(playerStats.level);
+      enemy = null;
+      saveProgress();
       location.reload();
       return;
     }
@@ -490,7 +491,8 @@ export function startNewBattle() {
   }
 
   // Normal battle mode
-  enemy = generateEnemy(playerStats.level);
+  enemy = null;
+  saveProgress();
   location.reload();
 }
 
