@@ -9,10 +9,8 @@ if (playerStats.statPoints > 0) {
 }
 
 document.getElementById("statButton").onclick = () => {
-  localStorage.setItem("statsReturnTo", `town.html?player=${encodeURIComponent(player.name)}`;
-};);
+  localStorage.setItem("statsReturnTo", `town.html?player=${encodeURIComponent(player.name)}`);
   window.location.href = `train.html?player=${encodeURIComponent(player.name)}`;
-};;
 };
 
 document.getElementById("battleBtn").onclick = () => {
