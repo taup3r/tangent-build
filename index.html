@@ -1,112 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tangent RPG</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tangent RPG</title>
 
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/modal.css">
+    <!-- Modernised Theme -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0d0f12;
+            color: #e3e6eb;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #0f0f17;
-      color: white;
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+        }
 
-    .start-container {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-    }
+        h1 {
+            margin: 0 0 10px;
+            font-size: 2.6rem;
+            color: #4dd0e1;
+            text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
+        }
 
-    .start-title {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-shadow: 0 0 12px rgba(76, 255, 156, 0.6);
-      color: #4cff9c;
-    }
+        h2 {
+            margin: 0 0 30px;
+            font-size: 1.1rem;
+            color: #9aa0a6;
+            font-weight: 400;
+        }
 
-    .start-subtitle {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      margin-top: -10px;
-    }
+        button {
+            width: 100%;
+            padding: 14px 22px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            background: #161a1f;
+            color: #e3e6eb;
+            border: 1px solid #4dd0e1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
 
-    .start-button {
-      padding: 14px 20px;
-      background: #4cff9c;
-      border-radius: 10px;
-      font-size: 1.3rem;
-      cursor: pointer;
-      width: 100%;
-      font-weight: 700;
-      border: none;
-      color: #0f0f17;
-      transition: 0.15s;
-    }
+        button:hover {
+            background: #4dd0e1;
+            color: #0d0f12;
+            border-color: #ffca28;
+            box-shadow: 0 0 14px rgba(77, 208, 225, 0.5);
+        }
 
-    .start-button:hover {
-      background: #3be986;
-    }
+        #saveList {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #161a1f;
+            border: 1px solid #4dd0e1;
+            border-radius: 10px;
+            text-align: left;
+        }
 
-    .save-list {
-      background: #1c1c28;
-      padding: 20px;
-      border-radius: 12px;
-      width: 100%;
-      display: none;
-      margin-top: 10px;
-    }
+        .save-slot {
+            background: #1c2127;
+            border: 1px solid #2a2f36;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
 
-    .save-item {
-      padding: 12px;
-      background: #2a2a3a;
-      margin: 8px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.15s;
-    }
+        .save-slot:hover {
+            border-color: #4dd0e1;
+            background: #222830;
+        }
+    </style>
 
-    .save-item:hover {
-      background: #3a3a4a;
-    }
-  </style>
+    <!-- External CSS (unchanged) -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/modal.css" />
 </head>
 
 <body>
+    <div class="container">
+        <h1>Tangent RPG</h1>
+        <h2>A procedural combat adventure</h2>
 
-  <div class="start-container">
-    <div class="start-title">Tangent RPG</div>
-    <div class="start-subtitle">A procedural combat adventure</div>
+        <button id="newGameBtn">New Game</button>
+        <button id="continueBtn">Continue</button>
 
-    <button id="newGameBtn" class="start-button">New Game</button>
-    <button id="continueBtn" class="start-button">Continue</button>
+        <div id="saveList"></div>
+    </div>
 
-    <div id="saveList" class="save-list"></div>
-  </div>
+    <script type="module" src="js/start.js"></script>
 
-  <script type="module" src="js/start.js"></script>
-
-  <script>
-    history.pushState(null, "", location.href);
-    window.onpopstate = function () {
-      window.location.href = "index.html";
-    };
-  </script>
+    <script>
+        history.pushState(null, "", location.href);
+        window.onpopstate = function () {
+            window.location.href = "index.html";
+        };
+    </script>
 </body>
 </html>
