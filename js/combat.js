@@ -318,8 +318,8 @@ export function enemySkipAction() {
 }
 
 document.getElementById("statButton").onclick = () => {
-  localStorage.setItem("statsReturnTo", "combat.html");
-  window.location.href = "train.html";
+  localStorage.setItem("statsReturnTo", `combat.html?player=${encodeURIComponent(player.name)}`);
+  window.location.href = `train.html?player=${encodeURIComponent(player.name)}`;
 };
 
 /* -------------------------
