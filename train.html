@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Allocate Stats</title>
+  <link rel="stylesheet" href="css/train.css">
+</head>
+
+<body>
+
+  <div id="statsWrapper">
+
+    <h1 class="stats-title">Allocate Stat Points</h1>
+
+    <div id="statsContainer">
+
+      <p class="stats-points">
+        Unspent Points: <span id="statPoints"></span>
+      </p>
+
+      <div class="stat-row">
+        <span>STR</span>
+        <button class="stat-btn" data-stat="STR">+</button>
+        <span id="statSTR"></span>
+      </div>
+
+      <div class="stat-row">
+        <span>DEX</span>
+        <button class="stat-btn" data-stat="DEX">+</button>
+        <span id="statDEX"></span>
+      </div>
+
+      <div class="stat-row">
+        <span>AGI</span>
+        <button class="stat-btn" data-stat="AGI">+</button>
+        <span id="statAGI"></span>
+      </div>
+
+      <div class="stat-row">
+        <span>CON</span>
+        <button class="stat-btn" data-stat="CON">+</button>
+        <span id="statCON"></span>
+      </div>
+
+      <button id="returnBtn" class="return-btn">Return</button>
+
+    </div>
+
+  </div>
+
+  <script type="module" src="js/train.js"></script>
+</body>
+</html>
