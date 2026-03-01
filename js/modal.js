@@ -478,6 +478,8 @@ export function startNewBattle() {
 
     if (left > 0) {
       // Continue dungeon
+      enemy = null;
+      saveProgress();
       location.reload();
       return;
     }
@@ -489,6 +491,8 @@ export function startNewBattle() {
   }
 
   // Normal battle mode
+  enemy = null;
+  saveProgress();
   location.reload();
 }
 
