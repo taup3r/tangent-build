@@ -79,8 +79,6 @@ export function loadProgress() {
   }
   if (data.savedEnemy != null) {
     enemy = data.savedEnemy;
-  } else {
-    enemy = generateEnemy(playerStats.level);
   }
 
   applyStatsToCombat(player, playerStats);
