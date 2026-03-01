@@ -218,6 +218,7 @@ export function applySkillDamage(perfect) {
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
+  log(`You attack for ${dmg}!`);
   floatDamage(dmg, "enemyCard");
   updateUI();
 
