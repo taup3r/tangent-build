@@ -22,6 +22,18 @@ export let player = {
    INITIAL ENEMY INSTANCE
 ================================ */
 
+const enemyTypes = [
+  { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
+  { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
+  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
+];
+
+const enemyPortraits = {
+  aggressive: "assets/enemy_aggressive.png",
+  defensive: "assets/enemy_defensive.png",
+  warlock: "assets/enemy_warlock.png"
+};
+
 export let enemy = null;
 
 /* ================================
@@ -122,12 +134,6 @@ export function loseExp(amount) {
    ENEMY TYPES + TIERS
 ================================ */
 
-const enemyTypes = [
-  { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
-  { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
-  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
-];
-
 // Tier roll: 80% normal, 15% elite, 5% boss
 function rollEnemyTier() {
   const r = Math.random();
@@ -216,12 +222,6 @@ export function generateEnemy(playerLevel) {
 /* ================================
    PORTRAITS
 ================================ */
-
-const enemyPortraits = {
-  aggressive: "assets/enemy_aggressive.png",
-  defensive: "assets/enemy_defensive.png",
-  warlock: "assets/enemy_warlock.png"
-};
 
 export function initializePortraits() {
   document.getElementById("enemyPortrait").src = enemyPortraits[enemy.behavior];
