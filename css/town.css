@@ -42,7 +42,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 260px;
+  width: 80%; //260px;
   margin: 0 auto;
 }
 
@@ -63,6 +63,10 @@ html, body {
 
 .town-btn.explore {
   background: #4a7cff;
+}
+
+.town-btn.train {
+  background: #4caf50;
 }
 
 .town-btn.explore:hover {
