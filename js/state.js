@@ -106,6 +106,9 @@ export function saveProgress() {
 }
 
 loadProgress();
+if (!enemy) {
+  generateEnemy(playerStats.level);
+}
 
 /* ================================
    EXP + LEVELING
