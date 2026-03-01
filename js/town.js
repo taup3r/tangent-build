@@ -4,6 +4,10 @@ import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js
 
 loadProgress();
 
+if (playerStats.remainingStats > 0) {
+  document.getElementById("statButton").style.display = "flex";
+}
+
 document.getElementById("statButton").onclick = () => {
   localStorage.setItem("statsReturnTo", `town.html?player=${encodeURIComponent(player.name)}`;
 };);
