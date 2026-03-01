@@ -1,10 +1,10 @@
-import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
 loadProgress();
 
-if (playerStats.remainingStats > 0) {
+if (playerStats.statPoints > 0) {
   document.getElementById("statButton").style.display = "flex";
 }
 
