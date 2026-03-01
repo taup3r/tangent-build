@@ -317,6 +317,11 @@ export function enemySkipAction() {
   log(`${enemy.name} has no AP and skips the turn.`);
 }
 
+document.getElementById("statButton").onclick = () => {
+  localStorage.setItem("statsReturnTo", "combat.html");
+  window.location.href = "train.html";
+};
+
 /* -------------------------
    TURN START
 ------------------------- */
