@@ -4,6 +4,13 @@ import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js
 
 loadProgress();
 
+document.getElementById("statsButton").onclick = () => {
+  localStorage.setItem("statsReturnTo", `town.html?player=${encodeURIComponent(player.name)}`;
+};);
+  window.location.href = `train.html?player=${encodeURIComponent(player.name)}`;
+};;
+};
+
 document.getElementById("battleBtn").onclick = () => {
   // Normal single battle
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
