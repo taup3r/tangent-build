@@ -4,25 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tangent RPG</title>
+    <link rel="stylesheet" href="css/base.css">
 
     <!-- Modernised Theme -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0d0f12;
-            color: #e3e6eb;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        .wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
         }
 
         .container {
             text-align: center;
-            width: 90%;
-            max-width: 420px;
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
         }
 
         h1 {
@@ -93,6 +90,7 @@
 </head>
 
 <body>
+  <div class="wrapper">
     <div class="container">
         <h1>Tangent RPG</h1>
         <h2>A procedural combat adventure</h2>
@@ -102,14 +100,15 @@
 
         <div id="saveList"></div>
     </div>
+  </div>
 
-    <script type="module" src="js/start.js"></script>
+  <script type="module" src="js/start.js"></script>
 
-    <script>
-        history.pushState(null, "", location.href);
-        window.onpopstate = function () {
-            window.location.href = "index.html";
-        };
-    </script>
+  <script>
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = "index.html";
+    };
+  </script>
 </body>
 </html>
