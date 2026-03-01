@@ -174,6 +174,10 @@ export function showResultModal(victory) {
   } else {
     townBtn.style.display = "none";
   }
+
+  if (dungeonMode && !victory) {
+        document.getElementById("continueBtn").style.display = "none";
+  }
 }
 
 /* -------------------------
