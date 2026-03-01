@@ -104,7 +104,7 @@ export function saveProgress() {
 }
 
 loadProgress();
-if (!enemy) {
+if (!enemy || enemy === null) {
   generateEnemy(playerStats.level);
 }
 
