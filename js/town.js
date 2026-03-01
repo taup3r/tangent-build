@@ -4,7 +4,7 @@ import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js
 
 loadProgress();
 
-document.getElementById("statsButton").onclick = () => {
+document.getElementById("statButton").onclick = () => {
   localStorage.setItem("statsReturnTo", `town.html?player=${encodeURIComponent(player.name)}`;
 };);
   window.location.href = `train.html?player=${encodeURIComponent(player.name)}`;
