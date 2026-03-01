@@ -90,6 +90,7 @@
 </head>
 
 <body>
+  <div class="wrapper">
     <div class="container">
         <h1>Tangent RPG</h1>
         <h2>A procedural combat adventure</h2>
@@ -99,14 +100,15 @@
 
         <div id="saveList"></div>
     </div>
+  </div>
 
-    <script type="module" src="js/start.js"></script>
+  <script type="module" src="js/start.js"></script>
 
-    <script>
-        history.pushState(null, "", location.href);
-        window.onpopstate = function () {
-            window.location.href = "index.html";
-        };
-    </script>
+  <script>
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = "index.html";
+    };
+  </script>
 </body>
 </html>
