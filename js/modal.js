@@ -2,10 +2,11 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
+import { dungeonTypes } from "./dungeon.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -443,8 +444,9 @@ function showDungeonSummary() {
   document.getElementById("resultModal").style.zIndex = "1";
   const preview = document.getElementById("dungeonRewardPreview");
 
-  // Generate reward weapon (player level + 5)
-  const rewardWeapon = generateWeapon(playerStats.level + 5);
+  // Generate reward weapon (player level + bonus)
+  const bonus = dungeonTypes[dungeonType].rewardBonus;
+  const rewardWeapon = generateWeapon(playerStats.level + bonus);
 
   preview.innerHTML = `
     <div style="color:${rewardWeapon.color};">
