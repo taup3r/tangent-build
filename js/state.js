@@ -292,6 +292,14 @@ export let dungeonMode = localStorage.getItem(playerDungeonMode) === "true";
 
 export let dungeonEnemiesLeft = Number(localStorage.getItem(playerDungeonEnemiesLeft) || 0);
 
+export function setEnemiesLeft(count) {
+  localStorage.setItem(playerDungeonEnemiesLeft, count);
+}
+
+const playerDungeonType = `dungeonType_${player.name}`;
+const playerDungeonQueue = `dungeonQueue_${player.name}`;
+const playerDungeonIndex = `dungeonIndex_${player.name}`;
+
 export function setDungeonMode(enable) {
   if (enable) {
     localStorage.setItem(playerDungeonMode, "true");
@@ -299,9 +307,28 @@ export function setDungeonMode(enable) {
   else {
     localStorage.removeItem(playerDungeonMode);
     localStorage.removeItem(playerDungeonEnemiesLeft);
+  localStorage.removeItem(playerDungeonType);
+
+  localStorage.removeItem(playerDungeonQueue);
+
+  localStorage.removeItem(playerDungeonIndex);
   }
 }
 
-export function setEnemiesLeft(count) {
-  localStorage.setItem(playerDungeonEnemiesLeft, count);
+export function startDungeon(type) {
+  const queue = generateDungeonQueue(type);
+
+  localStorage.setItem(playerDungeonType, type);
+  localStorage.setItem(playerDungeonQueue, JSON.stringify(queue));
+  localStorage.setItem(playerDungeonIndex, "0");
+}
+
+export let dungeonType = localStorage.getItem(playerDungeonType);
+
+export let dungeonQueue = JSON.parse(localStorage.getItem(playerDungeonQueue) || "[]");
+
+export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
+
+export function getNextDungeonTier() {
+  return dungeonQueue[dungeonIndex];
 }
