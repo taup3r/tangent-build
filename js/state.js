@@ -335,6 +335,11 @@ export let dungeonQueue = JSON.parse(localStorage.getItem(playerDungeonQueue) ||
 
 export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
+export function getNextDungeonIndex() {
+  dungeonIndex++;
+  localStorage.setItem(playerDungeonIndex, dungeonIndex);
+}
+
 export function getNextDungeonTier() {
   return dungeonQueue[dungeonIndex];
 }
