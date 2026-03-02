@@ -1,18 +1,20 @@
-import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
 import { openEnemyInfo, openPlayerInfoModal } from "./modal.js";
+import { dungeonTypes } from "./dungeon.js";
 
 function updateBattleHeader() {
   const header = document.getElementById("battleHeader");
 
   if (!dungeonMode) {
     header.textContent = "Random Encounter";
-    return;
+  } else {
+    const type = dungeonTypes[dungeonType].name;
+    const left = dungeonQueue.length - dungeonIndex;
+    header.textContent = `Dungeon (${type}) – ${left} Enemies Left`;
   }
-
-  header.textContent = `Dungeon – ${dungeonEnemiesLeft} Left`;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
