@@ -1,4 +1,5 @@
 import { generateWeapon } from "./weapon.js";
+import { generateDungeonQueue } from "./dungeon.js";
 
 /* ================================
    PLAYER COMBAT STATE
