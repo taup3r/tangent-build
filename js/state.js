@@ -148,7 +148,12 @@ function randomEnemyStats(level) {
 ================================ */
 
 export function generateEnemy(playerLevel) {
-  const tier = rollEnemyTier();
+  let tier;
+  if (dungeonMode) {
+    tier = getNextDungeonTier();
+  } else {
+    tier = rollEnemyTier();
+  }
 
   // Level scaling
   let level = playerLevel;
