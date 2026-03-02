@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
@@ -471,12 +471,8 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
-    let left = dungeonEnemiesLeft;
-    left--;
-    
-    setEnemiesLeft(left);
-
-    if (left > 0) {
+    getNextDungeonIndex();
+    if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
       location.reload();
       return;
