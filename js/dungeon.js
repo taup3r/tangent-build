@@ -43,8 +43,17 @@ export function generateDungeonQueue(type) {
     queue.push("elite");
   }
 
+  // Add boss (we will keep this last)
+  const boss = "boss";
+
+  // Shuffle normals + elites
+  for (let i = queue.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [queue[i], queue[j]] = [queue[j], queue[i]];
+  }
+
   // Boss always last
-  queue.push("boss");
+  queue.push(boss);
 
   return queue;
 }
