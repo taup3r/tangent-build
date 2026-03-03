@@ -246,3 +246,15 @@
   margin: 12px 0;
   font-weight: bold;
 }
+
+.dungeon-intro-box {
+  width: 340px;
+  padding: 20px;
+  text-align: center;
+}
+
+.dungeon-intro-text {
+  margin: 15px 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
