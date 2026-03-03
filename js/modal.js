@@ -490,6 +490,9 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
+    if (dungeonIndex === 0) {
+      showDungeonIntro();
+    }
     getNextDungeonIndex();
     if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
