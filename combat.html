@@ -298,6 +298,8 @@
 
       <p>You defeated all enemies.</p>
 
+      <p id="dungeonEpilogueText" class="dungeon-epilogue-text"></p>
+
       <div id="dungeonRewardPreview" class="reward-preview"></div>
 
       <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
@@ -315,6 +317,19 @@
 
   <!-- AP TOOLTIP -->
   <div id="apTooltip" class="ap-tooltip" style="display:none;"></div>
+
+  <!-- Dungeon Intro Modal -->
+  <div id="dungeonIntroModal" class="modal" style="display:none;">
+    <div class="modal-content dungeon-intro-box">
+
+      <h2 id="dungeonIntroTitle"></h2>
+
+      <p id="dungeonIntroText" class="dungeon-intro-text"></p>
+
+      <button id="dungeonIntroBeginBtn" class="modal-btn">Begin</button>
+
+    </div>
+  </div>
 
   <!-- MAIN JS ENTRY POINT -->
   <script type="module" src="js/main.js"></script>
