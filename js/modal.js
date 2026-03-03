@@ -444,8 +444,11 @@ function showDungeonSummary() {
   document.getElementById("resultModal").style.zIndex = "1";
   const preview = document.getElementById("dungeonRewardPreview");
 
+  const dungeon = dungeonTypes[dungeonType];
+    document.getElementById("dungeonEpilogueText").textContent = dungeon.epilogue;
+
   // Generate reward weapon (player level + bonus)
-  const bonus = dungeonTypes[dungeonType].rewardBonus;
+  const bonus = dungeon.rewardBonus;
   const rewardWeapon = generateWeapon(playerStats.level + bonus);
 
   preview.innerHTML = `
