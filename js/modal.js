@@ -433,8 +433,22 @@ window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
 /* -------------------------
-   DUNGEON SUMMARY
+   DUNGEON INTRO SUMMARY
 ------------------------- */
+
+function showDungeonIntro() {
+  const type = localStorage.getItem("dungeonType");
+  const intro = dungeonTypes[type].intro;
+
+  document.getElementById("dungeonIntroTitle").textContent = dungeonTypes[type].name;
+  document.getElementById("dungeonIntroText").textContent = intro;
+
+  document.getElementById("dungeonIntroModal").style.display = "flex";
+
+  document.getElementById("dungeonIntroBeginBtn").onclick = () => {
+    document.getElementById("dungeonIntroModal").style.display = "none";
+  };
+}
 
 function showDungeonSummary() {
   const modal = document.getElementById("dungeonSummaryModal");
