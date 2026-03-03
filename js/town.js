@@ -17,7 +17,7 @@ document.getElementById("exploreBtn").onclick = () => {
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
 
-function getDifficuly() {
+function getDifficulty() {
   const roll = Math.random();
   if (roll < 0.50) return "normal";
   if (roll < 0.80) return "hard";
