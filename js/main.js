@@ -13,7 +13,7 @@ function updateBattleHeader() {
   } else {
     const type = dungeonTypes[dungeonType].name;
     const left = dungeonQueue.length - dungeonIndex;
-    header.textContent = `Dungeon (${type}) – ${left} Enemies Left`;
+    header.textContent = `${type} – ${left} Enemies Left`;
   }
 }
 
