@@ -436,7 +436,7 @@ window.openCompareWeaponModal = openCompareWeaponModal;
    DUNGEON INTRO SUMMARY
 ------------------------- */
 
-function showDungeonIntro() {
+export function showDungeonIntro() {
   const intro = dungeonTypes[dungeonType].intro;
   document.getElementById("dungeonIntroTitle").textContent = dungeonTypes[dungeonType].name;
   document.getElementById("dungeonIntroText").textContent = intro;
@@ -488,9 +488,6 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
-    if (dungeonIndex === 0) {
-      showDungeonIntro();
-    }
     getNextDungeonIndex();
     if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
