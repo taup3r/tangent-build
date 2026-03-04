@@ -141,34 +141,54 @@
     </div>
   </div>
 
-  <!-- STAT DISTRIBUTION MODAL -->
+  <!-- Stats Modal -->
   <div id="statModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Train</h2>
+    <div class="modal-content stat-box">
 
-      <p id="statPointsLeft"></p>
+      <h2 class="stat-title">Allocate Stats</h2>
+
+      <p class="stat-available">
+        Available Points: <span id="statPointsDisplay"></span>
+      </p>
 
       <div class="stat-row">
-        STR: <span id="strVal"></span>
-        <button onclick="addStat('STR')">+</button>
+        <span class="stat-label">STR</span>
+        <div class="stat-controls">
+          <button class="stat-btn minus" data-stat="STR">−</button>
+          <span id="statValueSTR" class="stat-value"></span>
+          <button class="stat-btn plus" data-stat="STR">+</button>
+        </div>
       </div>
 
       <div class="stat-row">
-        DEX: <span id="dexVal"></span>
-        <button onclick="addStat('DEX')">+</button>
+        <span class="stat-label">DEX</span>
+        <div class="stat-controls">
+          <button class="stat-btn minus" data-stat="DEX">−</button>
+          <span id="statValueDEX" class="stat-value"></span>
+          <button class="stat-btn plus" data-stat="DEX">+</button>
+        </div>
       </div>
 
       <div class="stat-row">
-        AGI: <span id="agiVal"></span>
-        <button onclick="addStat('AGI')">+</button>
+        <span class="stat-label">AGI</span>
+        <div class="stat-controls">
+          <button class="stat-btn minus" data-stat="AGI">−</button>
+          <span id="statValueAGI" class="stat-value"></span>
+          <button class="stat-btn plus" data-stat="AGI">+</button>
+        </div>
       </div>
 
       <div class="stat-row">
-        CON: <span id="conVal"></span>
-        <button onclick="addStat('CON')">+</button>
+        <span class="stat-label">CON</span>
+        <div class="stat-controls">
+          <button class="stat-btn minus" data-stat="CON">−</button>
+          <span id="statValueCON" class="stat-value"></span>
+          <button class="stat-btn plus" data-stat="CON">+</button>
+        </div>
       </div>
 
-      <button class="modal-button" onclick="closeStatMenu()">Done</button>
+      <button id="closeStatModal" class="close-stat-btn">Close</button>
+
     </div>
   </div>
 
