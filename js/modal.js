@@ -154,7 +154,10 @@ export function showResultModal(victory) {
 
   // Show stat button if points available
   if (playerStats.statPoints > 0) {
-    document.getElementById("statButton").style.display = "block";
+  document.getElementById("statButton").onclick = () => {
+    openStatModal();
+  }
+  document.getElementById("statButton").style.display = "block";
   }
 
   // Show loot button only on victory
@@ -267,39 +270,71 @@ export function checkWin() {
    STAT MENU
 ------------------------- */
 
-export function openStatMenu() {
+let tempStats = {
+  STR: 0,
+  DEX: 0,
+  AGI: 0,
+  CON: 0
+};
+
+let tempPoints = 0;
+
+function openStatModal() {
+  // Copy current stats into temp
+  tempStats.STR = playerStats.STR;
+  tempStats.DEX = playerStats.DEX;
+  tempStats.AGI = playerStats.AGI;
+  tempStats.CON = playerStats.CON;
+
+  tempPoints = playerStats.statPoints;
+
+  updateStatUI();
   document.getElementById("statModal").style.display = "flex";
-  updateStatMenu();
 }
 
-export function closeStatMenu() {
-  document.getElementById("statModal").style.display = "none";
+function updateStatUI() {
+  document.getElementById("statPointsDisplay").textContent = tempPoints;
+
+  document.getElementById("statValueSTR").textContent = tempStats.STR;
+  document.getElementById("statValueDEX").textContent = tempStats.DEX;
+  document.getElementById("statValueAGI").textContent = tempStats.AGI;
+  document.getElementById("statValueCON").textContent = tempStats.CON;
 }
 
-export function addStat(stat) {
-  if (playerStats.statPoints <= 0) return;
+// Handle + and -
+document.querySelectorAll(".stat-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const stat = btn.dataset.stat;
 
-  playerStats[stat]++;
-  playerStats.statPoints--;
-  applyStatsToCombat(player, playerStats);
+    if (btn.classList.contains("plus")) {
+      if (tempPoints > 0) {
+        tempStats[stat]++;
+        tempPoints--;
+      }
+    } else {
+      // minus
+      if (tempStats[stat] > playerStats[stat]) {
+        tempStats[stat]--;
+        tempPoints++;
+      }
+    }
+
+    updateStatUI();
+  });
+});
+
+// Close and save
+document.getElementById("closeStatModal").onclick = () => {
+  // Commit changes
+  playerStats.STR = tempStats.STR;
+  playerStats.DEX = tempStats.DEX;
+  playerStats.AGI = tempStats.AGI;
+  playerStats.CON = tempStats.CON;
+  playerStats.statPoints = tempPoints;
 
   saveProgress();
-  updateStatMenu();
-}
-
-function updateStatMenu() {
-  document.getElementById("statPointsLeft").textContent =
-    `Points left: ${playerStats.statPoints}`;
-
-  document.getElementById("strVal").textContent = playerStats.STR;
-  document.getElementById("dexVal").textContent = playerStats.DEX;
-  document.getElementById("agiVal").textContent = playerStats.AGI;
-  document.getElementById("conVal").textContent = playerStats.CON;
-}
-
-window.openStatMenu = openStatMenu;
-window.closeStatMenu = closeStatMenu;
-window.addStat = addStat;
+  document.getElementById("statModal").style.display = "none";
+};
 
 /* -------------------------
    ENEMY PROFILE MODAL
