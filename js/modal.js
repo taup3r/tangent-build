@@ -437,10 +437,8 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 ------------------------- */
 
 function showDungeonIntro() {
-  const type = localStorage.getItem("dungeonType");
-  const intro = dungeonTypes[type].intro;
-
-  document.getElementById("dungeonIntroTitle").textContent = dungeonTypes[type].name;
+  const intro = dungeonTypes[dungeonType].intro;
+  document.getElementById("dungeonIntroTitle").textContent = dungeonTypes[dungeonType].name;
   document.getElementById("dungeonIntroText").textContent = intro;
 
   document.getElementById("dungeonIntroModal").style.display = "flex";
