@@ -258,3 +258,111 @@
   line-height: 1.4;
   opacity: 0.9;
 }
+
+.stat-box {
+  width: 360px;
+  padding: 30px;
+  text-align: center;
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+.stat-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.stat-available {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+}
+
+.stat-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+}
+
+.stat-btn.plus {
+  background: #4a7cff;
+}
+
+.stat-btn.plus:hover {
+  background: #6a9cff;
+}
+
+.stat-btn.minus {
+  background: #cc3333;
+}
+
+.stat-btn.minus:hover {
+  background: #dd4444;
+}
+
+.stat-value {
+  width: 32px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.close-stat-btn {
+  margin-top: 30px;
+  padding: 12px;
+  width: 100%;
+  background: #444;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.close-stat-btn:hover {
+  background: #555;
+}
+
+.stat-desc {
+  margin: -6px 0 12px 0;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  text-align: left;
+}
+
+.reset-stat-btn {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: #555;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.reset-stat-btn:hover {
+  background: #666;
+}
