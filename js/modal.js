@@ -274,7 +274,7 @@ function openStatModal() {
   const modal = document.getElementById("statModal");
   const frame = document.getElementById("statsFrame");
 
-  frame.src = "stats.html";
+  frame.src = `stats.html?player=${encodeURIComponent(player.name)}`;
   modal.style.display = "flex";
 }
 
