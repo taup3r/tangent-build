@@ -2,7 +2,7 @@ import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, ap
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
-import { openEnemyInfo, openPlayerInfoModal } from "./modal.js";
+import { openEnemyInfo, openPlayerInfoModal, showDungeonIntro } from "./modal.js";
 import { dungeonTypes } from "./dungeon.js";
 
 function updateBattleHeader() {
@@ -36,5 +36,10 @@ window.addEventListener("DOMContentLoaded", () => {
 document.getElementById("openPlayerModal").addEventListener("click", openPlayerInfoModal);
 
   updateBattleHeader();
+  if (dungeonMode) {
+    if (dungeonIndex === 0) {
+      showDungeonIntro();
+    }
+  }
   startPlayerTurn();
 });
