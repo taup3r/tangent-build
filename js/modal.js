@@ -2,10 +2,11 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType } from "./state.js";
 import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
+import { dungeonTypes } from "./dungeon.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -432,8 +433,20 @@ window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
 /* -------------------------
-   DUNGEON SUMMARY
+   DUNGEON INTRO SUMMARY
 ------------------------- */
+
+export function showDungeonIntro() {
+  const intro = dungeonTypes[dungeonType].intro;
+  document.getElementById("dungeonIntroTitle").textContent = dungeonTypes[dungeonType].name;
+  document.getElementById("dungeonIntroText").textContent = intro;
+
+  document.getElementById("dungeonIntroModal").style.display = "flex";
+
+  document.getElementById("dungeonIntroBeginBtn").onclick = () => {
+    document.getElementById("dungeonIntroModal").style.display = "none";
+  };
+}
 
 function showDungeonSummary() {
   const modal = document.getElementById("dungeonSummaryModal");
@@ -443,8 +456,12 @@ function showDungeonSummary() {
   document.getElementById("resultModal").style.zIndex = "1";
   const preview = document.getElementById("dungeonRewardPreview");
 
-  // Generate reward weapon (player level + 5)
-  const rewardWeapon = generateWeapon(playerStats.level + 5);
+  const dungeon = dungeonTypes[dungeonType];
+    document.getElementById("dungeonEpilogueText").textContent = dungeon.epilogue;
+
+  // Generate reward weapon (player level + bonus)
+  const bonus = dungeon.rewardBonus;
+  const rewardWeapon = generateWeapon(playerStats.level + bonus);
 
   preview.innerHTML = `
     <div style="color:${rewardWeapon.color};">
@@ -471,12 +488,8 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
-    let left = dungeonEnemiesLeft;
-    left--;
-    
-    setEnemiesLeft(left);
-
-    if (left > 0) {
+    getNextDungeonIndex();
+    if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
       location.reload();
       return;

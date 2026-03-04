@@ -1,4 +1,4 @@
-import { player, setDungeonMode, setEnemiesLeft, loadProgress } from "./state.js";
+import { player, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -12,7 +12,14 @@ document.getElementById("battleBtn").onclick = () => {
 document.getElementById("exploreBtn").onclick = () => {
   // Start dungeon mode with 8 enemies
   setDungeonMode(true);
-  setEnemiesLeft(8);
+  startDungeon(getDifficulty());
 
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
+
+function getDifficulty() {
+  const roll = Math.random();
+  if (roll < 0.50) return "normal";
+  if (roll < 0.80) return "hard";
+  return "nightmare";
+}
