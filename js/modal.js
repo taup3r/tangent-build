@@ -270,21 +270,16 @@ export function checkWin() {
    STAT MENU
 ------------------------- */
 
-let tempStats = {
-  STR: 0,
-  DEX: 0,
-  AGI: 0,
-  CON: 0
-};
-
+let tempStats = {};
 let tempPoints = 0;
 
 function openStatModal() {
-  // Copy current stats into temp
-  tempStats.STR = playerStats.STR;
-  tempStats.DEX = playerStats.DEX;
-  tempStats.AGI = playerStats.AGI;
-  tempStats.CON = playerStats.CON;
+  tempStats = {
+    STR: playerStats.STR,
+    DEX: playerStats.DEX,
+    AGI: playerStats.AGI,
+    CON: playerStats.CON
+  };
 
   tempPoints = playerStats.statPoints;
 
@@ -301,7 +296,7 @@ function updateStatUI() {
   document.getElementById("statValueCON").textContent = tempStats.CON;
 }
 
-// Handle + and -
+// + and -
 document.querySelectorAll(".stat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const stat = btn.dataset.stat;
@@ -312,7 +307,6 @@ document.querySelectorAll(".stat-btn").forEach(btn => {
         tempPoints--;
       }
     } else {
-      // minus
       if (tempStats[stat] > playerStats[stat]) {
         tempStats[stat]--;
         tempPoints++;
@@ -323,9 +317,19 @@ document.querySelectorAll(".stat-btn").forEach(btn => {
   });
 });
 
-// Close and save
+// Reset button
+document.getElementById("resetStatsBtn").onclick = () => {
+  tempStats.STR = playerStats.STR;
+  tempStats.DEX = playerStats.DEX;
+  tempStats.AGI = playerStats.AGI;
+  tempStats.CON = playerStats.CON;
+  tempPoints = playerStats.statPoints;
+
+  updateStatUI();
+};
+
+// Save & Close
 document.getElementById("closeStatModal").onclick = () => {
-  // Commit changes
   playerStats.STR = tempStats.STR;
   playerStats.DEX = tempStats.DEX;
   playerStats.AGI = tempStats.AGI;
