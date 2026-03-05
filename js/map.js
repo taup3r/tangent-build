@@ -1,3 +1,7 @@
+import { player, playerStats, loadProgress } from "./state.js";
+
+loadProgress();
+
 const SIZE = 12;
 
 let playerX = 0;
@@ -14,6 +18,14 @@ const locations = [
 
 const grid = document.getElementById("mapGrid");
 
+function renderPlayerInfo() {
+  document.getElementById("playerName").textContent = `Name: ${player.name || "Player"}`;
+  document.getElementById("playerLevel").textContent = `Level: ${playerStats.level}`;
+  document.getElementById("playerExp").textContent = `EXP: ${playerStats.exp}/${playerStats.expToNext}`;
+}
+
+renderPlayerInfo();
+
 function renderGrid() {
   grid.innerHTML = "";
 
@@ -24,13 +36,11 @@ function renderGrid() {
 
       if (x === playerX && y === playerY) {
         tile.classList.add("player");
-        tile.textContent = "🧍"; // player icon
+        tile.textContent = "🧍";
       }
 
       const loc = locations.find(l => l.x === x && l.y === y);
-      if (loc) {
-        tile.textContent = loc.icon;
-      }
+      if (loc) tile.textContent = loc.icon;
 
       grid.appendChild(tile);
     }
