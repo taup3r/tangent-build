@@ -58,3 +58,16 @@
 .town-btn.explore:hover {
   background: #6a9cff;
 }
+
+.stats-iframe-box {
+  width: 360px;
+  height: 620px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.stats-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
