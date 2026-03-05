@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tangent RPG – Town Map</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/map.css">
+</head>
+
+<body>
+
+  <div id="mapWrapper">
+
+    <h1 class="map-title">Town of Wayfarer’s Rest</h1>
+
+    <!-- Map Grid -->
+    <div id="mapGrid"></div>
+
+    <!-- Movement Buttons -->
+    <div id="movementControls">
+      <button class="move-btn" data-dir="up">▲</button>
+      <div class="middle-row">
+        <button class="move-btn" data-dir="left">◀</button>
+        <button class="move-btn" data-dir="right">▶</button>
+      </div>
+      <button class="move-btn" data-dir="down">▼</button>
+    </div>
+
+    <!-- Location Interaction Panel -->
+    <div id="locationPanel" style="display:none;">
+      <h2 id="locationName"></h2>
+      <p id="locationDesc"></p>
+      <button id="locationEnterBtn" class="enter-btn">Enter</button>
+      <button id="locationCloseBtn" class="close-btn">Close</button>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/map.js"></script>
+</body>
+</html>
