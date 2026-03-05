@@ -1,4 +1,4 @@
-import { player, setDungeonMode, startDungeon, loadProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -17,9 +17,13 @@ document.getElementById("exploreBtn").onclick = () => {
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
 
-document.getElementById("statButton").onclick = () => {
-  openStatModal();
-};
+// Show stat button if points available
+if (playerStats.statPoints > 0) {
+  document.getElementById("statButton").onclick = () => {
+    openStatModal();
+  }
+  document.getElementById("statButton").style.display = "block";
+}
 
 function getDifficulty() {
   const roll = Math.random();
