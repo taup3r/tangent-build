@@ -5,6 +5,7 @@ html, body {
 #mapWrapper {
   text-align: center;
   padding-top: 20px;
+  position: relative;
 }
 
 .map-title {
@@ -29,23 +30,36 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem; /* icons scale cleanly */
+  font-size: 1.4rem;
 }
 
+/* Player glow border */
 .map-tile.player {
-  background: #4a7cff;
-  color: white;
-  font-weight: bold;
+  border: 2px solid #4a7cff;
+  box-shadow: 0 0 8px #4a7cff;
 }
 
-.location-icon {
-  font-size: 3rem;
-  margin-bottom: 10px;
+/* Bottom-left Player Info */
+#playerInfo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  text-align: left;
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
-/* Movement Controls */
+/* Bottom-right Movement Controls */
 #movementControls {
-  margin-top: 20px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.move-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .move-btn {
@@ -56,17 +70,11 @@ html, body {
   border-radius: 6px;
   color: white;
   font-size: 1.5rem;
-  margin: 5px;
   cursor: pointer;
 }
 
 .move-btn:hover {
   background: #444;
-}
-
-.middle-row {
-  display: flex;
-  justify-content: center;
 }
 
 /* Modal */
@@ -88,6 +96,11 @@ html, body {
   background: #1a1a1a;
   border-radius: 10px;
   text-align: center;
+}
+
+.location-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 .enter-btn {
