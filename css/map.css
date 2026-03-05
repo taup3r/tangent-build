@@ -12,14 +12,14 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* Grid */
+/* 12x12 Grid */
 #mapGrid {
-  width: 300px;
-  height: 300px;
+  width: 360px;
+  height: 360px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
   gap: 2px;
 }
 
@@ -29,8 +29,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.8rem;
-  color: #aaa;
+  font-size: 1.4rem; /* icons scale cleanly */
 }
 
 .map-tile.player {
@@ -39,10 +38,9 @@ html, body {
   font-weight: bold;
 }
 
-.map-tile.location {
-  background: #333;
-  color: #ffd27f;
-  font-weight: bold;
+.location-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 /* Movement Controls */
@@ -71,15 +69,25 @@ html, body {
   justify-content: center;
 }
 
-/* Location Panel */
-#locationPanel {
-  margin-top: 25px;
-  background: #1a1a1a;
-  padding: 20px;
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-box {
   width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 20px;
+  background: #1a1a1a;
   border-radius: 10px;
+  text-align: center;
 }
 
 .enter-btn {
@@ -98,7 +106,7 @@ html, body {
   background: #6a9cff;
 }
 
-.close-btn {
+.cancel-btn {
   width: 100%;
   padding: 12px;
   background: #555;
@@ -110,6 +118,6 @@ html, body {
   margin-top: 10px;
 }
 
-.close-btn:hover {
+.cancel-btn:hover {
   background: #666;
 }
