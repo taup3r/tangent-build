@@ -13,14 +13,14 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* 12x12 Grid */
+/* 12x15 Grid */
 #mapGrid {
   width: 360px;
-  height: 360px;
+  height: 450px; /* 15 rows */
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(15, 1fr);
   gap: 2px;
 }
 
@@ -47,6 +47,7 @@ html, body {
   text-align: left;
   font-size: 1rem;
   opacity: 0.9;
+  line-height: 1.4rem;
 }
 
 /* Bottom-right Movement Controls */
