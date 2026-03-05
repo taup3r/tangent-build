@@ -1,15 +1,15 @@
 const SIZE = 12;
 
-let playerX = 6;
-let playerY = 6;
+let playerX = 0;
+let playerY = 11;
 
 // HTML-rendered icons
 const locations = [
-  { x: 3, y: 3, name: "Town Hall", desc: "Train your stats.", icon: "🏛️", link: "stats.html" },
-  { x: 8, y: 3, name: "Arena", desc: "Fight a random battle.", icon: "⚔️", link: "combat.html" },
-  { x: 3, y: 9, name: "Normal Dungeon", desc: "A modest challenge.", icon: "🕳️", link: "combat.html?dungeon=normal" },
-  { x: 6, y: 9, name: "Hard Dungeon", desc: "A dangerous expedition.", icon: "🔥", link: "combat.html?dungeon=hard" },
-  { x: 9, y: 9, name: "Nightmare Dungeon", desc: "Only the brave survive.", icon: "💀", link: "combat.html?dungeon=nightmare" }
+  { x: 2, y: 10, name: "Town Hall", desc: "Train your stats.", icon: "🏛️", link: "stats.html" },
+  { x: 0, y: 4, name: "Arena", desc: "Fight a random battle.", icon: "⚔️", link: "combat.html" },
+  { x: 4, y: 7, name: "Normal Dungeon", desc: "A modest challenge.", icon: "🕳️", link: "combat.html?dungeon=normal" },
+  { x: 11, y: 11, name: "Hard Dungeon", desc: "A dangerous expedition.", icon: "🔥", link: "combat.html?dungeon=hard" },
+  { x: 10, y: 1, name: "Nightmare Dungeon", desc: "Only the brave survive.", icon: "💀", link: "combat.html?dungeon=nightmare" }
 ];
 
 const grid = document.getElementById("mapGrid");
