@@ -19,7 +19,7 @@ document.getElementById("exploreBtn").onclick = () => {
 
 function getDifficulty() {
   const roll = Math.random();
-  if (roll < 0.50) return "normal";
-  if (roll < 0.80) return "hard";
+  if (roll < 0.30) return "normal";
+  if (roll < 0.60) return "hard";
   return "nightmare";
 }
