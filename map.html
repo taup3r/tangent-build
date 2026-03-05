@@ -14,18 +14,29 @@
 
     <h1 class="map-title">Town of Wayfarer’s Rest</h1>
 
+    <!-- 12x12 Map Grid -->
     <div id="mapGrid"></div>
 
-    <div id="movementControls">
-      <button class="move-btn" data-dir="up">▲</button>
-      <div class="middle-row">
-        <button class="move-btn" data-dir="left">◀</button>
-        <button class="move-btn" data-dir="right">▶</button>
-      </div>
-      <button class="move-btn" data-dir="down">▼</button>
+    <!-- Bottom-left Player Info -->
+    <div id="playerInfo">
+      <div id="playerName"></div>
+      <div id="playerLevel"></div>
+      <div id="playerExp"></div>
     </div>
 
-    <!-- Modal -->
+    <!-- Bottom-right Movement Controls -->
+    <div id="movementControls">
+      <div class="move-row">
+        <button class="move-btn" data-dir="up">▲</button>
+        <button class="move-btn" data-dir="right">▶</button>
+      </div>
+      <div class="move-row">
+        <button class="move-btn" data-dir="left">◀</button>
+        <button class="move-btn" data-dir="down">▼</button>
+      </div>
+    </div>
+
+    <!-- Location Modal -->
     <div id="locationModal" class="modal" style="display:none;">
       <div class="modal-content location-box">
 
