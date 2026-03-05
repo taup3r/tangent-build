@@ -270,75 +270,23 @@ export function checkWin() {
    STAT MENU
 ------------------------- */
 
-let tempStats = {};
-let tempPoints = 0;
-
 function openStatModal() {
-  tempStats = {
-    STR: playerStats.STR,
-    DEX: playerStats.DEX,
-    AGI: playerStats.AGI,
-    CON: playerStats.CON
-  };
+  const modal = document.getElementById("statModal");
+  const frame = document.getElementById("statsFrame");
 
-  tempPoints = playerStats.statPoints;
-
-  updateStatUI();
-  document.getElementById("statModal").style.display = "flex";
+  frame.src = `stats.html?player=${encodeURIComponent(player.name)}`;
+  modal.style.display = "flex";
 }
 
-function updateStatUI() {
-  document.getElementById("statPointsDisplay").textContent = tempPoints;
-
-  document.getElementById("statValueSTR").textContent = tempStats.STR;
-  document.getElementById("statValueDEX").textContent = tempStats.DEX;
-  document.getElementById("statValueAGI").textContent = tempStats.AGI;
-  document.getElementById("statValueCON").textContent = tempStats.CON;
-}
-
-// + and -
-document.querySelectorAll(".stat-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const stat = btn.dataset.stat;
-
-    if (btn.classList.contains("plus")) {
-      if (tempPoints > 0) {
-        tempStats[stat]++;
-        tempPoints--;
-      }
-    } else {
-      if (tempStats[stat] > playerStats[stat]) {
-        tempStats[stat]--;
-        tempPoints++;
-      }
-    }
-
-    updateStatUI();
-  });
-});
-
-// Reset button
-document.getElementById("resetStatsBtn").onclick = () => {
-  tempStats.STR = playerStats.STR;
-  tempStats.DEX = playerStats.DEX;
-  tempStats.AGI = playerStats.AGI;
-  tempStats.CON = playerStats.CON;
-  tempPoints = playerStats.statPoints;
-
-  updateStatUI();
-};
-
-// Save & Close
-document.getElementById("closeStatModal").onclick = () => {
-  playerStats.STR = tempStats.STR;
-  playerStats.DEX = tempStats.DEX;
-  playerStats.AGI = tempStats.AGI;
-  playerStats.CON = tempStats.CON;
-  playerStats.statPoints = tempPoints;
-
-  saveProgress();
+function closeStatModal() {
   document.getElementById("statModal").style.display = "none";
-};
+}
+
+window.addEventListener("message", (event) => {
+  if (event.data === "close-stats") {
+    closeStatModal();
+  }
+});
 
 /* -------------------------
    ENEMY PROFILE MODAL

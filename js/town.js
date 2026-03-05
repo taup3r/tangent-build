@@ -1,4 +1,4 @@
-import { player, setDungeonMode, startDungeon, loadProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -17,9 +17,39 @@ document.getElementById("exploreBtn").onclick = () => {
   window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
 };
 
+// Show stat button if points available
+if (playerStats.statPoints > 0) {
+  document.getElementById("statButton").onclick = () => {
+    openStatModal();
+  }
+  document.getElementById("statButton").style.display = "block";
+}
+
 function getDifficulty() {
   const roll = Math.random();
   if (roll < 0.30) return "normal";
   if (roll < 0.60) return "hard";
   return "nightmare";
 }
+
+/* -------------------------
+   STAT MENU
+------------------------- */
+
+function openStatModal() {
+  const modal = document.getElementById("statModal");
+  const frame = document.getElementById("statsFrame");
+
+  frame.src = `stats.html?player=${encodeURIComponent(player.name)}`;
+  modal.style.display = "flex";
+}
+
+function closeStatModal() {
+  document.getElementById("statModal").style.display = "none";
+}
+
+window.addEventListener("message", (event) => {
+  if (event.data === "close-stats") {
+    closeStatModal();
+  }
+});

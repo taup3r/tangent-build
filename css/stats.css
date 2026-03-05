@@ -1,0 +1,117 @@
+html, body {
+  padding-top: 0px;
+}
+
+#statsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+
+#statsContainer {
+  width: 360px;
+  padding: 10px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stats-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.stats-available {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
+
+.stat-block {
+  margin-bottom: 20px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+}
+
+.stat-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+}
+
+.stat-btn.plus {
+  background: #4a7cff;
+}
+
+.stat-btn.plus:hover {
+  background: #6a9cff;
+}
+
+.stat-btn.minus {
+  background: #cc3333;
+}
+
+.stat-btn.minus:hover {
+  background: #dd4444;
+}
+
+.stat-value {
+  width: 32px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.stat-desc {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  text-align: left;
+}
+
+.reset-stat-btn,
+.save-stat-btn {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.reset-stat-btn {
+  background: #555;
+}
+
+.reset-stat-btn:hover {
+  background: #666;
+}
+
+.save-stat-btn {
+  background: #4a7cff;
+}
+
+.save-stat-btn:hover {
+  background: #6a9cff;
+}
