@@ -153,7 +153,7 @@ export function showResultModal(victory) {
   applyModalTheme(modal, enemy.type);
 
   // Show stat button if points available
-  if (playerStats.statPoints > 0) {
+  if (playerStats.statPoints > 0 && !dungeonMode) {
   document.getElementById("statButton").onclick = () => {
     openStatModal();
   }
