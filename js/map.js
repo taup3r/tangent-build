@@ -2,26 +2,28 @@ import { player, playerStats, loadProgress } from "./state.js";
 
 loadProgress();
 
-const SIZE = 12;
+const SIZE_X = 12;
+const SIZE_Y = 15;
 
 let playerX = 0;
-let playerY = 11;
+let playerY = 14;
 
 // HTML-rendered icons
 const locations = [
-  { x: 2, y: 10, name: "Town Hall", desc: "Train your stats.", icon: "🏛️", link: "stats.html" },
+  { x: 2, y: 12, name: "Town Hall", desc: "Train your stats.", icon: "🏛️", link: "stats.html" },
   { x: 0, y: 4, name: "Arena", desc: "Fight a random battle.", icon: "⚔️", link: "combat.html" },
   { x: 6, y: 6, name: "Normal Dungeon", desc: "A modest challenge.", icon: "🕳️", link: "combat.html?dungeon=normal" },
-  { x: 11, y: 11, name: "Hard Dungeon", desc: "A dangerous expedition.", icon: "🔥", link: "combat.html?dungeon=hard" },
-  { x: 10, y: 1, name: "Nightmare Dungeon", desc: "Only the brave survive.", icon: "💀", link: "combat.html?dungeon=nightmare" }
+  { x: 11, y: 13, name: "Hard Dungeon", desc: "A dangerous expedition.", icon: "🔥", link: "combat.html?dungeon=hard" },
+  { x: 9, y: 1, name: "Nightmare Dungeon", desc: "Only the brave survive.", icon: "💀", link: "combat.html?dungeon=nightmare" }
 ];
 
 const grid = document.getElementById("mapGrid");
 
 function renderPlayerInfo() {
-  document.getElementById("playerName").textContent = `Name: ${player.name || "Player"}`;
-  document.getElementById("playerLevel").textContent = `Level: ${playerStats.level}`;
-  document.getElementById("playerExp").textContent = `EXP: ${playerStats.exp}/${playerStats.expToNext}`;
+  document.getElementById("playerName").textContent = player.name || "";
+  document.getElementById("playerLevel").textContent = `Lv ${playerStats.level}`;
+  document.getElementById("playerExp").textContent = `${playerStats.exp}/${playerStats.expToNext}`;
+  document.getElementById("playerWeapon").textContent = player.weapon?.name || "";
 }
 
 renderPlayerInfo();
@@ -29,8 +31,8 @@ renderPlayerInfo();
 function renderGrid() {
   grid.innerHTML = "";
 
-  for (let y = 0; y < SIZE; y++) {
-    for (let x = 0; x < SIZE; x++) {
+  for (let y = 0; y < SIZE_Y; y++) {
+    for (let x = 0; x < SIZE_X; x++) {
       const tile = document.createElement("div");
       tile.classList.add("map-tile");
 
@@ -55,9 +57,9 @@ document.querySelectorAll(".move-btn").forEach(btn => {
     const dir = btn.dataset.dir;
 
     if (dir === "up" && playerY > 0) playerY--;
-    if (dir === "down" && playerY < SIZE - 1) playerY++;
+    if (dir === "down" && playerY < SIZE_Y - 1) playerY++;
     if (dir === "left" && playerX > 0) playerX--;
-    if (dir === "right" && playerX < SIZE - 1) playerX++;
+    if (dir === "right" && playerX < SIZE_X - 1) playerX++;
 
     renderGrid();
     checkLocationStep();
