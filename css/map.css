@@ -1,0 +1,115 @@
+html, body {
+  padding: 0;
+}
+
+#mapWrapper {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.map-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Grid */
+#mapGrid {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+}
+
+.map-tile {
+  background: #222;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.map-tile.player {
+  background: #4a7cff;
+  color: white;
+  font-weight: bold;
+}
+
+.map-tile.location {
+  background: #333;
+  color: #ffd27f;
+  font-weight: bold;
+}
+
+/* Movement Controls */
+#movementControls {
+  margin-top: 20px;
+}
+
+.move-btn {
+  width: 60px;
+  height: 60px;
+  background: #333;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.5rem;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.move-btn:hover {
+  background: #444;
+}
+
+.middle-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Location Panel */
+#locationPanel {
+  margin-top: 25px;
+  background: #1a1a1a;
+  padding: 20px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+.enter-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4a7cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.enter-btn:hover {
+  background: #6a9cff;
+}
+
+.close-btn {
+  width: 100%;
+  padding: 12px;
+  background: #555;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.close-btn:hover {
+  background: #666;
+}
