@@ -14,10 +14,8 @@
 
     <h1 class="map-title">Town of Wayfarer’s Rest</h1>
 
-    <!-- Map Grid -->
     <div id="mapGrid"></div>
 
-    <!-- Movement Buttons -->
     <div id="movementControls">
       <button class="move-btn" data-dir="up">▲</button>
       <div class="middle-row">
@@ -27,12 +25,19 @@
       <button class="move-btn" data-dir="down">▼</button>
     </div>
 
-    <!-- Location Interaction Panel -->
-    <div id="locationPanel" style="display:none;">
-      <h2 id="locationName"></h2>
-      <p id="locationDesc"></p>
-      <button id="locationEnterBtn" class="enter-btn">Enter</button>
-      <button id="locationCloseBtn" class="close-btn">Close</button>
+    <!-- Modal -->
+    <div id="locationModal" class="modal" style="display:none;">
+      <div class="modal-content location-box">
+
+        <div id="locationIcon" class="location-icon"></div>
+
+        <h2 id="locationName"></h2>
+        <p id="locationDesc"></p>
+
+        <button id="enterLocationBtn" class="enter-btn">Enter</button>
+        <button id="cancelLocationBtn" class="cancel-btn">Cancel</button>
+
+      </div>
     </div>
 
   </div>
