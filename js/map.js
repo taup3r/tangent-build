@@ -1,22 +1,19 @@
-// Grid size
-const SIZE = 6;
+const SIZE = 12;
 
-// Player start position
-let playerX = 2;
-let playerY = 2;
+let playerX = 6;
+let playerY = 6;
 
-// Map locations
+// HTML-rendered icons
 const locations = [
-  { x: 1, y: 1, name: "Town Hall", desc: "Train your stats.", link: "stats.html" },
-  { x: 4, y: 1, name: "Arena", desc: "Fight a random battle.", link: "combat.html" },
-  { x: 1, y: 4, name: "Normal Dungeon", desc: "A modest challenge.", link: "combat.html?dungeon=normal" },
-  { x: 3, y: 4, name: "Hard Dungeon", desc: "A dangerous expedition.", link: "combat.html?dungeon=hard" },
-  { x: 5, y: 4, name: "Nightmare Dungeon", desc: "Only the brave survive.", link: "combat.html?dungeon=nightmare" }
+  { x: 3, y: 3, name: "Town Hall", desc: "Train your stats.", icon: "🏛️", link: "stats.html" },
+  { x: 8, y: 3, name: "Arena", desc: "Fight a random battle.", icon: "⚔️", link: "combat.html" },
+  { x: 3, y: 9, name: "Normal Dungeon", desc: "A modest challenge.", icon: "🕳️", link: "combat.html?dungeon=normal" },
+  { x: 6, y: 9, name: "Hard Dungeon", desc: "A dangerous expedition.", icon: "🔥", link: "combat.html?dungeon=hard" },
+  { x: 9, y: 9, name: "Nightmare Dungeon", desc: "Only the brave survive.", icon: "💀", link: "combat.html?dungeon=nightmare" }
 ];
 
 const grid = document.getElementById("mapGrid");
 
-// Render grid
 function renderGrid() {
   grid.innerHTML = "";
 
@@ -25,17 +22,14 @@ function renderGrid() {
       const tile = document.createElement("div");
       tile.classList.add("map-tile");
 
-      // Player
       if (x === playerX && y === playerY) {
         tile.classList.add("player");
-        tile.textContent = "You";
+        tile.textContent = "🧍"; // player icon
       }
 
-      // Locations
       const loc = locations.find(l => l.x === x && l.y === y);
       if (loc) {
-        tile.classList.add("location");
-        tile.textContent = loc.name.split(" ")[0];
+        tile.textContent = loc.icon;
       }
 
       grid.appendChild(tile);
@@ -56,33 +50,31 @@ document.querySelectorAll(".move-btn").forEach(btn => {
     if (dir === "right" && playerX < SIZE - 1) playerX++;
 
     renderGrid();
-    checkNearbyLocations();
+    checkLocationStep();
   });
 });
 
-// Check adjacency
-function checkNearbyLocations() {
-  const panel = document.getElementById("locationPanel");
-  const nameEl = document.getElementById("locationName");
-  const descEl = document.getElementById("locationDesc");
-  const enterBtn = document.getElementById("locationEnterBtn");
+// Step-on activation
+function checkLocationStep() {
+  const loc = locations.find(l => l.x === playerX && l.y === playerY);
+  if (!loc) return;
 
-  const nearby = locations.find(loc =>
-    Math.abs(loc.x - playerX) + Math.abs(loc.y - playerY) === 1
-  );
-
-  if (nearby) {
-    panel.style.display = "block";
-    nameEl.textContent = nearby.name;
-    descEl.textContent = nearby.desc;
-    enterBtn.onclick = () => {
-      window.location.href = nearby.link;
-    };
-  } else {
-    panel.style.display = "none";
-  }
+  openLocationModal(loc);
 }
 
-document.getElementById("locationCloseBtn").onclick = () => {
-  document.getElementById("locationPanel").style.display = "none";
+// Modal logic
+function openLocationModal(loc) {
+  document.getElementById("locationName").textContent = loc.name;
+  document.getElementById("locationDesc").textContent = loc.desc;
+  document.getElementById("locationIcon").textContent = loc.icon;
+
+  document.getElementById("enterLocationBtn").onclick = () => {
+    window.location.href = loc.link;
+  };
+
+  document.getElementById("locationModal").style.display = "flex";
+}
+
+document.getElementById("cancelLocationBtn").onclick = () => {
+  document.getElementById("locationModal").style.display = "none";
 };
