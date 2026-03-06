@@ -1,60 +1,88 @@
 #townWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-#townContainer {
   text-align: center;
-  width: 100%;
-  max-width: 480px;
-  padding: 40px;
+  padding-top: 40px;
+  padding-bottom: 140px; /* space for explore button */
 }
 
 .town-title {
-  font-size: 2.6rem;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
 }
 
-.town-subtitle {
-  font-size: 1.1rem;
-  opacity: 0.75;
-  margin-bottom: 40px;
-}
-
-.town-buttons {
+/* Random area */
+#randomArea {
+  width: 300px;
+  margin: 0 auto 40px auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 80%; //260px;
-  margin: 0 auto;
+  gap: 15px;
 }
 
+/* Colored buttons */
 .town-btn {
-  padding: 16px;
-  font-size: 1.3rem;
+  width: 100%;
+  padding: 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
   cursor: pointer;
-  background: #333;
-  color: #fff;
-  transition: 0.2s;
+  font-weight: bold;
 }
 
 .town-btn:hover {
-  background: #444;
+  opacity: 0.9;
 }
 
-.town-btn.explore {
-  background: #4a7cff;
+.town-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.town-btn.train {
-  background: #4caf50;
+/* Unique colors */
+.btn-train { background: #4caf50; }     /* green */
+.btn-arena { background: #ff4a4a; }     /* red */
+.btn-dungeon { background: #4a7cff; }   /* blue */
+
+/* Scrolling lore text */
+#loreScroller {
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 90px;
+  left: 0;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.85;
 }
 
-.town-btn.explore:hover {
-  background: #6a9cff;
+#loreText {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 8s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Explore button (index.html New Game style, 80% width) */
+.explore-btn {
+  width: 80%;
+  padding: 18px;
+  background: #555; /* same as New Game */
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  left: 10%;
+}
+
+.explore-btn:hover {
+  background: #666;
 }
