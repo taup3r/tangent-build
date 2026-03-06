@@ -274,7 +274,9 @@ export function enemySkillAction() {
   if (enemy.behavior === "assassin") {
     log(`${enemy.name} uses Shadow Strike!`);
   } else if (enemy.behavior === "berserker") {
-    log(`${enemy.name} enters a furious Rage Attack`);
+    log(`${enemy.name} enters a furious Rage Attack!`);
+  } else if (enemy.behavior === "sentinel") {
+    log(`${enemy.name} uses Shield Bash!`);
   }
 
   if (enemy.behavior === "berserker") {
@@ -313,6 +315,11 @@ export function enemySkillAction() {
   } else if (enemy.behavior === "berserker") {
     // half damage
     dmg = Math.floor(dmg / 2);
+  } else if (enemy.behavior === "berserker") {
+    // reduced damage
+    dmg = Math.floor(dmg * 0.8);
+    player.ap = Math.max(0, player.ap - 1);
+    log("You lost 1 AP"!);
   } else {
     dmg *= 2;
   }
