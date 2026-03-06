@@ -271,6 +271,10 @@ export function enemyAttackAction() {
 export function enemySkillAction() {
   enemy.ap -= 2;
 
+  if (enemy.behavior === "assassin") {
+    log(`${enemy.name} uses Shadow Strike`);
+  }
+
   if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
@@ -293,8 +297,16 @@ export function enemySkillAction() {
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, totalSTR);
 
-  // --- Skill multiplier (unchanged) ---
-  dmg *= 2;
+  if (enemy.behavior === "assassin") {
+    // TODO: implement Crit Chance here
+    if (Math.random() < 0.35) {
+      dmg = Math.floor(dmg * 2.5);
+    } else {
+      dmg *= 2;
+    }
+  } else {
+    dmg *= 2;
+  }
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
