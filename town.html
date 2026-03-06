@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tangent RPG – Town</title>
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/town.css">
 </head>
 
@@ -31,6 +32,22 @@
     </div>
   </div>
 
+  <!-- Stats Modal -->
+  <div id="statModal" class="modal" style="display:none;">
+    <div class="modal-content stats-iframe-box">
+      <iframe id="statsFrame" src="" class="stats-iframe"></iframe>
+    </div>
+  </div>
+
   <script type="module" src="js/town.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("player");
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = `town.html?player=${encodeURIComponent(name)}`; 
+    };
+  </script>
 </body>
 </html>
