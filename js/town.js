@@ -81,7 +81,6 @@ function generateTownLayout() {
   });
 
   // Update scrolling lore text
-  resetLoreAnimation();
   const lore = loreSnippets[Math.floor(Math.random() * loreSnippets.length)];
   loreText.textContent = lore;
   resetLoreAnimation();
