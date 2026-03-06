@@ -46,7 +46,7 @@
 
 /* Scrolling lore text */
 #loreScroller {
-  width: 100%;
+  width: 90%;
   height: 30px;
   overflow: hidden;
   position: fixed;
@@ -60,7 +60,7 @@
 #loreText {
   display: inline-block;
   white-space: nowrap;
-  animation: scrollText 12s linear infinite;
+  animation: scrollText 10s linear infinite;
 }
 
 @keyframes scrollText {
