@@ -20,8 +20,9 @@ const loreSnippets = [
 ];
 
 function resetLoreAnimation() {
-  const newNode = loreText.cloneNode(true);
-  loreText.parentNode.replaceChild(newNode, loreText);
+  loreText.style.animation = "none";
+  void loreText.offsetWidth;
+  loreText.style.animation = "scrollText 12s linear infinite";
 }
 
 function generateTownLayout() {
