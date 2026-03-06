@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tangent RPG – Town</title>
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/town.css">
 </head>
 
@@ -13,39 +12,25 @@
 
   <div id="townWrapper">
 
-    <div id="townContainer">
+    <h1 class="town-title">Wayfarer’s Rest</h1>
 
-      <h1 class="town-title">Wayfarer’s Rest</h1>
-      <p class="town-subtitle">A quiet refuge between battles.</p>
+    <!-- Randomized Button Container -->
+    <div id="randomArea"></div>
 
-      <div class="town-buttons">
-        <button id="statButton" class="town-btn train" style="display:none;">
-          Train Stats
-        </button>
-        <button id="battleBtn" class="town-btn">Battle Random Encounters</button>
-        <button id="exploreBtn" class="town-btn explore">Explore Dungeon</button>
-      </div>
-
-    </div>
+    <!-- Explore Button -->
+    <button id="exploreBtn" class="explore-btn">Explore</button>
 
   </div>
 
-  <!-- Stats Modal -->
-  <div id="statModal" class="modal" style="display:none;">
-    <div class="modal-content stats-iframe-box">
-      <iframe id="statsFrame" src="" class="stats-iframe"></iframe>
+  <!-- Lore Modal -->
+  <div id="loreModal" class="modal" style="display:none;">
+    <div class="modal-content lore-box">
+      <h2>Exploration Report</h2>
+      <p id="loreText"></p>
+      <button id="closeLoreBtn" class="close-btn">Close</button>
     </div>
   </div>
 
   <script type="module" src="js/town.js"></script>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("player");
-    history.pushState(null, "", location.href);
-    window.onpopstate = function () {
-      window.location.href = `town.html?player=${encodeURIComponent(name)}`; 
-    };
-  </script>
 </body>
 </html>
