@@ -319,7 +319,7 @@ export function enemySkillAction() {
     // reduced damage
     dmg = Math.floor(dmg * 0.8);
     player.ap = Math.max(0, player.ap - 1);
-    log("You lost 1 AP"!);
+    log("You lost 1 AP!");
   } else {
     dmg *= 2;
   }
