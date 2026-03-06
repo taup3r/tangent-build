@@ -19,6 +19,11 @@ const loreSnippets = [
   "A child pointed at you excitedly, whispering about heroes."
 ];
 
+function resetLoreAnimation() {
+  const newNode = loreText.cloneNode(true);
+  loreText.parentNode.replaceChild(newNode, loreText);
+}
+
 function generateTownLayout() {
   randomArea.innerHTML = "";
 
@@ -75,6 +80,7 @@ function generateTownLayout() {
   // Update scrolling lore text
   const lore = loreSnippets[Math.floor(Math.random() * loreSnippets.length)];
   loreText.textContent = lore;
+  resetLoreAnimation();
 }
 
 // Initial generation
