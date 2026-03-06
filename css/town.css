@@ -42,7 +42,7 @@
 /* Unique colors */
 .btn-train { background: #4caf50; }     /* green */
 .btn-arena { background: #ff4a4a; }     /* red */
-.btn-dungeon { background: #b347ff; }   /* purple */
+.btn-dungeon { background: #4a7cff; }   /* blue */
 
 /* Scrolling lore text */
 #loreScroller {
