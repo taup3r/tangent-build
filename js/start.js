@@ -19,7 +19,7 @@ document.getElementById("newGameBtn").onclick = () => {
 
   localStorage.setItem(key, JSON.stringify(newSave));
 
-  window.location.href = `combat.html?player=${encodeURIComponent(name)}`;
+  window.location.href = `town.html?player=${encodeURIComponent(name)}`;
 };
 
 
