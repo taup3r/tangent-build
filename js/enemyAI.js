@@ -41,7 +41,7 @@ function decideEnemyAction() {
 
   // BERSERKER — reckless, always attacks, stronger when low HP
   if (type === "berserker") {
-    const hpPercent = enemy.currentHP / enemy.maxHP;
+    const hpPercent = enemy.hp / enemy.maxHP;
 
     if (enemy.ap >= 2) {
       // Rage mode below 50% HP → skill attack
