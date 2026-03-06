@@ -4,26 +4,93 @@ import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from 
 
 loadProgress();
 
-document.getElementById("battleBtn").onclick = () => {
-  // Normal single battle
-  window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
-};
+const randomArea = document.getElementById("randomArea");
+const exploreBtn = document.getElementById("exploreBtn");
 
-document.getElementById("exploreBtn").onclick = () => {
-  // Start dungeon mode with 8 enemies
-  setDungeonMode(true);
-  startDungeon(getDifficulty());
+const loreModal = document.getElementById("loreModal");
+const loreText = document.getElementById("loreText");
+const closeLoreBtn = document.getElementById("closeLoreBtn");
 
-  window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
-};
+const loreSnippets = [
+  "You wandered through the quiet market streets.",
+  "A stray cat followed you for a few steps before losing interest.",
+  "You overheard adventurers arguing about treasure in the hills.",
+  "A cool breeze carried the scent of pine and distant rain.",
+  "You spotted a merchant packing up mysterious crates.",
+  "A guard nodded at you, recognizing your growing reputation.",
+  "You found a strange footprint near the town gate.",
+  "A child pointed at you excitedly, whispering about heroes."
+];
 
-// Show stat button if points available
-if (playerStats.statPoints > 0) {
-  document.getElementById("statButton").onclick = () => {
-    openStatModal();
-  }
-  document.getElementById("statButton").style.display = "block";
+function generateTownLayout() {
+  randomArea.innerHTML = "";
+
+  const buttons = [
+    {
+      label: "Train Stats",
+      action: () => openStatModal(),
+      disabled: playerStats.statPoints <= 0
+    },
+    {
+      label: "Fight in Arena",
+      action: () => {
+        // Normal single battle
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    },
+    {
+      label: "Enter Dungeon",
+      action: () => {
+        // Start dungeon mode with 8 enemies
+        setDungeonMode(true);
+        startDungeon(getDifficulty());
+
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    }
+  ];
+
+  // Randomly decide how many buttons appear (0–3)
+  const count = Math.floor(Math.random() * 4);
+
+  // Shuffle buttons
+  const shuffled = [...buttons].sort(() => Math.random() - 0.5);
+
+  // Take the first N
+  const chosen = shuffled.slice(0, count);
+
+  // Render them
+  chosen.forEach(btn => {
+    const el = document.createElement("button");
+    el.classList.add("town-btn");
+    el.textContent = btn.label;
+    el.disabled = btn.disabled;
+
+    if (!btn.disabled) {
+      el.onclick = btn.action;
+    }
+
+    randomArea.appendChild(el);
+  });
+
+  // Show lore modal
+  const lore = loreSnippets[Math.floor(Math.random() * loreSnippets.length)];
+  loreText.textContent = lore;
+  loreModal.style.display = "flex";
 }
+
+// Initial generation
+generateTownLayout();
+
+// Explore → reshuffle
+exploreBtn.onclick = generateTownLayout;
+
+// Close modal
+closeLoreBtn.onclick = () => {
+  loreModal.style.display = "none";
+};
 
 function getDifficulty() {
   const roll = Math.random();
