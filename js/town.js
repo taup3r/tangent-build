@@ -6,10 +6,7 @@ loadProgress();
 
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
-
-const loreModal = document.getElementById("loreModal");
 const loreText = document.getElementById("loreText");
-const closeLoreBtn = document.getElementById("closeLoreBtn");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -75,10 +72,9 @@ function generateTownLayout() {
     randomArea.appendChild(el);
   });
 
-  // Show lore modal
+  // Update scrolling lore text
   const lore = loreSnippets[Math.floor(Math.random() * loreSnippets.length)];
   loreText.textContent = lore;
-  loreModal.style.display = "flex";
 }
 
 // Initial generation
@@ -86,11 +82,6 @@ generateTownLayout();
 
 // Explore → reshuffle
 exploreBtn.onclick = generateTownLayout;
-
-// Close modal
-closeLoreBtn.onclick = () => {
-  loreModal.style.display = "none";
-};
 
 function getDifficulty() {
   const roll = Math.random();
