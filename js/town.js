@@ -20,9 +20,10 @@ const loreSnippets = [
 ];
 
 function resetLoreAnimation() {
+  const animation = loreText.style.animation;
   loreText.style.animation = "none";
   void loreText.offsetWidth;
-  loreText.style.animation = "scrollText 12s linear infinite";
+  loreText.style.animation = animation;
 }
 
 function generateTownLayout() {
