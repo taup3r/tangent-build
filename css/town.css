@@ -1,7 +1,7 @@
 #townWrapper {
   text-align: center;
   padding-top: 40px;
-  padding-bottom: 120px; /* space for explore button */
+  padding-bottom: 140px; /* space for explore button */
 }
 
 .town-title {
@@ -39,9 +39,9 @@
   cursor: not-allowed;
 }
 
-/* Color themes */
+/* Unique colors */
 .btn-train { background: #4caf50; }     /* green */
-.btn-arena { background: #4a7cff; }     /* blue */
+.btn-arena { background: #ff4a4a; }     /* red */
 .btn-dungeon { background: #b347ff; }   /* purple */
 
 /* Scrolling lore text */
@@ -50,7 +50,7 @@
   height: 30px;
   overflow: hidden;
   position: fixed;
-  bottom: 70px;
+  bottom: 90px;
   left: 0;
   text-align: center;
   font-size: 1rem;
@@ -68,19 +68,19 @@
   100% { transform: translateX(-100%); }
 }
 
-/* Explore button */
+/* Explore button (index.html New Game style, 80% width) */
 .explore-btn {
-  width: 100%;
+  width: 80%;
   padding: 18px;
-  background: #4a7cff; /* Arena blue */
+  background: #4a7cff; /* same as New Game */
   border: none;
-  border-radius: 0;
+  border-radius: 10px;
   color: white;
   font-size: 1.3rem;
   cursor: pointer;
   position: fixed;
-  bottom: 0;
-  left: 0;
+  bottom: 20px;
+  left: 10%;
 }
 
 .explore-btn:hover {
