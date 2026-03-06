@@ -1,6 +1,7 @@
 #townWrapper {
   text-align: center;
   padding-top: 40px;
+  padding-bottom: 120px; /* space for explore button */
 }
 
 .town-title {
@@ -17,65 +18,71 @@
   gap: 15px;
 }
 
-/* Buttons */
+/* Colored buttons */
 .town-btn {
   width: 100%;
   padding: 14px;
-  background: #333;
   border: none;
   border-radius: 8px;
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .town-btn:hover {
-  background: #444;
+  opacity: 0.9;
 }
 
 .town-btn:disabled {
-  background: #555;
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+}
+
+/* Color themes */
+.btn-train { background: #4caf50; }     /* green */
+.btn-arena { background: #4a7cff; }     /* blue */
+.btn-dungeon { background: #b347ff; }   /* purple */
+
+/* Scrolling lore text */
+#loreScroller {
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+#loreText {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 12s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* Explore button */
 .explore-btn {
-  width: 200px;
-  padding: 14px;
-  background: #4a7cff;
+  width: 100%;
+  padding: 18px;
+  background: #4a7cff; /* Arena blue */
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 .explore-btn:hover {
   background: #6a9cff;
-}
-
-/* Modal */
-.lore-box {
-  width: 320px;
-  padding: 20px;
-  background: #1a1a1a;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.close-btn {
-  width: 100%;
-  padding: 12px;
-  background: #555;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.close-btn:hover {
-  background: #666;
 }
