@@ -72,7 +72,7 @@
 .explore-btn {
   width: 80%;
   padding: 18px;
-  background: #4a7cff; /* same as New Game */
+  background: #555; /* same as New Game */
   border: none;
   border-radius: 10px;
   color: white;
@@ -84,5 +84,5 @@
 }
 
 .explore-btn:hover {
-  background: #6a9cff;
+  background: #666;
 }
