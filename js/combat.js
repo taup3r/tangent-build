@@ -315,7 +315,7 @@ export function enemySkillAction() {
   } else if (enemy.behavior === "berserker") {
     // half damage
     dmg = Math.floor(dmg / 2);
-  } else if (enemy.behavior === "berserker") {
+  } else if (enemy.behavior === "sentinel") {
     // reduced damage
     dmg = Math.floor(dmg * 0.8);
     player.ap = Math.max(0, player.ap - 1);
