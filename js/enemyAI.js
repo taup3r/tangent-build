@@ -59,7 +59,7 @@ function decideEnemyAction() {
     if (enemy.ap >= 2) return "skill"; // Shield Bash
     if (enemy.ap >= 1) {
       // If player attacked last turn → counterattack
-      if (player.lastAction === "attack") return "attack";
+      if (!player.defending) return "attack";
       return "defend";
     }
     return "defend";
