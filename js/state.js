@@ -273,7 +273,10 @@ export let enemy = generateEnemy(playerStats.level);
 const enemyPortraits = {
   aggressive: "assets/enemy_aggressive.png",
   defensive: "assets/enemy_defensive.png",
-  warlock: "assets/enemy_warlock.png"
+  warlock: "assets/enemy_warlock.png",
+  assassin: "assets/enemy_assassin.png",
+  sentinel: "assets/enemy_sentinel.png",
+  berserker: "assets/enemy_berserker.png"
 };
 
 export function initializePortraits() {
