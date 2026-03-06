@@ -107,7 +107,10 @@ export function loseExp(amount) {
 const enemyTypes = [
   { type: "Aggressive Fighter", behavior: "aggressive", hint: "This foe seems bloodthirsty..." },
   { type: "Defensive Guard", behavior: "defensive", hint: "This one watches your moves carefully..." },
-  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." }
+  { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." },
+  { type: "Silent Assassin", behavior: "assassin", hint: "This foe moves with deadly precision..." },
+  { type: "Raging Berserker", behavior: "berserker", hint: "Its eyes burn with uncontrollable fury..." },
+  { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." }
 ];
 
 // Tier roll: 80% normal, 15% elite, 5% boss
@@ -119,8 +122,8 @@ function rollEnemyTier() {
 }
 
 function randomName() {
-  const first = ["Gor", "Thal", "Rin", "Vor", "Kel", "Zar", "Mor", "Fen"];
-  const last = ["Bloodfang", "Ironhide", "Nightweaver", "Stormborn", "Ashclaw"];
+  const first = ["Gor", "Thal", "Rin", "Vor", "Kel", "Zar", "Mor", "Fen", "Lin", "Rex", "Stu", "Bal"];
+  const last = ["Bloodfang", "Ironhide", "Nightweaver", "Stormborn", "Ashclaw", "Capslock", "Coldwind", "Boltsong"];
   return first[Math.floor(Math.random() * first.length)] + " " +
          last[Math.floor(Math.random() * last.length)];
 }
@@ -270,7 +273,10 @@ export let enemy = generateEnemy(playerStats.level);
 const enemyPortraits = {
   aggressive: "assets/enemy_aggressive.png",
   defensive: "assets/enemy_defensive.png",
-  warlock: "assets/enemy_warlock.png"
+  warlock: "assets/enemy_warlock.png",
+  assassin: "assets/enemy_assassin.png",
+  sentinel: "assets/enemy_sentinel.png",
+  berserker: "assets/enemy_berserker.png"
 };
 
 export function initializePortraits() {

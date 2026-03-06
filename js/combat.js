@@ -271,10 +271,22 @@ export function enemyAttackAction() {
 export function enemySkillAction() {
   enemy.ap -= 2;
 
-  if (!rollHit(enemy, player)) {
-    log("Enemy missed!");
-    floatDamage("MISS", "playerCard");
-    return;
+  if (enemy.behavior === "assassin") {
+    log(`${enemy.name} uses Shadow Strike!`);
+  } else if (enemy.behavior === "berserker") {
+    log(`${enemy.name} enters a furious Rage Attack!`);
+  } else if (enemy.behavior === "sentinel") {
+    log(`${enemy.name} uses Shield Bash!`);
+  }
+
+  if (enemy.behavior === "berserker") {
+    //sure hit
+  } else {
+    if (!rollHit(enemy, player)) {
+      log("Enemy missed!");
+      floatDamage("MISS", "playerCard");
+      return;
+    }
   }
 
   animateSkillDouble("playerCard");
@@ -293,8 +305,24 @@ export function enemySkillAction() {
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, totalSTR);
 
-  // --- Skill multiplier (unchanged) ---
-  dmg *= 2;
+  if (enemy.behavior === "assassin") {
+    // crit chance increase damage
+    if (Math.random() < 0.35) {
+      dmg = Math.floor(dmg * 2.5);
+    } else {
+      dmg *= 2;
+    }
+  } else if (enemy.behavior === "berserker") {
+    // half damage
+    dmg = Math.floor(dmg / 2);
+  } else if (enemy.behavior === "sentinel") {
+    // reduced damage
+    dmg = Math.floor(dmg * 0.8);
+    player.ap = Math.max(0, player.ap - 1);
+    log("You lost 1 AP!");
+  } else {
+    dmg *= 2;
+  }
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);

@@ -6,7 +6,7 @@
    - Turn transitions
 ============================================ */
 
-import { enemy, clampAP } from "./state.js";
+import { player, enemy, clampAP } from "./state.js";
 import { log, updateUI } from "./ui.js";
 import { startPlayerTurn } from "./combat.js";
 import { checkWin } from "./modal.js";
@@ -23,6 +23,51 @@ import {
 
 function decideEnemyAction() {
   const type = enemy.behavior;
+
+  // ============================
+  // NEW BEHAVIORS
+  // ============================
+
+  // ASSASSIN — avoids attacking into defense, prefers skill
+  if (type === "assassin") {
+    if (enemy.ap >= 2) return Math.random() < 0.7 ? "skill" : "attack";
+    if (enemy.ap >= 1) {
+      // If player is defending, avoid attacking
+      if (player.defending) return "defend";
+      return "attack";
+    }
+    return "defend";
+  }
+
+  // BERSERKER — reckless, always attacks, stronger when low HP
+  if (type === "berserker") {
+    const hpPercent = enemy.hp / enemy.max;
+
+    if (enemy.ap >= 2) {
+      // Rage mode below 50% HP → skill attack
+      if (hpPercent < 0.5) return "skill";
+      return "attack";
+    }
+
+    if (enemy.ap >= 1) return "attack";
+
+    return "skip";
+  }
+
+  // SENTINEL — defensive, punishes attacks, uses shield bash
+  if (type === "sentinel") {
+    if (enemy.ap >= 2) return "skill"; // Shield Bash
+    if (enemy.ap >= 1) {
+      // If player attacked last turn → counterattack
+      if (!player.defending) return "attack";
+      return "defend";
+    }
+    return "defend";
+  }
+
+  // ============================
+  // EXISTING BEHAVIORS
+  // ============================
 
   // If enemy has 2 AP → skill or attack/defend depending on type
   if (enemy.ap >= 2) {
