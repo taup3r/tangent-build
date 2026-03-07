@@ -101,6 +101,11 @@ export function loseExp(amount) {
   saveProgress();
 }
 
+export function gainGold(amount) {
+  playerStats.gold += amount;
+  saveProgress();
+}
+
 /* ================================
    ENEMY TYPES + TIERS
 ================================ */
