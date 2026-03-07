@@ -63,11 +63,6 @@
   animation: scrollText 8s linear infinite;
 }
 
-@keyframes scrollText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
 /* Explore button (index.html New Game style, 80% width) */
 .explore-btn {
   width: 80%;
