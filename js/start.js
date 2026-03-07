@@ -46,7 +46,7 @@ document.getElementById("continueBtn").onclick = () => {
       nameBtn.textContent = name;
       nameBtn.style.cursor = "pointer";
       nameBtn.onclick = () => {
-        window.location.href = `combat.html?player=${encodeURIComponent(name)}`;
+        window.location.href = `town.html?player=${encodeURIComponent(name)}`;
       };
 
       // Delete button
