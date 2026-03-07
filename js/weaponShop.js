@@ -51,24 +51,6 @@ function renderShop() {
   shopList.innerHTML = "";
 
   inventory.forEach(w => {
-    const el = document.createElement("div");
-    el.classList.add("shop-item");
-
-    el.innerHTML = `
-      <span class="shop-weapon-name">${w.name}</span>
-      <button class="buy-btn">Buy</button>
-    `;
-
-    // Hook up buy logic later
-    shopList.appendChild(el);
-  });
-}
-function renderShop() {
-  const inventory = loadShopInventory();
-
-  shopList.innerHTML = "";
-
-  inventory.forEach(w => {
     const { color } = getColorByRank(w.rank);
 
     const el = document.createElement("div");
