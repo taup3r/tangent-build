@@ -1,4 +1,5 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
+import { getRandomDungeonType } from "./dungeon.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -28,6 +29,7 @@ function resetLoreAnimation() {
 
 function generateTownLayout() {
   randomArea.innerHTML = "";
+  const dungeonType = getRandomDungeonType();
 
   const buttons = [
     {
@@ -46,12 +48,12 @@ function generateTownLayout() {
       disabled: false
     },
     {
-      label: "Enter Dungeon",
+      label: `Enter ${dungeonType.name}`,
       class: "btn-dungeon",
       action: () => {
-        // Start dungeon mode with 8 enemies
+        // Start dungeon
         setDungeonMode(true);
-        startDungeon(getDifficulty());
+        startDungeon(dungeonType.type);
 
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
@@ -93,13 +95,6 @@ generateTownLayout();
 
 // Explore → reshuffle
 exploreBtn.onclick = generateTownLayout;
-
-function getDifficulty() {
-  const roll = Math.random();
-  if (roll < 0.30) return "normal";
-  if (roll < 0.60) return "hard";
-  return "nightmare";
-}
 
 /* -------------------------
    STAT MENU

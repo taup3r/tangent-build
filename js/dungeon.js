@@ -1,6 +1,7 @@
 export const dungeonTypes = {
   normal: {
-    name: "Normal Dungeon",
+    type: "normal",
+    name: "Dim Caverns",
     enemies: 4,
     elites: 1,
     bosses: 1,
@@ -9,7 +10,8 @@ export const dungeonTypes = {
     rewardBonus: 4
   },
   hard: {
-    name: "Hard Dungeon",
+    type: "hard",
+    name: "Ancient Ruins",
     enemies: 6,
     elites: 2,
     bosses: 1,
@@ -18,7 +20,8 @@ export const dungeonTypes = {
     rewardBonus: 6
   },
   nightmare: {
-    name: "Nightmare Dungeon",
+    type: "nightmare",
+    name: "Obsidian Halls",
     enemies: 8,
     elites: 3,
     bosses: 1,
@@ -27,6 +30,17 @@ export const dungeonTypes = {
     rewardBonus: 8
   }
 };
+
+function getDifficulty() {
+  const roll = Math.random();
+  if (roll < 0.30) return "normal";
+  if (roll < 0.60) return "hard";
+  return "nightmare";
+}
+
+export function getRandomDungeonType() {
+  return dungeonTypes[getDifficulty()];
+}
 
 export function generateDungeonQueue(type) {
   const d = dungeonTypes[type];
