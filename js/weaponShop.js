@@ -8,6 +8,10 @@ loadProgress();
 
 const shopList = document.getElementById("shopList");
 
+document.getElementById("backButton").onclick = () => {
+  window.location.href=`town.html?player=${encodeURIComponent(player.name)}`;
+}
+
 function getCurrentHourKey() {
   const now = new Date();
   return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}-${now.getHours()}`;
