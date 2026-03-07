@@ -56,7 +56,6 @@ function renderShop() {
 
     el.innerHTML = `
       <div class="shop-weapon-name">${w.name}</div>
-      <div class="shop-weapon-stats">${w.minDamage}–${w.maxDamage} dmg</div>
       <button class="buy-btn">Buy</button>
     `;
 
