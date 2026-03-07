@@ -60,7 +60,13 @@ function generateTownLayout() {
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
-    }
+    },
+    {
+      label: "Weapon Shop",
+      class: "btn-shop",
+      action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`;
+      disabled: false
+}
   ];
 
   // Randomly decide how many buttons appear (1–3)
