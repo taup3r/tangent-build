@@ -1,5 +1,6 @@
 export const dungeonTypes = {
   normal: {
+    type: "normal",
     name: "Dim Caverns",
     enemies: 4,
     elites: 1,
@@ -9,6 +10,7 @@ export const dungeonTypes = {
     rewardBonus: 4
   },
   hard: {
+    type: "hard",
     name: "Ancient Ruins",
     enemies: 6,
     elites: 2,
@@ -18,6 +20,7 @@ export const dungeonTypes = {
     rewardBonus: 6
   },
   nightmare: {
+    type: "nightmare",
     name: "Obsidian Halls",
     enemies: 8,
     elites: 3,
