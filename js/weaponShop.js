@@ -1,5 +1,5 @@
 import { player, playerStats, loadProgress } from "./state.js";
-import { generateWeapon, getColorByRank } from "./weapon.js";
+import { generateWeapon } from "./weapon.js";
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
@@ -51,14 +51,12 @@ function renderShop() {
   shopList.innerHTML = "";
 
   inventory.forEach(w => {
-    const { color } = getColorByRank(w.rank);
-
     const el = document.createElement("div");
     el.classList.add("shop-item");
 
     el.innerHTML = `
       <div class="shop-row">
-        <span class="weapon-name" style="color:${color}">${w.name}</span>
+        <span class="weapon-name" style="color:${w.color}">${w.name}</span>
         <span class="buy-icon">🛒</span>
       </div>
     `;
