@@ -93,7 +93,7 @@ const mythicLore = [
 // COLOR SYSTEM
 // =========================
 
-export function getColorByRank(rank) {
+function getColorByRank(rank) {
   if (rank <= 10) return { tier: "Common", color: "#C0C0C0" };
   if (rank <= 20) return { tier: "Uncommon", color: "#4CAF50" };
   if (rank <= 30) return { tier: "Rare", color: "#2196F3" };
