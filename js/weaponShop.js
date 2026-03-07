@@ -47,17 +47,18 @@ function loadShopInventory() {
 
 function renderShop() {
   const inventory = loadShopInventory();
-
   shopList.innerHTML = "";
 
   inventory.forEach(w => {
+    const { color } = getColorByRank(w.rank);
+
     const el = document.createElement("div");
     el.classList.add("shop-item");
 
     el.innerHTML = `
       <div class="shop-row">
-        <span class="weapon-name" style="color:${w.color}">${w.name}</span>
-        <button>buy</button>
+        <span class="weapon-name" style="color:${color}">${w.name}</span>
+        <span class="buy-icon">🛒</span>
       </div>
     `;
 
