@@ -3,7 +3,7 @@
 ============================================ */
 
 import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType } from "./state.js";
-import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
+import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -136,6 +136,7 @@ export function showResultModal(victory) {
     animateExpGain(expDisplay, 0, expGain);
 
     gainExp(expGain);
+    gainGold(enemy.gold);
 
   } else {
     title.textContent = "Defeat";
