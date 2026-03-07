@@ -1,5 +1,5 @@
 import { player, playerStats, loadProgress } from "./state.js";
-import { generateWeapon } from "./weapon.js";
+import { generateWeapon, getColorByRank } from "./weapon.js";
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
@@ -60,6 +60,33 @@ function renderShop() {
     `;
 
     // Hook up buy logic later
+    shopList.appendChild(el);
+  });
+}
+function renderShop() {
+  const inventory = loadShopInventory();
+
+  shopList.innerHTML = "";
+
+  inventory.forEach(w => {
+    const { color } = getColorByRank(w.rank);
+
+    const el = document.createElement("div");
+    el.classList.add("shop-item");
+
+    el.innerHTML = `
+      <div class="shop-row">
+        <span class="weapon-name" style="color:${color}">${w.name}</span>
+        <span class="buy-icon">🛒</span>
+      </div>
+    `;
+
+    // Buy logic (hook later)
+    el.querySelector(".buy-icon").onclick = () => {
+      console.log("Buy", w.name);
+      // implement purchase logic here
+    };
+
     shopList.appendChild(el);
   });
 }
