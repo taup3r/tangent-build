@@ -254,6 +254,7 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
+        document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     showResultModal(true);
     return true;
   }
