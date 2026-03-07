@@ -1,3 +1,7 @@
+.container {
+  padding: 0px;
+}
+
 .shop-item {
   background: #222;
   padding: 12px;
