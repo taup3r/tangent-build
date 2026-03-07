@@ -56,7 +56,8 @@ function renderShop() {
 
     el.innerHTML = `
       <div class="shop-row">
-        <button class="weapon-name" style="color:${w.color}">${w.name}</button>
+        <span class="weapon-name" style="color:${w.color}">${w.name}</span>
+        <button>buy</button>
       </div>
     `;
 
