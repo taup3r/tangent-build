@@ -22,6 +22,8 @@ export function updateHeaderStats() {
   document.getElementById("playerLevelDisplay").textContent = `Lv ${playerStats.level}`;
   document.getElementById("playerExpDisplay").textContent =
     `EXP: ${playerStats.exp} / ${playerStats.expToNext}`;
+    document.getElementById("playerGoldDisplay").textContent =
+    `GOLD: ${playerStats.gold}`;
 }
 
 /* -------------------------
