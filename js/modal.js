@@ -3,7 +3,7 @@
 ============================================ */
 
 import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType } from "./state.js";
-import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat } from "./state.js";
+import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -136,6 +136,7 @@ export function showResultModal(victory) {
     animateExpGain(expDisplay, 0, expGain);
 
     gainExp(expGain);
+    gainGold(enemy.gold);
 
   } else {
     title.textContent = "Defeat";
@@ -253,6 +254,7 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
+        document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     showResultModal(true);
     return true;
   }
@@ -369,6 +371,8 @@ export function openPlayerInfoModal() {
   // Name + Level
   document.getElementById("playerInfoName").textContent = player.name;
   document.getElementById("playerInfoLevel").textContent = playerStats.level;
+  document.getElementById("playerInfoExp").textContent = `${playerStats.exp}/${playerStats.expToNext}`;
+  document.getElementById("playerInfoGold").textContent = playerStats.gold || 0;
 
   // Stats (after weapon bonuses)
   document.getElementById("playerInfoSTR").textContent = player.STR;

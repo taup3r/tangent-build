@@ -32,7 +32,8 @@ export let playerStats = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  playerWeapon: null
+  playerWeapon: null,
+  gold: 0
 };
 
 export function loadProgress() {
@@ -97,6 +98,11 @@ export function gainExp(amount) {
 export function loseExp(amount) {
   playerStats.exp -= amount;
   if (playerStats.exp < 0) playerStats.exp = 0;
+  saveProgress();
+}
+
+export function gainGold(amount) {
+  playerStats.gold += amount;
   saveProgress();
 }
 
@@ -256,7 +262,8 @@ export function generateEnemy(playerLevel) {
     behavior: baseType.behavior,
     hint: tierHint || baseType.hint,
     stats,
-    weapon
+    weapon,
+    gold: level * 4
   };
 }
 
