@@ -32,7 +32,8 @@ export let playerStats = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  playerWeapon: null
+  playerWeapon: null,
+  gold: 0
 };
 
 export function loadProgress() {
@@ -256,7 +257,8 @@ export function generateEnemy(playerLevel) {
     behavior: baseType.behavior,
     hint: tierHint || baseType.hint,
     stats,
-    weapon
+    weapon,
+    gold: level * 4
   };
 }
 
