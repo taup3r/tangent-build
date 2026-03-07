@@ -18,7 +18,10 @@
 
       <h1>Weapon Shop</h1>
       <div id="shopList"></div>
-      <button onclick="window.location.href=`town.html?player=${encodeURIComponent(player.name)}`>Back</button>
+      <button onclick={
+        const name = params.get("player");
+        window.location.href=`town.html?player=${encodeURIComponent(name)}`;
+      }>Back</button>
 
     </div>
 
@@ -31,7 +34,7 @@
     const name = params.get("player");
     history.pushState(null, "", location.href);
     window.onpopstate = function () {
-      window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`;
+      window.location.href = `weaponshop.html?player=${encodeURIComponent(name)}`;
     };
   </script>
 </body>
