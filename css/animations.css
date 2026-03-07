@@ -61,6 +61,11 @@
 }
 
 /* Travel animations */
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
 .travel-out {
   animation: travelOut 0.3s forwards ease-out;
 }
