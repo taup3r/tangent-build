@@ -53,7 +53,7 @@ function generateTownLayout() {
       action: () => {
         // Start dungeon
         setDungeonMode(true);
-        startDungeon(dungeonType.name);
+        startDungeon(dungeonType.type);
 
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
