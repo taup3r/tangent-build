@@ -93,8 +93,19 @@ function generateTownLayout() {
 // Initial generation
 generateTownLayout();
 
-// Explore → reshuffle
-exploreBtn.onclick = generateTownLayout;
+// Explore → travel
+exploreBtn.onclick = () => {
+  // Animate old content out
+  randomArea.classList.remove("travel-in");
+  randomArea.classList.add("travel-out");
+
+  // After animation ends, regenerate and animate in
+  setTimeout(() => {
+    generateTownLayout();
+    randomArea.classList.remove("travel-out");
+    randomArea.classList.add("travel-in");
+  }, 300);
+};
 
 /* -------------------------
    STAT MENU
