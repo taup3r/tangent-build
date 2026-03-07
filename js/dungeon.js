@@ -28,6 +28,17 @@ export const dungeonTypes = {
   }
 };
 
+function getDifficulty() {
+  const roll = Math.random();
+  if (roll < 0.30) return "normal";
+  if (roll < 0.60) return "hard";
+  return "nightmare";
+}
+
+export function getRandomDungeonType() {
+  return dungeonTypes[getDifficulty()];
+}
+
 export function generateDungeonQueue(type) {
   const d = dungeonTypes[type];
 
