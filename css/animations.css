@@ -59,3 +59,22 @@
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Travel animations */
+.travel-out {
+  animation: travelOut 0.3s forwards ease-out;
+}
+
+.travel-in {
+  animation: travelIn 0.3s forwards ease-out;
+}
+
+@keyframes travelOut {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(-40px); }
+}
+
+@keyframes travelIn {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
