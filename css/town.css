@@ -1,10 +1,6 @@
-html, body {
-  padding: 0px;
-}
-
 #townWrapper {
   text-align: center;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 140px; /* space for explore button */
 }
 
@@ -65,11 +61,6 @@ html, body {
   display: inline-block;
   white-space: nowrap;
   animation: scrollText 8s linear infinite;
-}
-
-@keyframes scrollText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
 }
 
 /* Explore button (index.html New Game style, 80% width) */
