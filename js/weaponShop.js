@@ -55,7 +55,7 @@ function renderShop() {
     el.classList.add("shop-item");
 
     el.innerHTML = `
-      <div class="shop-weapon-name">${w.name}</div>
+      <span class="shop-weapon-name">${w.name}</span>
       <button class="buy-btn">Buy</button>
     `;
 
