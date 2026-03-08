@@ -1,3 +1,5 @@
+import { player, loadProgress } from "./state.js";
+
 loadProgress();
 
 const playerQuests = `${player.name}_quests`;
