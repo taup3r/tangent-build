@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { generateWeapon } from "./weapon.js";
-import { openWeaponCompare } from "./modal.js";
+import { openCompareWeapon } from "./modal.js";
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
@@ -61,7 +61,7 @@ function renderShop() {
     `;
 
     el.querySelector(".buy-btn").onclick = () => {
-      openWeaponCompare(w,
+      openCompareWeapon(w,
         mode: `Buy ${price}g`,
         onAction: () => {
           // Deduct gold
