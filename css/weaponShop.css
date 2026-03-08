@@ -16,9 +16,10 @@
   font-size: 0.95rem; /* smaller for long names */
   font-weight: bold;
   max-width: 70%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  //overflow: hidden;
+  overflow-wrap: break-word;
+  //text-overflow: ellipsis;
+  //white-space: nowrap;
 }
 
 .buy-btn {
