@@ -68,8 +68,8 @@ function renderShop() {
 
     el.querySelector(".buy-btn").onclick = () => {
       openCompareWeapon(w,
-        mode: `Buy ${price}g`,
-        onAction: () => {
+        `Buy ${price}g`,
+        () => {
           // Deduct gold
           playerStats.gold -= price;
 
