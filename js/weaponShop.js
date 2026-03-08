@@ -82,6 +82,7 @@ function renderShop() {
         () => {
           // Deduct gold
           if (playerStats.gold < price) return;
+          player.weapon = w;
           playerStats.gold -= price;
 
           // Remove weapon from shop
