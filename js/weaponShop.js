@@ -7,6 +7,8 @@ const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
 
 loadProgress();
 
+document.getElementById("backButton").onclick = window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
+
 const shopList = document.getElementById("shopList");
 
 function getCurrentHourKey() {
