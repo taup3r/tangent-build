@@ -23,11 +23,11 @@
 }
 
 .buy-btn {
-  background: #4a7cff;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  padding: 6px 10px;
+  //background: #4a7cff;
+  //border: none;
+  //border-radius: 6px;
+  //color: white;
+  //padding: 6px 10px;
   cursor: pointer;
   font-size: 0.9rem;
   white-space: nowrap;
