@@ -8,7 +8,7 @@
 .shop-row {
   display: flex;
   justify-content: space-between;
-  align-items: left;
+  align-items: center;
 }
 
 .weapon-name {
