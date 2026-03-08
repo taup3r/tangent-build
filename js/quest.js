@@ -18,6 +18,7 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
+    chance: 50,
     stage: 0, // 0 = not started
     maxStage: 4,
     active: false,
