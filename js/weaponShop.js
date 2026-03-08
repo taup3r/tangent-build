@@ -76,6 +76,7 @@ function renderShop() {
         `Buy ${price}g`,
         () => {
           // Deduct gold
+          if (playerStats.gold < price) return;
           playerStats.gold -= price;
 
           // Remove weapon from shop
