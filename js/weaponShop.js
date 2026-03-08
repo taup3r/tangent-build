@@ -23,7 +23,7 @@ function loadShopInventory() {
   const savedKey = localStorage.getItem(playerWeaponShopTimestamp);
   const savedInventory = JSON.parse(localStorage.getItem(playerWeaponShopInventory));
 
-  const isValid = 
+  const isValid = savedKey &&
     savedKey === hourKey &&
     Array.isArray(savedInventory);
 
