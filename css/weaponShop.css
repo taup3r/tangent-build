@@ -1,7 +1,7 @@
 .shop-item {
   background: #222;
-  padding: 12px;
-  margin-bottom: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
   border-radius: 8px;
   border: 1px solid #444;
 }
@@ -13,16 +13,25 @@
 }
 
 .weapon-name {
-  font-size: 1.1rem;
+  font-size: 0.95rem; /* smaller for long names */
   font-weight: bold;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.buy-icon {
-  font-size: 1.2rem;
+.buy-btn {
+  background: #4a7cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 6px 10px;
   cursor: pointer;
-  padding-left: 10px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-.buy-icon:hover {
-  opacity: 0.7;
+.buy-btn:hover {
+  background: #6a9cff;
 }
