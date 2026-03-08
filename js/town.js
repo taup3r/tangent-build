@@ -1,6 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
+import { quests, getQuest, saveQuestState } from "./quest.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -136,3 +137,15 @@ window.addEventListener("message", (event) => {
     closeStatModal();
   }
 });
+
+
+/* QUESTS */
+
+function tryQuestEncounter() {
+  const blacksmith = getQuest("blacksmith");
+
+  // Only trigger if quest not started
+  if (blacksmith.stage === 0 && Math.random() < 0.10) {
+    triggerQuestIntro();
+  }
+}
