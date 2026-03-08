@@ -26,6 +26,8 @@ function loadShopInventory() {
     return JSON.parse(localStorage.getItem(playerWeaponShopInventory));
   }
 
+  alert(savedKey);
+
   const baseRank = player.weapon?.rank || 0;
   const newInventory = [];
 
