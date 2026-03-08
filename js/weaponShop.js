@@ -50,7 +50,7 @@ function renderShop() {
   shopList.innerHTML = "";
 
   inventory.forEach((w, index) => {
-    const price = w.rank * 5;
+    const price = w.inputRank * 5;
 
     const el = document.createElement("div");
     el.classList.add("shop-item");
