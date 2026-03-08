@@ -64,3 +64,7 @@ export function triggerQuest(quest) {
 
   modal.style.display = "flex";
 }
+
+export function ignoreQuest() {
+  document.getElementById("npcModal").style.display = "none";
+}
