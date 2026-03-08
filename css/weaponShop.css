@@ -15,10 +15,8 @@
 .weapon-name {
   font-size: 0.95rem; /* smaller for long names */
   font-weight: bold;
-  max-width: 70%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 75%;
+  overflow-wrap: break-word;
 }
 
 .buy-btn {
