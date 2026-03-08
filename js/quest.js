@@ -53,7 +53,7 @@ export function triggerQuest(quest) {
 
   npcButton.onclick = () => {
     const acceptedQuest = getQuest(quest.id);
-    acceptedQuest.stage = 1;
+    acceptedQuest.stage = quest.stage + 1;
     acceptedQuest.active = true;
     saveQuestState();
 
