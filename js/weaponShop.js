@@ -22,15 +22,11 @@ function loadShopInventory() {
   const hourKey = getCurrentHourKey();
   const savedKey = localStorage.getItem(playerWeaponShopTimestamp);
 
-  alert("before savedKey check");
-
   if (savedKey === hourKey) {
     return JSON.parse(localStorage.getItem(playerWeaponShopInventory));
   }
 
-  alert(savedKey);
-
-  const baseRank = player.weapon?.rank || 0;
+  const baseRank = player.weapon?.baseRank + player.weapon?.remainingRank;
   const newInventory = [];
 
   for (let i = 0; i < 5; i++) {
