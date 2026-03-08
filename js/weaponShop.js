@@ -50,8 +50,6 @@ function saveShopInventory(inv) {
 }
 
 function renderShop() {
-  shopList.style.display = "none";
-
   const inventory = loadShopInventory();
   shopList.innerHTML = "";
 
@@ -93,7 +91,6 @@ function renderShop() {
     };
 
     shopList.appendChild(el);
-    shopList.style.display = "flex";
   });
 }
 
