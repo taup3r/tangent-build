@@ -189,7 +189,7 @@ export function showResultModal(victory) {
    WEAPON COMPARISON MODAL
 ------------------------- */
 
-export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", onAction = updatePlayerWeaponUI) {
+export function openCompareWeapon(weapon, mode, onAction = null) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
 
@@ -239,13 +239,19 @@ export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", on
     onAction();
     saveProgress();
     modal.style.display = "none";
-    document.getElementById("lootWeaponBtn").style.display = "none";
   };
 
   // Cancel button
   document.getElementById("compareCancelBtn").onclick = () => {
     modal.style.display = "none";
   };
+}
+
+export function openCompareWeaponModal(weapon = enemy.weapon) {
+  openCompareWeapon(weapon, "Equip", () =>   {
+    updatePlayerWeaponUI();
+    document.getElementById("lootWeaponBtn").style.display = "none";
+  });
 }
 
 /* -------------------------
