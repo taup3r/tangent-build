@@ -1,8 +1,8 @@
 .shop-item {
   background: #222;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 4px;
+  border-radius: 4px;
   border: 1px solid #444;
 }
 
@@ -35,5 +35,5 @@
 }
 
 .buy-btn:hover {
-  background: #6a9cff;
+  //background: #6a9cff;
 }
