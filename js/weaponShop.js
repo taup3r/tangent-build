@@ -21,9 +21,14 @@ function getCurrentHourKey() {
 function loadShopInventory() {
   const hourKey = getCurrentHourKey();
   const savedKey = localStorage.getItem(playerWeaponShopTimestamp);
+  const savedInventory = JSON.parse(localStorage.getItem(playerWeaponShopInventory));
 
-  if (savedKey === hourKey) {
-    return JSON.parse(localStorage.getItem(playerWeaponShopInventory));
+  const isValid = 
+    savedKey === hourKey &&
+    Array.isArray(savedInventory);
+
+  if (isValid) {
+    return savedInventory;
   }
 
   const baseRank = player.weapon?.inputRank || 0;
