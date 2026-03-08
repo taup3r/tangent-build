@@ -2,9 +2,8 @@ loadProgress();
 
 const playerQuests = `${player.name}_quests`;
 
-export const questData = [
-  {
-    id: "blacksmith",
+export const questData = {
+  blacksmith: {
     flow: [
       {
         npc: "Blacksmith Roran",
@@ -12,7 +11,7 @@ export const questData = [
       }
     ]
   }
-];
+};
 
 export const quests = [
   {
