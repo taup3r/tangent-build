@@ -149,7 +149,7 @@ function tryQuestEncounter() {
   alert(JSON.stringify(blacksmith));
 
   // Only trigger if quest not started
-  if (blacksmith.stage === 0 && Math.random() < (blacksmit.chance/100)) {
+  if (blacksmith.stage === 0 && Math.random() < (blacksmith.chance/100)) {
     triggerQuest(blacksmith);
   }
 }
