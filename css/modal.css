@@ -37,17 +37,6 @@
   white-space: normal;
 }
 
-.modal-button {
-  width: 100%;
-  padding: 12px;
-  background: #4cff9c;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .stat-row {
   display: flex;
   justify-content: space-between;
