@@ -235,7 +235,6 @@ export function openCompareWeapon(weapon, mode, onAction = null) {
   // Equip button
   document.getElementById("compareEquipBtn").textContent = mode;
  document.getElementById("compareEquipBtn").onclick = () => {
-    player.weapon = weapon;
     onAction();
     saveProgress();
     modal.style.display = "none";
@@ -249,6 +248,7 @@ export function openCompareWeapon(weapon, mode, onAction = null) {
 
 export function openCompareWeaponModal(weapon = enemy.weapon) {
   openCompareWeapon(weapon, "Equip", () =>   {
+    player.weapon = weapon;
     updatePlayerWeaponUI();
     document.getElementById("lootWeaponBtn").style.display = "none";
   });
