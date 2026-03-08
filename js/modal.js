@@ -239,7 +239,7 @@ export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", on
     onAction();
     saveProgress();
     modal.style.display = "none";
-    document.getElementById("lootWeaponBtn")?.style.display = "none";
+    document.getElementById("lootWeaponBtn").style.display = "none";
   };
 
   // Cancel button
