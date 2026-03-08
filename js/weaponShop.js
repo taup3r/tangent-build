@@ -22,6 +22,8 @@ function loadShopInventory() {
   const hourKey = getCurrentHourKey();
   const savedKey = localStorage.getItem(playerWeaponShopTimestamp);
 
+  alert("before savedKey check");
+
   if (savedKey === hourKey) {
     return JSON.parse(localStorage.getItem(playerWeaponShopInventory));
   }
