@@ -35,7 +35,7 @@ function loadShopInventory() {
   const newInventory = [];
 
   while (newInventory.length < 5) {
-    const rankBoost = Math.floor(Math.random() * 11); // 0–10
+    const rankBoost = Math.floor(Math.random() * 10) + 1; // 1–10
     const weapon = generateWeapon(baseRank + rankBoost);
 
     // prevent duplicates by name
