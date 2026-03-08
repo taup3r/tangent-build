@@ -1,0 +1,38 @@
+.shop-item {
+  background: #222;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.shop-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weapon-name {
+  font-size: 0.95rem; /* smaller for long names */
+  font-weight: bold;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buy-btn {
+  background: #4a7cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  width: 20%;
+}
+
+.buy-btn:hover {
+  background: #6a9cff;
+}

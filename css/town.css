@@ -43,6 +43,7 @@
 .btn-train { background: #4caf50; }     /* green */
 .btn-arena { background: #ff4a4a; }     /* red */
 .btn-dungeon { background: #4a7cff; }   /* blue */
+.btn-shop { background: #ffaa2b; } /* warm gold */
 
 /* Scrolling lore text */
 #loreScroller {

@@ -189,7 +189,7 @@ export function showResultModal(victory) {
    WEAPON COMPARISON MODAL
 ------------------------- */
 
-export function openCompareWeaponModal(weapon = enemy.weapon) {
+export function openCompareWeapon(weapon, mode, onAction = null) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
 
@@ -233,18 +233,25 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
     enemyMods || "None";
 
   // Equip button
-  document.getElementById("compareEquipBtn").onclick = () => {
-    player.weapon = weapon;
-    updatePlayerWeaponUI();
+  document.getElementById("compareEquipBtn").textContent = mode;
+ document.getElementById("compareEquipBtn").onclick = () => {
+    onAction();
     saveProgress();
     modal.style.display = "none";
-    document.getElementById("lootWeaponBtn").style.display = "none";
   };
 
   // Cancel button
   document.getElementById("compareCancelBtn").onclick = () => {
     modal.style.display = "none";
   };
+}
+
+export function openCompareWeaponModal(weapon = enemy.weapon) {
+  openCompareWeapon(weapon, "Equip", () =>   {
+    player.weapon = weapon;
+    updatePlayerWeaponUI();
+    document.getElementById("lootWeaponBtn").style.display = "none";
+  });
 }
 
 /* -------------------------

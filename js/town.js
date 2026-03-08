@@ -60,11 +60,17 @@ function generateTownLayout() {
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
+    },
+    {
+      label: "Weapon Shop",
+      class: "btn-shop",
+      action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`,
+      disabled: false
     }
   ];
 
-  // Randomly decide how many buttons appear (1–3)
-  const count = Math.floor(Math.random() * 3) + 1;
+  // Randomly decide how many buttons appear (1–4)
+  const count = Math.floor(Math.random() * 4) + 1;
 
   // Shuffle buttons
   const shuffled = [...buttons].sort(() => Math.random() - 0.5);
