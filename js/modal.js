@@ -189,7 +189,7 @@ export function showResultModal(victory) {
    WEAPON COMPARISON MODAL
 ------------------------- */
 
-export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", trigger = updatePlayerWeaponUI) {
+export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", onAction = updatePlayerWeaponUI) {
   const modal = document.getElementById("compareWeaponModal");
   modal.style.display = "flex";
 
@@ -236,7 +236,7 @@ export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", tr
   document.getElementById("compareEquipBtn").textContent = mode;
  document.getElementById("compareEquipBtn").onclick = () => {
     player.weapon = weapon;
-    trigger();
+    onAction();
     saveProgress();
     modal.style.display = "none";
     document.getElementById("lootWeaponBtn")?.style.display = "none";
