@@ -2,6 +2,18 @@ loadProgress();
 
 const playerQuests = `${player.name}_quests`;
 
+export const questData = [
+  {
+    id: "blacksmith",
+    flow: [
+      {
+        npc: "Blacksmith Roran",
+        message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?"
+      }
+    ]
+  }
+];
+
 export const quests = [
   {
     id: "blacksmith",
@@ -27,4 +39,28 @@ export function saveQuestState() {
 
 export function getQuest(id) {
   return quests.find(q => q.id === id);
+}
+
+export function triggerQuestIntro(quest) {
+  const modal = document.getElementById("npcModal");
+  const npcName = document.getElementById("npcName");
+  const npcText = document.getElementById("npcText");
+  const npcButton = document.getElementById("npcButton");
+
+  npcName.textContent = quest.npcIntro;
+  npcText.textContent =
+    ;
+
+  npcButton.textContent = "Accept Quest";
+
+  npcButton.onclick = () => {
+    const blacksmith = getQuest("blacksmith");
+    blacksmith.stage = 1;
+    blacksmith.active = true;
+    saveQuestState();
+
+    modal.style.display = "none";
+  };
+
+  modal.style.display = "flex";
 }
