@@ -36,7 +36,7 @@ function loadShopInventory() {
   }
 
   localStorage.setItem(playerWeaponShopTimestamp, hourKey);
-  localStorage.setItem(playerWeaponShopInventory, JSON.stringify(newInventory));
+  saveShopInventory(newInventory);
 
   return newInventory;
 }
