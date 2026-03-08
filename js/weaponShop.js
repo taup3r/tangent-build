@@ -2,10 +2,10 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 
+loadProgress();
+
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
-
-loadProgress();
 
 document.getElementById("backButton").onclick = () => {
   window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
