@@ -145,7 +145,9 @@ window.addEventListener("message", (event) => {
 /* QUESTS */
 
 function tryQuestEncounter() {
-  document.getElementById("ignoreButton").onclick = document.getElementById("questModal").style.display = "none";
+  document.getElementById("ignoreButton").onclick = () => {
+    document.getElementById("questModal").style.display = "none";
+  };
 
   const blacksmith = getQuest("blacksmith");
 
