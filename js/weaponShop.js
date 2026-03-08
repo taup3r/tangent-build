@@ -61,7 +61,7 @@ function renderShop() {
     `;
 
     el.querySelector(".buy-btn").onclick = () => {
-      openWeaponCompareModal(w,
+      openWeaponCompare(w,
         mode: `Buy ${price}g`,
         onAction: () => {
           // Deduct gold
