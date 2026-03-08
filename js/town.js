@@ -101,6 +101,7 @@ function generateTownLayout() {
 
 // Initial generation
 generateTownLayout();
+tryQuestEncounter();
 
 // Explore → travel
 exploreBtn.onclick = () => {
