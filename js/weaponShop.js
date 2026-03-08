@@ -34,7 +34,7 @@ function loadShopInventory() {
     const weapon = generateWeapon(baseRank + rankBoost);
 
     // prevent duplicates by name
-    if (!newInventory.some(w => w === weapon)) {
+    if (!newInventory.some(w => w.name === weapon.name)) {
       newInventory.push(weapon);
     }
   }
