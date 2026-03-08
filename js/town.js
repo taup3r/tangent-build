@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { loadQuestState, quests, getQuest, saveQuestState } from "./quest.js";
+import { loadQuestState, getQuest, triggerQuest } from "./quest.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -113,6 +113,7 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
+    tryQuestEncounter();
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
