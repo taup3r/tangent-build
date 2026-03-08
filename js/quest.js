@@ -40,22 +40,21 @@ export function getQuest(id) {
   return quests.find(q => q.id === id);
 }
 
-export function triggerQuestIntro(quest) {
+export function triggerQuest(quest) {
   const modal = document.getElementById("npcModal");
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
 
-  npcName.textContent = quest.npcIntro;
-  npcText.textContent =
-    ;
+  npcName.textContent = questData[quest.id].flow[quest.stage].npc;
+  npcText.textContent = questData[quest.id].flow[quest.stage].message;
 
   npcButton.textContent = "Accept Quest";
 
   npcButton.onclick = () => {
-    const blacksmith = getQuest("blacksmith");
-    blacksmith.stage = 1;
-    blacksmith.active = true;
+    const acceptedQuest = getQuest(quest.id);
+    acceptedQuest.stage = 1;
+    acceptedQuest.active = true;
     saveQuestState();
 
     modal.style.display = "none";
