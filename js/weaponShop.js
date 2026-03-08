@@ -51,6 +51,11 @@ function renderShop() {
 
   inventory.forEach((w, index) => {
     const price = w.inputRank * 5;
+    if (w.rarity === "Unique") {
+      price *= 2;
+    } else if (w.rarity === "Mythic Unique") {
+      price *= 5;
+    }
 
     const el = document.createElement("div");
     el.classList.add("shop-item");
