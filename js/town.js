@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { loadQuestState, getQuest, triggerQuest } from "./quest.js";
+import { loadQuestState, getQuest, triggerQuest, ignoreQuest } from "./quest.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -146,7 +146,7 @@ window.addEventListener("message", (event) => {
 
 function tryQuestEncounter() {
   document.getElementById("ignoreButton").onclick = () => {
-    document.getElementById("questModal").style.display = "none";
+    ignoreQuest();
   };
 
   const blacksmith = getQuest("blacksmith");
