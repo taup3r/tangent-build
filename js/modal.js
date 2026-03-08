@@ -233,7 +233,8 @@ export function openCompareWeaponModal(weapon = enemy.weapon, mode = "Equip", tr
     enemyMods || "None";
 
   // Equip button
-   document.getElementById("compareEquipBtn").textContent = mode; document.getElementById("compareEquipBtn").onclick = () => {
+  document.getElementById("compareEquipBtn").textContent = mode;
+ document.getElementById("compareEquipBtn").onclick = () => {
     player.weapon = weapon;
     trigger();
     saveProgress();
