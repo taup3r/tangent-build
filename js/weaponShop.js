@@ -29,10 +29,14 @@ function loadShopInventory() {
   const baseRank = player.weapon?.inputRank || 0;
   const newInventory = [];
 
-  for (let i = 0; i < 5; i++) {
+  while (newInventory.length < 5) {
     const rankBoost = Math.floor(Math.random() * 11); // 0–10
     const weapon = generateWeapon(baseRank + rankBoost);
-    newInventory.push(weapon);
+
+    // prevent duplicates by name
+    if (!newInventory.some(w => w === weapon)) {
+      newInventory.push(weapon);
+    }
   }
 
   localStorage.setItem(playerWeaponShopTimestamp, hourKey);
