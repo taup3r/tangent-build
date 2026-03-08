@@ -1,7 +1,6 @@
 .shop-item {
   background: #222;
-  padding: 4px;
-  margin-bottom: 4px;
+  padding: 6px;
   border-radius: 4px;
   border: 1px solid #444;
 }
@@ -9,31 +8,19 @@
 .shop-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
 }
 
 .weapon-name {
-  font-size: 0.95rem; /* smaller for long names */
+  font-size: 0.95rem;
   font-weight: bold;
   max-width: 70%;
-  //overflow: hidden;
   overflow-wrap: break-word;
-  //text-overflow: ellipsis;
-  //white-space: nowrap;
 }
 
 .buy-btn {
-  //background: #4a7cff;
-  //border: none;
-  //border-radius: 6px;
-  //color: white;
-  //padding: 6px 10px;
   cursor: pointer;
   font-size: 0.9rem;
   white-space: nowrap;
   width: 20%;
-}
-
-.buy-btn:hover {
-  //background: #6a9cff;
 }
