@@ -13,15 +13,24 @@
 }
 
 .weapon-name {
-  font-size: 0.95rem;
+  font-size: 0.95rem; /* smaller for long names */
   font-weight: bold;
-  max-width: 70%;
+  max-width: 75%;
   overflow-wrap: break-word;
 }
 
 .buy-btn {
+  background: #4a7cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 6px 10px;
   cursor: pointer;
   font-size: 0.9rem;
   white-space: nowrap;
   width: 20%;
+}
+
+.buy-btn:hover {
+  background: #6a9cff;
 }
