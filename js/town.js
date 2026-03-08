@@ -146,6 +146,6 @@ function tryQuestEncounter() {
 
   // Only trigger if quest not started
   if (blacksmith.stage === 0 && Math.random() < 0.10) {
-    triggerQuestIntro();
+    triggerQuest(blacksmith);
   }
 }
