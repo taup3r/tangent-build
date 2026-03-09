@@ -85,7 +85,8 @@ blacksmith.stage < blacksmith.maxStage) {
   }
 }
 
-fetch("quest-modal.html")
+export function initQuestModal() {
+  fetch("quest-modal.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById("quest-modal-container").innerHTML = html;
@@ -94,4 +95,5 @@ fetch("quest-modal.html")
     const closeBtn = modal.querySelector(".close");
 
     closeBtn.onclick = () => modal.style.display = "none";
-});
+  });
+}
