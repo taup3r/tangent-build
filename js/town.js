@@ -6,7 +6,6 @@ import { updateHeaderStats } from "./ui.js";
 
 loadProgress();
 updateHeaderStats();
-loadQuestState();
 
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
@@ -101,7 +100,6 @@ function generateTownLayout() {
 
 // Initial generation
 generateTownLayout();
-tryQuestEncounter();
 
 // Explore → travel
 exploreBtn.onclick = () => {
@@ -112,7 +110,6 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
-    tryQuestEncounter();
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
