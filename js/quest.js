@@ -20,7 +20,7 @@ export const quests = [
     id: "blacksmith",
     chance: 50,
     stage: 0, // 0 = not started
-    maxStage: 0, // 0 - disable
+    maxStage: 1, // 0 - disable
     active: false,
     data: {} // for storing hammerFound, etc.
   }
