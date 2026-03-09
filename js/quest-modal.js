@@ -1,4 +1,4 @@
-/* QUESTS */
+import { loadQuestState, getQuest, triggerQuest, ignoreQuest } from "./quest.js";
 
 function tryQuestEncounter() {
   document.getElementById("ignoreButton").onclick = () => {
