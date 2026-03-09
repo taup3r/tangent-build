@@ -6,6 +6,7 @@ const playerQuests = `${player.name}_quests`;
 
 export const questData = {
   "blacksmith": {
+    title: "The Lost Hammer",
     flow: [
       {
         npc: "Blacksmith Roran",
