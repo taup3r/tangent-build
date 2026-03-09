@@ -26,6 +26,8 @@ export const quests = [
   }
 ];
 
+loadQuestState();
+
 export function loadQuestState() {
   const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
   if (saved.length > 0) {
@@ -67,4 +69,18 @@ export function triggerQuest(quest) {
 
 export function ignoreQuest() {
   document.getElementById("npcModal").style.display = "none";
+}
+
+export function tryQuestEncounter() {
+  document.getElementById("ignoreButton").onclick = () => {
+    ignoreQuest();
+  };
+
+  const blacksmith = getQuest("blacksmith");
+
+  // Only trigger if quest not started
+  if (blacksmith.stage === 0 && Math.random() < (blacksmith.chance/100) &&
+blacksmith.stage < blacksmith.maxStage) {
+    triggerQuest(blacksmith);
+  }
 }
