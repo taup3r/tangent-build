@@ -11,7 +11,13 @@ export const questData = {
       {
         npc: "Blacksmith Roran",
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
-        submit: "Accept Quest"
+        submit: "Accept Quest",
+        nextChance: 10
+      },{
+        npc: "",
+        message: "You found the Lost Hammer!",
+        submit: "Pick it up",
+        nextChance: 10
       }
     ]
   }
@@ -22,7 +28,7 @@ export const quests = [
     id: "blacksmith",
     chance: 50,
     stage: 0, // 0 = not started
-    maxStage: 0, // 0 - disable
+    maxStage: 2, // 0 - disable
     active: false,
     data: {} // for storing hammerFound, etc.
   }
@@ -54,13 +60,17 @@ export function triggerQuest(quest) {
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
 
-  questTitle.textContent = questData[quest.id].title;
-  npcName.textContent = questData[quest.id].flow[quest.stage].npc;
-  npcText.textContent = questData[quest.id].flow[quest.stage].message;
-  npcButton.textContent = questData[quest.id].flow[quest.stage].submit;
+  const currentQuest = questData[quest.id];
+  const currentQuestStage = currentQuest.flow[quest.stage];
+
+  questTitle.textContent = currentQuest.title;
+  npcName.textContent = currentQuestStage.npc;
+  npcText.textContent = currentQuestStage.message;
+  npcButton.textContent = currentQuestStage.submit;
 
   npcButton.onclick = () => {
     quest.stage += 1;
+    quest.chance = currentQuestStage.nextChance;
     quest.active = true;
     saveQuestState();
 
