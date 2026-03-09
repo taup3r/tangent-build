@@ -1,13 +1,12 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { loadQuestState, getQuest, triggerQuest, ignoreQuest } from "./quest.js";
+import { tryQuestEncounter } from "./quest.js";
 
 // Phase 1: Simple navigation + dungeon start
 
 loadProgress();
 updateHeaderStats();
-loadQuestState();
 
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
@@ -102,7 +101,7 @@ function generateTownLayout() {
 
 // Initial generation
 generateTownLayout();
-tryQuestEncounter();
+tryQuestEncounter("blacksmith", 0);
 
 // Explore → travel
 exploreBtn.onclick = () => {
@@ -113,7 +112,7 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
-    tryQuestEncounter();
+    tryQuestEncounter("blacksmith", 0);
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
@@ -140,20 +139,3 @@ window.addEventListener("message", (event) => {
     closeStatModal();
   }
 });
-
-
-/* QUESTS */
-
-function tryQuestEncounter() {
-  document.getElementById("ignoreButton").onclick = () => {
-    ignoreQuest();
-  };
-
-  const blacksmith = getQuest("blacksmith");
-
-  // Only trigger if quest not started
-  if (blacksmith.stage === 0 && Math.random() < (blacksmith.chance/100) &&
-blacksmith.stage < blacksmith.maxStage) {
-    triggerQuest(blacksmith);
-  }
-}

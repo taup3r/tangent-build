@@ -30,6 +30,13 @@ h2 {
   font-weight: 400;
 }
 
+h3 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  color: #4dd0e1;
+  text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
+}
+
 button {
   width: 100%;
   padding: 14px 22px;

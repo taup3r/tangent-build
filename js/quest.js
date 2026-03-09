@@ -6,10 +6,12 @@ const playerQuests = `${player.name}_quests`;
 
 export const questData = {
   "blacksmith": {
+    title: "The Lost Hammer",
     flow: [
       {
         npc: "Blacksmith Roran",
-        message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?"
+        message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
+        submit: "Accept Quest"
       }
     ]
   }
@@ -25,6 +27,8 @@ export const quests = [
     data: {} // for storing hammerFound, etc.
   }
 ];
+
+loadQuestState();
 
 export function loadQuestState() {
   const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
@@ -44,15 +48,16 @@ export function getQuest(id) {
 }
 
 export function triggerQuest(quest) {
-  const modal = document.getElementById("npcModal");
+  const modal = document.getElementById("quest-modal");
+  const questTitle = document.getElementById("questTitle");
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
 
+  questTitle.textContent = questData[quest.id].title;
   npcName.textContent = questData[quest.id].flow[quest.stage].npc;
   npcText.textContent = questData[quest.id].flow[quest.stage].message;
-
-  npcButton.textContent = "Accept Quest";
+  npcButton.textContent = questData[quest.id].flow[quest.stage].submit;
 
   npcButton.onclick = () => {
     quest.stage += 1;
@@ -66,5 +71,19 @@ export function triggerQuest(quest) {
 }
 
 export function ignoreQuest() {
-  document.getElementById("npcModal").style.display = "none";
+  document.getElementById("quest-modal").style.display = "none";
+}
+
+export function tryQuestEncounter(id, stage) {
+  document.getElementById("ignoreButton").onclick = () => {
+    ignoreQuest();
+  };
+
+  const quest = getQuest(id);
+
+  // Only trigger if quest not started
+  if (quest.stage === stage && Math.random() < (quest.chance/100) &&
+quest.stage < quest.maxStage) {
+    triggerQuest(quest);
+  }
 }
