@@ -51,15 +51,23 @@
 
   <script type="module" src="js/town.js"></script>
 
-  <!-- NPC Modal -->
-  <div id="npcModal" class="npc-modal" style="display:none;">
-    <div class="npc-box">
-      <h2 id="npcName"></h2>
-      <p id="npcText"></p>
-      <button id="npcButton" class="npc-btn"></button>
-      <button id="ignoreButton" class="npc-btn">Ignore</button>
-    </div>
-  </div>
+  <!-- Quest Modal -->
+  <div id="quest-modal-container" style="display:none;"></div>
+  <script>
+    fetch("quest-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-modal-container").innerHTML = html;
+
+       const modal = document.getElementById("quest-modal");
+       const closeBtn = modal.querySelector(".close");
+
+       closeBtn.onclick = () => modal.style.display = "none";
+       //window.onclick = e => {
+         //if (e.target === modal) modal.style.display = "none";
+       //};
+    });
+  </script>
 
   <script>
     const params = new URLSearchParams(window.location.search);
