@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/quest.css">
   <link rel="stylesheet" href="css/town.css">
 </head>
 
@@ -49,6 +50,16 @@
   </div>
 
   <script type="module" src="js/town.js"></script>
+
+  <!-- NPC Modal -->
+  <div id="npcModal" class="npc-modal" style="display:none;">
+    <div class="npc-box">
+      <h2 id="npcName"></h2>
+      <p id="npcText"></p>
+      <button id="npcButton" class="npc-btn"></button>
+      <button id="ignoreButton" class="npc-btn">Ignore</button>
+    </div>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
