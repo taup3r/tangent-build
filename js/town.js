@@ -101,7 +101,7 @@ function generateTownLayout() {
 
 // Initial generation
 generateTownLayout();
-tryQuestEncounter(0);
+tryQuestEncounter("blacksmith", 0);
 
 // Explore → travel
 exploreBtn.onclick = () => {
@@ -112,7 +112,7 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
-    tryQuestEncounter(0);
+    tryQuestEncounter("blacksmith", 0);
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
