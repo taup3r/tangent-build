@@ -84,3 +84,14 @@ blacksmith.stage < blacksmith.maxStage) {
     triggerQuest(blacksmith);
   }
 }
+
+fetch("quest-modal.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("quest-modal-container").innerHTML = html;
+
+    const modal = document.getElementById("quest-modal");
+    const closeBtn = modal.querySelector(".close");
+
+    closeBtn.onclick = () => modal.style.display = "none";
+});
