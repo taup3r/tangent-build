@@ -71,7 +71,7 @@ export function ignoreQuest() {
   document.getElementById("quest-modal").style.display = "none";
 }
 
-export function tryQuestEncounter() {
+export function tryQuestEncounter(stage) {
   document.getElementById("ignoreButton").onclick = () => {
     ignoreQuest();
   };
@@ -79,7 +79,7 @@ export function tryQuestEncounter() {
   const blacksmith = getQuest("blacksmith");
 
   // Only trigger if quest not started
-  if (blacksmith.stage === 0 && Math.random() < (blacksmith.chance/100) &&
+  if (blacksmith.stage === stage && Math.random() < (blacksmith.chance/100) &&
 blacksmith.stage < blacksmith.maxStage) {
     triggerQuest(blacksmith);
   }
