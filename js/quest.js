@@ -49,10 +49,12 @@ export function getQuest(id) {
 
 export function triggerQuest(quest) {
   const modal = document.getElementById("quest-modal");
+  const questTitle = document.getElementById("questTitle");
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
 
+  questTitle.textContent = questData[quest.id].title;
   npcName.textContent = questData[quest.id].flow[quest.stage].npc;
   npcText.textContent = questData[quest.id].flow[quest.stage].message;
   npcButton.textContent = questData[quest.id].flow[quest.stage].submit;
