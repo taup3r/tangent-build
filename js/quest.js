@@ -46,7 +46,7 @@ export function getQuest(id) {
 }
 
 export function triggerQuest(quest) {
-  const modal = document.getElementById("npcModal");
+  const modal = document.getElementById("quest-odal");
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
@@ -68,7 +68,7 @@ export function triggerQuest(quest) {
 }
 
 export function ignoreQuest() {
-  document.getElementById("npcModal").style.display = "none";
+  document.getElementById("quest-modal").style.display = "none";
 }
 
 export function tryQuestEncounter() {
