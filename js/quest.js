@@ -9,7 +9,8 @@ export const questData = {
     flow: [
       {
         npc: "Blacksmith Roran",
-        message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?"
+        message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
+        submit: "Accept Quest"
       }
     ]
   }
@@ -53,8 +54,7 @@ export function triggerQuest(quest) {
 
   npcName.textContent = questData[quest.id].flow[quest.stage].npc;
   npcText.textContent = questData[quest.id].flow[quest.stage].message;
-
-  npcButton.textContent = "Accept Quest";
+  npcButton.textContent = questData[quest.id].flow[quest.stage].submit;
 
   npcButton.onclick = () => {
     quest.stage += 1;
