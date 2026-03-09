@@ -1,13 +1,12 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { initQuestModal, tryQuestEncounter } from "./quest.js";
+import { tryQuestEncounter } from "./quest.js";
 
 // Phase 1: Simple navigation + dungeon start
 
 loadProgress();
 updateHeaderStats();
-initQuestModal();
 
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
