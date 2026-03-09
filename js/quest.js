@@ -71,16 +71,16 @@ export function ignoreQuest() {
   document.getElementById("quest-modal").style.display = "none";
 }
 
-export function tryQuestEncounter(stage) {
+export function tryQuestEncounter(id, stage) {
   document.getElementById("ignoreButton").onclick = () => {
     ignoreQuest();
   };
 
-  const blacksmith = getQuest("blacksmith");
+  const quest = getQuest(id);
 
   // Only trigger if quest not started
-  if (blacksmith.stage === stage && Math.random() < (blacksmith.chance/100) &&
-blacksmith.stage < blacksmith.maxStage) {
-    triggerQuest(blacksmith);
+  if (quest.stage === stage && Math.random() < (quest.chance/100) &&
+quest.stage < quest.maxStage) {
+    triggerQuest(quest);
   }
 }
