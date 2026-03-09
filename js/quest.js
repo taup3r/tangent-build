@@ -46,7 +46,7 @@ export function getQuest(id) {
 }
 
 export function triggerQuest(quest) {
-  const modal = document.getElementById("quest-odal");
+  const modal = document.getElementById("quest-modal");
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
