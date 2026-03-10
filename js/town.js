@@ -107,9 +107,7 @@ tryQuestEncounter("blacksmith", 0);
 tryQuestEncounter("blacksmith", 2, () => {
   tryQuestEncounter("blacksmith", 3, () => {
     const weapon = upgradeWeapon(player.weapon, 1);
-    openCompareWeapon(weapon, "Equip", () => {
-      player.weapon = weapon;
-    });
+    openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
   });
 });
 
