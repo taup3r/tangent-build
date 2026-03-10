@@ -274,7 +274,120 @@ export function generateWeapon(inputRank) {
     color: rarityColor,
     baseRank: weapon.rank,
     inputRank,
-    remainingRank: remaining,
+    remainingRank: inputRank - weapon.rank,
+    damage: { min: minDamage, max: maxDamage },
+    stats,
+    lore
+  };
+}
+
+export function upgradeWeapon(inputWeapon, remaining) {
+  let stats = inputWeapon.stats;
+  let name = inputWeapon.type;
+  let lore = inputWeapon.lore;
+  let isUnique = false;
+  let uniqueType = "NONE";
+  let weapon = weapons.find(inputWeapon.type);
+  const inputRank = inputWeapon.baseRank + inputWeapon.remainingRank + remaining;
+
+  const statCount = weightedStatCount();
+  const statTypes = ["STR", "DEX", "AGI", "CON"];
+  const chosenStats = [];
+
+  while (chosenStats.length < statCount) {
+    const stat = pickRandom(statTypes);
+    if (!chosenStats.includes(stat)) chosenStats.push(stat);
+  }
+
+  const distribution = distributePoints(remaining, chosenStats.length);
+  chosenStats.forEach((s, i) => stats[s] = distribution[i]);
+
+  const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
+
+  const unique = detectUnique(stats);
+  uniqueType = unique.type;
+
+  if (uniqueType === "MYTHIC") {
+    name = pickRandom(mythicUniques);
+    lore = pickRandom(mythicLore);
+    isUnique = true;
+  } else if (uniqueType === "TRI") {
+    const key = unique.stats.sort().join("+");
+    const pool = triUniques[key];
+    if (pool) {
+      name = pickRandom(pool);
+      lore = pickRandom(triLore);
+      isUnique = true;
+    }
+  } else if (uniqueType === "HYBRID") {
+    const key = unique.stats.sort().join("+");
+    const pool = hybridUniques[key];
+    if (pool) {
+      name = pickRandom(pool);
+      lore = pickRandom(hybridLore);
+      isUnique = true;
+    }
+  }
+
+  if (!isUnique) {
+    if (statsWithValue.length > 0) {
+      const highest = statsWithValue.sort((a, b) => b[1] - a[1])[0];
+      const highestStat = highest[0];
+      const highestValue = highest[1];
+
+      const prefixIndex = Math.min(Math.floor((highestValue - 1) / 5), 5);
+      const prefix = prefixTiers[highestStat][prefixIndex];
+
+      if (statsWithValue.length > 1) {
+        const secondStat = statsWithValue[1][0];
+        const extraStats = statsWithValue.length - 1;
+        const suffixIndex = Math.min(extraStats - 1, 2);
+        const suffix = suffixTiers[secondStat][suffixIndex];
+        name = `${prefix} ${inputWeapon.type} ${suffix}`;
+      } else {
+        name = `${prefix} ${inputWeapon.type}`;
+      }
+    }
+  }
+
+  let minDamage = weapon.min;
+  let maxDamage = weapon.max;
+
+  if (uniqueType === "HYBRID") {
+    minDamage += 1;
+    maxDamage -= 1;
+  } else if (uniqueType === "TRI") {
+    minDamage += 2;
+    maxDamage -= 2;
+  } else if (uniqueType === "MYTHIC") {
+    const target = weapon.max - 2;
+    minDamage = Math.max(weapon.min, target);
+    maxDamage = target;
+  }
+
+  const colorInfo = getColorByRank(inputRank);
+
+  let rarityColor = colorInfo.color;
+  let rarityName = colorInfo.tier;
+
+  if (uniqueType === "HYBRID" || uniqueType === "TRI") {
+    rarityColor = "#FFD700";
+    rarityName = "Unique";
+  }
+
+  if (uniqueType === "MYTHIC") {
+    rarityColor = "#B388FF";
+    rarityName = "Mythic Unique";
+  }
+
+  return {
+    name,
+    type: weapon.type,
+    rarity: rarityName,
+    color: rarityColor,
+    baseRank: weapon.rank,
+    inputRank,
+    remainingRank: inputRank - weapon.rank,
     damage: { min: minDamage, max: maxDamage },
     stats,
     lore
