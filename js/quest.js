@@ -12,11 +12,18 @@ export const questData = {
         npc: "Blacksmith Roran",
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
         submit: "Accept Quest",
+        cancel: "Ignore",
         nextChance: 50
       },{
         npc: "",
         message: "You found the Lost Hammer!",
         submit: "Pick it up",
+        cancel: "Leave it",
+        nextChance: 100
+      },{
+        npc: "Blacksmith Roran",
+        message: "You found it! I can finally get back to work. Let me repay you properly.",
+        submit: "Continue",
         nextChance: 10
       }
     ]
