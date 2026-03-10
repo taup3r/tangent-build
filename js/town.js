@@ -105,7 +105,7 @@ function generateTownLayout() {
 generateTownLayout();
 tryQuestEncounter("blacksmith", 0);
 tryQuestEncounter("blacksmith", 2, () => tryQuestEncounter("blacksmith", 3, () => {
-  const weapon = upgradeWeapon(player.weapon);
+  const weapon = upgradeWeapon(player.weapon, 1);
   openCompareWeaponModal(weapon);
 }));
 
