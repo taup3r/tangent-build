@@ -2,6 +2,8 @@ import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from 
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter } from "./quest.js";
+import { openCompareWeaponModal } from "./modal.js";
+import { upgradeWeapon } from "./weapon.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -102,7 +104,10 @@ function generateTownLayout() {
 // Initial generation
 generateTownLayout();
 tryQuestEncounter("blacksmith", 0);
-tryQuestEncounter("blacksmith", 2);
+tryQuestEncounter("blacksmith", 2, () => tryQuestEncounter("blacksmith", 3, () => {
+  const weapon = upgradeWeapon(player.weapon);
+  openCompareWeaponModal(weapon);
+}));
 
 // Explore → travel
 exploreBtn.onclick = () => {
