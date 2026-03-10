@@ -263,7 +263,7 @@ export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
-    tryQuestEncounter("blacksmith", 1, () => showResultModal(true));
+    tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
     return true;
   }
 
