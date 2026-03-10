@@ -59,6 +59,16 @@
     });
   </script>
 
+  <!-- Compare Modal -->
+  <div id="compare-modal-container"></div>
+  <script>
+    fetch("compare-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("compare-modal-container").innerHTML = html;
+    });
+  </script>
+
   <script type="module" src="js/town.js"></script>
 
   <script>
