@@ -66,6 +66,7 @@ export function triggerQuest(quest, action = null) {
   const npcName = document.getElementById("npcName");
   const npcText = document.getElementById("npcText");
   const npcButton = document.getElementById("npcButton");
+  const ignoreButton = document.getElementById("ignoreButton");
 
   const currentQuest = questData[quest.id];
   const currentQuestStage = currentQuest.flow[quest.stage];
@@ -74,6 +75,12 @@ export function triggerQuest(quest, action = null) {
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
   npcButton.textContent = currentQuestStage.submit;
+  if (currentQuestStage.cancel) {
+    ignoreButton.textContent = currentQuestStage.cancel;
+    ignoreButton.style.display = "flex";
+  } else {
+    ignoreButton.style.display = "none";
+  }
 
   npcButton.onclick = () => {
     quest.stage += 1;
