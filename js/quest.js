@@ -83,13 +83,16 @@ export function triggerQuest(quest, action = null) {
   modal.style.display = "flex";
 }
 
-export function ignoreQuest() {
+export function ignoreQuest(action = null) {
   document.getElementById("quest-modal").style.display = "none";
+  if (action) {
+    action();
+  }
 }
 
 export function tryQuestEncounter(id, stage, action = null) {
   document.getElementById("ignoreButton").onclick = () => {
-    ignoreQuest();
+    ignoreQuest(action);
   };
 
   const quest = getQuest(id);
