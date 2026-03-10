@@ -102,6 +102,7 @@ function generateTownLayout() {
 // Initial generation
 generateTownLayout();
 tryQuestEncounter("blacksmith", 0);
+tryQuestEncounter("blacksmith", 2);
 
 // Explore → travel
 exploreBtn.onclick = () => {
