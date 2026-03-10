@@ -287,7 +287,7 @@ export function upgradeWeapon(inputWeapon, remaining) {
   let lore = inputWeapon.lore;
   let isUnique = false;
   let uniqueType = "NONE";
-  let weapon = weapons.find(inputWeapon.type);
+  let weapon = weapons.find(w => w.type === inputWeapon.type);
   const inputRank = inputWeapon.baseRank + inputWeapon.remainingRank + remaining;
 
   const statCount = weightedStatCount();
