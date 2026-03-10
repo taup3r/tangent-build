@@ -282,7 +282,12 @@ export function generateWeapon(inputRank) {
 }
 
 export function upgradeWeapon(inputWeapon, remaining) {
-  let stats = inputWeapon.stats;
+  let stats = {
+    "STR": inputWeapon.STR,
+    "DEX": inputWeapon.DEX,
+    "AGI": inputWeapon.AGI,
+    "CON": inputWeapon.CON
+  };
   let name = inputWeapon.name;
   let lore = inputWeapon.lore;
   let isUnique = false;
