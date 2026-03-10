@@ -53,7 +53,7 @@ export function getQuest(id) {
   return quests.find(q => q.id === id);
 }
 
-export function triggerQuest(quest) {
+export function triggerQuest(quest, action = null) {
   const modal = document.getElementById("quest-modal");
   const questTitle = document.getElementById("questTitle");
   const npcName = document.getElementById("npcName");
@@ -75,6 +75,9 @@ export function triggerQuest(quest) {
     saveQuestState();
 
     modal.style.display = "none";
+    if (action) {
+      action();
+    }
   };
 
   modal.style.display = "flex";
@@ -84,7 +87,7 @@ export function ignoreQuest() {
   document.getElementById("quest-modal").style.display = "none";
 }
 
-export function tryQuestEncounter(id, stage) {
+export function tryQuestEncounter(id, stage, action = null) {
   document.getElementById("ignoreButton").onclick = () => {
     ignoreQuest();
   };
@@ -94,6 +97,6 @@ export function tryQuestEncounter(id, stage) {
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
 quest.stage < quest.maxStage) {
-    triggerQuest(quest);
+    triggerQuest(quest, action);
   }
 }
