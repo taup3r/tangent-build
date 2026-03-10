@@ -28,7 +28,7 @@ export const questData = {
       },{
         npc: "Blacksmith Roran",
         message: "Congratulations! Your weapon has been refined!",
-        submit: "Accept",
+        submit: "Compare",
         cancel: "Revert",
         nextChance: 10
       }
