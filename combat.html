@@ -8,6 +8,7 @@
   <!-- CSS SPLIT -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/modal.css">
@@ -308,6 +309,16 @@
 
     </div>
   </div>
+
+  <!-- Quest Modal -->
+  <div id="quest-modal-container"></div>
+  <script>
+    fetch("quest-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-modal-container").innerHTML = html;
+    });
+  </script>
 
   <!-- MAIN JS ENTRY POINT -->
   <script type="module" src="js/main.js"></script>
