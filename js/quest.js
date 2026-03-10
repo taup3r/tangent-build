@@ -24,7 +24,7 @@ export const questData = {
         npc: "Blacksmith Roran",
         message: "You found it! I can finally get back to work. Let me repay you properly.",
         submit: "Continue",
-        nextChance: 10
+        nextChance: 100
       }
     ]
   }
@@ -35,7 +35,7 @@ export const quests = [
     id: "blacksmith",
     chance: 50,
     stage: 0, // 0 = not started
-    maxStage: 3, // 0 - disable
+    maxStage: 0, // 0 - disable
     active: false,
     data: {} // for storing hammerFound, etc.
   }
