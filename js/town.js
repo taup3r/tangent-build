@@ -104,10 +104,12 @@ function generateTownLayout() {
 // Initial generation
 generateTownLayout();
 tryQuestEncounter("blacksmith", 0);
-//tryQuestEncounter("blacksmith", 2, () => tryQuestEncounter("blacksmith", 3, () => {
-//  const weapon = upgradeWeapon(player.weapon, 1);
-//  openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
-//}));
+tryQuestEncounter("blacksmith", 2, () => {
+  tryQuestEncounter("blacksmith", 3, () => {
+    const weapon = upgradeWeapon(player.weapon, 1);
+    openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+  });
+});
 
 // Explore → travel
 exploreBtn.onclick = () => {
