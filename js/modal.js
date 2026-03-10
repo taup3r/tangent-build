@@ -7,6 +7,7 @@ import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGo
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
+import { tryQuestEncounter } from "./quest.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -262,7 +263,7 @@ export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
-    showResultModal(true);
+    tryQuestEncounter("blacksmith", 1, () => showResultModal(true));
     return true;
   }
 
