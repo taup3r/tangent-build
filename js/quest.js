@@ -75,9 +75,7 @@ export function triggerQuest(quest, action = null) {
     saveQuestState();
 
     modal.style.display = "none";
-    if (action) {
-      action();
-    }
+    if (action) action();
   };
 
   modal.style.display = "flex";
@@ -85,9 +83,7 @@ export function triggerQuest(quest, action = null) {
 
 export function ignoreQuest(action = null) {
   document.getElementById("quest-modal").style.display = "none";
-  if (action) {
-    action();
-  }
+  if (action) action();
 }
 
 export function tryQuestEncounter(id, stage, action = null) {
@@ -101,5 +97,7 @@ export function tryQuestEncounter(id, stage, action = null) {
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
 quest.stage < quest.maxStage) {
     triggerQuest(quest, action);
+  } else {
+    if (action) action();
   }
 }
