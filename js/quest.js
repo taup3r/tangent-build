@@ -100,9 +100,9 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
-export function tryQuestEncounter(id, stage, action = null) {
+export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
   document.getElementById("ignoreButton").onclick = () => {
-    ignoreQuest(action);
+    ignoreQuest(ignoreAction);
   };
 
   const quest = getQuest(id);
