@@ -282,6 +282,7 @@ export function generateWeapon(inputRank) {
 }
 
 export function upgradeWeapon(inputWeapon, remaining) {
+  if (!inputWeapon) return generateWeapon(remaining);
   let stats = {
     "STR": inputWeapon.STR || 0,
     "DEX": inputWeapon.DEX || 0,
