@@ -52,6 +52,21 @@
   animation: fadeIn 0.4s ease;
 }
 
+.quest-btn {
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.quest-btn:hover {
+  background: #ffe066;
+}
+
 /* Landscape mode */
 @media (min-width: 700px) {
   .battlefield {
