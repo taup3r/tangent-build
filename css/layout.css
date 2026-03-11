@@ -54,16 +54,11 @@
 
 .quest-btn {
   border: none;
-  padding: 8px 14px;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   font-size: 0.9rem;
   width: auto;
-}
-
-.quest-btn:hover {
-  background: #ffe066;
 }
 
 /* Landscape mode */
