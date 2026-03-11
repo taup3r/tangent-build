@@ -107,9 +107,12 @@ export function ignoreQuest(action = null) {
 }
 
 export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
-  document.getElementById("ignoreButton").onclick = () => {
-    ignoreQuest(ignoreAction);
-  };
+  const ignoreButton = document.getElementById("ignoreButton");
+  if (ignoreButton) {
+    ignoreButton.onclick = () => {
+      ignoreQuest(ignoreAction);
+    };
+  }
 
   const quest = getQuest(id);
 
