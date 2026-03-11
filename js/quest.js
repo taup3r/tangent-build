@@ -118,6 +118,6 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
 quest.stage < quest.maxStage) {
     triggerQuest(quest, action);
   } else {
-    if (action) action();
+    if (ignoreAction) ignoreAction();
   }
 }
