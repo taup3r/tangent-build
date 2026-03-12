@@ -75,7 +75,9 @@ export function triggerQuest(quest, action = null, isView = false) {
   const ignoreButton = document.getElementById("ignoreButton");
 
   const currentQuest = questData[quest.id];
-  const currentQuestStage = currentQuest.flow[quest.stage];
+  let stage = quest.stage;
+  if (isView) stage -= 1;
+  const currentQuestStage = currentQuest.flow[stage];
 
   questTitle.textContent = currentQuest.title;
   npcName.textContent = currentQuestStage.npc;
@@ -87,11 +89,11 @@ export function triggerQuest(quest, action = null, isView = false) {
     npcButton.textContent = currentQuestStage.submit;
   }
 
-  if (currentQuestStage.cancel) {
+  if (isView || !currentStage.cancel) {
+    ignoreButton.style.display = "none";
+  } else {
     ignoreButton.textContent = currentQuestStage.cancel;
     ignoreButton.style.display = "flex";
-  } else {
-    ignoreButton.style.display = "none";
   }
 
   npcButton.onclick = () => {
