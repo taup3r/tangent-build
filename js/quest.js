@@ -127,7 +127,7 @@ quest.stage < quest.maxStage) {
 
 export function showQuestList()
 {
-  const container = document.getElementById("questListContainer");
+  const container = document.getElementById("quest-list-modal-container");
   container.innerHTML = "";
 
   const activeQuests = quests.filter(q => q.active && q.stage < q.maxStage);
@@ -149,4 +149,4 @@ export function showQuestList()
 };
 
   document.getElementById("quest-list-modal").style.display = "flex";
-};
+}
