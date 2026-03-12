@@ -89,11 +89,11 @@ export function triggerQuest(quest, action = null) {
     npcButton.textContent = currentQuestStage.submit;
   //}
 
-  if (!currentStage.cancel) {
-    ignoreButton.style.display = "none";
-  } else {
+  if (currentStage.cancel) {
     ignoreButton.textContent = currentQuestStage.cancel;
     ignoreButton.style.display = "flex";
+  } else {
+    ignoreButton.style.display = "none";
   }
 
   npcButton.onclick = () => {
