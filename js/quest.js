@@ -137,9 +137,6 @@ quest.stage < quest.maxStage) {
 
 export function showQuestList()
 {
-  const container = document.getElementById("quest-list-modal-container");
-  container.innerHTML = "";
-
   const activeQuests = quests.filter(q => q.active && q.stage < q.maxStage);
 
   activeQuests.forEach(q => {
