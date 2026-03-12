@@ -126,7 +126,7 @@ exploreBtn.onclick = () => {
   }, 300);
 };
 
-//document.getElementById("questButton").onclick = () => showQuestList();
+document.getElementById("questButton").onclick = () => showQuestList();
 
 /* -------------------------
    STAT MENU
