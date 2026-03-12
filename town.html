@@ -49,6 +49,16 @@
     </div>
   </div>
 
+  <!-- Quest List Modal -->
+  <div id="quest-list-modal-container"></div>
+  <script>
+    fetch("quest-list-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-list-modal-container").innerHTML = html;
+    });
+  </script>
+
   <!-- Quest Modal -->
   <div id="quest-modal-container"></div>
   <script>
