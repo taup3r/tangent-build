@@ -66,7 +66,7 @@ export function getQuest(id) {
   return quests.find(q => q.id === id);
 }
 
-export function triggerQuest(quest, action = null, isView = false) {
+export function triggerQuest(quest, action = null) {
   const modal = document.getElementById("quest-modal");
   const questTitle = document.getElementById("questTitle");
   const npcName = document.getElementById("npcName");
@@ -76,20 +76,20 @@ export function triggerQuest(quest, action = null, isView = false) {
 
   const currentQuest = questData[quest.id];
   let stage = quest.stage;
-  if (isView === true) stage -= 1;
+  //if (isView === true) stage -= 1;
   const currentQuestStage = currentQuest.flow[stage];
 
   questTitle.textContent = currentQuest.title;
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
 
-  if (isView === true) {
-    npcButton.textContent = "Close";
-  } else {
+  //if (isView === true) {
+    //npcButton.textContent = "Close";
+  //} else {
     npcButton.textContent = currentQuestStage.submit;
-  }
+  //}
 
-  if (isView === true || !currentStage.cancel) {
+  if (!currentStage.cancel) {
     ignoreButton.style.display = "none";
   } else {
     ignoreButton.textContent = currentQuestStage.cancel;
@@ -97,12 +97,12 @@ export function triggerQuest(quest, action = null, isView = false) {
   }
 
   npcButton.onclick = () => {
-    if (isView === false) {
+    //if (isView === false) {
       quest.stage += 1;
       quest.chance = currentQuestStage.nextChance;
       quest.active = true;
       saveQuestState();
-    }
+    //}
 
     modal.style.display = "none";
     if (action) action();
@@ -148,7 +148,7 @@ export function showQuestList()
     btn.textContent = questData[q.id].title;
 
     btn.onclick = () => {
-      triggerQuest(q, null, true);
+      triggerQuest(q, null);
     };
 
     container.appendChild(btn);
