@@ -66,17 +66,10 @@
   width: 100%;
   padding: 10px;
   margin-top: 8px;
-  background: #ffaa2b;
-  border: none;
   border-radius: 6px;
-  color: #000;
   font-weight: bold;
   cursor: pointer;
   text-align: left;
-}
-
-.quest-entry-btn:hover {
-  background: #ffcc66;
 }
 
 /* Landscape mode */
