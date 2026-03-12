@@ -76,20 +76,20 @@ export function triggerQuest(quest, action = null, isView = false) {
 
   const currentQuest = questData[quest.id];
   let stage = quest.stage;
-  if (isView) stage -= 1;
+  if (isView === true) stage -= 1;
   const currentQuestStage = currentQuest.flow[stage];
 
   questTitle.textContent = currentQuest.title;
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
 
-  if (isView) {
+  if (isView === true) {
     npcButton.textContent = "Close";
   } else {
     npcButton.textContent = currentQuestStage.submit;
   }
 
-  if (isView || !currentStage.cancel) {
+  if (isView === true || !currentStage.cancel) {
     ignoreButton.style.display = "none";
   } else {
     ignoreButton.textContent = currentQuestStage.cancel;
@@ -97,7 +97,7 @@ export function triggerQuest(quest, action = null, isView = false) {
   }
 
   npcButton.onclick = () => {
-    if (!isView) {
+    if (isView === false) {
       quest.stage += 1;
       quest.chance = currentQuestStage.nextChance;
       quest.active = true;
