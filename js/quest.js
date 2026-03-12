@@ -13,7 +13,7 @@ export const questData = {
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
         submit: "Accept Quest",
         cancel: "Ignore",
-        nextChance: 50
+        nextChance: 10
       },{
         npc: "",
         message: "You found the Lost Hammer!",
@@ -22,9 +22,15 @@ export const questData = {
         nextChance: 100
       },{
         npc: "Blacksmith Roran",
-        message: "You found it! I can finally get back to work. Let me repay you properly.",
+        message: "You found it! I can finally get back to work. Let me repay you properly. I will let you know when I'm done.",
         submit: "Continue",
-        nextChance: 100
+        nextChance: 50
+      },{
+        npc: "Blacksmith Roran",
+        message: "Congratulations! Your weapon has been refined!",
+        submit: "Compare",
+        cancel: "Revert",
+        nextChance: 10
       }
     ]
   }
@@ -33,9 +39,9 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
-    chance: 50,
+    chance: 10,
     stage: 0, // 0 = not started
-    maxStage: 0, // 0 - disable
+    maxStage: 4, // 0 - disable
     active: false,
     data: {} // for storing hammerFound, etc.
   }
@@ -60,7 +66,7 @@ export function getQuest(id) {
   return quests.find(q => q.id === id);
 }
 
-export function triggerQuest(quest, action = null) {
+export function triggerQuest(quest, action = null, isView = false) {
   const modal = document.getElementById("quest-modal");
   const questTitle = document.getElementById("questTitle");
   const npcName = document.getElementById("npcName");
@@ -69,13 +75,23 @@ export function triggerQuest(quest, action = null) {
   const ignoreButton = document.getElementById("ignoreButton");
 
   const currentQuest = questData[quest.id];
-  const currentQuestStage = currentQuest.flow[quest.stage];
+  let stage = quest.stage;
+  if (isView === true) stage -= 1;
+  const currentQuestStage = currentQuest.flow[stage];
 
   questTitle.textContent = currentQuest.title;
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
-  npcButton.textContent = currentQuestStage.submit;
-  if (currentQuestStage.cancel) {
+
+  if (isView === true) {
+    npcButton.textContent = "Close";
+  } else {
+    npcButton.textContent = currentQuestStage.submit;
+  }
+
+  if (isView === true) {
+    ignoreButton.style.display = "none";
+  } else if (currentQuestStage.cancel) {
     ignoreButton.textContent = currentQuestStage.cancel;
     ignoreButton.style.display = "flex";
   } else {
@@ -83,10 +99,12 @@ export function triggerQuest(quest, action = null) {
   }
 
   npcButton.onclick = () => {
-    quest.stage += 1;
-    quest.chance = currentQuestStage.nextChance;
-    quest.active = true;
-    saveQuestState();
+    if (isView === false) {
+      quest.stage += 1;
+      quest.chance = currentQuestStage.nextChance;
+      quest.active = true;
+      saveQuestState();
+    }
 
     modal.style.display = "none";
     if (action) action();
@@ -100,10 +118,13 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
-export function tryQuestEncounter(id, stage, action = null) {
-  document.getElementById("ignoreButton").onclick = () => {
-    ignoreQuest(action);
-  };
+export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
+  const ignoreButton = document.getElementById("ignoreButton");
+  if (ignoreButton) {
+    ignoreButton.onclick = () => {
+      ignoreQuest(ignoreAction);
+    };
+  }
 
   const quest = getQuest(id);
 
@@ -112,6 +133,32 @@ export function tryQuestEncounter(id, stage, action = null) {
 quest.stage < quest.maxStage) {
     triggerQuest(quest, action);
   } else {
-    if (action) action();
+    if (ignoreAction) ignoreAction();
   }
+}
+
+export function showQuestList()
+{
+  const container = document.getElementById("questListContainer");
+  container.innerHTML = "";
+
+  const activeQuests = quests.filter(q => q.active && q.stage < q.maxStage);
+
+  activeQuests.forEach(q => {
+    const btn = document.createElement("button");
+    btn.classList.add("quest-entry-btn");
+    btn.textContent = questData[q.id].title;
+
+    btn.onclick = () => {
+      triggerQuest(q, null, true);
+    };
+
+    container.appendChild(btn);
+  });
+
+  document.getElementById("questListCloseBtn").onclick = () => {
+    document.getElementById("quest-list-modal").style.display = "none";
+};
+
+  document.getElementById("quest-list-modal").style.display = "flex";
 }

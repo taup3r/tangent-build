@@ -21,7 +21,7 @@
     </div>
 
     <div class="header-right">
-      Lv <span id="playerLevelDisplay">1</span> • Exp <span id="playerExpDisplay">0 / 20</span> • <span id="playerGoldDisplay">0</span> Gold
+      Lv <span id="playerLevelDisplay">1</span> • Exp <span id="playerExpDisplay">0 / 20</span> • <span id="playerGoldDisplay">0</span> Gold • <button id="questButton" class="quest-btn">📜</button>
     </div>
   </div>
 
@@ -49,6 +49,16 @@
     </div>
   </div>
 
+  <!-- Quest List Modal -->
+  <div id="quest-list-modal-container"></div>
+  <script>
+    fetch("quest-list-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-list-modal-container").innerHTML = html;
+    });
+  </script>
+
   <!-- Quest Modal -->
   <div id="quest-modal-container"></div>
   <script>
@@ -56,6 +66,16 @@
     .then(res => res.text())
     .then(html => {
       document.getElementById("quest-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Compare Modal -->
+  <div id="compare-modal-container"></div>
+  <script>
+    fetch("compare-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("compare-modal-container").innerHTML = html;
     });
   </script>
 
