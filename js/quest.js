@@ -124,3 +124,29 @@ quest.stage < quest.maxStage) {
     if (ignoreAction) ignoreAction();
   }
 }
+
+export function showQuestList()
+{
+  const container = document.getElementById("questListContainer");
+  container.innerHTML = "";
+
+  const activeQuests = quests.filter(q => q.active && q.stage < q.maxStage);
+
+  activeQuests.forEach(q => {
+    const btn = document.createElement("button");
+    btn.classList.add("quest-entry-btn");
+    btn.textContent = q.getTitle();
+
+    btn.onclick = () => {
+      showQuestDetails(q);
+    };
+
+    container.appendChild(btn);
+  });
+
+  document.getElementById("questListCloseBtn").onclick = () => {
+    document.getElementById("quest-list-modal").style.display = "none";
+};
+
+  document.getElementById("quest-list-modal").style.display = "flex";
+};
