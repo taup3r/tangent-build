@@ -112,7 +112,13 @@ function questEncounters() {
 
 // Initial generation
 generateTownLayout();
-questEncounters();
+//questEncounters();
+tryQuestEncounter("blacksmith", 0);
+tryQuestEncounter("blacksmith", 2);
+tryQuestEncounter("blacksmith", 3, () => {
+  const weapon = upgradeWeapon(player.weapon, 1);
+  openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+});
 
 // Explore → travel
 exploreBtn.onclick = () => {
@@ -123,7 +129,13 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
-    questEncounters();
+    //questEncounters();
+    tryQuestEncounter("blacksmith", 0);
+    tryQuestEncounter("blacksmith", 2);
+    tryQuestEncounter("blacksmith", 3, () => {
+      const weapon = upgradeWeapon(player.weapon, 1);
+      openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+    });
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
