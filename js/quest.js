@@ -13,7 +13,7 @@ export const questData = {
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
         submit: "Accept Quest",
         cancel: "Ignore",
-        nextChance: 10
+        nextChance: 100
       },{
         npc: "",
         message: "You found the Lost Hammer!",
