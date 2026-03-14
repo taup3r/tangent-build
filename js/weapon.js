@@ -289,6 +289,7 @@ export function upgradeWeapon(inputWeapon, remaining) {
     "AGI": inputWeapon.AGI || 0,
     "CON": inputWeapon.CON || 0
   };
+  alert(JSON.stringify(stats));
   let name = inputWeapon.name;
   let lore = inputWeapon.lore;
   let isUnique = false;
@@ -307,6 +308,8 @@ export function upgradeWeapon(inputWeapon, remaining) {
 
   const distribution = distributePoints(remaining, chosenStats.length);
   chosenStats.forEach((s, i) => stats[s] += distribution[i]);
+
+  alert(JSON.stringify(stats));
 
   const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
 
