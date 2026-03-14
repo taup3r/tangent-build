@@ -306,7 +306,7 @@ export function upgradeWeapon(inputWeapon, remaining) {
   }
 
   const distribution = distributePoints(remaining, chosenStats.length);
-  chosenStats.forEach((s, i) => stats[s] = distribution[i]);
+  chosenStats.forEach((s, i) => stats[s] += distribution[i]);
 
   const statsWithValue = Object.entries(stats).filter(([_, v]) => v > 0);
 
