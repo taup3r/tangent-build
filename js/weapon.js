@@ -294,7 +294,7 @@ export function upgradeWeapon(inputWeapon, remaining) {
   let isUnique = false;
   let uniqueType = "NONE";
   let weapon = weapons.find(w => w.type === inputWeapon.type);
-  const inputRank = inputWeapon.baseRank + inputWeapon.remainingRank + remaining;
+  const inputRank = inputWeapon.inputRank + remaining;
 
   const statCount = weightedStatCount();
   const statTypes = ["STR", "DEX", "AGI", "CON"];
