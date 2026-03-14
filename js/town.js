@@ -102,7 +102,7 @@ function generateTownLayout() {
 }
 
 function questEncounters() {
-  loadProgress();
+  loadQuestState();
   tryQuestEncounter("blacksmith", 0);
   tryQuestEncounter("blacksmith", 2);
   tryQuestEncounter("blacksmith", 3, () => {
