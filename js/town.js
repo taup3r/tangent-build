@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, showQuestList } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList } from "./quest.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 
@@ -101,15 +101,19 @@ function generateTownLayout() {
   resetLoreAnimation();
 }
 
-// Initial generation
-generateTownLayout();
-tryQuestEncounter("blacksmith", 0);
-tryQuestEncounter("blacksmith", 2, () => {
+function questEncounters() {
+  loadQuestState();
+  tryQuestEncounter("blacksmith", 0);
+  tryQuestEncounter("blacksmith", 2);
   tryQuestEncounter("blacksmith", 3, () => {
     const weapon = upgradeWeapon(player.weapon, 1);
     openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
   });
-});
+}
+
+// Initial generation
+generateTownLayout();
+questEncounters();
 
 // Explore → travel
 exploreBtn.onclick = () => {
@@ -120,7 +124,7 @@ exploreBtn.onclick = () => {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     generateTownLayout();
-    tryQuestEncounter("blacksmith", 0);
+    questEncounters();
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);

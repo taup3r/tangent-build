@@ -156,6 +156,23 @@ export function showQuestList()
     container.appendChild(btn);
   });
 
+  const doneContainer = document.getElementById("questListDoneContainer");
+  doneContainer.innerHTML = "";
+
+  const completedQuests = quests.filter(q => q.active && q.stage === q.maxStage);
+
+  completedQuests.forEach(q => {
+    const btn = document.createElement("button");
+    btn.classList.add("quest-entry-btn");
+    btn.textContent = questData[q.id].title;
+
+    btn.onclick = () => {
+      triggerQuest(q, null, true);
+    };
+
+    doneContainer.appendChild(btn);
+  });
+
   document.getElementById("questListCloseBtn").onclick = () => {
     document.getElementById("quest-list-modal").style.display = "none";
 };
