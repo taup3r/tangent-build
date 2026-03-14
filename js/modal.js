@@ -265,6 +265,8 @@ export function checkWin() {
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
       tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
+    } else {
+      showResultModal(true);
     }
     return true;
   }
