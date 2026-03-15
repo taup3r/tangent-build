@@ -7,6 +7,7 @@ const playerQuests = `${player.name}_quests`;
 export const questData = {
   "blacksmith": {
     title: "The Lost Hammer",
+    maxStage: 5, // set to 0 to turn off quest
     flow: [
       {
         npc: "Blacksmith Roran",
@@ -46,7 +47,6 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
-    maxStage: 5, // 0 - disable
     active: false,
     data: {}
   }
@@ -135,7 +135,7 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < quest.maxStage) {
+quest.stage < questData[quest.id].maxStage) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
@@ -147,7 +147,7 @@ export function showQuestList()
   const container = document.getElementById("questListContainer");
   container.innerHTML = "";
 
-  const activeQuests = quests.filter(q => q.active && q.stage < q.maxStage);
+  const activeQuests = quests.filter(q => q.active && q.stage < questData[q.id].maxStage);
 
   activeQuests.forEach(q => {
     const btn = document.createElement("button");
@@ -164,7 +164,7 @@ export function showQuestList()
   const doneContainer = document.getElementById("questListDoneContainer");
   doneContainer.innerHTML = "";
 
-  const completedQuests = quests.filter(q => q.active && q.stage === q.maxStage);
+  const completedQuests = quests.filter(q => q.active && q.stage === questData[q.id].maxStage);
 
   completedQuests.forEach(q => {
     const btn = document.createElement("button");
