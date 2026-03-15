@@ -13,7 +13,7 @@ export const questData = {
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
         submit: "Accept Quest",
         cancel: "Ignore",
-        nextChance: 100
+        nextChance: 10
       },{
         npc: "",
         message: "You found the Lost Hammer!",
@@ -35,7 +35,7 @@ export const questData = {
         npc: "Blacksmith Roran",
         message: "Ha! I knew that refined weapon will serve you well. You've proven your strength, adventurer. From now on, my forge is open to you anytime.",
         submit: "Accept",
-        nextChance: 100
+        nextChance: 10
       }
     ]
   }
@@ -44,7 +44,7 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
-    chance: 100,
+    chance: 10,
     stage: 0, // 0 = not started
     maxStage: 5, // 0 - disable
     active: false,
