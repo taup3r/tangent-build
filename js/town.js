@@ -4,6 +4,7 @@ import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList } from "./quest.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
+import { showStatsModal } from "./stats.js";
 
 // Phase 1: Simple navigation + dungeon start
 
@@ -40,7 +41,7 @@ function generateTownLayout() {
     {
       label: "Train Stats",
       class: "btn-train",
-      action: () => openStatModal(),
+      action: () => showStatsModal(),
       disabled: playerStats.statPoints <= 0
     },
     {
@@ -132,25 +133,3 @@ exploreBtn.onclick = () => {
 };
 
 document.getElementById("questButton").onclick = () => showQuestList();
-
-/* -------------------------
-   STAT MENU
-------------------------- */
-
-function openStatModal() {
-  const modal = document.getElementById("statModal");
-  const frame = document.getElementById("statsFrame");
-
-  frame.src = `stats.html?player=${encodeURIComponent(player.name)}`;
-  modal.style.display = "flex";
-}
-
-function closeStatModal() {
-  document.getElementById("statModal").style.display = "none";
-}
-
-window.addEventListener("message", (event) => {
-  if (event.data === "close-stats") {
-    closeStatModal();
-  }
-});
