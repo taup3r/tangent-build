@@ -7,7 +7,7 @@ import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGo
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { tryQuestEncounter } from "./quest.js";
+import { showQuestList, tryQuestEncounter } from "./quest.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -434,6 +434,8 @@ window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
 window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
+
+document.getElementById("questButton").onclick = () => showQuestList();
 
 /* -------------------------
    DUNGEON INTRO SUMMARY
