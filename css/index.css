@@ -37,7 +37,7 @@ h3 {
   text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
 }
 
-/* button {
+button {
   width: 100%;
   padding: 14px 22px;
   margin: 10px 0;
@@ -55,7 +55,7 @@ button:hover {
   color: #0d0f12;
   border-color: #ffca28;
   box-shadow: 0 0 14px rgba(77, 208, 225, 0.5);
-} */
+}
 
 #saveList {
   display: none;
