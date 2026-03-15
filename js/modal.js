@@ -266,7 +266,8 @@ export function checkWin() {
     if (dungeonMode) {
       tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
     } else {
-      showResultModal(true);
+      tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+ showResultModal(true));
     }
     return true;
   }
@@ -435,7 +436,8 @@ window.closeEnemyInfo = closeEnemyInfo;
 window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
-document.getElementById("questButton").onclick = () => showQuestList();
+const questButton = document.getElementById("questButton");
+if (questButton) questButton.onclick = () => showQuestList();
 
 /* -------------------------
    DUNGEON INTRO SUMMARY
