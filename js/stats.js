@@ -66,7 +66,5 @@ export function showStatsModal() {
     document.getElementById("stats-modal").style.display = "none";
   };
 
-  document.getElementById("closeStatsBtn").onclick = () => document.getElementById("stats-modal").style.display = "none";
-
   document.getElementById("stats-modal").style.display = "flex";
 }
