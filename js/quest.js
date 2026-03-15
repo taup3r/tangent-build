@@ -13,7 +13,7 @@ export const questData = {
         message: "Adventurer! I’ve lost my hammer somewhere near the dungeon entrance. Without it, I can’t forge anything. Could you help me find it?",
         submit: "Accept Quest",
         cancel: "Ignore",
-        nextChance: 10
+        nextChance: 100
       },{
         npc: "",
         message: "You found the Lost Hammer!",
@@ -27,10 +27,15 @@ export const questData = {
         nextChance: 50
       },{
         npc: "Blacksmith Roran",
-        message: "Congratulations! Your weapon has been refined!",
+        message: "Congratulations! Your weapon has been refined! Test it in the arena.",
         submit: "Compare",
-        cancel: "Revert",
-        nextChance: 10
+        cancel: "Decline",
+        nextChance: 100
+      },{
+        npc: "Blacksmith Roran",
+        message: "Ha! I knew that refined weapon will serve you well. You've proven your strength, adventurer. From now on, my forge is open to you anytime.",
+        submit: "Accept",
+        nextChance: 100
       }
     ]
   }
@@ -39,11 +44,11 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
-    chance: 10,
+    chance: 100,
     stage: 0, // 0 = not started
-    maxStage: 4, // 0 - disable
+    maxStage: 5, // 0 - disable
     active: false,
-    data: {} // for storing hammerFound, etc.
+    data: {}
   }
 ];
 
