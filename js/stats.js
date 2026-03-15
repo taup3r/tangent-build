@@ -21,7 +21,6 @@ function updateUI() {
 }
 
 export function showStatsModal() {
-  loadProgress();
   updateUI();
 
   document.querySelectorAll(".stat-btn").forEach(btn => {
@@ -30,13 +29,13 @@ export function showStatsModal() {
 
       if (btn.classList.contains("plus")) {
         if (tempPoints > 0) {
-          tempStats[stat]++;
-          tempPoints--;
+          tempStats[stat]+=1;
+          tempPoints-=1;
         }
       } else {
         if (tempStats[stat] > playerStats[stat]) {
-          tempStats[stat]--;
-          tempPoints++;
+          tempStats[stat]-=1;
+          tempPoints+=1;
         }
       }
 
