@@ -266,7 +266,7 @@ export function checkWin() {
     if (dungeonMode) {
       tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
     } else {
-      showResultModal(true);
+      tryQuestEncounter("blacksmith", 4, () => showResultModal(true));
     }
     return true;
   }
