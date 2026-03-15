@@ -21,6 +21,7 @@ function updateUI() {
 }
 
 export function showStatsModal() {
+  loadProgress();
   updateUI();
 
   document.querySelectorAll(".stat-btn").forEach(btn => {
