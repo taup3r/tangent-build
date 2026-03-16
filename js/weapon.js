@@ -284,10 +284,10 @@ export function generateWeapon(inputRank) {
 export function upgradeWeapon(inputWeapon, remaining) {
   if (!inputWeapon) return generateWeapon(remaining);
   let stats = {
-    "STR": inputWeapon.STR || 0,
-    "DEX": inputWeapon.DEX || 0,
-    "AGI": inputWeapon.AGI || 0,
-    "CON": inputWeapon.CON || 0
+    STR: inputWeapon.stats.STR || 0,
+    DEX: inputWeapon.stats.DEX || 0,
+    AGI: inputWeapon.stats.AGI || 0,
+    CON: inputWeapon.stats.CON || 0
   };
   let name = inputWeapon.name;
   let lore = inputWeapon.lore;
