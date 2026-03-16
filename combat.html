@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/stats.css">
   <link rel="stylesheet" href="css/modal.css">
 </head>
 
@@ -142,11 +143,14 @@
   </div>
 
   <!-- Stats Modal -->
-  <div id="statModal" class="modal" style="display:none;">
-    <div class="modal-content stats-iframe-box">
-      <iframe id="statsFrame" src="" class="stats-iframe"></iframe>
-    </div>
-  </div>
+  <div id="stats-modal-container"></div>
+  <script>
+    fetch("stats-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("stats-modal-container").innerHTML = html;
+    });
+  </script>
 
   <!-- ENEMY INFO MODAL -->
   <div id="enemyInfoModal" class="modal" style="display:none;">

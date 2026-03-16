@@ -3,24 +3,12 @@ import { playerStats, saveProgress, loadProgress } from "./state.js";
 loadProgress();
 
 let tempStats = {
-  STR: playerStats.STR,
-  DEX: playerStats.DEX,
-  AGI: playerStats.AGI,
-  CON: playerStats.CON
-};
-
+    STR: playerStats.STR,
+    DEX: playerStats.DEX,
+    AGI: playerStats.AGI,
+    CON: playerStats.CON
+  };
 let tempPoints = playerStats.statPoints;
-
-function updateUI() {
-  document.getElementById("statPointsDisplay").textContent = tempPoints;
-
-  document.getElementById("statValueSTR").textContent = tempStats.STR;
-  document.getElementById("statValueDEX").textContent = tempStats.DEX;
-  document.getElementById("statValueAGI").textContent = tempStats.AGI;
-  document.getElementById("statValueCON").textContent = tempStats.CON;
-}
-
-updateUI();
 
 document.querySelectorAll(".stat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -43,13 +31,7 @@ document.querySelectorAll(".stat-btn").forEach(btn => {
 });
 
 document.getElementById("resetStatsBtn").onclick = () => {
-  tempStats = {
-    STR: playerStats.STR,
-    DEX: playerStats.DEX,
-    AGI: playerStats.AGI,
-    CON: playerStats.CON
-  };
-  tempPoints = playerStats.statPoints;
+  loadStats();
   updateUI();
 };
 
@@ -61,6 +43,30 @@ document.getElementById("saveStatsBtn").onclick = () => {
   playerStats.statPoints = tempPoints;
 
   saveProgress();
-
-  parent.postMessage("close-stats", "*");
+  document.getElementById("stats-modal").style.display = "none";
 };
+
+function loadStats() {
+  loadProgress();
+  tempStats = {
+    STR: playerStats.STR,
+    DEX: playerStats.DEX,
+    AGI: playerStats.AGI,
+    CON: playerStats.CON
+  };
+  tempPoints = playerStats.statPoints;
+}
+
+function updateUI() {
+  document.getElementById("statPointsDisplay").textContent = tempPoints;
+  document.getElementById("statValueSTR").textContent = tempStats.STR;
+  document.getElementById("statValueDEX").textContent = tempStats.DEX;
+  document.getElementById("statValueAGI").textContent = tempStats.AGI;
+  document.getElementById("statValueCON").textContent = tempStats.CON;
+}
+
+export function showStatsModal() {
+  loadStats();
+  updateUI();
+  document.getElementById("stats-modal").style.display = "flex";
+}
