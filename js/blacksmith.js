@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
-import { generateWeapon } from "./weapon.js";
-import { openCompareWeapon } from "./modal.js";
+//import { generateWeapon } from "./weapon.js";
+//import { openCompareWeapon } from "./modal.js";
 
 loadProgress();
 
