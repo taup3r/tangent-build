@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tangent RPG - Blacksmith</title>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/blacksmith.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="container">
+
+      <h1>Blacksmith</h1>
+      <button id="refineButton">Refine</button>
+      <button id="backButton">Back</button>
+
+    </div>
+
+  </div>
+
+   <!-- Compare Modal -->
+  <div id="compare-modal-container"></div>
+  <script>
+    fetch("compare-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("compare-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <script type="module" src="js/blacksmith.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("player");
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = `blacksmith.html?player=${encodeURIComponent(name)}`;
+    };
+  </script>
+</body>
+</html>
