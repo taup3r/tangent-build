@@ -30,8 +30,8 @@ export function showStatsModal() {
   updateUI();
 
   document.querySelectorAll(".stat-btn").forEach(btn => {
-    btn.onclick = () => {};
-    btn.addEventListener("click", () => {
+    //btn.addEventListener("click", () => {
+    btn.onclick = () => {
       const stat = btn.dataset.stat;
 
       if (btn.classList.contains("plus")) {
