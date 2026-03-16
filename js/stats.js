@@ -30,9 +30,7 @@ export function showStatsModal() {
   updateUI();
 
   document.querySelectorAll(".stat-btn").forEach(btn => {
-    const newElement = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newElement, btn);
-
+    btn.onclick = () => {};
     btn.addEventListener("click", () => {
       const stat = btn.dataset.stat;
 
