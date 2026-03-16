@@ -2,14 +2,19 @@ import { playerStats, saveProgress, loadProgress } from "./state.js";
 
 loadProgress();
 
-let tempStats = {
-  STR: playerStats.STR,
-  DEX: playerStats.DEX,
-  AGI: playerStats.AGI,
-  CON: playerStats.CON
-};
+let tempStats = {};
+let tempPoints;
 
-let tempPoints = playerStats.statPoints;
+function loadStats() {
+  tempStats = {
+    STR: playerStats.STR,
+    DEX: playerStats.DEX,
+    AGI: playerStats.AGI,
+    CON: playerStats.CON
+  };
+
+  tempPoints = playerStats.statPoints;
+}
 
 function updateUI() {
   document.getElementById("statPointsDisplay").textContent = tempPoints;
@@ -21,6 +26,7 @@ function updateUI() {
 }
 
 export function showStatsModal() {
+  loadStats();
   updateUI();
 
   document.querySelectorAll(".stat-btn").forEach(btn => {
@@ -29,13 +35,13 @@ export function showStatsModal() {
 
       if (btn.classList.contains("plus")) {
         if (tempPoints > 0) {
-          tempStats[stat]+=1;
-          tempPoints-=1;
+          tempStats[stat]++;
+          tempPoints--;
         }
       } else {
         if (tempStats[stat] > playerStats[stat]) {
-          tempStats[stat]-=1;
-          tempPoints+=1;
+          tempStats[stat]--;
+          tempPoints++;
         }
       }
 
@@ -44,13 +50,7 @@ export function showStatsModal() {
   });
 
   document.getElementById("resetStatsBtn").onclick = () => {
-    tempStats = {
-      STR: playerStats.STR,
-      DEX: playerStats.DEX,
-      AGI: playerStats.AGI,
-      CON: playerStats.CON
-    };
-    tempPoints = playerStats.statPoints;
+    loadStats();
     updateUI();
   };
 
