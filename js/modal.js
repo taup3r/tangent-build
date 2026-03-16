@@ -2,12 +2,12 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType } from "./state.js";
-import { playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
 import { showQuestList, tryQuestEncounter } from "./quest.js";
+import { showStatsModal } from "./stats.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -157,7 +157,7 @@ export function showResultModal(victory) {
   // Show stat button if points available
   if (playerStats.statPoints > 0 && !dungeonMode) {
   document.getElementById("statButton").onclick = () => {
-    openStatModal();
+    showStatsModal();
   }
   document.getElementById("statButton").style.display = "block";
   }
@@ -283,7 +283,7 @@ export function checkWin() {
 
 /* -------------------------
    STAT MENU
-------------------------- */
+------------------------- 
 
 function openStatModal() {
   const modal = document.getElementById("statModal");
@@ -302,6 +302,7 @@ window.addEventListener("message", (event) => {
     closeStatModal();
   }
 });
+*/
 
 /* -------------------------
    ENEMY PROFILE MODAL
