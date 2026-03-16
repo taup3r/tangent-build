@@ -2,8 +2,13 @@ import { playerStats, saveProgress, loadProgress } from "./state.js";
 
 loadProgress();
 
-let tempStats = {};
-let tempPoints;
+let tempStats = {
+    STR: playerStats.STR,
+    DEX: playerStats.DEX,
+    AGI: playerStats.AGI,
+    CON: playerStats.CON
+  };
+let tempPoints = playerStats.statPoints;
 
 document.querySelectorAll(".stat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
