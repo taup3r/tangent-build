@@ -42,6 +42,7 @@ document.getElementById("saveStatsBtn").onclick = () => {
 };
 
 function loadStats() {
+  loadProgress();
   tempStats = {
     STR: playerStats.STR,
     DEX: playerStats.DEX,
