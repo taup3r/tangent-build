@@ -4,9 +4,10 @@ import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList } from "./quest.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
-import { showStatsModal } from "./stats.js";
+import { integrateStatsModal, showStatsModal } from "./stats.js";
 
-// Phase 1: Simple navigation + dungeon start
+//wire up stats modal
+integrateStatsModal();
 
 loadProgress();
 updateHeaderStats();
