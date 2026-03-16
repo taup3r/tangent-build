@@ -73,6 +73,7 @@ function generateTownLayout() {
     }
   ];
 
+  loadQuestState();
   const blacksmithQuest = getQuest("blacksmith");
 
   if (blacksmithQuest && blacksmithQuest.stage >= 4) {
