@@ -1,5 +1,13 @@
 import { playerStats, saveProgress, loadProgress } from "./state.js";
 
+export function integrateStatsModal() {
+  fetch("stats-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("stats-modal-container").innerHTML = html;
+    });
+}
+
 loadProgress();
 
 let tempStats = {
