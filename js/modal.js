@@ -282,29 +282,6 @@ export function checkWin() {
 }
 
 /* -------------------------
-   STAT MENU
-------------------------- 
-
-function openStatModal() {
-  const modal = document.getElementById("statModal");
-  const frame = document.getElementById("statsFrame");
-
-  frame.src = `stats.html?player=${encodeURIComponent(player.name)}`;
-  modal.style.display = "flex";
-}
-
-function closeStatModal() {
-  document.getElementById("statModal").style.display = "none";
-}
-
-window.addEventListener("message", (event) => {
-  if (event.data === "close-stats") {
-    closeStatModal();
-  }
-});
-*/
-
-/* -------------------------
    ENEMY PROFILE MODAL
 ------------------------- */
 
