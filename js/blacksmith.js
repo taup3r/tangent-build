@@ -6,13 +6,14 @@ loadProgress();
 
 document.getElementById("refineButton").onclick = () => {
   const weapon = player.weapon;
-  let newWeapon;
+  let refined;
 
   if (weapon) {
-    newWeapon = upgradeWeapon(weapon, 1);
+    refined = upgradeWeapon(weapon, 1);
   } else {
-    newWeapon = generateWeapon(1);
+    refined = generateWeapon(2);
   }
+  openCompareWeapon(refined, "Equip");
 };
 
 document.getElementById("backButton").onclick = () => {
