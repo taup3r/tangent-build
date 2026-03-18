@@ -1,8 +1,10 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
+import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 
 loadProgress();
+updateHeaderStats();
 
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = "Refine 1 ore + 1000g";
