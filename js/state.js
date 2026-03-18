@@ -16,8 +16,7 @@ export let player = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  weapon: null,
-  items: {}
+  weapon: null
 };
 
 /* ================================
@@ -57,10 +56,6 @@ export function loadProgress() {
 
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
-  }
-
-  if (playerStats.items) {
-    player.items = playerStats.items;
   }
 
   applyStatsToCombat(player, playerStats);
