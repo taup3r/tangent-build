@@ -30,12 +30,14 @@ document.querySelectorAll(".stat-btn").forEach(btn => {
   });
 });
 
-document.getElementById("resetStatsBtn").onclick = () => {
+const resetStatsBtn = document.getElementById("resetStatsBtn");
+if (resetStatsBtn) resetStatsBtn.onclick = () => {
   loadStats();
   updateUI();
 };
 
-document.getElementById("saveStatsBtn").onclick = () => {
+const saveStatsBtn = document.getElementById("saveStatsBtn");
+if (saveStatsBtn) saveStatsBtn.onclick = () => {
   playerStats.STR = tempStats.STR;
   playerStats.DEX = tempStats.DEX;
   playerStats.AGI = tempStats.AGI;
