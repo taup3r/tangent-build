@@ -76,7 +76,7 @@ function generateTownLayout() {
   loadQuestState();
   const blacksmithQuest = getQuest("blacksmith");
 
-  if (blacksmithQuest && blacksmithQuest.stage >= 4) {
+  if (blacksmithQuest && blacksmithQuest.stage >= 5) {
     buttons.push({
       label: "Blacksmith",
       class: "btn-blacksmith",
