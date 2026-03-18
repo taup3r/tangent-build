@@ -55,7 +55,7 @@
 .quest-btn {
   border: none;
   padding: 4px;
-  /*border-radius: 6px;*/
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   font-size: 0.9rem;
