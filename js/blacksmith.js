@@ -4,7 +4,9 @@ import { openCompareWeapon } from "./modal.js";
 
 loadProgress();
 
-document.getElementById("refineButton").onclick = () => {
+const refineButton = document.getElementById("refineButton");
+refineButton.textContent = "Refine 1 ore + 3000g";
+refineButton.onclick = () => {
   const weapon = player.weapon;
   let refined;
 
