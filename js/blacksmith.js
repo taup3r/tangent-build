@@ -12,17 +12,20 @@ refineButton.onclick = () => {
   const weapon = player.weapon;
   let refined;
 
-  //if (playerStats.gold >= 1000 && playerStats.items["ore"] && playerStats.items["ore"].count || 0 > 0) {
+  if (playerStats.gold >= 1000 && playerStats.items["ore"] && (playerStats.items["ore"].count || 0) > 0) {
+    // immediately reduces ore on attempt
+    playerStats.items["ore"].count -= 1;
+
     if (weapon) {
       refined = upgradeWeapon(weapon, 1);
     } else {
       refined = generateWeapon(2);
     }
     openCompareWeapon(refined, "Equip", () => {
-      //playerStats.gold -= 1000;
-      //playerStats.items["ore"].count -= 1;
+      // then charges gold when equipped
+      playerStats.gold -= 1000;
     });
-  //}  
+  }  
 };
 
 document.getElementById("backButton").onclick = () => {
