@@ -46,25 +46,6 @@
 .btn-shop { background: #ffaa2b; } /* warm gold */
 .btn-blacksmith { background: #b5651d; } /* forge bronze */
 
-/* Scrolling lore text */
-#loreScroller {
-  width: 100%;
-  height: 30px;
-  overflow: hidden;
-  position: fixed;
-  bottom: 90px;
-  left: 0;
-  text-align: center;
-  font-size: 1rem;
-  opacity: 0.85;
-}
-
-#loreText {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scrollText 8s linear infinite;
-}
-
 /* Explore button (index.html New Game style, 80% width) */
 .explore-btn {
   width: 80%;
