@@ -6,6 +6,8 @@ import { openCompareWeapon } from "./modal.js";
 loadProgress();
 updateHeaderStats();
 
+document.getElementById("loreText").textContent = "Refining current weapon costs 1 ore, and charges 1000 gold when you decide to go with it.";
+
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = "Refine 1 ore + 1000g";
 refineButton.onclick = () => {
