@@ -12,14 +12,17 @@ refineButton.onclick = () => {
   const weapon = player.weapon;
   let refined;
 
-  if (playerStats.gold >= 1000 && playerStats.items["ore"] && playerStats.items["ore"].count || 0 > 0) {
+  //if (playerStats.gold >= 1000 && playerStats.items["ore"] && playerStats.items["ore"].count || 0 > 0) {
     if (weapon) {
       refined = upgradeWeapon(weapon, 1);
     } else {
       refined = generateWeapon(2);
     }
-    openCompareWeapon(refined, "Equip");
-  }  
+    openCompareWeapon(refined, "Equip", () => {
+      //playerStats.gold -= 1000;
+      //playerStats.items["ore"].count -= 1;
+    });
+  //}  
 };
 
 document.getElementById("backButton").onclick = () => {
