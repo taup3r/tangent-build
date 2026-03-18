@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tangent RPG - Blacksmith</title>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modal.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header-component-container"></div>
+  <script>
+    fetch("header-component.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header-component-container").innerHTML = html;
+    });
+  </script>
+
+  <div class="wrapper">
+
+    <div class="container">
+
+      <h1>Blacksmith's Forge</h1>
+      <button id="refineButton">Refine</button>
+      <button id="backButton">Back</button>
+
+    </div>
+
+  </div>
+
+   <!-- Compare Modal -->
+  <div id="compare-modal-container"></div>
+  <script>
+    fetch("compare-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("compare-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Scrolling Lore Text -->
+  <div id="loreScroller">
+    <span id="loreText"></span>
+  </div>
+
+  <script type="module" src="js/blacksmith.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("player");
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = `blacksmith.html?player=${encodeURIComponent(name)}`;
+    };
+  </script>
+</body>
+</html>

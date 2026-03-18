@@ -60,6 +60,25 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Scrolling lore text */
+#loreScroller {
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 90px;
+  left: 0;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+#loreText {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 8s linear infinite;
+}
+
 /* Travel animations */
 @keyframes scrollText {
   0% { transform: translateX(100%); }

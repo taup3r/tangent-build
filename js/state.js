@@ -33,7 +33,8 @@ export let playerStats = {
   AGI: 0,
   CON: 0,
   playerWeapon: null,
-  gold: 0
+  gold: 0,
+  items: {}
 };
 
 export function loadProgress() {

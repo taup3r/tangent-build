@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest } from "./quest.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
@@ -72,6 +72,20 @@ function generateTownLayout() {
       disabled: false
     }
   ];
+
+  loadQuestState();
+  const blacksmithQuest = getQuest("blacksmith");
+
+  if (blacksmithQuest && blacksmithQuest.stage >= 4) {
+    buttons.push({
+      label: "Blacksmith",
+      class: "btn-blacksmith",
+      action: () => {
+        window.location.href = `blacksmith.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    });
+  }
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
