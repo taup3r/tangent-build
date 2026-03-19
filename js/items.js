@@ -42,8 +42,7 @@ export function triggerItem(item, action = null, isView = false) {
 
   acceptButton.onclick = () => {
     if (isView === false) {
-      item.count = (item.count || 0) + 1;
-      //todo: save to progress
+      item.count += 1;
     }
 
     modal.style.display = "none";
