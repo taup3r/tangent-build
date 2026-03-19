@@ -11,15 +11,8 @@ export const itemData = {
   }
 };
 
-export const items = [
-  {
-    id: "ore-w",
-    count: 0
-  }
-];
-
 export function getItem(id) {
-  return items.find(q => q.id === id);
+  return playerStats.items.find(q => q.id === id);
 }
 
 export function triggerItem(item, action = null, isView = false) {
@@ -49,7 +42,7 @@ export function triggerItem(item, action = null, isView = false) {
 
   acceptButton.onclick = () => {
     if (isView === false) {
-      item.stage += 1;
+      item.count = (item.count || 0) + 1;
       //todo: save to progress
     }
 
@@ -66,33 +59,31 @@ export function ignoreItem(action = null) {
 }
 
 //todo
-export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
+export function tryItemEncounter(id, action = null, ignoreAction = null) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
-      ignoreQuest(ignoreAction);
+      ignoreItem(ignoreAction);
     };
   }
 
-  const quest = getQuest(id);
+  const item = getItem(id);
+  //todo fix here
 
-  // Only trigger if quest not started
-  if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage) {
-    triggerQuest(quest, action);
+  if (Math.random() < (itemData[item.id].chance/100) &&
+(item.count + 1) < itemData[item.id].maxCount) {
+    triggerItem(item, action);
   } else {
     if (ignoreAction) ignoreAction();
   }
 }
 
-export function showQuestList()
+export function showItemList()
 {
-  const container = document.getElementById("questListContainer");
+  const container = document.getElementById("itemListContainer");
   container.innerHTML = "";
 
-  const activeQuests = quests.filter(q => q.active && q.stage < questData[q.id].maxStage);
-
-  activeQuests.forEach(q => {
+  items.forEach(q => {
     const btn = document.createElement("button");
     btn.classList.add("quest-entry-btn");
     btn.textContent = questData[q.id].title;
