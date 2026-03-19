@@ -58,7 +58,6 @@ export function ignoreItem(action = null) {
   if (action) action();
 }
 
-//todo
 export function tryItemEncounter(id, action = null, ignoreAction = null) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
@@ -68,7 +67,12 @@ export function tryItemEncounter(id, action = null, ignoreAction = null) {
   }
 
   const item = getItem(id);
-  //todo fix here
+  if (!item) {
+    item = {
+      id,
+      count: 0
+    }
+  }
 
   if (Math.random() < (itemData[item.id].chance/100) &&
 (item.count + 1) < itemData[item.id].maxCount) {
@@ -83,38 +87,21 @@ export function showItemList()
   const container = document.getElementById("itemListContainer");
   container.innerHTML = "";
 
-  items.forEach(q => {
+  playerStats.items.forEach(i => {
     const btn = document.createElement("button");
-    btn.classList.add("quest-entry-btn");
-    btn.textContent = questData[q.id].title;
+    btn.classList.add("item-entry-btn");
+    btn.textContent = itemData[i.id].name + " (" + i.count + ")";
 
     btn.onclick = () => {
-      triggerQuest(q, null, true);
+      triggerItem(i, null, true);
     };
 
     container.appendChild(btn);
   });
 
-  const doneContainer = document.getElementById("questListDoneContainer");
-  doneContainer.innerHTML = "";
-
-  const completedQuests = quests.filter(q => q.active && q.stage === questData[q.id].maxStage);
-
-  completedQuests.forEach(q => {
-    const btn = document.createElement("button");
-    btn.classList.add("quest-entry-btn");
-    btn.textContent = questData[q.id].title;
-
-    btn.onclick = () => {
-      triggerQuest(q, null, true);
-    };
-
-    doneContainer.appendChild(btn);
-  });
-
-  document.getElementById("questListCloseBtn").onclick = () => {
-    document.getElementById("quest-list-modal").style.display = "none";
+  document.getElementById("itemListCloseBtn").onclick = () => {
+    document.getElementById("item-list-modal").style.display = "none";
 };
 
-  document.getElementById("quest-list-modal").style.display = "flex";
+  document.getElementById("item-list-modal").style.display = "flex";
 }
