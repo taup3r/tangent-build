@@ -78,7 +78,7 @@ function generateTownLayout() {
 
   if (blacksmithQuest && blacksmithQuest.stage >= 5) {
     buttons.push({
-      label: "Blacksmith",
+      label: "Blacksmith's Forge",
       class: "btn-blacksmith",
       action: () => {
         window.location.href = `blacksmith.html?player=${encodeURIComponent(player.name)}`;
