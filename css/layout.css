@@ -62,7 +62,27 @@
   width: auto;
 }
 
+.item-btn {
+  border: none;
+  padding: 4px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: auto;
+}
+
 .quest-entry-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: left;
+}
+
+.item-entry-btn {
   width: 100%;
   padding: 10px;
   margin-top: 8px;
