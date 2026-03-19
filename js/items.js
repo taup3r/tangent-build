@@ -1,4 +1,4 @@
-import { player, playerStats, loadProgress } from "./state.js";
+import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 
 loadProgress();
 
@@ -43,6 +43,8 @@ export function triggerItem(item, action = null, isView = false) {
   acceptButton.onclick = () => {
     if (isView === false) {
       item.count += 1;
+      getItem(item.id) = item;
+      saveProgress();
     }
 
     modal.style.display = "none";
