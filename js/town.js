@@ -7,6 +7,8 @@ import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
 
+window.location.reload(true);
+
 // Phase 1: Simple navigation + dungeon start
 
 loadProgress();
