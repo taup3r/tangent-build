@@ -123,30 +123,30 @@ function questEncounters() {
   });
 }
 
-window.onload = () => {
-  loadProgress();
+function explore() {
   updateHeaderStats();
 
-  // Initial generation
-  generateTownLayout();
-  questEncounters();
+  randomArea.classList.remove("travel-in");
+  randomArea.classList.add("travel-out");
 
+  // After animation ends, regenerate and animate in
+  setTimeout(() => {
+    generateTownLayout();
+    questEncounters();
+    randomArea.classList.remove("travel-out");
+    randomArea.classList.add("travel-in");
+  }, 300);
+  
   // Explore → travel
   exploreBtn.onclick = () => {
     // Animate old content out
-    randomArea.classList.remove("travel-in");
-    randomArea.classList.add("travel-out");
-
-    // After animation ends, regenerate and animate in
-    setTimeout(() => {
-      generateTownLayout();
-      questEncounters();
-      randomArea.classList.remove("travel-out");
-      randomArea.classList.add("travel-in");
-    }, 300);
+    explore();
   };
 
   document.getElementById("questButton").onclick = () => showQuestList();
   document.getElementById("itemButton").onclick = () => showItemList();
 }
+
+loadProgress();
+explore();
 
