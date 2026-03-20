@@ -10,6 +10,8 @@ import { showStatsModal } from "./stats.js";
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
+const questButton = document.getElementById("questButton");
+const itemButton = document.getElementById("itemButton");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -124,7 +126,6 @@ function questEncounters() {
 }
 
 function explore() {
-  updateHeaderStats();
 
   randomArea.classList.remove("travel-in");
   randomArea.classList.add("travel-out");
@@ -136,17 +137,14 @@ function explore() {
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
-  
-  // Explore → travel
-  exploreBtn.onclick = () => {
-    // Animate old content out
-    explore();
-  };
-
-  document.getElementById("questButton").onclick = () => showQuestList();
-  document.getElementById("itemButton").onclick = () => showItemList();
 }
 
+// Button events
+exploreBtn.onclick = () => explore();
+questButton.onclick = () => showQuestList();
+itemButton.onclick = () => showItemList();
+
+// Main
 loadProgress();
-explore();
+updateHeaderStats();
 
