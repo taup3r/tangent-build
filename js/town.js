@@ -147,4 +147,7 @@ itemButton.onclick = () => showItemList();
 // Main
 loadProgress();
 updateHeaderStats();
+generateTownLayout();
+questEncounters();
+
 
