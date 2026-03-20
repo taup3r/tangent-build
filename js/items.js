@@ -106,7 +106,9 @@ export function showItemList()
   const container = document.getElementById("itemListContainer");
   container.innerHTML = "";
 
-  items.forEach(i => {
+  const availItems = items.filter(i => i.count > 0);
+
+  availItems.forEach(i => {
     const btn = document.createElement("button");
     btn.classList.add("item-entry-btn");
     btn.textContent = itemData[i.id].name + " (" + i.count + ")";
