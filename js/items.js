@@ -97,7 +97,11 @@ export function tryItemEncounter(id, action = null, ignoreAction = null) {
 (item.count + 1) < itemData[item.id].maxCount) {
     triggerItem(item, action);
   } else {
-    if (ignoreAction) ignoreAction();
+    if (ignoreAction) {
+      ignoreAction();
+    } else if (action) {
+      action();
+    }
   }
 }
 
