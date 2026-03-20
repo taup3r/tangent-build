@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { getItem } from "./items.js";
+import { getItem, saveItems } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -20,6 +20,7 @@ refineButton.onclick = () => {
   if (playerStats.gold >= 1000 && ore.count >= 1) {
     // immediately reduces ore on attempt
     ore.count -= 1;
+    saveItems();
 
     if (weapon) {
       refined = upgradeWeapon(weapon, 1);
