@@ -2,7 +2,8 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { getItem, loadItems, saveItems } from "./items.js";
+import { showQuestList } from "./quest.js";
+import { getItem, loadItems, saveItems, showItemList } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -33,6 +34,9 @@ refineButton.onclick = () => {
     });
   }  
 };
+
+questButton.onclick = () => showQuestList();
+itemButton.onclick = () => showItemList();
 
 document.getElementById("backButton").onclick = () => {
   window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
