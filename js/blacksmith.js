@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { getItem, saveItems } from "./items.js";
+import { getItem, loadItems, saveItems } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
