@@ -7,7 +7,7 @@ import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
 import { showQuestList, tryQuestEncounter } from "./quest.js";
-import { tryItemEncounter } from "./items.js";
+import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 
 /* ============================================
@@ -417,6 +417,9 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 
 const questButton = document.getElementById("questButton");
 if (questButton) questButton.onclick = () => showQuestList();
+
+const itemButton = document.getElementById("itemButton");
+if (itemButton) itemButton.onclick = () => showItemList();
 
 /* -------------------------
    DUNGEON INTRO SUMMARY
