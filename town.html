@@ -109,7 +109,6 @@
     history.pushState(null, "", location.href);
     window.onpopstate = function () {
       window.location.href = `town.html?player=${encodeURIComponent(name)}`;
-      window.location.reload(true);
     };
   </script>
 </body>
