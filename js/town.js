@@ -2,18 +2,16 @@ import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from 
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest } from "./quest.js";
+import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
 
-// Phase 1: Simple navigation + dungeon start
-
-loadProgress();
-updateHeaderStats();
-
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
+const questButton = document.getElementById("questButton");
+const itemButton = document.getElementById("itemButton");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -127,23 +125,31 @@ function questEncounters() {
   });
 }
 
-// Initial generation
-generateTownLayout();
-questEncounters();
+function explore() {
 
-// Explore → travel
-exploreBtn.onclick = () => {
-  // Animate old content out
   randomArea.classList.remove("travel-in");
   randomArea.classList.add("travel-out");
 
   // After animation ends, regenerate and animate in
   setTimeout(() => {
+    loadProgress();
+    updateHeaderStats();
     generateTownLayout();
     questEncounters();
     randomArea.classList.remove("travel-out");
     randomArea.classList.add("travel-in");
   }, 300);
-};
+}
 
-document.getElementById("questButton").onclick = () => showQuestList();
+// Button events
+exploreBtn.onclick = () => explore();
+questButton.onclick = () => showQuestList();
+itemButton.onclick = () => showItemList();
+
+// Main
+loadProgress();
+updateHeaderStats();
+generateTownLayout();
+questEncounters();
+
+

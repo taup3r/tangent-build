@@ -7,6 +7,7 @@ import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
 import { showQuestList, tryQuestEncounter } from "./quest.js";
+import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 
 /* ============================================
@@ -264,7 +265,7 @@ export function checkWin() {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
-      tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
+      tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)));
     } else {
       tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true));
@@ -416,6 +417,9 @@ window.openCompareWeaponModal = openCompareWeaponModal;
 
 const questButton = document.getElementById("questButton");
 if (questButton) questButton.onclick = () => showQuestList();
+
+const itemButton = document.getElementById("itemButton");
+if (itemButton) itemButton.onclick = () => showItemList();
 
 /* -------------------------
    DUNGEON INTRO SUMMARY
