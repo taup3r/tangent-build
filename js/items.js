@@ -88,7 +88,7 @@ export function showItemList()
   const container = document.getElementById("itemListContainer");
   container.innerHTML = "";
 
-  playerStats.items.forEach(i => {
+  if (playerStats.items) playerStats.items.forEach(i => {
     const btn = document.createElement("button");
     btn.classList.add("item-entry-btn");
     btn.textContent = itemData[i.id].name + " (" + i.count + ")";
