@@ -88,9 +88,10 @@ export function tryItemEncounter(id, action = null, ignoreAction = null) {
   const item = getItem(id);
   if (!item) {
     item = {
-      id,
+      id: id,
       count: 0
     }
+    items.add(item);
   }
 
   if (Math.random() < (itemData[item.id].chance/100) &&
