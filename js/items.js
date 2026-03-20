@@ -61,8 +61,7 @@ export function triggerItem(item, action = null, isView = false) {
   acceptButton.onclick = () => {
     if (isView === false) {
       item.count += 1;
-      playerStats.items = items;
-      saveProgress();
+      saveItems();
     }
 
     modal.style.display = "none";
@@ -70,6 +69,11 @@ export function triggerItem(item, action = null, isView = false) {
   };
 
   modal.style.display = "flex";
+}
+
+export function saveItems() {
+  playerStats.items = items;
+  saveProgress();
 }
 
 export function ignoreItem(action = null) {
