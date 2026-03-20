@@ -2,6 +2,7 @@ import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from 
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest } from "./quest.js";
+import { showItemList } from "./item.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
@@ -147,3 +148,5 @@ exploreBtn.onclick = () => {
 };
 
 document.getElementById("questButton").onclick = () => showQuestList();
+
+document.getElementById("itemButton").onclick = () => showItemList();
