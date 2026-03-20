@@ -77,11 +77,11 @@ export function ignoreItem(action = null) {
   if (action) action();
 }
 
-export function tryItemEncounter(id, action = null, ignoreAction = null) {
+export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
-      ignoreItem(ignoreAction || action);
+      ignoreItem(ignoreAction || alwaysAction);
     };
   }
 
@@ -96,12 +96,12 @@ export function tryItemEncounter(id, action = null, ignoreAction = null) {
 
   if (Math.random() < (itemData[item.id].chance/100) &&
 (item.count + 1) < itemData[item.id].maxCount) {
-    triggerItem(item, action);
+    triggerItem(item, acceptAction || alwaysAction);
   } else {
     if (ignoreAction) {
       ignoreAction();
-    } else if (action) {
-      action();
+    } else if (alwaysAction) {
+      alwaysAction();
     }
   }
 }
