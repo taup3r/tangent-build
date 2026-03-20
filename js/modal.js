@@ -265,7 +265,7 @@ export function checkWin() {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
-      tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true));
+      tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)));
     } else {
       tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true));
