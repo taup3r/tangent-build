@@ -21,7 +21,7 @@ export const items = [
 loadItems();
 
 export function loadItems() {
-  const saved = playerStats.items || "[]");
+  const saved = playerStats.items || "[]";
   if (saved.length > 0) {
     items.forEach((q, i) => {
       items[i] = { ...q, ...saved[i] };
