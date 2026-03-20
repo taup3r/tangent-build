@@ -101,9 +101,9 @@
     });
   </script>
 
-  <script type="module" src="js/town.js"></script>
+  <script type="module" src="js/town.js" defer></script>
 
-  <script>
+  <script defer>
     const params = new URLSearchParams(window.location.search);
     const name = params.get("player");
     history.pushState(null, "", location.href);
