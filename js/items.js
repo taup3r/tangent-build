@@ -11,8 +11,26 @@ export const itemData = {
   }
 };
 
+export const items = [
+  {
+    id: "ore-w",
+    count: 0
+  }
+];
+
+loadItems();
+
+export function loadItems() {
+  const saved = playerStats.items || "[]");
+  if (saved.length > 0) {
+    items.forEach((q, i) => {
+      items[i] = { ...q, ...saved[i] };
+    });
+  }
+}
+
 export function getItem(id) {
-  return playerStats.items.find(q => q.id === id);
+  return items.find(q => q.id === id);
 }
 
 export function triggerItem(item, action = null, isView = false) {
@@ -43,7 +61,7 @@ export function triggerItem(item, action = null, isView = false) {
   acceptButton.onclick = () => {
     if (isView === false) {
       item.count += 1;
-      getItem(item.id) = item;
+      playerStats.items = items;
       saveProgress();
     }
 
@@ -88,7 +106,7 @@ export function showItemList()
   const container = document.getElementById("itemListContainer");
   container.innerHTML = "";
 
-  if (playerStats.items) playerStats.items.forEach(i => {
+  items.forEach(i => {
     const btn = document.createElement("button");
     btn.classList.add("item-entry-btn");
     btn.textContent = itemData[i.id].name + " (" + i.count + ")";
