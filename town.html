@@ -71,6 +71,26 @@
     });
   </script>
 
+  <!-- Item List Modal -->
+  <div id="item-list-modal-container"></div>
+  <script>
+    fetch("item-list-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("item-list-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Item Modal -->
+  <div id="item-modal-container"></div>
+  <script>
+    fetch("item-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("item-modal-container").innerHTML = html;
+    });
+  </script>
+
   <!-- Compare Modal -->
   <div id="compare-modal-container"></div>
   <script>
