@@ -16,7 +16,7 @@
 <body>
   <!-- HEADER -->
   <div id="header-component-container"></div>
-  <script defer>
+  <script>
     fetch("header-component.html")
     .then(res => res.text())
     .then(html => {
@@ -43,7 +43,7 @@
 
   <!-- Stats Modal -->
   <div id="stats-modal-container"></div>
-  <script defer>
+  <script>
     fetch("stats-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -53,7 +53,7 @@
 
   <!-- Quest List Modal -->
   <div id="quest-list-modal-container"></div>
-  <script defer>
+  <script>
     fetch("quest-list-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -63,7 +63,7 @@
 
   <!-- Quest Modal -->
   <div id="quest-modal-container"></div>
-  <script defer>
+  <script>
     fetch("quest-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -73,7 +73,7 @@
 
   <!-- Item List Modal -->
   <div id="item-list-modal-container"></div>
-  <script defer>
+  <script>
     fetch("item-list-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -83,7 +83,7 @@
 
   <!-- Item Modal -->
   <div id="item-modal-container"></div>
-  <script defer>
+  <script>
     fetch("item-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -93,7 +93,7 @@
 
   <!-- Compare Modal -->
   <div id="compare-modal-container"></div>
-  <script defer>
+  <script>
     fetch("compare-modal.html")
     .then(res => res.text())
     .then(html => {
@@ -103,7 +103,7 @@
 
   <script type="module" src="js/town.js" defer></script>
 
-  <script defer>
+  <script>
     const params = new URLSearchParams(window.location.search);
     const name = params.get("player");
     history.pushState(null, "", location.href);
