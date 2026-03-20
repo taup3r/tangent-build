@@ -81,7 +81,7 @@ export function tryItemEncounter(id, action = null, ignoreAction = null) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
-      ignoreItem(ignoreAction);
+      ignoreItem(ignoreAction || action);
     };
   }
 
