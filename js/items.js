@@ -5,7 +5,7 @@ loadProgress();
 export const itemData = {
   "ore-w": {
     name: "White Ore",
-    chance: 80,
+    chance: 10,
     maxCount: 99,
     lore: "Common ore found on the most basic dungeons."
   }
