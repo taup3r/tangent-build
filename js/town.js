@@ -132,6 +132,8 @@ function explore() {
 
   // After animation ends, regenerate and animate in
   setTimeout(() => {
+    loadProgress();
+    updateHeaderStats();
     generateTownLayout();
     questEncounters();
     randomArea.classList.remove("travel-out");
