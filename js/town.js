@@ -7,11 +7,6 @@ import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
 
-// Phase 1: Simple navigation + dungeon start
-
-loadProgress();
-updateHeaderStats();
-
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
@@ -128,26 +123,28 @@ function questEncounters() {
   });
 }
 
-// Initial generation
-generateTownLayout();
-questEncounters();
-
-// Explore → travel
-exploreBtn.onclick = () => {
-  // Animate old content out
-  randomArea.classList.remove("travel-in");
-  randomArea.classList.add("travel-out");
-
-  // After animation ends, regenerate and animate in
-  setTimeout(() => {
-    generateTownLayout();
-    questEncounters();
-    randomArea.classList.remove("travel-out");
-    randomArea.classList.add("travel-in");
-  }, 300);
-};
-
 window.onload = () => {
+  loadProgress();
+  updateHeaderStats();
+
+  // Initial generation
+  generateTownLayout();
+  questEncounters();
+
+  // Explore → travel
+  exploreBtn.onclick = () => {
+    // Animate old content out
+    randomArea.classList.remove("travel-in");
+    randomArea.classList.add("travel-out");
+
+    // After animation ends, regenerate and animate in
+    setTimeout(() => {
+      generateTownLayout();
+      questEncounters();
+      randomArea.classList.remove("travel-out");
+      randomArea.classList.add("travel-in");
+    }, 300);
+  };
   document.getElementById("questButton").onclick = () => showQuestList();
   document.getElementById("itemButton").onclick = () => showItemList();
 }
