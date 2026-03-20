@@ -145,6 +145,7 @@ window.onload = () => {
       randomArea.classList.add("travel-in");
     }, 300);
   };
+
   document.getElementById("questButton").onclick = () => showQuestList();
   document.getElementById("itemButton").onclick = () => showItemList();
 }
