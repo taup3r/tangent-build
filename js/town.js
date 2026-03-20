@@ -147,6 +147,8 @@ exploreBtn.onclick = () => {
   }, 300);
 };
 
-document.getElementById("questButton").onclick = () => showQuestList();
+window.onload = () => {
+  document.getElementById("questButton").onclick = () => showQuestList();
+  document.getElementById("itemButton").onclick = () => showItemList();
+}
 
-document.getElementById("itemButton").onclick = () => showItemList();
