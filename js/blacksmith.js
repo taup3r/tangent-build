@@ -6,6 +6,7 @@ import { getItem } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
+loadItems();
 
 document.getElementById("loreText").textContent = "Refining current weapon costs 1 ore, and charges 1000 gold when you decide to go with it.";
 
@@ -15,9 +16,10 @@ refineButton.onclick = () => {
   const weapon = player.weapon;
   let refined;
 
-  if (playerStats.gold >= 1000 && playerStats.items["ore"] && (playerStats.items["ore"].count || 0) > 0) {
+  const ore = getItem("ore-w");
+  if (playerStats.gold >= 1000 && ore.count >= 1) {
     // immediately reduces ore on attempt
-    playerStats.items["ore"].count -= 1;
+    ore.count -= 1;
 
     if (weapon) {
       refined = upgradeWeapon(weapon, 1);
