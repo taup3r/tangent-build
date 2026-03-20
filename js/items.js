@@ -12,6 +12,7 @@ export const itemData = {
 };
 
 export function getItem(id) {
+  if (!playerStats.items) return null;
   return playerStats.items.find(q => q.id === id);
 }
 
