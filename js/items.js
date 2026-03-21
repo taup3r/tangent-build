@@ -13,7 +13,15 @@ export const itemData = {
   },
   "ore-g": {
     name: "Green Ore",
-    chance: 10,
+    chance: 8,
+    maxCount: 99,
+    use: 1000,
+    rarity: "Uncommon",
+    lore: "Uncommon ore found on dungeons."
+  },
+  "ore-b": {
+    name: "Blue Ore",
+    chance: 6,
     maxCount: 99,
     use: 1000,
     rarity: "Uncommon",
@@ -28,6 +36,10 @@ export const items = [
   },
   {
     id: "ore-g",
+    count: 0
+  },
+  {
+    id: "ore-b",
     count: 0
   }
 ];
