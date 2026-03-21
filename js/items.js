@@ -42,6 +42,14 @@ export const itemData = {
     use: 5000,
     rarity: "Legendary",
     lore: "One-of-a-kind ore found in deep treacherous dungeons."
+  },
+  "ore-r": {
+    name: "Red Ore",
+    chance: 2,
+    maxCount: 99,
+    use: 8000,
+    rarity: "Mythic",
+    lore: "Mythical ores rumored by blacksmiths as 'the Ones'."
   }
 };
 
@@ -64,6 +72,10 @@ export const items = [
   },
   {
     id: "ore-o",
+    count: 0
+  },
+  {
+    id: "ore-r",
     count: 0
   }
 ];
