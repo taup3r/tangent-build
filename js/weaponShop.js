@@ -9,6 +9,9 @@ updateHeaderStats();
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
 
+questButton.onclick = () => showQuestList();
+itemButton.onclick = () => showItemList();
+
 document.getElementById("backButton").onclick = () => {
   window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
 };
