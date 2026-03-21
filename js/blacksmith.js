@@ -3,7 +3,7 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
-import { itemData, getItem, getNameByRarity, loadItems, saveItems, showItemList } from "./items.js";
+import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveItems, showItemList } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -15,11 +15,18 @@ const id = getNameByRarity(weapon.rarity);
 const ore = getItem(id);
 const price = itemData[id].use;
 const name = itemData[id].name;
+const color = getColorByRarity(itemData[id].rarity);
 
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
+const refineOre = document.getElementById("refine-ore");
+refineOre.innerHTML = `
+      <div style="color:${color}; font-weight:bold;">${name}
+      </div>
+    `;
+
 const refineButton = document.getElementById("refineButton");
-refineButton.textContent = `Refine 1 ${name} + ${price}g`;
+refineButton.textContent = `Refine for ${price}g`;
 
 refineButton.onclick = () => {
   let refined;
