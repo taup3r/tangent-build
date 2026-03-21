@@ -3,17 +3,18 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
-import { itemData, getItem, loadItems, saveItems, showItemList } from "./items.js";
+import { itemData, getItem, getNameByRarity, loadItems, saveItems, showItemList } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
 loadItems();
 
 const weapon = player.weapon;
+const id = getNameByRarity(weapon.rarity);
 
-const ore = getItem("ore-w");
-const price = itemData[ore.id].use;
-const name = itemData[ore.id].name;
+const ore = getItem(id);
+const price = itemData[id].use;
+const name = itemData[id].name;
 
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
