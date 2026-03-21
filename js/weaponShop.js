@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { showQuestList, tryQuestEncounter } from "./quest.js";
+import { showQuestList, loadQuestState, tryQuestEncounter } from "./quest.js";
 import { showItemList } from "./items.js";
 
 loadProgress();
@@ -107,5 +107,11 @@ function renderShop() {
   });
 }
 
+function questEncounters() {
+  loadProgress();
+  loadQuestState();
+  tryQuestEncounter("merchantGuild", 0);
+}
+
 renderShop();
-tryQuestEncounter("merchantGuild", 0);
+questEncounters();
