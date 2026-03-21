@@ -20,7 +20,7 @@ const color = getColorByRarity(weapon?.rarity || "Common");
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
 const refineOre = document.getElementById("refine-ore");
-refineOre.innerHTML = `<p>To refine your weapon you need:</p><h1 style="color:${color}; font-weight:bold;">${name}</h1>`;
+refineOre.innerHTML = `<p>To refine your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
 
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine for ${price}g`;
