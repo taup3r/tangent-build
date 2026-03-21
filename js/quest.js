@@ -46,7 +46,7 @@ export const questData = {
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
-        message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation?",
+        message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation? Try and catch the Guild Captain in town as he roams on duty and deliver this sealed package.",
         submit: "Accept Sealed Package",
         cancel: "Ignore",
         nextChance: 10
