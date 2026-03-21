@@ -33,7 +33,7 @@ refineButton.onclick = () => {
     }
     openCompareWeapon(refined, "Equip", () => {
       // then charges gold when equipped
-      playerStats.gold -= 1000;
+      playerStats.gold -= price;
     });
   }  
 };
