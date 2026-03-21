@@ -39,6 +39,19 @@ export const questData = {
         nextChance: 10
       }
     ]
+  },
+  "merchantGuild": {
+    title: "Merchant's Guild Problems",
+    maxStage: 0, // set to 0 to turn off quest
+    flow: [
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation?",
+        submit: "Accept Quest",
+        cancel: "Ignore",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -47,6 +60,13 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
+    active: false,
+    data: {}
+  },
+  {
+    id: "merchantGuild",
+    chance: 10,
+    stage: 0,
     active: false,
     data: {}
   }
