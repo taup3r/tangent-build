@@ -42,7 +42,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 2, // set to 0 to turn off quest
+    maxStage: 3, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
@@ -57,6 +57,12 @@ export const questData = {
         submit: "Give Package",
         cancel: "Ignore",
         nextChance: 100
+      },
+      {
+        npc: "",
+        message: "Nice, earned some quick coin on that easy delivery. Time to get back to Selra.",
+        submit: "Look for Selra",
+        nextChance: 80
       }
     ]
   }
