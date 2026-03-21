@@ -26,6 +26,14 @@ export const itemData = {
     use: 3000,
     rarity: "Rare",
     lore: "Rare ore used for powerful weapon refinements."
+  },
+  "ore-p": {
+    name: "Purple Ore",
+    chance: 4,
+    maxCount: 99,
+    use: 4000,
+    rarity: "Epic",
+    lore: "Very rare ore used to refine already powerful weapons."
   }
 };
 
@@ -40,6 +48,10 @@ export const items = [
   },
   {
     id: "ore-b",
+    count: 0
+  },
+  {
+    id: "ore-p",
     count: 0
   }
 ];
