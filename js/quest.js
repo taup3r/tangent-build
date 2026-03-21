@@ -47,7 +47,7 @@ export const questData = {
       {
         npc: "Selra, Merchant Guild Clerk",
         message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation?",
-        submit: "Accept Quest",
+        submit: "Accept Sealed Package",
         cancel: "Ignore",
         nextChance: 100
       }
