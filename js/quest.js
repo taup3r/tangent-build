@@ -42,7 +42,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 3, // set to 0 to turn off quest
+    maxStage: 4, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
@@ -63,6 +63,13 @@ export const questData = {
         message: "Here, a small reward for your trouble. And tell Selra to send these on time.",
         submit: "Accept",
         nextChance: 80
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "Thank you. Although, the captain claims he never received the last shipment. Could you check the arena for anything unusual?",
+        submit: "Agree",
+        cancel: "Ignore",
+        nextChance: 100
       }
     ]
   }
