@@ -4,30 +4,19 @@ loadProgress();
 
 export const itemData = {
   "ore-w": {
-    name: "White Ore",
+    name: "Common Ore",
     chance: 10,
     maxCount: 99,
     use: 1000,
-    rarity: "Common",
+    minRank: 1,
+    maxRank: 10,
     lore: "Common ore found on the most basic dungeons."
-  },
-  "ore-g": {
-    name: "Green Ore",
-    chance: 8,
-    maxCount: 99,
-    use: 2000,
-    rarity: "Uncommon",
-    lore: "Uncommon ore found on dungeons."
   }
 };
 
 export const items = [
   {
     id: "ore-w",
-    count: 0
-  },
-  {
-    id: "ore-g",
     count: 0
   }
 ];
@@ -41,6 +30,15 @@ export function loadItems() {
       items[i] = { ...q, ...saved[i] };
     });
   }
+}
+
+export function getColorByRank(rank) {
+  if (rank <= 10) return { tier: "Common", color: "#C0C0C0" };
+  if (rank <= 20) return { tier: "Uncommon", color: "#4CAF50" };
+  if (rank <= 30) return { tier: "Rare", color: "#2196F3" };
+  if (rank <= 40) return { tier: "Epic", color: "#9C27B0" };
+  if (rank <= 50) return { tier: "Legendary", color: "#FF9800" };
+  return { tier: "Mythic", color: "#FF0000" };
 }
 
 export function getItem(id) {
