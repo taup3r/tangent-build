@@ -11,6 +11,7 @@ loadItems();
 
 const weapon = player.weapon;
 const id = getNameByRarity(weapon.rarity);
+alert(id);
 
 const ore = getItem(id);
 const price = itemData[id].use;
