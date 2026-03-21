@@ -12,6 +12,7 @@ loadItems();
 const ore = getItem("ore-w");
 const price = itemData[ore.id].use;
 const name = itemData[ore.id].name;
+const weapon = player.weapon;
 
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
@@ -19,7 +20,6 @@ const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine 1 ${name} + ${price}g`;
 
 refineButton.onclick = () => {
-  const weapon = player.weapon;
   let refined;
   if (playerStats.gold >= price && ore.count >= 1) {
     // immediately reduces ore on attempt
