@@ -74,7 +74,7 @@ function generateTownLayout() {
   loadQuestState();
   const blacksmithQuest = getQuest("blacksmith");
 
-  if (blacksmithQuest && blacksmithQuest.stage >= 5) {
+  //if (blacksmithQuest && blacksmithQuest.stage >= 5) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
@@ -83,7 +83,7 @@ function generateTownLayout() {
       },
       disabled: false
     });
-  }
+  //}
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
