@@ -10,13 +10,12 @@ updateHeaderStats();
 loadItems();
 
 const weapon = player.weapon;
-const id = getNameByRarity(weapon.rarity);
-alert(id);
+const id = getNameByRarity(weapon?.rarity || "ore-w");
 
 const ore = getItem(id);
 const price = itemData[id].use;
 const name = itemData[id].name;
-//const color = getColorByRarity(weapon.rarity);
+const color = getColorByRarity(weapon?.rarity || "ore-w");
 
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
