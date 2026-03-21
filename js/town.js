@@ -1,4 +1,4 @@
-import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest } from "./quest.js";
@@ -126,6 +126,7 @@ function questEncounters() {
   tryQuestEncounter("merchantGuild", 1, () => {
     playerStats.gold += 20;
     playerStats.reputation = (playerStats.reputation || 0) + 1;
+    saveProgress();
   });
 }
 
