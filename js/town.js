@@ -123,6 +123,10 @@ function questEncounters() {
     const weapon = upgradeWeapon(player.weapon, 1);
     openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
   });
+  tryQuestEncounter("merchantGuild", 1, () => {
+    playerStats.gold += 20;
+    playerStats.reputation = (playerStats.reputation || 0) + 1;
+  });
 }
 
 function explore() {
