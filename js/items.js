@@ -5,15 +5,77 @@ loadProgress();
 export const itemData = {
   "ore-w": {
     name: "White Ore",
+    chance: 12,
+    maxCount: 99,
+    use: 1000,
+    rarity: "Common",
+    lore: "Common ore found on the most basic dungeons."
+  },
+  "ore-g": {
+    name: "Green Ore",
     chance: 10,
     maxCount: 99,
-    lore: "Common ore found on the most basic dungeons."
+    use: 2000,
+    rarity: "Uncommon",
+    lore: "Uncommon ore found on dungeons."
+  },
+  "ore-b": {
+    name: "Blue Ore",
+    chance: 8,
+    maxCount: 99,
+    use: 3000,
+    rarity: "Rare",
+    lore: "Rare ore used for powerful weapon refinements."
+  },
+  "ore-p": {
+    name: "Purple Ore",
+    chance: 6,
+    maxCount: 99,
+    use: 4000,
+    rarity: "Epic",
+    lore: "Very rare ore used to refine already powerful weapons."
+  },
+  "ore-o": {
+    name: "Orange Ore",
+    chance: 4,
+    maxCount: 99,
+    use: 5000,
+    rarity: "Legendary",
+    lore: "One-of-a-kind ore found in deep treacherous dungeons."
+  },
+  "ore-r": {
+    name: "Red Ore",
+    chance: 2,
+    maxCount: 99,
+    use: 8000,
+    rarity: "Mythic",
+    lore: "Mythical ores rumored by blacksmiths as 'the Ones'."
   }
 };
 
 export const items = [
   {
     id: "ore-w",
+    count: 0
+  },
+  {
+    id: "ore-g",
+    count: 0
+  },
+  {
+    id: "ore-b",
+    count: 0
+  },
+  {
+    id: "ore-p",
+    count: 0
+  },
+  {
+    id: "ore-o",
+    count: 0
+  },
+  {
+    id: "ore-r",
     count: 0
   }
 ];
@@ -26,6 +88,40 @@ export function loadItems() {
     items.forEach((q, i) => {
       items[i] = { ...q, ...saved[i] };
     });
+  }
+}
+
+export function getColorByRarity(rarity) {
+  switch (rarity) {
+    case "Common":
+      return "#C0C0C0";
+    case "Uncommon":
+      return "#4CAF50";
+    case "Rare":
+      return "#2196F3";
+    case "Epic":
+      return "#9C27B0";
+    case "Legendary":
+      return "#FF9800";
+    default:
+      return "#FF0000";
+  }
+}
+
+export function getNameByRarity(rarity) {
+  switch (rarity) {
+    case "Common":
+      return "ore-w";
+    case "Uncommon":
+      return "ore-g";
+    case "Rare":
+      return "ore-b";
+    case "Epic":
+      return "ore-p";
+    case "Legendary":
+      return "ore-o";
+    default:
+      return "ore-r";
   }
 }
 

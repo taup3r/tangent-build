@@ -3,22 +3,27 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
-import { getItem, loadItems, saveItems, showItemList } from "./items.js";
+import { itemData, getItem, getNameByRarity, loadItems, saveItems, showItemList } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
 loadItems();
 
-document.getElementById("loreText").textContent = "Refining current weapon costs 1 ore, and charges 1000 gold when you decide to go with it.";
+const weapon = player.weapon;
+const id = getNameByRarity(weapon.rarity);
+
+const ore = getItem(id);
+const price = itemData[id].use;
+const name = itemData[id].name;
+
+document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
 const refineButton = document.getElementById("refineButton");
-refineButton.textContent = "Refine 1 ore + 1000g";
-refineButton.onclick = () => {
-  const weapon = player.weapon;
-  let refined;
+refineButton.textContent = `Refine 1 ${name} + ${price}g`;
 
-  const ore = getItem("ore-w");
-  if (playerStats.gold >= 1000 && ore.count >= 1) {
+refineButton.onclick = () => {
+  let refined;
+  if (playerStats.gold >= price && ore.count >= 1) {
     // immediately reduces ore on attempt
     ore.count -= 1;
     saveItems();
@@ -30,7 +35,7 @@ refineButton.onclick = () => {
     }
     openCompareWeapon(refined, "Equip", () => {
       // then charges gold when equipped
-      playerStats.gold -= 1000;
+      playerStats.gold -= price;
     });
   }  
 };
