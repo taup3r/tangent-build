@@ -3,7 +3,7 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
-import { getItem, loadItems, saveItems, showItemList } from "./items.js";
+import { itemData, getItem, loadItems, saveItems, showItemList } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
