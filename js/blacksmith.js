@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { itemData, generateWeapon, upgradeWeapon } from "./weapon.js";
+import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
 import { getItem, loadItems, saveItems, showItemList } from "./items.js";
