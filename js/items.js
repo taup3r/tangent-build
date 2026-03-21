@@ -108,6 +108,23 @@ export function getColorByRarity(rarity) {
   }
 }
 
+export function getNameByRarity(rarity) {
+  switch (rarity) {
+    case "Common":
+      return "ore-w";
+    case "Uncommon":
+      return "ore-g";
+    case "Rare":
+      return "ore-b";
+    case "Epic":
+      return "ore-p";
+    case "Legendary":
+      return "ore-o";
+    default:
+      return "ore-r";
+  }
+}
+
 export function getItem(id) {
   return items.find(q => q.id === id);
 }
