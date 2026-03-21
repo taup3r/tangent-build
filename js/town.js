@@ -127,6 +127,8 @@ function questEncounters() {
     playerStats.gold += 20;
     playerStats.reputation = (playerStats.reputation || 0) + 1;
     saveProgress();
+
+    tryQuestEncounter("merchantGuild", 2);
   });
 }
 
