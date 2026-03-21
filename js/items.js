@@ -7,6 +7,7 @@ export const itemData = {
     name: "White Ore",
     chance: 10,
     maxCount: 99,
+    use: 1000,
     lore: "Common ore found on the most basic dungeons."
   }
 };
