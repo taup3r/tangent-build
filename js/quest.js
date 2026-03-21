@@ -42,12 +42,19 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 1, // set to 0 to turn off quest
+    maxStage: 2, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
         message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation?",
         submit: "Accept Sealed Package",
+        cancel: "Ignore",
+        nextChance: 10
+      },
+      {
+        npc: "Guard Captain Thorne",
+        message: "A delivery from the Merchant Guild? Hmph. They're late as usual. Hand it over.",
+        submit: "Give Package",
         cancel: "Ignore",
         nextChance: 100
       }
