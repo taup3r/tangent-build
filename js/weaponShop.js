@@ -111,6 +111,7 @@ function questEncounters() {
   loadProgress();
   loadQuestState();
   tryQuestEncounter("merchantGuild", 0);
+  tryQuestEncounter("merchantGuild", 3);
 }
 
 renderShop();
