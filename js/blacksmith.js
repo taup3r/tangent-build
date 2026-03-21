@@ -9,10 +9,11 @@ loadProgress();
 updateHeaderStats();
 loadItems();
 
+const weapon = player.weapon;
+
 const ore = getItem("ore-w");
 const price = itemData[ore.id].use;
 const name = itemData[ore.id].name;
-const weapon = player.weapon;
 
 document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
