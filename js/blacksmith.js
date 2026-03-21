@@ -11,8 +11,9 @@ loadItems();
 
 const ore = getItem("ore-w");
 const price = itemData[ore.id].use;
+const name = itemData[ore.id].name;
 
-document.getElementById("loreText").textContent = `Refining current weapon costs 1 ore, and charges ${price} gold when you decide to go with it.`;
+document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine 1 ore + ${price}g`;
