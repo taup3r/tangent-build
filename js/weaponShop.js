@@ -1,11 +1,18 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
+import { updateHeaderStats } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
+import { showQuestList } from "./quest.js";
+import { showItemList } from "./items.js";
 
 loadProgress();
+updateHeaderStats();
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
+
+questButton.onclick = () => showQuestList();
+itemButton.onclick = () => showItemList();
 
 document.getElementById("backButton").onclick = () => {
   window.location.href = `town.html?player=${encodeURIComponent(player.name)}`;
