@@ -8,8 +8,7 @@ export const itemData = {
     chance: 10,
     maxCount: 99,
     use: 1000,
-    minRank: 1,
-    maxRank: 10,
+    rarity: "Common",
     lore: "Common ore found on the most basic dungeons."
   }
 };
