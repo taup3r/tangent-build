@@ -5,7 +5,7 @@ loadProgress();
 export const itemData = {
   "ore-w": {
     name: "White Ore",
-    chance: 10,
+    chance: 12,
     maxCount: 99,
     use: 1000,
     rarity: "Common",
@@ -13,7 +13,7 @@ export const itemData = {
   },
   "ore-g": {
     name: "Green Ore",
-    chance: 8,
+    chance: 10,
     maxCount: 99,
     use: 2000,
     rarity: "Uncommon",
@@ -21,7 +21,7 @@ export const itemData = {
   },
   "ore-b": {
     name: "Blue Ore",
-    chance: 6,
+    chance: 8,
     maxCount: 99,
     use: 3000,
     rarity: "Rare",
@@ -29,11 +29,19 @@ export const itemData = {
   },
   "ore-p": {
     name: "Purple Ore",
-    chance: 4,
+    chance: 6,
     maxCount: 99,
     use: 4000,
     rarity: "Epic",
     lore: "Very rare ore used to refine already powerful weapons."
+  },
+  "ore-o": {
+    name: "Orange Ore",
+    chance: 4,
+    maxCount: 99,
+    use: 5000,
+    rarity: "Legendary",
+    lore: "One-of-a-kind ore found in deep treacherous dungeons."
   }
 };
 
@@ -52,6 +60,10 @@ export const items = [
   },
   {
     id: "ore-p",
+    count: 0
+  },
+  {
+    id: "ore-o",
     count: 0
   }
 ];
