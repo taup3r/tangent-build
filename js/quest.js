@@ -59,9 +59,9 @@ export const questData = {
         nextChance: 100
       },
       {
-        npc: "",
-        message: "Nice, earned some quick coin on that easy delivery. Time to get back to Selra.",
-        submit: "Look for Selra",
+        npc: "Guard Captain Thorne",
+        message: "Here, a small reward for your trouble. And tell Selra to send these on time.",
+        submit: "Accept",
         nextChance: 80
       }
     ]
