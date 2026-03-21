@@ -46,7 +46,7 @@
 .btn-shop { background: #ffaa2b; } /* warm gold */
 .btn-blacksmith { background: #b5651d; } /* forge bronze */
 
-/* Explore button (index.html New Game style, 80% width) 
+/* Explore button (index.html New Game style, 80% width) */
 .explore-btn {
   width: 80%;
   padding: 18px;
@@ -64,4 +64,3 @@
 .explore-btn:hover {
   background: #666;
 }
-*/
