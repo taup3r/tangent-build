@@ -72,7 +72,7 @@ export const quests = [
   },
   {
     id: "merchantGuild",
-    chance: 10,
+    chance: 100,
     stage: 0,
     active: false,
     data: {}
