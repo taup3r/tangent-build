@@ -15,7 +15,7 @@ export const itemData = {
     name: "Green Ore",
     chance: 8,
     maxCount: 99,
-    use: 1000,
+    use: 2000,
     rarity: "Uncommon",
     lore: "Uncommon ore found on dungeons."
   },
@@ -23,9 +23,9 @@ export const itemData = {
     name: "Blue Ore",
     chance: 6,
     maxCount: 99,
-    use: 1000,
-    rarity: "Uncommon",
-    lore: "Uncommon ore found on dungeons."
+    use: 3000,
+    rarity: "Rare",
+    lore: "Rare ore used for powerful weapon refinements."
   }
 };
 
