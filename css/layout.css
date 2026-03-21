@@ -92,6 +92,24 @@
   text-align: left;
 }
 
+.explore-btn {
+  width: 80%;
+  padding: 18px;
+  background: #555;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  left: 10%;
+}
+
+.explore-btn:hover {
+  background: #666;
+}
+
 /* Landscape mode */
 @media (min-width: 700px) {
   .battlefield {
