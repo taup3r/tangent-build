@@ -45,22 +45,3 @@
 .btn-dungeon { background: #4a7cff; }   /* blue */
 .btn-shop { background: #ffaa2b; } /* warm gold */
 .btn-blacksmith { background: #b5651d; } /* forge bronze */
-
-/* Explore button (index.html New Game style, 80% width) */
-.explore-btn {
-  width: 80%;
-  padding: 18px;
-  background: #555; /* same as New Game */
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 1.3rem;
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  left: 10%;
-}
-
-.explore-btn:hover {
-  background: #666;
-}
