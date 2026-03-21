@@ -3,6 +3,7 @@ import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 
 loadProgress();
+updateHeaderStats();
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
 const playerWeaponShopInventory = `${player.name}_weaponShopInventory`;
