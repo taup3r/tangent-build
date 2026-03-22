@@ -25,23 +25,23 @@ refineOre.innerHTML = `<p>To refine your weapon you need:</p><h3 style="color:${
 const oreList = document.getElementById("oreList");
 oreList.innerHTML = "";
 
-Object.keys(oreData).forEach(id => {
-  const ore = getItem(id);
+Object.keys(oreData).forEach(key => {
+  const ore = getItem(key);
   const qty = ore.count;
-  const grp = oreData[id].group;
+  const grp = oreData[key].group;
 
   const entry = document.createElement("div");
   entry.classList.add("ore-entry");
 
   entry.innerHTML = `
     <span class="ore-name">${ore.name} (x${qty})</span>
-    <button class="refine-btn" id="refine_${tier}" ${qty < grp ? "disabled" : ""}>
+    <button class="refine-btn" id="refine_${ore.tier}" ${qty < grp ? "disabled" : ""}>
       Refine
     </button>
   `;
 
   oreList.appendChild(entry);
-}
+});
   
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine for ${price}g`;
