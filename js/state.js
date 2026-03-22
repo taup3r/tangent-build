@@ -172,6 +172,7 @@ export function setEnemiesLeft(count) {
 const playerDungeonType = `dungeonType_${player.name}`;
 const playerDungeonQueue = `dungeonQueue_${player.name}`;
 const playerDungeonIndex = `dungeonIndex_${player.name}`;
+const playerEnemyName = `enemyName_${player.name}`;
 
 export function setDungeonMode(enable) {
   if (enable) {
@@ -202,6 +203,16 @@ export let dungeonQueue = JSON.parse(localStorage.getItem(playerDungeonQueue) ||
 
 export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
+export let enemyName = localStorage.getItem(playerEnemyName);
+
+export function setEnemyName(name) {
+  localStorage.setItem(playerEnemyName, name);
+}
+
+export function clearEnemyName() {
+  localStorage.removeItem(playerEnemyName);
+}
+
 export function getNextDungeonIndex() {
   dungeonIndex++;
   localStorage.setItem(playerDungeonIndex, dungeonIndex);
@@ -214,12 +225,6 @@ export function getNextDungeonTier() {
 /* ================================
    ENEMY GENERATOR (TIERED)
 ================================ */
-
-export function updateEnemy(enemyName) {
-  if (enemyName === "Guild Smuggler") {
-    enemy = generateEnemy(playerStats.level, enemyName, "boss");
-  }
-}
 
 export function generateEnemy(playerLevel, enemyName = null, enemyTier = null) {
   let tier;
