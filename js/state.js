@@ -233,7 +233,7 @@ export function generateEnemy(playerLevel) {
   } else {
     tier = rollEnemyTier();
   }
-  if (enemyName === "Guild Smuggler") {
+  if (enemyName === "Guild Smuggler" && dungeonMode) {
     tier = "boss";
   }
 
@@ -251,7 +251,7 @@ export function generateEnemy(playerLevel) {
   if (tier === "elite") name = "Elite " + name;
   if (tier === "boss") name = "Boss " + name;
 
-  if (enemyName) name = enemyName;
+  if (enemyName && dungeonMode) name = enemyName;
 
   // Tier hints
   let tierHint = "";
