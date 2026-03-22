@@ -82,7 +82,12 @@ export const questData = {
         npc: "Guild Smuggler",
         message: "Huh, how did you find me? In any case, you should have never looked in the first place. You don't mess around with me.",
         submit: "Fight",
-        cancel: "Escape",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "The smuggler drops a ledger detailing stolen merchant guild shipments. This is the proof Selra needs.",
+        submit: "Take",
         nextChance: 100
       }
     ]
