@@ -84,15 +84,15 @@ export const itemData = {
 export const items = [
   {
     id: "ore-w",
-    count: 12
+    count: 0
   },
   {
     id: "ore-g",
-    count: 8
+    count: 0
   },
   {
     id: "ore-b",
-    count: 8
+    count: 0
   },
   {
     id: "ore-p",
@@ -100,7 +100,7 @@ export const items = [
   },
   {
     id: "ore-o",
-    count: 3
+    count: 0
   },
   {
     id: "ore-r",
