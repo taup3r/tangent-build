@@ -48,11 +48,6 @@
   cursor: pointer;
 }
 
-.npc-button {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
 .stat-row {
   display: flex;
   justify-content: space-between;
