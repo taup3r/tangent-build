@@ -44,7 +44,7 @@ refineButton.onclick = () => {
   }  
 };
 
-const oreList = document.getElementById("oreList");
+const oreList = document.getElementById("ore-list");
 oreList.innerHTML = "";
 
 Object.keys(oreData).forEach(key => {
