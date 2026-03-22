@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tangent RPG - Merchant Guild</title>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header-component-container"></div>
+  <script>
+    fetch("header-component.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header-component-container").innerHTML = html;
+    });
+  </script>
+
+  <div class="wrapper">
+
+    <div class="container">
+
+      <h1>Merchant Guild</h1>
+      <div id="currentReputation"></div>
+      <button id="backButton" class="explore-btn">Leave</button>
+
+    </div>
+
+  </div>
+
+  <!-- Quest List Modal -->
+  <div id="quest-list-modal-container"></div>
+  <script>
+    fetch("quest-list-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-list-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Quest Modal -->
+  <div id="quest-modal-container"></div>
+  <script>
+    fetch("quest-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("quest-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Item List Modal -->
+  <div id="item-list-modal-container"></div>
+  <script>
+    fetch("item-list-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("item-list-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Item Modal -->
+  <div id="item-modal-container"></div>
+  <script>
+    fetch("item-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("item-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Scrolling Lore Text -->
+  <div id="loreScroller">
+    <span id="loreText"></span>
+  </div>
+
+  <script type="module" src="js/merchantGuild.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("player");
+    history.pushState(null, "", location.href);
+    window.onpopstate = function () {
+      window.location.href = `merchantGuild.html?player=${encodeURIComponent(name)}`;
+    };
+  </script>
+</body>
+</html>
