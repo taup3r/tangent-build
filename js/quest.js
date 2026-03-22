@@ -17,7 +17,7 @@ export const questData = {
         nextChance: 10
       },{
         npc: "",
-        message: "You found the Lost Hammer!",
+        message: "You found the Lost Hammer! Roran will be thrilled to see this.",
         submit: "Pick it up",
         cancel: "Leave it",
         nextChance: 100
@@ -69,6 +69,13 @@ export const questData = {
         message: "Thank you. Although, the captain claims he never received the last shipment. Could you check the arena for anything unusual?",
         submit: "Agree",
         cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "Loosing the match, you went to the back door to sulk. You discover a smashed crate bearing the Merchant Guild seal. Someone has been stealing shipments and hiding them in the arena backdoor! Report this back to Selra.",
+        submit: "Take clue",
+        cancel: "Ignore it",
         nextChance: 100
       }
     ]
