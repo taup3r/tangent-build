@@ -1,4 +1,4 @@
-import { initializePortraits, player, playerStats, enemy, generateEnemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, updateEnemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
@@ -21,8 +21,7 @@ function updateBattleHeader() {
 window.addEventListener("DOMContentLoaded", () => {
 
   tryQuestEncounter("merchantGuild", 5, () => {
-    enemy.name = "Guild Smuggler";
-    //enemy = generateEnemy(playerStats.level, "Guild Smuggler", "boss");
+    updateEnemy("Guild Smuggler");
   });
   initializePortraits();
   applyStatsToCombat(player, playerStats);
