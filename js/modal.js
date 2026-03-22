@@ -478,6 +478,7 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
+    tryQuestEncounter("merchantGuild", 5, () => setEnemyName("Guild Smuggler"));
     getNextDungeonIndex();
     if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
