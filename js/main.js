@@ -21,7 +21,7 @@ function updateBattleHeader() {
 window.addEventListener("DOMContentLoaded", () => {
 
   tryQuestEncounter("merchantGuild", 5, () => {
-    enemy = generateEnemy(playerStats.level, "Guild Smuggler");
+    enemy = generateEnemy(playerStats.level, "Guild Smuggler", "boss");
   });
   initializePortraits();
   applyStatsToCombat(player, playerStats);
