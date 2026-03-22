@@ -1,9 +1,10 @@
-import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, generateEnemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
 import { openEnemyInfo, openPlayerInfoModal, showDungeonIntro } from "./modal.js";
 import { dungeonTypes } from "./dungeon.js";
+import { tryQuestEncounter } from "./quest.js";
 
 function updateBattleHeader() {
   const header = document.getElementById("battleHeader");
@@ -19,6 +20,9 @@ function updateBattleHeader() {
 
 window.addEventListener("DOMContentLoaded", () => {
 
+  tryQuestEncounter("merchantGuild", 5, () => {
+    enemy = generateEnemy(playerStats.level);
+  });
   initializePortraits();
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
