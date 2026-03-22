@@ -42,7 +42,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 5, // set to 0 to turn off quest
+    maxStage: 6, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
@@ -76,6 +76,13 @@ export const questData = {
         message: "Loosing the match, you went to the back door to sulk. You discover a smashed crate bearing the Merchant Guild seal. Someone has been stealing shipments and hiding them in the arena backdoor! Report this back to Selra.",
         submit: "Take clue",
         cancel: "Ignore it",
+        nextChance: 100
+      },
+      {
+        npc: "Guild Smuggler",
+        message: "Huh, how did you find me? In any case, you should have never looked in the first place. You don't mess around with me.",
+        submit: "Fight",
+        cancel: "Escape",
         nextChance: 100
       }
     ]
