@@ -261,12 +261,11 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 ------------------------- */
 
 export function checkWin() {
-  if (enemy.name === "Guild Smuggler") {
-    tryQuestEncounter("merchantGuild", 6);
-    clearEnemyName();
-  }
-
   if (enemy.hp <= 0) {
+    if (enemy.name === "Guild Smuggler") {
+      tryQuestEncounter("merchantGuild", 6);
+      clearEnemyName();
+    }
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
