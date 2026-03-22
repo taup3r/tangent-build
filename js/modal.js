@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -265,6 +265,9 @@ export function checkWin() {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
+      if (enemy.name === "Guild Smuggler") {
+        tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
+      }
       tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)));
     } else {
       tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
@@ -275,7 +278,8 @@ export function checkWin() {
 
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
-    showResultModal(false);
+    tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
+ showResultModal(false));
     return true;
   }
 

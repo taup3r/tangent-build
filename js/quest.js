@@ -17,7 +17,7 @@ export const questData = {
         nextChance: 10
       },{
         npc: "",
-        message: "You found the Lost Hammer!",
+        message: "You found the Lost Hammer! Roran will be thrilled to see this.",
         submit: "Pick it up",
         cancel: "Leave it",
         nextChance: 100
@@ -39,6 +39,70 @@ export const questData = {
         nextChance: 10
       }
     ]
+  },
+  "merchantGuild": {
+    title: "Merchant's Guild Problems",
+    maxStage: 9, // set to 0 to turn off quest
+    flow: [
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "You look like someone who gets things done. The Merchant Guild needs a reliable courier. Interested in earning some coin and reputation? Try and catch the Guild Captain in town as he roams on duty and deliver this sealed package.",
+        submit: "Accept Sealed Package",
+        cancel: "Ignore",
+        nextChance: 10
+      },
+      {
+        npc: "Guard Captain Thorne",
+        message: "A delivery from the Merchant Guild? Hmph. They're late as usual. Hand it over.",
+        submit: "Give Package",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "Guard Captain Thorne",
+        message: "Here, a small reward for your trouble. And tell Selra to send these on time.",
+        submit: "Accept",
+        nextChance: 80
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "Thank you. Although, the captain claims he never received the last shipment. Could you check the arena for anything unusual?",
+        submit: "Agree",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "Loosing the match, you went to the back door to sulk. You discover a smashed crate bearing the Merchant Guild seal. Someone has been stealing shipments and hiding them in the arena backdoor! Find the culprit.",
+        submit: "Take clue",
+        cancel: "Ignore it",
+        nextChance: 100
+      },
+      {
+        npc: "Guild Smuggler",
+        message: "Huh, how did you find me? In any case, you should have never looked in the first place. You don't mess around with me.",
+        submit: "Fight",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "The smuggler drops a ledger detailing stolen merchant guild shipments. This is the proof Selra needs.",
+        submit: "Take",
+        nextChance: 100
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "This ledger... I knew something was wrong. You've done the guild a great service. Allow me to reward you properly.",
+        submit: "Accept",
+        nextChance: 100
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "The Merchant Guild Hall in town is now open for you. Expect better prices for goods and more opportunities to grow your reputation in the future.",
+        submit: "Continue",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -47,6 +111,13 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
+    active: false,
+    data: {}
+  },
+  {
+    id: "merchantGuild",
+    chance: 8,
+    stage: 0,
     active: false,
     data: {}
   }

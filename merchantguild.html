@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tangent RPG – Town</title>
+  <title>Tangent RPG - Merchant Guild</title>
+
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/stats.css">
-  <link rel="stylesheet" href="css/town.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
 
 <body>
+
   <!-- HEADER -->
   <div id="header-component-container"></div>
   <script>
@@ -25,32 +25,17 @@
     });
   </script>
 
-  <div id="townWrapper">
+  <div class="wrapper">
 
-    <h1 class="town-title">Wayfarer’s Rest</h1>
+    <div class="container">
 
-    <!-- Randomized Button Container -->
-    <div id="randomArea"></div>
+      <h1>Merchant Guild</h1>
+      <div id="currentReputation"></div>
+      <button id="backButton" class="explore-btn">Leave</button>
 
-    <!-- Scrolling Lore Text -->
-    <div id="loreScroller">
-      <span id="loreText"></span>
     </div>
 
-    <!-- Explore Button (fixed bottom) -->
-    <button id="exploreBtn" class="explore-btn">Explore</button>
-
   </div>
-
-  <!-- Stats Modal -->
-  <div id="stats-modal-container"></div>
-  <script>
-    fetch("stats-modal.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("stats-modal-container").innerHTML = html;
-    });
-  </script>
 
   <!-- Quest List Modal -->
   <div id="quest-list-modal-container"></div>
@@ -92,24 +77,19 @@
     });
   </script>
 
-  <!-- Compare Modal -->
-  <div id="compare-modal-container"></div>
-  <script>
-    fetch("compare-modal.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("compare-modal-container").innerHTML = html;
-    });
-  </script>
+  <!-- Scrolling Lore Text -->
+  <div id="loreScroller">
+    <span id="loreText"></span>
+  </div>
 
-  <script type="module" src="js/town.js"></script>
+  <script type="module" src="js/merchantguild.js"></script>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const name = params.get("player");
     history.pushState(null, "", location.href);
     window.onpopstate = function () {
-      window.location.href = `town.html?player=${encodeURIComponent(name)}`;
+      window.location.href = `merchantguild.html?player=${encodeURIComponent(name)}`;
     };
   </script>
 </body>

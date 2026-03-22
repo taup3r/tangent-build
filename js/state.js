@@ -34,6 +34,7 @@ export let playerStats = {
   CON: 0,
   playerWeapon: null,
   gold: 0,
+  reputation: 0,
   items: []
 };
 
@@ -171,6 +172,7 @@ export function setEnemiesLeft(count) {
 const playerDungeonType = `dungeonType_${player.name}`;
 const playerDungeonQueue = `dungeonQueue_${player.name}`;
 const playerDungeonIndex = `dungeonIndex_${player.name}`;
+const playerEnemyName = `enemyName_${player.name}`;
 
 export function setDungeonMode(enable) {
   if (enable) {
@@ -201,6 +203,16 @@ export let dungeonQueue = JSON.parse(localStorage.getItem(playerDungeonQueue) ||
 
 export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
+export let enemyName = localStorage.getItem(playerEnemyName);
+
+export function setEnemyName(name) {
+  localStorage.setItem(playerEnemyName, name);
+}
+
+export function clearEnemyName() {
+  localStorage.removeItem(playerEnemyName);
+}
+
 export function getNextDungeonIndex() {
   dungeonIndex++;
   localStorage.setItem(playerDungeonIndex, dungeonIndex);
@@ -221,6 +233,9 @@ export function generateEnemy(playerLevel) {
   } else {
     tier = rollEnemyTier();
   }
+  if (enemyName === "Guild Smuggler" && dungeonMode) {
+    tier = "boss";
+  }
 
   // Level scaling
   let level = playerLevel;
@@ -230,10 +245,13 @@ export function generateEnemy(playerLevel) {
   // Base type
   const baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
 
-  // Name prefix
   let name = randomName();
+
+  // Name prefix
   if (tier === "elite") name = "Elite " + name;
   if (tier === "boss") name = "Boss " + name;
+
+  if (enemyName && dungeonMode) name = enemyName;
 
   // Tier hints
   let tierHint = "";

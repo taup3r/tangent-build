@@ -1,7 +1,7 @@
-import { player, playerStats, setDungeonMode, startDungeon, loadProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -73,13 +73,24 @@ function generateTownLayout() {
 
   loadQuestState();
   const blacksmithQuest = getQuest("blacksmith");
+  const merchantGuildQuest = getQuest("merchantGuild");
 
-  if (blacksmithQuest && blacksmithQuest.stage >= 5) {
+  if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
       action: () => {
         window.location.href = `blacksmith.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    });
+  }
+  if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
+    buttons.push({
+      label: "Merchant Guild",
+      class: "btn-merchant-guild",
+      action: () => {
+        window.location.href = `merchantguild.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
     });
@@ -122,6 +133,13 @@ function questEncounters() {
   tryQuestEncounter("blacksmith", 3, () => {
     const weapon = upgradeWeapon(player.weapon, 1);
     openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+  });
+  tryQuestEncounter("merchantGuild", 1, () => {
+    playerStats.gold += 20;
+    playerStats.reputation = (playerStats.reputation || 0) + 1;
+    saveProgress();
+
+    tryQuestEncounter("merchantGuild", 2);
   });
 }
 
