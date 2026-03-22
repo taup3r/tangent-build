@@ -50,20 +50,23 @@ oreList.innerHTML = "";
 Object.keys(oreData).forEach(key => {
   const ore = getItem(key);
   const qty = ore.count;
+  const oreName = itemData[key].name;
   const grp = oreData[key].group;
   const tier = oreData[key].tier;
 
-  const entry = document.createElement("div");
-  entry.classList.add("ore-entry");
+  if (qty >= grp) {
+    const entry = document.createElement("div");
+    entry.classList.add("ore-entry");
 
-  entry.innerHTML = `
-    <span class="ore-name">${ore.name} (x${qty})</span>
-    <button class="refine-btn" id="refine_${tier}" ${qty < grp ? "disabled" : ""}>
-      Refine
-    </button>
-  `;
+    entry.innerHTML = `
+      <span class="ore-name">${oreName} (${qty})</span>
+      <button class="refine-btn" id="refine_${tier}">
+        Refine for ${tier*tier*500}g
+      </button>
+    `;
 
-  oreList.appendChild(entry);
+    oreList.appendChild(entry);
+  }
 });
 
 questButton.onclick = () => showQuestList();
