@@ -68,6 +68,9 @@ Object.keys(oreData).forEach(key => {
     `;
 
     oreList.appendChild(entry);
+    document.getElementById(`refine_${tier}`).onclick = () => {
+      //todo
+    };
   }
 });
 
