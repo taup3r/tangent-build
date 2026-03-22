@@ -114,6 +114,10 @@ function questEncounters() {
   tryQuestEncounter("merchantGuild", 3);
   tryQuestEncounter("merchantGuild", 7, () => {
     //todo reward
+    playerStats.gold += 500;
+    playerStats.reputation += 3;
+    saveProgress();
+    tryQuestEncounter("merchantGuild", 8);
   });
 }
 
