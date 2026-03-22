@@ -42,7 +42,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 7, // set to 0 to turn off quest
+    maxStage: 8, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
@@ -88,6 +88,12 @@ export const questData = {
         npc: "",
         message: "The smuggler drops a ledger detailing stolen merchant guild shipments. This is the proof Selra needs.",
         submit: "Take",
+        nextChance: 100
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "This ledger... I knew something was wrong. You've done the guild a great service. Allow me to reward you properly.",
+        submit: "Accept",
         nextChance: 100
       }
     ]
