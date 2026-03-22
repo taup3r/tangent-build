@@ -17,13 +17,13 @@ const price = itemData[id].use;
 const name = itemData[id].name;
 const color = getColorByRarity(weapon?.rarity || "Common");
 
-document.getElementById("loreText").textContent = `Refining current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
+document.getElementById("loreText").textContent = `Upgrading current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
 
 const refineOre = document.getElementById("refine-ore");
-refineOre.innerHTML = `<p>To refine your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
+refineOre.innerHTML = `<p>To upgrade your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
   
 const refineButton = document.getElementById("refineButton");
-refineButton.textContent = `Refine for ${price}g`;
+refineButton.textContent = `Upgrade weapon for ${price}g`;
 
 refineButton.onclick = () => {
   let refined;
@@ -53,6 +53,8 @@ Object.keys(oreData).forEach(key => {
   const oreName = itemData[key].name;
   const grp = oreData[key].group;
   const tier = oreData[key].tier;
+  const nextKey = oreData[key].next;
+  const nextOreName = itemData[nextKey].name;
 
   if (qty >= grp) {
     const entry = document.createElement("div");
@@ -61,7 +63,7 @@ Object.keys(oreData).forEach(key => {
     entry.innerHTML = `
       <span class="ore-name">${oreName} (${qty})</span>
       <button class="refine-btn" id="refine_${tier}">
-        Refine for ${tier*tier*500}g
+        Refine to ${nextOreName} for ${tier*tier*500}g
       </button>
     `;
 
