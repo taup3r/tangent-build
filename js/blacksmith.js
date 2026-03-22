@@ -54,6 +54,7 @@ Object.keys(oreData).forEach(key => {
   const grp = oreData[key].group;
   const tier = oreData[key].tier;
   const nextKey = oreData[key].next;
+  const nextOre = getItem(nextKey);
   const nextOreName = itemData[nextKey].name;
 
   if (qty >= grp) {
@@ -70,6 +71,7 @@ Object.keys(oreData).forEach(key => {
     oreList.appendChild(entry);
     document.getElementById(`refine_${tier}`).onclick = () => {
       ore.count -= grp;
+      nextOre += 1;
       //playerStats.gold -= (tier*tier*500);
       saveItems();
       saveProgress();
