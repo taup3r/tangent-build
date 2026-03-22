@@ -215,12 +215,16 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
-export function generateEnemy(playerLevel, enemyName = null) {
+export function generateEnemy(playerLevel, enemyName = null, enemyTier = null) {
   let tier;
-  if (dungeonMode) {
-    tier = getNextDungeonTier();
+  if (enemyTier) {
+    tier = enemyTier;
   } else {
-    tier = rollEnemyTier();
+    if (dungeonMode) {
+      tier = getNextDungeonTier();
+    } else {
+      tier = rollEnemyTier();
+    }
   }
 
   // Level scaling
