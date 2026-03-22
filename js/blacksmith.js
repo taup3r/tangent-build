@@ -3,7 +3,7 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
-import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveItems, showItemList } from "./items.js";
+import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveItems, showItemList, oreData } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -22,6 +22,27 @@ document.getElementById("loreText").textContent = `Refining current weapon costs
 const refineOre = document.getElementById("refine-ore");
 refineOre.innerHTML = `<p>To refine your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
 
+const oreList = document.getElementById("oreList");
+oreList.innerHTML = "";
+
+Object.keys(oreData).forEach(id => {
+  const ore = getItem(id);
+  const qty = ore.count;
+  const grp = oreData[id].group;
+
+  const entry = document.createElement("div");
+  entry.classList.add("ore-entry");
+
+  entry.innerHTML = `
+    <span class="ore-name">${ore.name} (x${qty})</span>
+    <button class="refine-btn" id="refine_${tier}" ${qty < grp ? "disabled" : ""}>
+      Refine
+    </button>
+  `;
+
+  oreList.appendChild(entry);
+}
+  
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine for ${price}g`;
 
