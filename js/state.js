@@ -226,16 +226,15 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
-export function generateEnemy(playerLevel, enemyName = null, enemyTier = null) {
+export function generateEnemy(playerLevel) {
   let tier;
-  if (enemyTier) {
-    tier = enemyTier;
+  if (dungeonMode) {
+    tier = getNextDungeonTier();
   } else {
-    if (dungeonMode) {
-      tier = getNextDungeonTier();
-    } else {
-      tier = rollEnemyTier();
-    }
+    tier = rollEnemyTier();
+  }
+  if (enemyName === "Guild Smuggler") {
+    tier = "boss";
   }
 
   // Level scaling
@@ -247,11 +246,12 @@ export function generateEnemy(playerLevel, enemyName = null, enemyTier = null) {
   const baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
 
   let name = randomName();
-  if (enemyName) name = enemyName;
 
   // Name prefix
   if (tier === "elite") name = "Elite " + name;
   if (tier === "boss") name = "Boss " + name;
+
+  if (enemyName) name = enemyName;
 
   // Tier hints
   let tierHint = "";
