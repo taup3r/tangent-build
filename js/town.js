@@ -90,7 +90,7 @@ function generateTownLayout() {
       label: "Merchant Guild",
       class: "btn-merchant-guild",
       action: () => {
-        window.location.href = `merchantGuild.html?player=${encodeURIComponent(player.name)}`;
+        window.location.href = `merchantguild.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
     });
