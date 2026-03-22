@@ -73,7 +73,7 @@ export const questData = {
       },
       {
         npc: "",
-        message: "Loosing the match, you went to the back door to sulk. You discover a smashed crate bearing the Merchant Guild seal. Someone has been stealing shipments and hiding them in the arena backdoor! Report this back to Selra.",
+        message: "Loosing the match, you went to the back door to sulk. You discover a smashed crate bearing the Merchant Guild seal. Someone has been stealing shipments and hiding them in the arena backdoor! Find the culprit.",
         submit: "Take clue",
         cancel: "Ignore it",
         nextChance: 100
