@@ -42,7 +42,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    maxStage: 8, // set to 0 to turn off quest
+    maxStage: 9, // set to 0 to turn off quest
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
@@ -94,6 +94,12 @@ export const questData = {
         npc: "Selra, Merchant Guild Clerk",
         message: "This ledger... I knew something was wrong. You've done the guild a great service. Allow me to reward you properly.",
         submit: "Accept",
+        nextChance: 100
+      },
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "The Merchant Guild Hall in town is now open for you. Expect better prices for goods and more opportunities to grow your reputation in the future.",
+        submit: "Continue",
         nextChance: 100
       }
     ]
