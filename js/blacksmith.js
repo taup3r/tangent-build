@@ -12,7 +12,7 @@ loadItems();
 const weapon = player.weapon;
 const id = getNameByRarity(weapon?.rarity || "Common");
 
-const ore = getItem(id);
+const weaponOre = getItem(id);
 const price = itemData[id].use;
 const name = itemData[id].name;
 const color = getColorByRarity(weapon?.rarity || "Common");
@@ -50,7 +50,7 @@ refineButton.onclick = () => {
   let refined;
   if (playerStats.gold >= price && ore.count >= 1) {
     // immediately reduces ore on attempt
-    ore.count -= 1;
+    weaponOre.count -= 1;
     saveItems();
 
     if (weapon) {
