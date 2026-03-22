@@ -21,27 +21,6 @@ document.getElementById("loreText").textContent = `Refining current weapon costs
 
 const refineOre = document.getElementById("refine-ore");
 refineOre.innerHTML = `<p>To refine your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
-
-const oreList = document.getElementById("oreList");
-oreList.innerHTML = "";
-
-Object.keys(oreData).forEach(key => {
-  const ore = getItem(key);
-  const qty = ore.count;
-  const grp = oreData[key].group;
-
-  const entry = document.createElement("div");
-  entry.classList.add("ore-entry");
-
-  entry.innerHTML = `
-    <span class="ore-name">${ore.name} (x${qty})</span>
-    <button class="refine-btn" id="refine_${ore.tier}" ${qty < grp ? "disabled" : ""}>
-      Refine
-    </button>
-  `;
-
-  oreList.appendChild(entry);
-});
   
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Refine for ${price}g`;
@@ -64,6 +43,28 @@ refineButton.onclick = () => {
     });
   }  
 };
+
+const oreList = document.getElementById("oreList");
+oreList.innerHTML = "";
+
+Object.keys(oreData).forEach(key => {
+  const ore = getItem(key);
+  const qty = ore.count;
+  const grp = oreData[key].group;
+  const tier = oreData[key].tier;
+
+  const entry = document.createElement("div");
+  entry.classList.add("ore-entry");
+
+  entry.innerHTML = `
+    <span class="ore-name">${ore.name} (x${qty})</span>
+    <button class="refine-btn" id="refine_${tier}" ${qty < grp ? "disabled" : ""}>
+      Refine
+    </button>
+  `;
+
+  oreList.appendChild(entry);
+});
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
