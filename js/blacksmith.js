@@ -71,7 +71,7 @@ Object.keys(oreData).forEach(key => {
     oreList.appendChild(entry);
     document.getElementById(`refine_${tier}`).onclick = () => {
       ore.count -= grp;
-      nextOre += 1;
+      nextOre.count += 1;
       //playerStats.gold -= (tier*tier*500);
       saveItems();
       saveProgress();
