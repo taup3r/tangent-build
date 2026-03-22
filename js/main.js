@@ -20,7 +20,10 @@ function updateBattleHeader() {
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  if (dungeonMode) tryQuestEncounter("merchantGuild", 5, () => setEnemyName("Guild Smuggler"));
+  if (dungeonMode) tryQuestEncounter("merchantGuild", 5, () => {
+    setEnemyName("Guild Smuggler");
+    return location.reload();
+});
 
   initializePortraits();
   applyStatsToCombat(player, playerStats);
