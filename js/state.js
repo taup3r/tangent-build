@@ -215,7 +215,7 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
-export function generateEnemy(playerLevel) {
+export function generateEnemy(playerLevel, enemyName = null) {
   let tier;
   if (dungeonMode) {
     tier = getNextDungeonTier();
@@ -231,8 +231,10 @@ export function generateEnemy(playerLevel) {
   // Base type
   const baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
 
-  // Name prefix
   let name = randomName();
+  if (enemyName) name = enemyName;
+
+  // Name prefix
   if (tier === "elite") name = "Elite " + name;
   if (tier === "boss") name = "Boss " + name;
 
