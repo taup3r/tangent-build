@@ -10,7 +10,7 @@ const reputation = document.getElementById("currentReputation");
 loadProgress();
 updateHeaderStats();
 
-reputation.textContent = `Your current reputation is ${playerStats.reputation} points`;
+reputation.textContent = `Your current reputation is ${playerStats.reputation || 0} points`;
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
