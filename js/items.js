@@ -2,6 +2,34 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 
 loadProgress();
 
+export const oreData = {
+  "ore-w": {
+    next: "ore-g",
+    group: 12,
+    tier: 1
+  },
+  "ore-g": {
+    next: "ore-b",
+    group: 10,
+    tier: 2
+  },
+  "ore-b": {
+    next: "ore-p",
+    group: 8,
+    tier: 3
+  },
+  "ore-p": {
+    next: "ore-o",
+    group: 6,
+    tier: 4
+  },
+  "ore-o": {
+    next: "ore-r",
+    group: 4,
+    tier: 5
+  }
+}
+
 export const itemData = {
   "ore-w": {
     name: "White Ore",
