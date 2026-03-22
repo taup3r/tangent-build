@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, setEnemyName, clearEnemyName } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -483,7 +483,6 @@ function showDungeonSummary() {
 
 export function startNewBattle() {
   if (dungeonMode) {
-    tryQuestEncounter("merchantGuild", 5, () => setEnemyName("Guild Smuggler"));
     getNextDungeonIndex();
     if (dungeonIndex < dungeonQueue.length) {
       // Continue dungeon
