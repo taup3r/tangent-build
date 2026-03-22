@@ -2,10 +2,11 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { showQuestList, loadQuestState, tryQuestEncounter } from "./quest.js";
+import { showQuestList, loadQuestState, tryQuestEncounter, getQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 
 loadProgress();
+loadQuestState();
 updateHeaderStats();
 
 const playerWeaponShopTimestamp = `${player.name}_weaponShopTimestamp`;
@@ -65,6 +66,15 @@ function renderShop() {
   const inventory = loadShopInventory();
   shopList.innerHTML = "";
 
+  list discountPercent = 0;
+  const merchantGuild = getQuest("merchantGuild");
+  if (merchantGuild) {
+    if (merchantGuild.stage >= questData["merchantGuild"].maxStage) {
+      discountPercent = 5;
+      document.getElementById("discountDisplay").textContent = `You enjoy a ${discountPercent}% discount from the Merchant Guild.`;
+    }
+  }
+
   inventory.forEach((w, index) => {
     let price = w.inputRank * 25;
     if (w.rarity === "Unique") {
@@ -72,6 +82,7 @@ function renderShop() {
     } else if (w.rarity === "Mythic Unique") {
       price *= 8;
     }
+    price = Math.floor(price * (100-percentDiscount)/100);
 
     const el = document.createElement("div");
     el.classList.add("shop-item");
