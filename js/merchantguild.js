@@ -10,6 +10,8 @@ const reputation = document.getElementById("currentReputation");
 loadProgress();
 updateHeaderStats();
 
+document.getElementById("loreText").textContent = "The Merchant Guild takes regulation on all goods prices and quests undertakings";
+
 reputation.textContent = `Your current reputation is ${playerStats.reputation || 0} points`;
 
 questButton.onclick = () => showQuestList();
