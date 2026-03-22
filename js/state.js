@@ -215,6 +215,12 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
+export function updateEnemy(enemyName) {
+  if (enemyName === "Guild Smuggler") }
+    enemy = generateEnemy(playerStats.level, enemyName, "boss");
+  }
+}
+
 export function generateEnemy(playerLevel, enemyName = null, enemyTier = null) {
   let tier;
   if (enemyTier) {
