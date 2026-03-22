@@ -53,6 +53,7 @@ Object.keys(oreData).forEach(key => {
   const oreName = itemData[key].name;
   const grp = oreData[key].group;
   const tier = oreData[key].tier;
+  const orePrice = tier*tier*500;
   const nextKey = oreData[key].next;
   const nextOre = getItem(nextKey);
   const nextOreName = itemData[nextKey].name;
@@ -63,8 +64,8 @@ Object.keys(oreData).forEach(key => {
 
     entry.innerHTML = `
       <span class="ore-name">${oreName} (${qty})</span>
-      <button class="refine-btn" id="refine_${tier}">
-        Refine to ${nextOreName} for ${tier*tier*500}g
+      <button class="refine-btn" id="refine_${tier}" ${playerStats.gold < orePrice ? "disabled" : ""}>
+        Refine to ${nextOreName} for ${orePrice}g
       </button>
     `;
 
@@ -72,7 +73,7 @@ Object.keys(oreData).forEach(key => {
     document.getElementById(`refine_${tier}`).onclick = () => {
       ore.count -= grp;
       nextOre.count += 1;
-      //playerStats.gold -= (tier*tier*500);
+      playerStats.gold -= orePrice;
       saveItems();
       saveProgress();
       location.reload();
