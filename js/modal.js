@@ -262,12 +262,12 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 
 export function checkWin() {
   if (enemy.hp <= 0) {
-    if (enemy.name === "Guild Smuggler") {
-      tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
-    }
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
     if (dungeonMode) {
+      if (enemy.name === "Guild Smuggler") {
+        tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
+      }
       tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)));
     } else {
       tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
