@@ -112,6 +112,9 @@ function questEncounters() {
   loadQuestState();
   tryQuestEncounter("merchantGuild", 0);
   tryQuestEncounter("merchantGuild", 3);
+  tryQuestEncounter("merchantGuild", 7, () => {
+    //todo reward
+  });
 }
 
 renderShop();
