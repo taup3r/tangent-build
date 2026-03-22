@@ -216,7 +216,7 @@ export function getNextDungeonTier() {
 ================================ */
 
 export function updateEnemy(enemyName) {
-  if (enemyName === "Guild Smuggler") }
+  if (enemyName === "Guild Smuggler") {
     enemy = generateEnemy(playerStats.level, enemyName, "boss");
   }
 }
