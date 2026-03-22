@@ -82,7 +82,7 @@ function renderShop() {
     } else if (w.rarity === "Mythic Unique") {
       price *= 8;
     }
-    price = Math.floor(price * (100-percentDiscount)/100);
+    price = Math.floor(price * (100-discountPercent)/100);
 
     const el = document.createElement("div");
     el.classList.add("shop-item");
