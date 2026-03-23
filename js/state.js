@@ -125,7 +125,8 @@ const enemyTypes = [
 function rollEnemyTier() {
   const r = Math.random();
   if (r < 0.05) return "boss";
-  if (r < 0.20) return "elite";
+  if (r < 0.15) return "veteran";
+  if (r < 0.30) return "elite";
   return "normal";
 }
 
@@ -234,12 +235,13 @@ export function generateEnemy(playerLevel) {
     tier = rollEnemyTier();
   }
   if (enemyName === "Guild Smuggler" && dungeonMode) {
-    tier = "boss";
+    tier = "veteran";
   }
 
   // Level scaling
   let level = playerLevel;
   if (tier === "elite") level += 1;
+  if (tier === "veteran") level += 2;
   if (tier === "boss") level += 3;
 
   // Base type
@@ -249,6 +251,7 @@ export function generateEnemy(playerLevel) {
 
   // Name prefix
   if (tier === "elite") name = "Elite " + name;
+  if (tier === "veteran") name = "Veteran " + name;
   if (tier === "boss") name = "Boss " + name;
 
   if (enemyName && dungeonMode) name = enemyName;
@@ -256,6 +259,7 @@ export function generateEnemy(playerLevel) {
   // Tier hints
   let tierHint = "";
   if (tier === "elite") tierHint = "This enemy radiates dangerous strength.";
+  if (tier === "veteran") tierHint = "This looks to be a match with a seasoned warrior.";
   if (tier === "boss") tierHint = "A terrifying presence looms over you.";
 
   const stats = randomEnemyStats(level);
@@ -316,6 +320,8 @@ export function initializePortraits() {
 
   if (enemy.type === "elite") {
     nameEl.style.color = "#ffcc00";
+  } else if (enemy.type === "veteran") {
+    nameEl.style.color = "#ffa500";
   } else if (enemy.type === "boss") {
     nameEl.style.color = "#ff4444";
   } else {

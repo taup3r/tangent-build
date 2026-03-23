@@ -4,6 +4,7 @@ export const dungeonTypes = {
     name: "Dim Caverns",
     enemies: 4,
     elites: 1,
+    veterans: 0,
     bosses: 1,
     intro: "You step into the dim caverns, the air thick with dust and forgotten echoes.",
     epilogue: "The cavern falls silent as the final foe collapses. You emerge into daylight once more.",
@@ -14,6 +15,7 @@ export const dungeonTypes = {
     name: "Ancient Ruins",
     enemies: 6,
     elites: 2,
+    veterans: 1,
     bosses: 1,
     intro: "The ancient ruins groan as you enter. Something powerful stirs deeper within.",
     epilogue: "The ruins tremble as the boss falls. A strange energy dissipates into the air.",
@@ -23,7 +25,8 @@ export const dungeonTypes = {
     type: "nightmare",
     name: "Obsidian Halls",
     enemies: 8,
-    elites: 3,
+    elites: 2,
+    veterans: 2,
     bosses: 1,
     intro: "A cursed wind howls through the obsidian halls. Only the strongest return from this place.",
     epilogue: "The nightmare fades as the final monstrosity falls. You feel changed by what you survived.",
@@ -48,13 +51,18 @@ export function generateDungeonQueue(type) {
   const queue = [];
 
   // Add normals
-  for (let i = 0; i < d.enemies - d.elites - d.bosses; i++) {
+  for (let i = 0; i < d.enemies - d.elites - d.veterans - d.bosses; i++) {
     queue.push("normal");
   }
 
   // Add elites
   for (let i = 0; i < d.elites; i++) {
     queue.push("elite");
+  }
+
+  // Add veterans
+  for (let i = 0; i < d.veterans; i++) {
+    queue.push("veteran");
   }
 
   // Add boss (we will keep this last)
