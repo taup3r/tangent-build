@@ -27,7 +27,7 @@ refineButton.textContent = `Upgrade weapon for ${price}g`;
 
 refineButton.onclick = () => {
   let refined;
-  if (playerStats.gold >= price && ore.count >= 1) {
+  if (playerStats.gold >= price && weaponOre.count >= 1) {
     // immediately reduces ore on attempt
     weaponOre.count -= 1;
     saveItems();
@@ -40,6 +40,8 @@ refineButton.onclick = () => {
     openCompareWeapon(refined, "Equip", () => {
       // then charges gold when equipped
       playerStats.gold -= price;
+      saveProgress();
+      location.reload();
     });
   }  
 };
