@@ -116,7 +116,7 @@ export const quests = [
   },
   {
     id: "merchantGuild",
-    chance: 8,
+    chance: 25,
     stage: 0,
     active: false,
     data: {}
