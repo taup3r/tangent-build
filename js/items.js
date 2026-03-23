@@ -84,7 +84,7 @@ export const itemData = {
 export const items = [
   {
     id: "ore-w",
-    count: 1
+    count: 0
   },
   {
     id: "ore-g",
