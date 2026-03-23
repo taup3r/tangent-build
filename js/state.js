@@ -33,7 +33,7 @@ export let playerStats = {
   AGI: 0,
   CON: 0,
   playerWeapon: null,
-  gold: 0,
+  gold: 10000,
   reputation: 0,
   items: []
 };
