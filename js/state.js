@@ -235,7 +235,7 @@ export function generateEnemy(playerLevel) {
     tier = rollEnemyTier();
   }
   if (enemyName === "Guild Smuggler" && dungeonMode) {
-    tier = "boss";
+    tier = "veteran";
   }
 
   // Level scaling
