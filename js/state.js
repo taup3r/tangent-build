@@ -321,7 +321,7 @@ export function initializePortraits() {
   if (enemy.type === "elite") {
     nameEl.style.color = "#ffcc00";
   } else if (enemy.type === "veteran") {
-    nameEl.style.color = "#ffcc00";
+    nameEl.style.color = "#ffa500";
   } else if (enemy.type === "boss") {
     nameEl.style.color = "#ff4444";
   } else {
