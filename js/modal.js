@@ -9,6 +9,7 @@ import { dungeonTypes } from "./dungeon.js";
 import { showQuestList, tryQuestEncounter } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
+import { gainReputation, loseReputation } from "./reputation.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -264,6 +265,10 @@ export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
+
+    const gainRep = gainReputation(enemy.type);
+    if (gainRep) document.getElementById("log").textContent += `Gained ${gainRep} reputation!\n`;
+
     if (dungeonMode) {
       if (enemy.name === "Guild Smuggler") {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
@@ -278,6 +283,10 @@ export function checkWin() {
 
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
+
+    const loseRep = loseReputation(enemy.type);
+    if (loseRep) document.getElementById("log").textContent += `Lost ${loseRep} reputation!\n`;
+
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;
