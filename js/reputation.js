@@ -7,26 +7,39 @@ export function weaponShopDiscount() {
 }
 
 export function gainReputation(tier) {
-  let rep = playerStats.reputation || 0;
+  let rep = 0;
 
-  if (tier === "normal") rep += 1;
-  if (tier === "elite") rep += 2;
-  if (tier === "veteran") rep += 3;
-  if (tier === "boss") rep += 4;
+  //if no reputation yet, system not used
+  if ((playerStats.reputation || 0) < 1) return null;
 
-  if (rep > 100) rep = 100;
+  if (tier === "normal") rep = 1;
+  if (tier === "elite") rep = 2;
+  if (tier === "veteran") rep = 3;
+  if (tier === "boss") rep = 4;
 
-  playerStats.reputation = rep;
+  playerStats.reputation += rep;
+
+  //max reputation capped at 100
+  if (playerStats.reputation > 100) playerStats.reputation = 100;
+
+  return rep;
 }
 
 export function loseReputation(tier) {
-  let rep = playerStats.reputation || 0;
+  let rep = 0;
 
-  if (tier === "normal") rep -= 3;
-  if (tier === "elite") rep -= 2;
-  if (tier === "veteran") rep -= 1;
+  //if no reputation yet, system not used
+  if ((playerStats.reputation || 0) < 1) return null;
 
-  if (rep < 1) rep = 1;
+  if (tier === "normal") rep = 4;
+  if (tier === "elite") rep = 3;
+  if (tier === "veteran") rep = 2;
+  if (tier === "boss") rep = 1;
 
-  playerStats.reputation = rep;
+  playerStats.reputation -= rep;
+
+  //min reputation capped at 1
+  if (playerStats.reputation < 1) playerStats.reputation = 1;
+
+  return rep;
 }
