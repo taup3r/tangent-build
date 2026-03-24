@@ -1,4 +1,4 @@
-import { playerStats } from "./state.js";
+import { playerStats, saveProgress } from "./state.js";
 
 export function weaponShopDiscount() {
   if ((playerStats.reputation || 0) > 0) {
@@ -22,6 +22,7 @@ export function gainReputation(tier) {
   //max reputation capped at 100
   if (playerStats.reputation > 100) playerStats.reputation = 100;
 
+  saveProgress();
   return rep;
 }
 
@@ -41,5 +42,6 @@ export function loseReputation(tier) {
   //min reputation capped at 1
   if (playerStats.reputation < 1) playerStats.reputation = 1;
 
+  saveProgress();
   return rep;
 }
