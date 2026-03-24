@@ -4,6 +4,7 @@ import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
 import { showItemList } from "./items.js";
+import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
 loadQuestState();
@@ -70,7 +71,7 @@ function renderShop() {
   const merchantGuild = getQuest("merchantGuild");
   if (merchantGuild) {
     if (merchantGuild.stage >= questData["merchantGuild"].maxStage) {
-      discountPercent = 5;
+      discountPercent = weaponShopDiscount();
       document.getElementById("discountDisplay").textContent = `You enjoy a ${discountPercent}% discount from the Merchant Guild.`;
     }
   }
