@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList } from "./quest.js";
 import { showItemList } from "./items.js";
-import { weaponShopDiscount, getReputationTier } from "./reputation.js";
+import { weaponShopDiscount, getReputationTier, getReputationColor } from "./reputation.js";
 
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
@@ -24,6 +24,8 @@ function loadReputationUI() {
   // Label
   const label = document.getElementById("repLabel");
   label.textContent = `${rep} / 100 — ${getReputationTier(rep)}`;
+
+  fill.style.background = getReputationColor(rep);
 }
 
 reputation.textContent = `Your current reputation is ${playerStats.reputation || 0} points\nYou currently have ${weaponShopDiscount()}% discount on shops.`;
