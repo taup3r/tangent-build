@@ -191,3 +191,9 @@ button:disabled {
   justify-content: space-between;
   margin: 4px 0;
 }
+
+.divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #444;
+}
