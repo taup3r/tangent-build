@@ -40,8 +40,20 @@
       </div>
 
       <hr class="divider">
-
       <div id="currentReputation"></div>
+
+      <div class="guild-quest-entry">
+        <p>${quest.title}</p>
+
+        ${quest.type === "repeatable" ? `
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${(quest.progress / quest.target) * 100}%"></div>
+        </div>
+        ` : ""}
+
+        <button class="guild-quest-btn" disabled>${quest.progress === quest.target ? "Completed" : "In Progress"}</button>
+      </div>
+
       <button id="backButton" class="explore-btn">Leave</button>
 
     </div>
