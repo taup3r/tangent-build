@@ -1,9 +1,13 @@
 import { playerStats, saveProgress } from "./state.js";
 
 export function weaponShopDiscount() {
-  if ((playerStats.reputation || 0) > 0) {
-    return 5;
-  }
+  const rep = playerStats.reputation || 0;
+  if (rep > 80) return 20;
+  if (rep > 60) return 16;
+  if (rep > 40) return 12;
+  if (rep > 20) return 8;
+  if (rep > 0) return 5;
+  return 0;
 }
 
 export function gainReputation(tier) {
