@@ -107,15 +107,21 @@ export const questData = {
     ]
   },
   "arenaNormal": {
-    title: "(Repeatable) Arena Normal",
+    title: "Arena Normal",
     type: "repeatable",
     maxStage: 2,
     flow: [
       {
         npc: "Old man Calidore",
-        message: "Defeat 3 normal enemies in the Arena",
+        message: "Good day recruit. Could you defeat 3 normal enemies in the Arena for me, this will promote my business well.",
         submit: "Accept",
         cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "Old man Calidore",
+        message: "That is swift work thanks! Here is your reward.",
+        submit: "Accept",
         nextChance: 100
       }
     ]
