@@ -53,3 +53,11 @@ export function getReputationTier(rep) {
   if (rep < 80) return "Respected";
   return "Elite";
 }
+
+export function getReputationColor(rep) {
+  if (rep < 20) return "#666";        // grey
+  if (rep < 40) return "#4aa3ff";     // blue
+  if (rep < 60) return "#55ff88";     // green
+  if (rep < 80) return "#ffaa2b";     // gold
+  return "#ff44aa";                   // pink elite
+}
