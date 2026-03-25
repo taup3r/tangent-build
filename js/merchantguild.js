@@ -28,7 +28,7 @@ function loadReputationUI() {
   fill.style.background = getReputationColor(rep);
 }
 
-reputation.textContent = `Your current reputation is ${playerStats.reputation || 0} points\nYou currently have ${weaponShopDiscount()}% discount on shops.`;
+reputation.textContent = `You currently have ${weaponShopDiscount() || 0}% discount on shops.`;
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
