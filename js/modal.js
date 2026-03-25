@@ -9,6 +9,7 @@ import { dungeonTypes } from "./dungeon.js";
 import { showQuestList, tryQuestEncounter } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
+import { gainReputation, loseReputation } from "./reputation.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -81,6 +82,9 @@ export function showResultModal(victory) {
   // Clear EXP display area
   const expDisplay = document.getElementById("expGainDisplay");
   expDisplay.innerHTML = "";
+  // Clear REP display area
+  const repDisplay = document.getElementById("repGainDisplay");
+  repDisplay.innerHTML = "";
 
   // Restore loot button click
   document.getElementById("lootWeaponBtn").onclick = () => {
@@ -133,9 +137,13 @@ export function showResultModal(victory) {
   if (victory) {
     title.textContent = "Victory!";
     const expGain = (enemy.level + 1) * 5;
+    const repGain = gainReputation(enemy.type);
 
     // Animate EXP above loot preview
     animateExpGain(expDisplay, 0, expGain);
+    if (repGain) {
+      repDisplay.innerHTML = `<b>Gained ${repGain} Reputation</b>`;
+    }
 
     gainExp(expGain);
     gainGold(enemy.gold);
@@ -143,9 +151,13 @@ export function showResultModal(victory) {
   } else {
     title.textContent = "Defeat";
     const expLoss = Math.floor((enemy.level + 1) * 5 * 0.2);
+    const repLoss = loseReputation(enemy.type);
 
     // Animate LOST EXP (correct wording)
     animateExpLoss(expDisplay, 0, expLoss);
+    if (repLoss) {
+      repDisplay.innerHTML = `<b>Lost ${repLoss} Reputation</b>`;
+    }
 
     loseExp(expLoss);
   }
@@ -264,6 +276,7 @@ export function checkWin() {
   if (enemy.hp <= 0) {
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
+
     if (dungeonMode) {
       if (enemy.name === "Guild Smuggler") {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
@@ -278,6 +291,7 @@ export function checkWin() {
 
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
+
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;

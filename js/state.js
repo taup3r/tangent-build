@@ -121,13 +121,21 @@ const enemyTypes = [
   { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." }
 ];
 
-// Tier roll: 80% normal, 15% elite, 5% boss
+// Tier roll:
 function rollEnemyTier() {
-  const r = Math.random();
-  if (r < 0.05) return "boss";
-  if (r < 0.15) return "veteran";
-  if (r < 0.30) return "elite";
-  return "normal";
+  const rep = playerStats.reputation || 0;
+
+  const normalChance = 50 - (rep * 0.5);
+  const eliteChance = 30 + (rep * 0.25);
+  const veteranChance = 15 + (rep * 0.15);
+  const bossChance = 5 + (rep * 0.10);
+
+  const roll = Math.random() * 100;
+
+  if (roll < normalChance) return "normal";
+  if (roll < normalChance + eliteChance) return "elite";
+  if (roll < normalChance + eliteChance + veteranChance) return "veteran";
+  return "boss";
 }
 
 function randomName() {
