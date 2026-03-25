@@ -33,27 +33,27 @@ function applyModalTheme(modal, tier) {
 }
 
 // Animated EXP gain
-function animateExpGain(element, start, end, duration = 600, label = "EXP") {
+function animateExpGain(element, start, end, duration = 600) {
   const diff = end - start;
   const startTime = performance.now();
 
   function tick(now) {
     const progress = Math.min((now - startTime) / duration, 1);
     const value = Math.floor(start + diff * progress);
-    element.innerHTML = `<b>Gained ${value} ${label}</b>`;
+    element.innerHTML = `<b>Gained ${value} EXP</b>`;
     if (progress < 1) requestAnimationFrame(tick);
   }
 
   requestAnimationFrame(tick);
 }
 
-function animateExpLoss(element, start, end, duration = 600, label = "EXP") {
+function animateExpLoss(element, start, end, duration = 600) {
   const startTime = performance.now();
 
   function tick(now) {
     const progress = Math.min((now - startTime) / duration, 1);
     const value = Math.floor(start + end * progress);
-    element.innerHTML = `<b style="color:#ff4444;">Lost ${value} ${label}</b>`;
+    element.innerHTML = `<b style="color:#ff4444;">Lost ${value} EXP</b>`;
     if (progress < 1) requestAnimationFrame(tick);
   }
 
@@ -141,7 +141,9 @@ export function showResultModal(victory) {
 
     // Animate EXP above loot preview
     animateExpGain(expDisplay, 0, expGain);
-    if (repGain) animateExpGain(repDisplay, 0, repGain, "Reputation");
+    if (repGain) {
+      repDisplay.innerHTML = `<b>Gained ${repGain} Reputation</b>`;
+    }
 
     gainExp(expGain);
     gainGold(enemy.gold);
@@ -153,7 +155,9 @@ export function showResultModal(victory) {
 
     // Animate LOST EXP (correct wording)
     animateExpLoss(expDisplay, 0, expLoss);
-    if (repLoss) animateExpLoss(repDisplay, 0, repLoss, "Reputation");
+    if (repLoss) {
+      repDisplay.innerHTML = `<b>Lost ${repLoss} Reputation</b>`;
+    }
 
     loseExp(expLoss);
   }
