@@ -7,6 +7,7 @@ const playerQuests = `${player.name}_quests`;
 export const questData = {
   "blacksmith": {
     title: "The Lost Hammer",
+    type: "town",
     maxStage: 5, // set to 0 to turn off quest
     flow: [
       {
@@ -42,6 +43,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
+    type: "town",
     maxStage: 9, // set to 0 to turn off quest
     flow: [
       {
@@ -103,6 +105,20 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "arenaNormal": {
+    title: "(Repeatable) Arena Normal",
+    type: "repeatable",
+    maxStage: 2,
+    flow: [
+      {
+        npc: "Old man Calidore",
+        message: "Defeat 3 normal enemies in the Arena",
+        submit: "Accept",
+        cancel: "Ignore",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -111,15 +127,19 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
-    active: false,
-    data: {}
+    active: false
   },
   {
     id: "merchantGuild",
     chance: 25,
     stage: 0,
-    active: false,
-    data: {}
+    active: false
+  },
+  {
+    id: "arenaNormal",
+    chance: 100,
+    stage: 0,
+    active: false
   }
 ];
 
