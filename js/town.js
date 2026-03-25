@@ -75,7 +75,7 @@ function generateTownLayout() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
-  if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
+  //if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
@@ -84,7 +84,7 @@ function generateTownLayout() {
       },
       disabled: false
     });
-  }
+  //}
   //if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
     buttons.push({
       label: "Merchant Guild",
