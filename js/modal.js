@@ -84,7 +84,7 @@ export function showResultModal(victory) {
   expDisplay.innerHTML = "";
   // Clear REP display area
   const repDisplay = document.getElementById("repGainDisplay");
-  expDisplay.innerHTML = "";
+  repDisplay.innerHTML = "";
 
   // Restore loot button click
   document.getElementById("lootWeaponBtn").onclick = () => {
