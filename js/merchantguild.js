@@ -34,7 +34,7 @@ const questList = document.getElementById("questList");
 
 function renderQuests() {
   loadQuestState();
-  const repeatableQuests = quests.filter(q => q.type === "repeatable");
+  const repeatableQuests = quests.filter(q => questData[q.id].type === "repeatable");
   questList.innerHTML = "";
 
   repeatableQuests.forEach((q, index) => {
