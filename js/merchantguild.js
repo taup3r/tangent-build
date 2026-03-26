@@ -42,9 +42,9 @@ function renderQuests() {
     el.classList.add("quest-item");
     const completed = q.stage === questData[q.id].maxStage;
 
-    el.innerHTML = /*`
+    el.innerHTML = `
       <div class="guild-quest-entry">
-        <p>${questData[q.id].title}</p>` +
+        <p>${questData[q.id].title}</p></div>` +/*
         ${q.active ? `
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
