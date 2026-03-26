@@ -32,33 +32,49 @@ function loadReputationUI() {
 
 const questList = document.getElementById("questList");
 
-function getCurrentDayKey() {
-  const now = new Date();
-  return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-}
-
-function loadQuestList() {
+function renderQuests() {
   loadQuestState();
-  const currentKey = getCurrentDayKey();
-  //const savedKey = localStorage.getItem(playerQuestTimestamp);
-
-  //const isValid = savedKey && savedKey === currentKey;
-
-  //if (isValid) {
-    //return savedInventory;
-  //}
-
   const repeatableQuests = quests.filter(q => q.type === "repeatable");
+  questList.innerHTML = "";
 
-  for (let i = repeatableQuests.length - 1; i > 0; i--) {
-    
-  }
+  repeatableQuests.forEach((q, index) => {
+    const el = document.createElement("div");
+    el.classList.add("quest-item");
 
-  //localStorage.setItem(playerWeaponShopTimestamp, hourKey);
-  //saveShopInventory(newInventory);
+    el.innerHTML = `
+      <div class="quest-row">
+        <span class="quest-name">${questData[q.id].title}</span>
+        <button class="accept-btn">ACCEPT</button>
+      </div>
+    `;
 
-  //return newQuests;
+    el.querySelector(".accept-btn").onclick = () => {
+      /*
+      openCompareWeapon(w,
+        `Buy ${price}g`,
+        () => {
+          // Deduct gold
+          if (playerStats.gold < price) return;
+          player.weapon = w;
+          playerStats.gold -= price;
+
+          // Remove weapon from shop
+          const updated = loadShopInventory();
+          updated.splice(index, 1);
+          saveShopInventory(updated);
+
+          saveProgress();
+          renderShop();
+        }
+      );
+      */
+    };
+
+    questList.appendChild(el);
+  });
 }
+
+renderQuests();
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
