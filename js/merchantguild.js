@@ -50,15 +50,9 @@ function loadQuestList() {
 
   const repeatableQuests = quests.filter(q => q.type === "repeatable");
 
-  //while (newQuests.length < 5) {
-    //const rankBoost = Math.floor(Math.random() * 10) + 1; // 1–10
-    //const weapon = generateWeapon(baseRank + rankBoost);
-
-    // prevent duplicates by name
-    //if (!newInventory.some(w => w.name === weapon.name)) {
-      //newInventory.push(weapon);
-    //}
-  //}
+  for (let i = repeatableQuests.length - 1; i > 0; i--) {
+    
+  }
 
   //localStorage.setItem(playerWeaponShopTimestamp, hourKey);
   //saveShopInventory(newInventory);
