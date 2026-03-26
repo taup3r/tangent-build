@@ -36,7 +36,7 @@ function renderQuests() {
   loadQuestState();
   const repeatableQuests = quests.filter(q => questData[q.id].type === "repeatable");
   questList.innerHTML = "";
-
+/*
   repeatableQuests.forEach((q, index) => {
     const el = document.createElement("div");
     el.classList.add("quest-item");
@@ -49,8 +49,8 @@ function renderQuests() {
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
         </div>
-        ` : ""} + /*`<button class="guild-quest-btn" disabled>` + ${completed ? "Completed" : "In Progress"} + `</button>
-      </div>*/`
+        ` : ""} + `<button class="guild-quest-btn" disabled>` + ${completed ? "Completed" : "In Progress"} + `</button>
+      </div>`
 
       <div class="quest-row">
         <span class="quest-name">${questData[q.id].title}</span>
@@ -59,7 +59,6 @@ function renderQuests() {
     `;
 
     el.querySelector(".accept-btn").onclick = () => {
-      /*
       openCompareWeapon(w,
         `Buy ${price}g`,
         () => {
@@ -77,11 +76,11 @@ function renderQuests() {
           renderShop();
         }
       );
-      */
     };
 
     questList.appendChild(el);
   });
+*/
 }
 
 renderQuests();
