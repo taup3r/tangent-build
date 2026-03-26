@@ -43,8 +43,10 @@ function renderQuests() {
     const completed = q.stage === questData[q.id].maxStage;
     const notStarted = q.active === false;
     let status;
+    let btnState = "disabled";
     if (notStarted) {
       status = "Start";
+      btnState = "";
     } else if (completed) {
       status = "Completed";
     } else {
@@ -57,16 +59,11 @@ function renderQuests() {
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
         </div>
-        <button class="guild-quest-btn" disabled>${status}</button>
-      </div>
-
-      <div class="quest-row">
-        <span class="quest-name">${questData[q.id].title}</span>
-        <button class="accept-btn">ACCEPT</button>
+        <button class="guild-quest-btn" ${btnState}>${status}</button>
       </div>
     `;
 
-    el.querySelector(".accept-btn").onclick = () => {
+    el.querySelector(".guild-quest-btn").onclick = () => {
       /*openCompareWeapon(w,
         `Buy ${price}g`,
         () => {
