@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { showQuestList } from "./quest.js";
+import { showQuestList, questData, quests, loadQuestState } from "./quest.js";
 import { showItemList } from "./items.js";
 import { weaponShopDiscount, getReputationTier, getReputationColor } from "./reputation.js";
 
@@ -38,6 +38,7 @@ function getCurrentDayKey() {
 }
 
 function loadQuestList() {
+  loadQuestState();
   const currentKey = getCurrentDayKey();
   //const savedKey = localStorage.getItem(playerQuestTimestamp);
 
@@ -48,7 +49,7 @@ function loadQuestList() {
   //}
 
   const newQuests = [];
-  //const quests = pl
+  //const repeatableQuests = quests.
   //newQuests.push()
 
   //while (newQuests.length < 5) {
