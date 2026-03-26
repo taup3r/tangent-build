@@ -44,14 +44,13 @@ function renderQuests() {
 
     el.innerHTML = `
       <div class="guild-quest-entry">
-        <p>${questData[q.id].title}</p>
-
+        <p>${questData[q.id].title}</p>` +
         ${q.active ? `
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
         </div>
-        ` : ""}
-
+        ` : ""} +
+        `
         <button class="guild-quest-btn" disabled>${completed ? "Completed" : "In Progress"}</button>
       </div>
 
