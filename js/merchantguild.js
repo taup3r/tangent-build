@@ -48,9 +48,7 @@ function loadQuestList() {
     //return savedInventory;
   //}
 
-  const newQuests = [];
-  //const repeatableQuests = quests.
-  //newQuests.push()
+  const repeatableQuests = quests.filter(q => q.type === "repeatable");
 
   //while (newQuests.length < 5) {
     //const rankBoost = Math.floor(Math.random() * 10) + 1; // 1–10
