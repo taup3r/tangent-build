@@ -110,6 +110,7 @@ export const questData = {
     title: "Arena Normal",
     type: "repeatable",
     maxStage: 2,
+    maxCount: 3,
     flow: [
       {
         npc: "Old man Calidore",
@@ -145,6 +146,7 @@ export const quests = [
     id: "arenaNormal",
     chance: 100,
     stage: 0,
+    count: 0,
     active: false
   }
 ];
@@ -236,6 +238,21 @@ quest.stage < questData[quest.id].maxStage) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
+  }
+}
+
+export function questIncrement(id, nextAction = null) {
+  const quest = getQuest(id);
+  if (quest.stage !== 1) {
+    if (nextAction) nextAction();
+    return;
+  }
+  
+  quest.count += 1;
+  saveQuestState();
+
+  if (quest.count >= questData[quest.id].maxCount) {
+    tryQuestEncounter(id, 1, nextAction);
   }
 }
 
