@@ -44,7 +44,7 @@ function renderQuests() {
 
     el.innerHTML = `
       <div class="guild-quest-entry">
-        <p>${questDats[q.id].title}</p>
+        <p>${questData[q.id].title}</p>
 
         ${q.active ? `
         <div class="progress-bar">
