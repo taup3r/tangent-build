@@ -26,9 +26,47 @@ function loadReputationUI() {
   label.textContent = `${rep} / 100 — ${getReputationTier(rep)}`;
 
   fill.style.background = getReputationColor(rep);
+
+  reputation.textContent = `You currently have ${weaponShopDiscount() || 0}% discount on shops.`;
 }
 
-reputation.textContent = `You currently have ${weaponShopDiscount() || 0}% discount on shops.`;
+const questList = document.getElementById("questList");
+
+function getCurrentDayKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+}
+
+function loadQuestList() {
+  const currentKey = getCurrentDayKey();
+  //const savedKey = localStorage.getItem(playerQuestTimestamp);
+
+  //const isValid = savedKey &&
+    savedKey === currentKey;
+
+  //if (isValid) {
+    //return savedInventory;
+  //}
+
+  const newQuests = [];
+  //const quests = pl
+  //newQuests.push()
+
+  //while (newQuests.length < 5) {
+    //const rankBoost = Math.floor(Math.random() * 10) + 1; // 1–10
+    //const weapon = generateWeapon(baseRank + rankBoost);
+
+    // prevent duplicates by name
+    //if (!newInventory.some(w => w.name === weapon.name)) {
+      //newInventory.push(weapon);
+    //}
+  //}
+
+  //localStorage.setItem(playerWeaponShopTimestamp, hourKey);
+  //saveShopInventory(newInventory);
+
+  //return newQuests;
+}
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
