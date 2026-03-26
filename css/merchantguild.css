@@ -43,7 +43,7 @@
 .quest-name {
   font-size: 0.95rem;
   font-weight: bold;
-  max-width: 75%;
+  max-width: 100%;
   overflow-wrap: break-word;
 }
 
@@ -56,7 +56,7 @@
   cursor: pointer;
   font-size: 0.9rem;
   white-space: nowrap;
-  width: 20%;
+  /*width: 20%;*/
 }
 
 .accept-btn:hover {
