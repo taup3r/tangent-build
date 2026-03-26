@@ -41,8 +41,7 @@ function loadQuestList() {
   const currentKey = getCurrentDayKey();
   //const savedKey = localStorage.getItem(playerQuestTimestamp);
 
-  //const isValid = savedKey &&
-    savedKey === currentKey;
+  //const isValid = savedKey && savedKey === currentKey;
 
   //if (isValid) {
     //return savedInventory;
