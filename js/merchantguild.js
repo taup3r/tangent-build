@@ -59,7 +59,7 @@ function renderQuests() {
     `;
 
     el.querySelector(".accept-btn").onclick = () => {
-      openCompareWeapon(w,
+      /*openCompareWeapon(w,
         `Buy ${price}g`,
         () => {
           // Deduct gold
@@ -76,11 +76,11 @@ function renderQuests() {
           renderShop();
         }
       );
+      */
     };
 
     questList.appendChild(el);
   });
-*/
 }
 
 renderQuests();
