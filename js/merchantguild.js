@@ -41,15 +41,23 @@ function renderQuests() {
     const el = document.createElement("div");
     el.classList.add("quest-item");
     const completed = q.stage === questData[q.id].maxStage;
+    const notStarted = q.active === false;
+    let status;
+    if (notStarted) {
+      status = "Start";
+    } else if (completed) {
+      status = "Completed";
+    } else {
+      status = "In Progress";
+    }
 
     el.innerHTML = `
       <div class="guild-quest-entry">
-        <p>${questData[q.id].title}</p>` +
-        `
+        <p>${questData[q.id].title}</p>
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
         </div>
-        <button class="guild-quest-btn" disabled>` + ${completed ? "Completed" : "In Progress"} + `</button>
+        <button class="guild-quest-btn" disabled>${status}</button>
       </div>
 
       <div class="quest-row">
