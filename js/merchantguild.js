@@ -44,11 +44,11 @@ function renderQuests() {
     const notStarted = q.active === false;
     let status;
     if (notStarted) {
-      status = "Start";
+      status = "📜";
     } else if (completed) {
-      status = "Completed";
+      status = "👑";
     } else {
-      status = `In Progress • ${q.count} of ${questData[q.id].maxCount}`;
+      status = `⏳ • ${q.count} of ${questData[q.id].maxCount}`;
     }
 
     el.innerHTML = `
