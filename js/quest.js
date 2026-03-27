@@ -107,7 +107,7 @@ export const questData = {
     ]
   },
   "arenaNormal": {
-    title: "Arena Normal",
+    title: "Test your mettle",
     type: "repeatable",
     maxStage: 2,
     maxCount: 3,
