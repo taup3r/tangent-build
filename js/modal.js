@@ -6,7 +6,7 @@ import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnem
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { showQuestList, tryQuestEncounter } from "./quest.js";
+import { showQuestList, tryQuestEncounter, questIncrement } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
@@ -283,8 +283,13 @@ export function checkWin() {
       }
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else {
-      tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+      if (enemy.type === "normal") {
+        questIncrement("arenaNormal", () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+ showResultModal(true))); 
+      } else {
+        tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true));
+      }
     }
     return true;
   }
