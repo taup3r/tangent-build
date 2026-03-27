@@ -52,11 +52,8 @@ function renderQuests() {
     }
 
     el.innerHTML = `
-      <div class="guild-quest-entry">
-        <p>${questData[q.id].title}</p>
-        <!--<div class="progress-bar">
-          <div class="progress-fill" style="width:${(q.count / questData[q.id].maxCount) * 100}%"></div>
-        </div>-->
+      <div class="quest-row">
+        <span>${questData[q.id].title}</span>
         <button class="guild-quest-btn">${status}</button>
       </div>
     `;
