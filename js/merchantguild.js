@@ -43,10 +43,8 @@ function renderQuests() {
     const completed = q.stage === questData[q.id].maxStage;
     const notStarted = q.active === false;
     let status;
-    let btnState = "disabled";
     if (notStarted) {
       status = "Start";
-      btnState = "";
     } else if (completed) {
       status = "Completed";
     } else {
@@ -59,7 +57,7 @@ function renderQuests() {
         <div class="progress-bar">
           <div class="progress-fill" style="width:${(q.count / questData[q.id].maxCount) * 100}%"></div>
         </div>
-        <button class="guild-quest-btn" ${btnState}>${status}</button>
+        <button class="guild-quest-btn">${status}</button>
       </div>
     `;
 
