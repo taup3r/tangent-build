@@ -53,8 +53,8 @@ function renderQuests() {
 
     el.innerHTML = `
       <div class="quest-row">
-        <span>${questData[q.id].title}</span>
-        <button class="guild-quest-btn">${status}</button>
+        <span class="quest-name">${questData[q.id].title}</span>
+        <button class="quest-btn">${status}</button>
       </div>
     `;
 
