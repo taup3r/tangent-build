@@ -57,7 +57,7 @@ function renderQuests() {
       <div class="guild-quest-entry">
         <p>${questData[q.id].title}</p>
         <div class="progress-bar">
-          <div class="progress-fill" style="width:${((q.stage + 1) / (questData[q.id].maxStage + 1)) * 100}%"></div>
+          <div class="progress-fill" style="width:${(q.count / questData[q.id].maxCount) * 100}%"></div>
         </div>
         <button class="guild-quest-btn" ${btnState}>${status}</button>
       </div>
@@ -65,24 +65,6 @@ function renderQuests() {
 
     el.querySelector(".guild-quest-btn").onclick = () => {
         if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
-      /*openCompareWeapon(w,
-        `Buy ${price}g`,
-        () => {
-          // Deduct gold
-          if (playerStats.gold < price) return;
-          player.weapon = w;
-          playerStats.gold -= price;
-
-          // Remove weapon from shop
-          const updated = loadShopInventory();
-          updated.splice(index, 1);
-          saveShopInventory(updated);
-
-          saveProgress();
-          renderShop();
-        }
-      );
-      */
     };
 
     questList.appendChild(el);
