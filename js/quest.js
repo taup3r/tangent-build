@@ -241,10 +241,12 @@ quest.stage < questData[quest.id].maxStage) {
   }
 }
 
-export function questIncrement(id, nextAction = null) {
+export function questIncrement(id, condition = false, nextAction = null) {
   const quest = getQuest(id);
-  if (questData[id].type !== "repeatable") return;
-  if (quest.stage !== 1) return;
+  if (quest.stage !== 1 || questData[id].type !== "repeatable" || condition === false) {
+    if (nextAction) nextAction();
+    return;
+  }
   
   quest.count += 1;
   saveQuestState();
