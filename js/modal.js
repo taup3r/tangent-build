@@ -283,13 +283,8 @@ export function checkWin() {
       }
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else {
-      if (enemy.type === "normal") {
-        questIncrement("arenaNormal", () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
- showResultModal(true))); 
-      } else {
-        tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
- showResultModal(true));
-      }
+      questIncrement("arenaNormal", enemy.type === "normal", () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+ showResultModal(true)));
     }
     return true;
   }
