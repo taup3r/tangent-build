@@ -57,12 +57,12 @@
 .quest-name {
   font-size: 0.95rem;
   font-weight: bold;
-  width: 78%;
+  max-width: 75%;
   text-align: left;
   overflow-wrap: break-word;
 }
 
-.accept-btn {
+.quest-btn {
   background: #4a7cff;
   border: none;
   border-radius: 6px;
@@ -74,6 +74,6 @@
   width: 20%;
 }
 
-.accept-btn:hover {
+.quest-btn:hover {
   background: #6a9cff;
 }
