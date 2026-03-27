@@ -64,6 +64,7 @@ function renderQuests() {
     `;
 
     el.querySelector(".guild-quest-btn").onclick = () => {
+        if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
       /*openCompareWeapon(w,
         `Buy ${price}g`,
         () => {
