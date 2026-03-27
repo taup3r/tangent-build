@@ -1,4 +1,4 @@
-import { player, loadProgress } from "./state.js";
+import { player, enemy, loadProgress } from "./state.js";
 
 loadProgress();
 
@@ -243,15 +243,13 @@ quest.stage < questData[quest.id].maxStage) {
 
 export function questIncrement(id, nextAction = null) {
   const quest = getQuest(id);
-  if (quest.stage !== 1) {
-    if (nextAction) nextAction();
-    return;
-  }
+  if (questData[id].type !== "repeatable") return;
+  if (quest.stage !== 1) return;
   
   quest.count += 1;
   saveQuestState();
 
-  if (quest.count >= questData[quest.id].maxCount) {
+  if (quest.count >= questData[id].maxCount) {
     tryQuestEncounter(id, 1, nextAction);
   }
 }
