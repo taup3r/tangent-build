@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { showQuestList, questData, quests, loadQuestState, tryQuestEncounter } from "./quest.js";
+import { showQuestList, questData, quests, loadQuestState, tryQuestEncounter, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { weaponShopDiscount, getReputationTier, getReputationColor } from "./reputation.js";
 
@@ -63,6 +63,7 @@ function renderQuests() {
 
     el.querySelector(".guild-quest-btn").onclick = () => {
         if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
+        if (q.stage === 1) triggerQuest(q, null, true);
     };
 
     questList.appendChild(el);
