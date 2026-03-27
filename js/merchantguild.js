@@ -48,15 +48,15 @@ function renderQuests() {
     } else if (completed) {
       status = "Completed";
     } else {
-      status = "In Progress";
+      status = `In Progress • ${q.count} of ${questData[q.id].maxCount}`;
     }
 
     el.innerHTML = `
       <div class="guild-quest-entry">
         <p>${questData[q.id].title}</p>
-        <div class="progress-bar">
+        <!--<div class="progress-bar">
           <div class="progress-fill" style="width:${(q.count / questData[q.id].maxCount) * 100}%"></div>
-        </div>
+        </div>-->
         <button class="guild-quest-btn">${status}</button>
       </div>
     `;
