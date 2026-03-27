@@ -1,4 +1,4 @@
-import { player, enemy, loadProgress } from "./state.js";
+import { player, loadProgress } from "./state.js";
 
 loadProgress();
 
