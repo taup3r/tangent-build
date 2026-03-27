@@ -48,7 +48,7 @@ function renderQuests() {
     } else if (completed) {
       status = "👑";
     } else {
-      status = `⏳ • ${q.count} of ${questData[q.id].maxCount}`;
+      status = `${q.count} ⏳ ${questData[q.id].maxCount}`;
     }
 
     el.innerHTML = `
