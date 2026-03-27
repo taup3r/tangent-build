@@ -62,7 +62,7 @@
   overflow-wrap: break-word;
 }
 
-.quest-btn {
+.guild-quest-btn {
   background: #4a7cff;
   border: none;
   border-radius: 6px;
@@ -74,6 +74,6 @@
   width: 20%;
 }
 
-.quest-btn:hover {
+.guild-quest-btn:hover {
   background: #6a9cff;
 }
