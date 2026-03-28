@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, questData, quests, loadQuestState, saveQuestState, tryQuestEncounter, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
-import { weaponShopDiscount, getReputationTier, getReputationColor } from "./reputation.js";
+import { weaponShopDiscount, blacksmithDiscount, getReputationTier, getReputationColor } from "./reputation.js";
 
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
@@ -27,7 +27,7 @@ function loadReputationUI() {
 
   fill.style.background = getReputationColor(rep);
 
-  reputation.textContent = `You currently have ${weaponShopDiscount() || 0}% discount on shops.`;
+  reputation.textContent = `You currently have ${weaponShopDiscount() || 0}% discount on shops and ${blacksmithDiscount() || 0}% on the blacksmith.`;
 }
 
 const questList = document.getElementById("questList");
