@@ -72,6 +72,12 @@ function getResidentialZone() {
       class: "btn-blacksmith",
       action: () => showStatsModal(),
       disabled: false
+    },
+    {
+      label: "Back to Square",
+      class: "btn-zone",
+      action: () => location.reload(),
+      disabled: false
     }
   ];
   zone = "residential";
@@ -123,6 +129,9 @@ function getTownSquareZone() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
+  let blacksmithDone = true;
+  let merchantGuildDone = true;
+
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
       label: "Blacksmith's Forge",
@@ -132,6 +141,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
+    blacksmithDone = true;
   }
   if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
     buttons.push({
@@ -142,7 +152,18 @@ function getTownSquareZone() {
       },
       disabled: false
     });
+    merchantGuildDone = true;
   }
+
+  if (blacksmithDone === true && merchantGuildDone === true) {
+    buttons.push({
+      label: "Go to Village",
+      class: "btn-zone",
+      action: () => location.reload(),
+      disabled: false
+    });
+  }
+
   zone = "townSquare";
   zoneName.textContent = "Tangent Square";
   return buttons;
