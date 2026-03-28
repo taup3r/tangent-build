@@ -75,7 +75,7 @@ function getResidentialZone() {
     }
   ];
   zone = "residential";
-  zoneName.textContent = "Residential Zone";
+  //zoneName.textContent = "Residential Zone";
   return buttons;
 }
 
@@ -144,7 +144,7 @@ function getTownSquareZone() {
     });
   }
   zone = "townSquare";
-  zoneName.textContent = "Wayfarer's Rest";
+  //zoneName.textContent = "Wayfarer's Rest";
   return buttons;
 }
 
