@@ -63,7 +63,7 @@
 }
 
 .guild-quest-btn {
-  background: #4a7cff;
+  /*background: #4a7cff;*/
   border: none;
   border-radius: 6px;
   color: white;
@@ -72,8 +72,4 @@
   font-size: 0.9rem;
   white-space: nowrap;
   width: 20%;
-}
-
-.guild-quest-btn:hover {
-  background: #6a9cff;
 }
