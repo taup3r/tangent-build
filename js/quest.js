@@ -121,7 +121,7 @@ export const questData = {
       },
       {
         npc: "Old man Calidore",
-        message: "That is swift work thanks! Here is your reward.",
+        message: "That is swift work! I've sent your reward through the merchant guild. Thanks again!",
         submit: "Accept",
         nextChance: 100
       }
