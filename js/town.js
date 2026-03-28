@@ -147,7 +147,7 @@ function generateTownLayout() {
   const buttons = getResidentialZone();
   //const zone = Math.Random();
   //if (zone < 0.20) {
-    //buttons.splice(0, buttons.length);
+    buttons.splice(0, buttons.length);
     getTownSquareZone().forEach(z => {
       buttons.push(z);
     });
