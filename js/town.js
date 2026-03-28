@@ -184,7 +184,7 @@ function generateTownLayout() {
   }
 
   // Randomly decide how many buttons appear (1–4)
-  const count = Math.floor(Math.random() * 4) + 1;
+  const count = Math.floor(Math.random() * 3) + 2;
 
   // Shuffle buttons
   const shuffled = [...buttons].sort(() => Math.random() - 0.5);
