@@ -35,7 +35,8 @@ export let playerStats = {
   playerWeapon: null,
   gold: 0,
   reputation: 0,
-  items: []
+  items: [],
+  zone: "townSquare"
 };
 
 export function loadProgress() {
@@ -57,6 +58,10 @@ export function loadProgress() {
 
   if (data.playerWeapon) {
     player.weapon = data.playerWeapon;
+  }
+
+  if (!playerStats.zone) {
+    playerStats.zone = "townSquare";
   }
 
   applyStatsToCombat(player, playerStats);
