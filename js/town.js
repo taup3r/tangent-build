@@ -31,7 +31,7 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-function generateTownLayout() {
+function getTownSquareZone() {
   randomArea.innerHTML = "";
   const dungeonType = getRandomDungeonType();
 
@@ -95,6 +95,12 @@ function generateTownLayout() {
       disabled: false
     });
   }
+
+  return buttons;
+}
+
+function generateTownLayout() {
+  const buttons = getTownSquareZone();
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
