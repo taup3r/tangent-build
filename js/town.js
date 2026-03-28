@@ -85,7 +85,7 @@ function generateTownLayout() {
       disabled: false
     });
   }
-  if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
+  //if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
     buttons.push({
       label: "Merchant Guild",
       class: "btn-merchant-guild",
@@ -94,7 +94,7 @@ function generateTownLayout() {
       },
       disabled: false
     });
-  }
+  //}
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
