@@ -13,7 +13,8 @@ const weapon = player.weapon;
 const id = getNameByRarity(weapon?.rarity || "Common");
 
 const weaponOre = getItem(id);
-const price = itemData[id].use;
+let price = itemData[id].use;
+price = Math.floor(price * (100-blacksmithDiscount())/100);
 const name = itemData[id].name;
 const color = getColorByRarity(weapon?.rarity || "Common");
 
