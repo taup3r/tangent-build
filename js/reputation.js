@@ -10,6 +10,16 @@ export function weaponShopDiscount() {
   return 0;
 }
 
+export function blacksmithDiscount() {
+  const rep = playerStats.reputation || 0;
+  if (rep > 80) return 12;
+  if (rep > 60) return 10;
+  if (rep > 40) return 8;
+  if (rep > 20) return 6;
+  if (rep > 0) return 4;
+  return 0;
+}
+
 export function gainReputation(tier) {
   let rep = 0;
 
