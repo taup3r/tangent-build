@@ -36,37 +36,37 @@ function getResidentialZone() {
   randomArea.innerHTML = "";
   const buttons = [
     {
-      label: "Yellow House",
+      label: "Hearthwhistle Cottage",
       class: "btn-shop",
       action: () => showStatsModal(),
       disabled: false
     },
     {
-      label: "Red Mansion",
+      label: "Thistledown Rest",
       class: "btn-arena",
       action: () => showStatsModal(),
       disabled: false
     },
     {
-      label: "Blue Pad",
+      label: "Willowbend Homestead",
       class: "btn-dungeon",
       action: () => showStatsModal(),
       disabled: false
     },
     {
-      label: "Green Cottage",
+      label: "Mosslight Cabin",
       class: "btn-train",
       action: () => showStatsModal(),
       disabled: false
     },
     {
-      label: "Purple Cove",
+      label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
       action: () => showStatsModal(),
       disabled: false
     },
     {
-      label: "Orange Hub",
+      label: "Oakroot Dwelling",
       class: "btn-blacksmith",
       action: () => showStatsModal(),
       disabled: false
