@@ -7,6 +7,7 @@ const playerQuests = `${player.name}_quests`;
 export const questData = {
   "blacksmith": {
     title: "The Lost Hammer",
+    type: "town",
     maxStage: 5, // set to 0 to turn off quest
     flow: [
       {
@@ -42,6 +43,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
+    type: "town",
     maxStage: 9, // set to 0 to turn off quest
     flow: [
       {
@@ -103,6 +105,27 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "arenaNormal": {
+    title: "Test your mettle",
+    type: "repeatable",
+    maxStage: 2,
+    maxCount: 3,
+    flow: [
+      {
+        npc: "Old man Calidore",
+        message: "Good day recruit. Could you defeat 3 normal enemies in the Arena for me, this will promote my business well.",
+        submit: "Accept",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "Old man Calidore",
+        message: "That is swift work! I've sent your reward through the merchant guild. Thanks again!",
+        submit: "Accept",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -111,15 +134,20 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
-    active: false,
-    data: {}
+    active: false
   },
   {
     id: "merchantGuild",
     chance: 25,
     stage: 0,
-    active: false,
-    data: {}
+    active: false
+  },
+  {
+    id: "arenaNormal",
+    chance: 100,
+    stage: 0,
+    count: 0,
+    active: false
   }
 ];
 
@@ -211,6 +239,23 @@ quest.stage < questData[quest.id].maxStage) {
   } else {
     if (ignoreAction) ignoreAction();
   }
+}
+
+export function questIncrement(id, condition = false, nextAction = null) {
+  const quest = getQuest(id);
+  if (quest.stage !== 1 || questData[id].type !== "repeatable" || condition === false) {
+    if (nextAction) nextAction();
+    return;
+  }
+  
+  quest.count += 1;
+  saveQuestState();
+
+  if (quest.count >= questData[id].maxCount) {
+    tryQuestEncounter(id, 1);
+  }
+
+  if (nextAction) nextAction();
 }
 
 export function showQuestList()

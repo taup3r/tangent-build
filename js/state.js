@@ -125,10 +125,10 @@ const enemyTypes = [
 function rollEnemyTier() {
   const rep = playerStats.reputation || 0;
 
-  const normalChance = 50 - (rep * 0.5);
-  const eliteChance = 30 + (rep * 0.25);
-  const veteranChance = 15 + (rep * 0.15);
-  const bossChance = 5 + (rep * 0.10);
+  const normalChance = 70 - (rep * 0.7);
+  const eliteChance = 25 + (rep * 0.3);
+  const veteranChance = 4 + (rep * 0.26);
+  const bossChance = 1 + (rep * 0.14);
 
   const roll = Math.random() * 100;
 
