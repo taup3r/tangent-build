@@ -74,7 +74,7 @@ function getResidentialZone() {
       disabled: false
     },
     {
-      label: "Back to Square",
+      label: "Go to Town Square",
       class: "btn-zone",
       action: () => location.reload(),
       disabled: false
