@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { showQuestList, questData, quests, loadQuestState, tryQuestEncounter, triggerQuest } from "./quest.js";
+import { showQuestList, questData, quests, loadQuestState, saveQuestState, tryQuestEncounter, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { weaponShopDiscount, getReputationTier, getReputationColor } from "./reputation.js";
 
