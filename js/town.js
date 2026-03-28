@@ -38,7 +38,7 @@ function getResidentialZone() {
       label: "Yellow House",
       class: "btn-shop",
       action: () => showStatsModal(),
-      disabled: playerStats.statPoints <= 0
+      disabled: false
     },
     {
       label: "Red Mansion",
@@ -146,11 +146,11 @@ function getTownSquareZone() {
 function generateTownLayout() {
   let buttons;
   const zone = Math.Random();
-  if (zone < 0.20) {
+  //if (zone < 0.20) {
     buttons = getResidentialZone();
-  } else {
-    buttons = getTownSquareZone();
-  }
+  //} else {
+    //buttons = getTownSquareZone();
+  //}
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
