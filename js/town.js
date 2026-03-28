@@ -159,7 +159,7 @@ function getTownSquareZone() {
 
   if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
-      label: "Go to Village",
+      label: "Go to the Village",
       class: "btn-zone",
       action: () => {
         playerStats.zone = "residential";
