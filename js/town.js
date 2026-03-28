@@ -14,7 +14,7 @@ const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
-const zoneName = document.getElementById("zoneName");
+//const zoneName = document.getElementById("zoneName");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
