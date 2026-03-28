@@ -4,6 +4,7 @@ import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList } from "./quest.js";
 import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveItems, showItemList, oreData } from "./items.js";
+import { blacksmithDiscount } from "./reputation.js";
 
 loadProgress();
 updateHeaderStats();
@@ -13,7 +14,8 @@ const weapon = player.weapon;
 const id = getNameByRarity(weapon?.rarity || "Common");
 
 const weaponOre = getItem(id);
-const price = itemData[id].use;
+let price = itemData[id].use;
+price = Math.floor(price * (100-blacksmithDiscount())/100);
 const name = itemData[id].name;
 const color = getColorByRarity(weapon?.rarity || "Common");
 
