@@ -7,8 +7,6 @@ import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
 
-let zone = "";
-
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
@@ -76,11 +74,15 @@ function getResidentialZone() {
     {
       label: "Go to Town Square",
       class: "btn-zone",
-      action: () => location.reload(),
+      action: () => {
+        playerStats.zone = "townSquare";
+        saveProgress();
+        location.reload();
+      },
       disabled: false
     }
   ];
-  zone = "residential";
+
   zoneName.textContent = "Tangent Village";
   return buttons;
 }
@@ -159,20 +161,23 @@ function getTownSquareZone() {
     buttons.push({
       label: "Go to Village",
       class: "btn-zone",
-      action: () => location.reload(),
+      action: () => {
+        playerStats.zone = "residential";
+        saveProgress();
+        location.reload();
+      },
       disabled: false
     });
   }
 
-  zone = "townSquare";
   zoneName.textContent = "Tangent Square";
   return buttons;
 }
 
 function generateTownLayout() {
   let buttons;
-  const zone = Math.random();
-  if (zone < 0.20) {
+  const zone = playerStats.zone;
+  if (zone === "residential") {
     buttons = getResidentialZone();
   } else {
     buttons = getTownSquareZone();
