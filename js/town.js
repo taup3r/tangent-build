@@ -7,6 +7,8 @@ import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
 
+const zone = "";
+
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
@@ -71,7 +73,7 @@ function getResidentialZone() {
       disabled: false
     }
   ];
-
+  zone = "residential";
   return buttons;
 }
 
@@ -139,7 +141,7 @@ function getTownSquareZone() {
       disabled: false
     });
   }
-
+  zone = "townSquare";
   return buttons;
 }
 
