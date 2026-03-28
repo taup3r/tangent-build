@@ -160,8 +160,8 @@ export const quests = [
   {
     id: "merchantGuild",
     chance: 25,
-    stage: 9,
-    active: true
+    stage: 0,
+    active: false
   },
   {
     id: "arenaNormal",
