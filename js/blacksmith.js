@@ -77,7 +77,6 @@ Object.keys(oreData).forEach(key => {
       nextOre.count += 1;
       playerStats.gold -= orePrice;
       saveItems();
-      saveProgress();
       location.reload();
     };
   }
