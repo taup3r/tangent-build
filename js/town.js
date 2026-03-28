@@ -131,8 +131,9 @@ function getTownSquareZone() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
-  let blacksmithDone = true;
-  let merchantGuildDone = true;
+  let blacksmithDone = false;
+  let merchantGuildDone = false;
+  let todoEnable = false;
 
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
@@ -157,7 +158,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  if (blacksmithDone === true && merchantGuildDone === true) {
+  if (blacksmithDone === true && merchantGuildDone === true && todoEnable === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
