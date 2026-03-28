@@ -14,6 +14,7 @@ const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
+const zoneName = document.getElementById("zoneName");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -74,6 +75,7 @@ function getResidentialZone() {
     }
   ];
   zone = "residential";
+  zoneName.textContent = "Residential Zone";
   return buttons;
 }
 
@@ -142,6 +144,7 @@ function getTownSquareZone() {
     });
   }
   zone = "townSquare";
+  zoneName.textContent = "Wayfarer's Rest";
   return buttons;
 }
 
