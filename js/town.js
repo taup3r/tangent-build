@@ -12,6 +12,7 @@ const exploreBtn = document.getElementById("exploreBtn");
 const loreText = document.getElementById("loreText");
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
+const zoneName = document.getElementById("zoneName");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -31,7 +32,62 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-function generateTownLayout() {
+function getResidentialZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Hearthwhistle Cottage",
+      class: "btn-shop",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Thistledown Rest",
+      class: "btn-arena",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Willowbend Homestead",
+      class: "btn-dungeon",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Mosslight Cabin",
+      class: "btn-train",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Bramblegate Lodge",
+      class: "btn-merchant-guild",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Oakroot Dwelling",
+      class: "btn-blacksmith",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Go to Town Square",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "townSquare";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    }
+  ];
+
+  zoneName.textContent = "Wayfarer's Keep";
+  return buttons;
+}
+
+function getTownSquareZone() {
   randomArea.innerHTML = "";
   const dungeonType = getRandomDungeonType();
 
@@ -75,6 +131,10 @@ function generateTownLayout() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
+  let blacksmithDone = false;
+  let merchantGuildDone = false;
+  let todoEnable = false;
+
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
       label: "Blacksmith's Forge",
@@ -84,6 +144,7 @@ function generateTownLayout() {
       },
       disabled: false
     });
+    blacksmithDone = true;
   }
   if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
     buttons.push({
@@ -94,10 +155,37 @@ function generateTownLayout() {
       },
       disabled: false
     });
+    merchantGuildDone = true;
+  }
+
+  if (blacksmithDone === true && merchantGuildDone === true && todoEnable === true) {
+    buttons.push({
+      label: "Go to the Village",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "residential";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    });
+  }
+
+  zoneName.textContent = "Wayfarer's Rest";
+  return buttons;
+}
+
+function generateTownLayout() {
+  let buttons;
+  const zone = playerStats.zone;
+  if (zone === "residential") {
+    buttons = getResidentialZone();
+  } else {
+    buttons = getTownSquareZone();
   }
 
   // Randomly decide how many buttons appear (1–4)
-  const count = Math.floor(Math.random() * 4) + 1;
+  const count = Math.floor(Math.random() * 3) + 2;
 
   // Shuffle buttons
   const shuffled = [...buttons].sort(() => Math.random() - 0.5);
