@@ -254,6 +254,8 @@ export function questIncrement(id, condition = false, nextAction = null) {
   if (quest.count >= questData[id].maxCount) {
     tryQuestEncounter(id, 1, nextAction);
   }
+
+  if (nextAction) nextAction();
 }
 
 export function showQuestList()
