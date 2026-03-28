@@ -107,7 +107,7 @@ export const questData = {
     ]
   },
   "arenaNormal": {
-    title: "Test your mettle",
+    title: "Test your Mettle I",
     type: "repeatable",
     maxStage: 2,
     maxCount: 3,
@@ -122,6 +122,27 @@ export const questData = {
       {
         npc: "Old man Calidore",
         message: "That is swift work! I've sent your reward through the merchant guild. Thanks again!",
+        submit: "Accept",
+        nextChance: 100
+      }
+    ]
+  },
+    "arenaElite": {
+    title: "Test your Mettle II",
+    type: "repeatable",
+    maxStage: 2,
+    maxCount: 3,
+    flow: [
+      {
+        npc: "Old man Calidore",
+        message: "Good day recruit. Looks like you know how to use that weapon. Could you defeat 3 elite enemies in the Arena for me, they are becoming more aggressive to newbies.",
+        submit: "Accept",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "Old man Calidore",
+        message: "That is very fine work! I've sent your reward through the merchant guild. Thanks again!",
         submit: "Accept",
         nextChance: 100
       }
@@ -144,6 +165,13 @@ export const quests = [
   },
   {
     id: "arenaNormal",
+    chance: 100,
+    stage: 0,
+    count: 0,
+    active: false
+  },
+  {
+    id: "arenaElite",
     chance: 100,
     stage: 0,
     count: 0,

@@ -23,6 +23,9 @@ function applyModalTheme(modal, tier) {
   if (tier === "elite") {
     box.style.border = "3px solid #ffcc00";
     box.style.boxShadow = "0 0 15px #ffcc00aa";
+  } else if (tier === "veteran") {
+    box.style.border = "3px solid #ffa500";
+    box.style.boxShadow = "0 0 15px #ffa500aa";
   } else if (tier === "boss") {
     box.style.border = "3px solid #ff4444";
     box.style.boxShadow = "0 0 15px #ff4444aa";
@@ -94,6 +97,7 @@ export function showResultModal(victory) {
   // Determine enemy name color based on tier
   let enemyNameColor = "";
   if (enemy.type === "elite") enemyNameColor = "#ffcc00";
+  else if (enemy.type === "veteran") enemyNameColor = "#ffa500";
   else if (enemy.type === "boss") enemyNameColor = "#ff4444";
   // Normal enemies → no color
 
@@ -283,8 +287,8 @@ export function checkWin() {
       }
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else {
-      questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
- showResultModal(true)));
+      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+ showResultModal(true))));
     }
     return true;
   }
@@ -314,6 +318,7 @@ export function openEnemyInfo() {
   nameEl.textContent = enemy.name;
 
   if (enemy.type === "elite") nameEl.style.color = "#ffcc00";
+  else if (enemy.type === "veteran") nameEl.style.color = "#ffa500";
   else if (enemy.type === "boss") nameEl.style.color = "#ff4444";
   else nameEl.style.color = ""; // normal
 
