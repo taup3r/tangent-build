@@ -62,7 +62,7 @@ function renderQuests() {
         if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
         if (q.stage === 1) triggerQuest(q, null, true);
         if (q.stage === 2) {
-          playerStats.reputation += 5;
+          playerStats.reputation = (playerStats.reputation || 0) + 5;
           saveProgress();
           q.stage = 0;
           q.count = 0;
