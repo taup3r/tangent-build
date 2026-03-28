@@ -16,6 +16,7 @@
   font-size: 0.95rem; /* smaller for long names */
   font-weight: bold;
   max-width: 75%;
+  text-align: left;
   overflow-wrap: break-word;
 }
 
