@@ -54,19 +54,19 @@ function getResidentialZone() {
     },
     {
       label: "Green Cottage",
-      class: "btn-shop",
+      class: "btn-train",
       action: () => showStatsModal(),
       disabled: false
     },
     {
       label: "Purple Cove",
-      class: "btn-blacksmith",
+      class: "btn-merchant-guild",
       action: () => showStatsModal(),
       disabled: false
     },
     {
       label: "Orange Hub",
-      class: "btn-merchant-guild",
+      class: "btn-blacksmith",
       action: () => showStatsModal(),
       disabled: false
     }
