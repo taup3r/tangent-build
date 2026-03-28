@@ -31,6 +31,50 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
+function getResidentialZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Yellow House",
+      class: "btn-shop",
+      action: () => showStatsModal(),
+      disabled: playerStats.statPoints <= 0
+    },
+    {
+      label: "Red Mansion",
+      class: "btn-arena",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Blue Pad",
+      class: "btn-dungeon",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Green Cottage",
+      class: "btn-shop",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Purple Cove",
+      class: "btn-blacksmith",
+      action: () => showStatsModal(),
+      disabled: false
+    },
+    {
+      label: "Orange Hub",
+      class: "btn-merchant-guild",
+      action: () => showStatsModal(),
+      disabled: false
+    }
+  ];
+
+  return buttons;
+}
+
 function getTownSquareZone() {
   randomArea.innerHTML = "";
   const dungeonType = getRandomDungeonType();
@@ -100,7 +144,10 @@ function getTownSquareZone() {
 }
 
 function generateTownLayout() {
-  const buttons = getTownSquareZone();
+  let buttons;
+  const zone = Math.Random();
+  if (zone < 0.20) buttons = getResidentialZone();
+  else buttons = getTownSquareZone();
 
   // Randomly decide how many buttons appear (1–4)
   const count = Math.floor(Math.random() * 4) + 1;
