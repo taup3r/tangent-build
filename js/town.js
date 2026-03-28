@@ -83,7 +83,7 @@ function getResidentialZone() {
     }
   ];
 
-  zoneName.textContent = "Tangent Village";
+  zoneName.textContent = "Wayfarer's Keep";
   return buttons;
 }
 
@@ -170,7 +170,7 @@ function getTownSquareZone() {
     });
   }
 
-  zoneName.textContent = "Tangent Square";
+  zoneName.textContent = "Wayfarer's Rest";
   return buttons;
 }
 
