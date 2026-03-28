@@ -1,4 +1,4 @@
-import { player, playerStats, loadProgress } from "./state.js";
+import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, questData, quests, loadQuestState, saveQuestState, tryQuestEncounter, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
