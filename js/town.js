@@ -144,11 +144,13 @@ function getTownSquareZone() {
 }
 
 function generateTownLayout() {
-  let buttons = getTownSquareZone();
+  const buttons = getTownSquareZone();
   const zone = Math.Random();
   if (zone < 0.20) {
     buttons.splice(0, buttons.length);
-    buttons = getResidentialZone();
+    getResidentialZone().forEach(z => {
+      buttons.push(z);
+    });
   }
 
   // Randomly decide how many buttons appear (1–4)
