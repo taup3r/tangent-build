@@ -2,7 +2,7 @@ import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { generateWeapon, upgradeWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
-import { showQuestList } from "./quest.js";
+import { showQuestList, questData, getQuest } from "./quest.js";
 import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveItems, showItemList, oreData } from "./items.js";
 import { blacksmithDiscount } from "./reputation.js";
 
@@ -23,6 +23,15 @@ document.getElementById("loreText").textContent = `Upgrading current weapon cost
 
 const refineOre = document.getElementById("refine-ore");
 refineOre.innerHTML = `<p>To upgrade your weapon you need:</p><h3 style="color:${color}; font-weight:bold;">${name}</h3>`;
+
+let discountPercent = 0;
+const merchantGuild = getQuest("merchantGuild");
+if (merchantGuild) {
+  if (merchantGuild.stage >= questData["merchantGuild"].maxStage) {
+    discountPercent = blacksmithDiscount();
+    document.getElementById("discountDisplay").textContent = `You enjoy a ${discountPercent}% discount from the Merchant Guild.`;
+  }
+}
   
 const refineButton = document.getElementById("refineButton");
 refineButton.textContent = `Upgrade weapon for ${price}g`;
