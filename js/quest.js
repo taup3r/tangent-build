@@ -156,7 +156,7 @@ export const questData = {
       {
         npc: "Selra, Merchant Guild Clerk",
         message: "Welcome, friend. Not many wander this far unless they’re lost or looking for something. Either way, you’re safe under this roof. Sit a spell and tell me what brings you.",
-        submit: "Accept",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
