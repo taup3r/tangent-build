@@ -43,7 +43,7 @@ function getResidentialZone() {
     {
       label: "Hearthwhistle Cottage",
       class: "btn-shop",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h4"),
       disabled: false
     },
     {
