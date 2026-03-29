@@ -136,9 +136,9 @@ function getTownSquareZone() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
-  let blacksmithDone = true;
-  let merchantGuildDone = true;
-  let todoEnable = true;
+  let blacksmithDone = false;
+  let merchantGuildDone = false;
+  let todoEnable = false;
 
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
