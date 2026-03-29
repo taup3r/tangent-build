@@ -197,6 +197,30 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "h5": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Gardener Sheena",
+        message: "Careful of the brambles — they’ve a mind of their own. Welcome, traveler. The stew’s simple, but it fills the bones.",
+        nextChance: 100
+      }
+    ]
+  },
+  "h6": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Trey Loudcry",
+        message: "Don’t mind the moss — it grows where it pleases. Ah, someone new. Haven’t had company since the last thaw.",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -247,6 +271,18 @@ export const quests = [
   },
   {
     id: "h4",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h5",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h6",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
