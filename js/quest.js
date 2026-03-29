@@ -147,6 +147,19 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+    "orangeHouse": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: ".",
+        submit: "Accept",
+        nextChance: 100
+      }
+    ]
   }
 };
 
