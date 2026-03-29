@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -30,6 +30,11 @@ function resetLoreAnimation() {
   loreText.style.animation = "none";
   void loreText.offsetWidth;
   loreText.style.animation = animation;
+}
+
+function getMessage(id) {
+  const quest = getQuest(id);
+  triggerQuest(quest);
 }
 
 function getResidentialZone() {
