@@ -239,11 +239,13 @@ export const quests = [
     stage: 1, // starts at 1 for view
     active: false
   },
+  {
     id: "h3",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
   },
+  {
     id: "h4",
     chance: 100,
     stage: 1, // starts at 1 for view
