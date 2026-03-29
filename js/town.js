@@ -32,9 +32,9 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-function getMessage(id) {
+function getMessage(id, action = null) {
   const quest = getQuest(id);
-  triggerQuest(quest);
+  triggerQuest(quest, action, true);
 }
 
 function getResidentialZone() {
@@ -43,37 +43,37 @@ function getResidentialZone() {
     {
       label: "Hearthwhistle Cottage",
       class: "btn-shop",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Thistledown Rest",
       class: "btn-arena",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Willowbend Homestead",
       class: "btn-dungeon",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Mosslight Cabin",
       class: "btn-train",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Oakroot Dwelling",
       class: "btn-blacksmith",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
@@ -136,9 +136,9 @@ function getTownSquareZone() {
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
-  let blacksmithDone = false;
-  let merchantGuildDone = false;
-  let todoEnable = false;
+  let blacksmithDone = true;
+  let merchantGuildDone = true;
+  let todoEnable = true;
 
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
