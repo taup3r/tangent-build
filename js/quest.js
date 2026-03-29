@@ -148,14 +148,14 @@ export const questData = {
       }
     ]
   },
-    "orangeHouse": {
+    "h1": {
     title: "",
     type: "chat",
     maxStage: 1,
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
-        message: ".",
+        message: "Welcome, friend. Not many wander this far unless they’re lost or looking for something. Either way, you’re safe under this roof. Sit a spell and tell me what brings you.",
         submit: "Accept",
         nextChance: 100
       }
@@ -188,6 +188,12 @@ export const quests = [
     chance: 100,
     stage: 0,
     count: 0,
+    active: false
+  },
+  {
+    id: "h1",
+    chance: 100,
+    stage: 1, // starts at 1 for view
     active: false
   }
 ];
