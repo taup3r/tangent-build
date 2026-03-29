@@ -173,6 +173,18 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "h3": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "That rich young lady",
+        message: "The wind’s been restless today. When it carries a stranger to my door, I take it as a sign. Tell me your name, traveler — and whether trouble follows behind you.",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -211,6 +223,11 @@ export const quests = [
   },
   {
     id: "h2",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+    id: "h3",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
