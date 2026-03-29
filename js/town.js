@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -32,43 +32,48 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
+function getMessage(id, action = null) {
+  const quest = getQuest(id);
+  triggerQuest(quest, action, true);
+}
+
 function getResidentialZone() {
   randomArea.innerHTML = "";
   const buttons = [
     {
       label: "Hearthwhistle Cottage",
       class: "btn-shop",
-      action: () => showStatsModal(),
+      action: () => getMessage("h4"),
       disabled: false
     },
     {
       label: "Thistledown Rest",
       class: "btn-arena",
-      action: () => showStatsModal(),
+      action: () => getMessage("h1"),
       disabled: false
     },
     {
       label: "Willowbend Homestead",
       class: "btn-dungeon",
-      action: () => showStatsModal(),
+      action: () => getMessage("h3"),
       disabled: false
     },
     {
       label: "Mosslight Cabin",
       class: "btn-train",
-      action: () => showStatsModal(),
+      action: () => getMessage("h6"),
       disabled: false
     },
     {
       label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
-      action: () => showStatsModal(),
+      action: () => getMessage("h5"),
       disabled: false
     },
     {
       label: "Oakroot Dwelling",
       class: "btn-blacksmith",
-      action: () => showStatsModal(),
+      action: () => getMessage("h2"),
       disabled: false
     },
     {

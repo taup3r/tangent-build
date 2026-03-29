@@ -127,7 +127,7 @@ export const questData = {
       }
     ]
   },
-    "arenaElite": {
+  "arenaElite": {
     title: "Test your Mettle II",
     type: "repeatable",
     maxStage: 2,
@@ -144,6 +144,80 @@ export const questData = {
         npc: "Old man Calidore",
         message: "That is very fine work! I've sent your reward through the merchant guild. Thanks again!",
         submit: "Accept",
+        nextChance: 100
+      }
+    ]
+  },
+  "h1": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "Welcome, friend. Not many wander this far unless they’re lost or looking for something. Either way, you’re safe under this roof. Sit a spell and tell me what brings you.",
+        submit: "Goodbye",
+        nextChance: 100
+      }
+    ]
+  },
+  "h2": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Old man Calidore",
+        message: "You’ve the look of someone who’s walked a long road. Oakroot’s old, but she’s sturdy. Rest your boots, and I’ll fetch something warm to drink.",
+        submit: "Goodbye",
+        nextChance: 100
+      }
+    ]
+  },
+  "h3": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Guard Captain Thorne",
+        message: "The wind’s been restless today. When it carries a stranger to my door, I take it as a sign. Tell me your name, traveler — and whether trouble follows behind you.",
+        nextChance: 100
+      }
+    ]
+  },
+  "h4": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Blacksmith Roran",
+        message: "Mind the kettle, it’s just about to sing. Oh! A visitor. Come warm your hands by the fire.",
+        nextChance: 100
+      }
+    ]
+  },
+  "h5": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Gardener Sheena",
+        message: "Careful of the brambles — they’ve a mind of their own. Welcome, traveler. The stew’s simple, but it fills the bones.",
+        nextChance: 100
+      }
+    ]
+  },
+  "h6": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Trey Loudcry",
+        message: "Don’t mind the moss — it grows where it pleases. Ah, someone new. Haven’t had company since the last thaw.",
         nextChance: 100
       }
     ]
@@ -175,6 +249,42 @@ export const quests = [
     chance: 100,
     stage: 0,
     count: 0,
+    active: false
+  },
+  {
+    id: "h1",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h2",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h3",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h4",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h5",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h6",
+    chance: 100,
+    stage: 1, // starts at 1 for view
     active: false
   }
 ];
