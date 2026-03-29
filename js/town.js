@@ -55,7 +55,7 @@ function getResidentialZone() {
     {
       label: "Willowbend Homestead",
       class: "btn-dungeon",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h3"),
       disabled: false
     },
     {
