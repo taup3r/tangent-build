@@ -61,13 +61,13 @@ function getResidentialZone() {
     {
       label: "Mosslight Cabin",
       class: "btn-train",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h6"),
       disabled: false
     },
     {
       label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h5"),
       disabled: false
     },
     {
