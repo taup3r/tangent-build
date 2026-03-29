@@ -73,7 +73,7 @@ function getResidentialZone() {
     {
       label: "Oakroot Dwelling",
       class: "btn-blacksmith",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h2"),
       disabled: false
     },
     {
