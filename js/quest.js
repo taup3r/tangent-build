@@ -127,7 +127,7 @@ export const questData = {
       }
     ]
   },
-    "arenaElite": {
+  "arenaElite": {
     title: "Test your Mettle II",
     type: "repeatable",
     maxStage: 2,
@@ -148,7 +148,7 @@ export const questData = {
       }
     ]
   },
-    "h1": {
+  "h1": {
     title: "",
     type: "chat",
     maxStage: 1,
@@ -156,6 +156,19 @@ export const questData = {
       {
         npc: "Selra, Merchant Guild Clerk",
         message: "Welcome, friend. Not many wander this far unless they’re lost or looking for something. Either way, you’re safe under this roof. Sit a spell and tell me what brings you.",
+        submit: "Goodbye",
+        nextChance: 100
+      }
+    ]
+  },
+  "h2": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Old man Calidore",
+        message: "You’ve the look of someone who’s walked a long road. Oakroot’s old, but she’s sturdy. Rest your boots, and I’ll fetch something warm to drink.",
         submit: "Goodbye",
         nextChance: 100
       }
@@ -192,6 +205,12 @@ export const quests = [
   },
   {
     id: "h1",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h2",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
