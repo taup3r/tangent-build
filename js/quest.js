@@ -180,8 +180,20 @@ export const questData = {
     maxStage: 1,
     flow: [
       {
-        npc: "That rich young lady",
+        npc: "Guard Captain Thorne",
         message: "The wind’s been restless today. When it carries a stranger to my door, I take it as a sign. Tell me your name, traveler — and whether trouble follows behind you.",
+        nextChance: 100
+      }
+    ]
+  },
+  "h4": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Blacksmith Roran",
+        message: "Mind the kettle, it’s just about to sing. Oh! A visitor. Come warm your hands by the fire.",
         nextChance: 100
       }
     ]
@@ -228,6 +240,11 @@ export const quests = [
     active: false
   },
     id: "h3",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+    id: "h4",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
