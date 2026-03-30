@@ -296,8 +296,8 @@ export function checkWin() {
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
 
-    tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
- showResultModal(false));
+    tryQuestEncounter("merchantGuild", 4);
+    showResultModal(false);
     return true;
   }
 
