@@ -285,10 +285,16 @@ export function checkWin() {
       if (enemy.name === "Guild Smuggler") {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
       }
-      tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
+      tryItemEncounter("ore-b");
+      tryItemEncounter("ore-g");
+      tryItemEncounter("ore-w");
+      tryQuestEncounter("blacksmith", 1);
+      showResultModal(true);
     } else {
-      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
- showResultModal(true))));
+      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => {
+tryQuestEncounter("blacksmith", 4);
+showResultModal(true);
+      }));
     }
     return true;
   }
