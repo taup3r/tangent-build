@@ -157,7 +157,7 @@ export function getItem(id) {
   return items.find(q => q.id === id);
 }
 
-export function triggerItem(item, action = null, isView = false) {
+export function triggerItem(item, isView = false) {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
@@ -189,7 +189,6 @@ export function triggerItem(item, action = null, isView = false) {
     }
 
     modal.style.display = "none";
-    if (action) action();
   };
 
   modal.style.display = "flex";
@@ -200,16 +199,11 @@ export function saveItems() {
   saveProgress();
 }
 
-export function ignoreItem(action = null) {
-  document.getElementById("item-modal").style.display = "none";
-  if (action) action();
-}
-
-export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null) {
+export function tryItemEncounter(id) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
-      ignoreItem(ignoreAction || alwaysAction);
+      document.getElementById("item-modal").style.display = "none";
     };
   }
 
@@ -224,13 +218,7 @@ export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, i
 
   if (Math.random() < (itemData[item.id].chance/100) &&
 (item.count + 1) < itemData[item.id].maxCount) {
-    triggerItem(item, acceptAction || alwaysAction);
-  } else {
-    if (ignoreAction) {
-      ignoreAction();
-    } else if (alwaysAction) {
-      alwaysAction();
-    }
+    triggerItem(item);
   }
 }
 
@@ -247,7 +235,7 @@ export function showItemList()
     btn.textContent = itemData[i.id].name + " (" + i.count + ")";
 
     btn.onclick = () => {
-      triggerItem(i, null, true);
+      triggerItem(i, true);
     };
 
     container.appendChild(btn);
