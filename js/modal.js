@@ -291,10 +291,10 @@ export function checkWin() {
       tryQuestEncounter("blacksmith", 1);
       showResultModal(true);
     } else {
-      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => {
-tryQuestEncounter("blacksmith", 4);
-showResultModal(true);
-      }));
+      questIncrement("arenaElite", enemy.type === "elite");
+      questIncrement("arenaNormal", enemy.type === "normal");
+      tryQuestEncounter("blacksmith", 4);
+      showResultModal(true);
     }
     return true;
   }
