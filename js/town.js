@@ -63,7 +63,7 @@ function getResidentialZone() {
       class: "btn-train",
       action: () => {
         const quest = getQuest("lostChild");
-        if (quest.stage < 3) {
+        if (quest.stage < questData["lostChild"].maxStage) {
           getMessage("h7", () => tryQuestEncounter("lostChild", 2));
         } else {
           getMessage("h6");
