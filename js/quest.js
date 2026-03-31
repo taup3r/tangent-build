@@ -269,6 +269,18 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "h7": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "The place is empty wand you can see boxes stacked on one side of the house. There seems to be nobody here.",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -342,6 +354,12 @@ export const quests = [
   },
   {
     id: "h6",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h7",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
