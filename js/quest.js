@@ -132,14 +132,14 @@ export const questData = {
       },
       {
         npc: "",
-        message: "Looking through posters throughout the village you found a note: 'Bring the boy back to Mosslight Cabin'.",
+        message: "Looking through posters throughout the village you found a note: 'Bring the boy to Mosslight Cabin'.",
         submit: "Continue",
         cancel: "Ignore",
         nextChance: 100
       },
       {
         npc: "",
-        message: "No one is here but you found the missing boy tied up inside. A hooded figure is guarding him. Time to fight.",
+        message: "As you searched around the house you found the missing boy tied up inside. A hooded figure is guarding him. Time to fight.",
         submit: "Fight",
         cancel: "Escape",
         nextChance: 100
