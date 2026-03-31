@@ -275,7 +275,7 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
-    chance: 100,
+    chance: 10,
     stage: 0, // 0 = not started
     zone: "townSquare",
     active: false
