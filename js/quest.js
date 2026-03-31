@@ -447,7 +447,8 @@ export function questIncrement(id, condition = false, nextAction = null) {
   saveQuestState();
 
   if (quest.count >= questData[id].maxCount) {
-    tryQuestEncounter(id, 1);
+    //tryQuestEncounter(id, 1);
+    triggerQuest(quest);
   }
 
   if (nextAction) nextAction();
