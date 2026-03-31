@@ -106,6 +106,54 @@ export const questData = {
       }
     ]
   },
+  "lostChild": {
+    title: "The Lost Child",
+    type: "residential",
+    maxStage: 6,
+    flow: [
+      {
+        npc: "Concerned Mother",
+        message: "Have you seen my son? He hasn't come home since yesterday...",
+        submit: "Offer Help",
+        cancel: "Ignore",
+        nextChance: 25
+      },
+      {
+        npc: "",
+        message: "You found small footprints towards the Mosslight Cabin.",
+        submit: "Investigate",
+        cancel: "Ignore",
+        nextChance: 25
+      },
+      {
+        npc: "",
+        message: "A hooded figure flees when you mention the missing child.",
+        submit: "Investigate",
+        cancel: "Ignore",
+        nextChance: 10
+      },
+      {
+        npc: "",
+        message: "Looking through posters throughout the village you found a note: 'Bring the boy back to Mosslight Cabin'.",
+        submit: "Continue",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "No one is here but you found the missing boy tied up inside. A hooded figure is guarding him. Time to fight.",
+        submit: "Fight",
+        cancel: "Escape",
+        nextChance: 100
+      },
+      {
+        npc: "Lost Child",
+        message: "Thank you kind sir. I was just playing outside the village when that hooded man took me. Can you take me home now please.",
+        submit: "Finish",
+        nextChance: 100
+      }
+    ]
+  },
   "arenaNormal": {
     title: "Test your Mettle I",
     type: "repeatable",
@@ -229,12 +277,21 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
+    zone: "townSquare",
     active: false
   },
   {
     id: "merchantGuild",
     chance: 25,
     stage: 0,
+    zone: "townSquare",
+    active: false
+  },
+  {
+    id: "lostChild",
+    chance: 10,
+    stage: 0,
+    zone: "residential",
     active: false
   },
   {
