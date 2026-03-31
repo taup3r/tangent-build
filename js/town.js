@@ -244,6 +244,7 @@ function questEncounters() {
   });
   tryQuestEncounter("lostChild", 0);
   tryQuestEncounter("lostChild", 1);
+  tryQuestEncounter("lostChild", 3);
 }
 
 function explore() {
