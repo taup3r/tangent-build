@@ -122,14 +122,12 @@ export const questData = {
         npc: "",
         message: "You found small footprints towards the the different houses. The kid must be playing around somewhere.",
         submit: "Investigate",
-        cancel: "Ignore",
         nextChance: 50
       },
       {
         npc: "",
         message: "A hooded figure flees as you are looking around the boxes.",
-        submit: "Investigate",
-        cancel: "Ignore",
+        submit: "Leave",
         nextChance: 10
       },
       {
