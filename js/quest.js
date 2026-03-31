@@ -298,6 +298,7 @@ export const quests = [
     id: "arenaNormal",
     chance: 100,
     stage: 0,
+    zone: "townSquare",
     count: 0,
     active: false
   },
@@ -305,6 +306,7 @@ export const quests = [
     id: "arenaElite",
     chance: 100,
     stage: 0,
+    zone: "townSquare",
     count: 0,
     active: false
   },
@@ -426,10 +428,11 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
   }
 
   const quest = getQuest(id);
+  const zone = quest.zone || "townSquare";
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage) {
+quest.stage < questData[quest.id].maxStage && playerStats.zone === zone) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
