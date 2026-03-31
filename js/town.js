@@ -221,7 +221,7 @@ function generateTownLayout() {
 function questEncounters() {
   loadProgress();
   loadQuestState();
-  if (playerStats.zone === "townSquare") {
+  //if (playerStats.zone === "townSquare") {
     tryQuestEncounter("blacksmith", 0);
     tryQuestEncounter("blacksmith", 2);
     tryQuestEncounter("blacksmith", 3, () => {
@@ -235,7 +235,7 @@ function questEncounters() {
 
       tryQuestEncounter("merchantGuild", 2);
     });
-  }
+  //}
 }
 
 function explore() {
