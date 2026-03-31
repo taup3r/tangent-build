@@ -64,7 +64,7 @@ function getResidentialZone() {
       action: () => {
         //const quest = getQuest("lostChild");
         //if (quest.stage < 2) {
-          getMessage("h7", () => tryQuestEncounter("lostChild", 2);
+          //getMessage("h7", () => tryQuestEncounter("lostChild", 2);
         //} else {
           getMessage("h6");
         //}
