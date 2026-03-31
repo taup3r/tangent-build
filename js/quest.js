@@ -275,7 +275,7 @@ export const questData = {
     flow: [
       {
         npc: "",
-        message: "The place is empty wand you can see boxes stacked on one side of the house. There seems to be nobody here.",
+        message: "The place is empty and you can see boxes stacked on one side of the house. There seems to be nobody here.",
         nextChance: 100
       }
     ]
