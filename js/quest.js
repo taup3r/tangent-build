@@ -1,4 +1,4 @@
-import { player, loadProgress } from "./state.js";
+import { player, playerStats, loadProgress } from "./state.js";
 
 loadProgress();
 
@@ -275,7 +275,7 @@ export const questData = {
 export const quests = [
   {
     id: "blacksmith",
-    chance: 10,
+    chance: 100,
     stage: 0, // 0 = not started
     zone: "townSquare",
     active: false
