@@ -43,7 +43,14 @@ function getResidentialZone() {
     {
       label: "Hearthwhistle Cottage",
       class: "btn-shop",
-      action: () => getMessage("h4"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < questData["lostChild"].maxStage) {
+          getMessage("h7");
+        } else {
+          getMessage("h4");
+        }
+      },
       disabled: false
     },
     {
@@ -74,7 +81,14 @@ function getResidentialZone() {
     {
       label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
-      action: () => getMessage("h5"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < questData["lostChild"].maxStage) {
+          getMessage("h7");
+        } else {
+          getMessage("h5");
+        }
+      },
       disabled: false
     },
     {
