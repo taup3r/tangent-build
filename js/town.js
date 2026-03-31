@@ -61,7 +61,14 @@ function getResidentialZone() {
     {
       label: "Mosslight Cabin",
       class: "btn-train",
-      action: () => getMessage("h6"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < 2) {
+          getMessage("h7", () => tryQuestEncounter("lostChild", 2);
+        } else {
+          getMessage("h6");
+        }
+      },
       disabled: false
     },
     {
