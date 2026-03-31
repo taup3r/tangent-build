@@ -132,7 +132,7 @@ export const questData = {
       },
       {
         npc: "",
-        message: "Looking through posters throughout the village you found a note: 'Bring the boy to Mosslight Cabin'.",
+        message: "Looking through posters throughout the village you found a note: 'Bring the boy to the abandoned house'.",
         submit: "Continue",
         cancel: "Ignore",
         nextChance: 100
