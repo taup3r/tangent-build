@@ -84,7 +84,11 @@ function getResidentialZone() {
       action: () => {
         const quest = getQuest("lostChild");
         if (quest.stage < questData["lostChild"].maxStage) {
-          getMessage("h7", () => tryQuestEncounter("lostChild", 4));
+          getMessage("h7", () => tryQuestEncounter("lostChild", 4, () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          }));
         } else {
           getMessage("h5");
         }
