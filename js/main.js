@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (dungeonMode) tryQuestEncounter("merchantGuild", 5, () => {
     setEnemyName("Guild Smuggler");
     return location.reload();
-});
+  });
 
   initializePortraits();
   applyStatsToCombat(player, playerStats);
@@ -31,6 +31,10 @@ window.addEventListener("DOMContentLoaded", () => {
   applyConstitution(enemy);
   updateUI();
   updatePlayerWeaponUI();
+
+  if (playerStats.combatEncounter === true) {
+    document.getElementById("continueBtn").style.display = "none";
+  }
  document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
   document.getElementById("skillBtn").addEventListener("click", playerSkill);
