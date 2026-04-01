@@ -286,6 +286,8 @@ export function checkWin() {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
       }
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
+    } else if (playerStats.combatEncounter === true) {
+      tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => showResultModal(true)))));
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true))));
