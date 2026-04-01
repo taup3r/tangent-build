@@ -109,7 +109,7 @@ export const questData = {
   "lostChild": {
     title: "The Lost Child",
     type: "residential",
-    maxStage: 6,
+    maxStage: 7,
     flow: [
       {
         npc: "Concerned Mother",
@@ -149,6 +149,12 @@ export const questData = {
         message: "Thank you kind sir. I was just playing outside the village when that hooded man took me. Can you take me home now please.",
         submit: "Finish",
         nextChance: 100
+      },
+      {
+        npc: "Thankful Mother",
+        message: "Thank you so much for finding and saving my son. I don't know what I'd do without your help. Please accept this small token of appreciation.",
+        submit: "Accept",
+        nextChance: 10
       }
     ]
   },
