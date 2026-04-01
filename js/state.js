@@ -36,7 +36,8 @@ export let playerStats = {
   gold: 0,
   reputation: 0,
   items: [],
-  zone: "townSquare"
+  zone: "townSquare",
+  combatEncounter: false
 };
 
 export function loadProgress() {
