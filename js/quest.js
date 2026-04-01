@@ -1,4 +1,4 @@
-import { player, loadProgress } from "./state.js";
+import { player, playerStats, loadProgress } from "./state.js";
 
 loadProgress();
 
@@ -103,6 +103,58 @@ export const questData = {
         message: "The Merchant Guild Hall in town is now open for you. Expect better prices for goods and more opportunities to grow your reputation in the future.",
         submit: "Continue",
         nextChance: 100
+      }
+    ]
+  },
+  "lostChild": {
+    title: "The Lost Child",
+    type: "residential",
+    maxStage: 7,
+    flow: [
+      {
+        npc: "Concerned Mother",
+        message: "Have you seen my son? He hasn't come home since yesterday...",
+        submit: "Offer Help",
+        cancel: "Ignore",
+        nextChance: 25
+      },
+      {
+        npc: "",
+        message: "You found small footprints towards the the different houses. The kid must be playing around somewhere.",
+        submit: "Investigate",
+        nextChance: 50
+      },
+      {
+        npc: "",
+        message: "A hooded figure flees as you are looking around the boxes.",
+        submit: "Leave",
+        nextChance: 10
+      },
+      {
+        npc: "",
+        message: "Looking through posters throughout the village you found a note: 'Bring the boy to the abandoned house'.",
+        submit: "Continue",
+        cancel: "Ignore",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "As you searched around the house you found the missing boy tied up inside. A hooded figure is guarding him. Time to fight.",
+        submit: "Fight",
+        cancel: "Escape",
+        nextChance: 100
+      },
+      {
+        npc: "Lost Child",
+        message: "Thank you kind sir. I was just playing outside the village when that hooded man took me. Can you take me home now please.",
+        submit: "Finish",
+        nextChance: 100
+      },
+      {
+        npc: "Thankful Mother",
+        message: "Thank you so much for finding and saving my son. I don't know what I'd do without your help. Please accept this small token of appreciation.",
+        submit: "Accept",
+        nextChance: 10
       }
     ]
   },
@@ -221,6 +273,18 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "h7": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "The place is empty and you can see boxes stacked on one side of the house. There seems to be nobody here.",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -229,18 +293,28 @@ export const quests = [
     id: "blacksmith",
     chance: 10,
     stage: 0, // 0 = not started
+    zone: "townSquare",
     active: false
   },
   {
     id: "merchantGuild",
     chance: 25,
     stage: 0,
+    zone: "townSquare",
+    active: false
+  },
+  {
+    id: "lostChild",
+    chance: 10,
+    stage: 0,
+    zone: "residential",
     active: false
   },
   {
     id: "arenaNormal",
     chance: 100,
     stage: 0,
+    zone: "townSquare",
     count: 0,
     active: false
   },
@@ -248,6 +322,7 @@ export const quests = [
     id: "arenaElite",
     chance: 100,
     stage: 0,
+    zone: "townSquare",
     count: 0,
     active: false
   },
@@ -283,6 +358,12 @@ export const quests = [
   },
   {
     id: "h6",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h7",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
@@ -369,10 +450,11 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
   }
 
   const quest = getQuest(id);
+  const zone = quest.zone || "townSquare";
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage) {
+quest.stage < questData[quest.id].maxStage && playerStats.zone === zone) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
@@ -390,7 +472,8 @@ export function questIncrement(id, condition = false, nextAction = null) {
   saveQuestState();
 
   if (quest.count >= questData[id].maxCount) {
-    tryQuestEncounter(id, 1);
+    //tryQuestEncounter(id, 1);
+    triggerQuest(quest);
   }
 
   if (nextAction) nextAction();

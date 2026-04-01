@@ -43,7 +43,14 @@ function getResidentialZone() {
     {
       label: "Hearthwhistle Cottage",
       class: "btn-shop",
-      action: () => getMessage("h4"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < questData["lostChild"].maxStage) {
+          getMessage("h7");
+        } else {
+          getMessage("h4");
+        }
+      },
       disabled: false
     },
     {
@@ -61,13 +68,31 @@ function getResidentialZone() {
     {
       label: "Mosslight Cabin",
       class: "btn-train",
-      action: () => getMessage("h6"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < questData["lostChild"].maxStage) {
+          getMessage("h7", () => tryQuestEncounter("lostChild", 2));
+        } else {
+          getMessage("h6");
+        }
+      },
       disabled: false
     },
     {
       label: "Bramblegate Lodge",
       class: "btn-merchant-guild",
-      action: () => getMessage("h5"),
+      action: () => {
+        const quest = getQuest("lostChild");
+        if (quest.stage < questData["lostChild"].maxStage) {
+          getMessage("h7", () => tryQuestEncounter("lostChild", 4, () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          }));
+        } else {
+          getMessage("h5");
+        }
+      },
       disabled: false
     },
     {
@@ -138,7 +163,6 @@ function getTownSquareZone() {
 
   let blacksmithDone = false;
   let merchantGuildDone = false;
-  let todoEnable = false;
 
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
@@ -163,7 +187,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  if (blacksmithDone === true && merchantGuildDone === true && todoEnable === true) {
+  if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
@@ -221,6 +245,10 @@ function generateTownLayout() {
 function questEncounters() {
   loadProgress();
   loadQuestState();
+  //reset combat encounter
+  playerStats.combatEncounter = false;
+  saveProgress();
+
   tryQuestEncounter("blacksmith", 0);
   tryQuestEncounter("blacksmith", 2);
   tryQuestEncounter("blacksmith", 3, () => {
@@ -233,6 +261,14 @@ function questEncounters() {
     saveProgress();
 
     tryQuestEncounter("merchantGuild", 2);
+  });
+  tryQuestEncounter("lostChild", 0);
+  tryQuestEncounter("lostChild", 1);
+  tryQuestEncounter("lostChild", 3);
+  tryQuestEncounter("lostChild", 6, () => {
+    playerStats.gold += 100;
+    playerStats.reputation += 5;
+    saveProgress();
   });
 }
 
