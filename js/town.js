@@ -246,6 +246,9 @@ function generateTownLayout() {
 function questEncounters() {
   loadProgress();
   loadQuestState();
+  //reset combat encounter
+  playerStats.combatEncounter = false;
+  saveProgress();
 
   tryQuestEncounter("blacksmith", 0);
   tryQuestEncounter("blacksmith", 2);
