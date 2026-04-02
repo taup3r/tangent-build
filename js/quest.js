@@ -387,7 +387,7 @@ export function saveQuestState() {
 
 export function getQuest(id) {
   const quest = quests.find(q => q.id === id);
-  alert(JSON.stringify(quest);
+  alert(JSON.stringify(quest));
   return quests.find(q => q.id === id);
 }
 
