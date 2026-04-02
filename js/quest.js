@@ -455,7 +455,7 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage && playerStats.zone === zone) {
+quest.stage < questData[quest.id].maxStage && playerStats.zone === quest.zone) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
