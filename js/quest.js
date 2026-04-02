@@ -304,13 +304,6 @@ export const quests = [
     active: false
   },
   {
-    id: "lostChild",
-    chance: 10,
-    stage: 0,
-    zone: "residential",
-    active: false
-  },
-  {
     id: "arenaNormal",
     chance: 100,
     stage: 0,
@@ -324,6 +317,13 @@ export const quests = [
     stage: 0,
     zone: "townSquare",
     count: 0,
+    active: false
+  },
+  {
+    id: "lostChild",
+    chance: 10,
+    stage: 0,
+    zone: "residential",
     active: false
   },
   {
@@ -372,25 +372,13 @@ export const quests = [
 
 loadQuestState();
 
-/*export function loadQuestState() {
+export function loadQuestState() {
   const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
   if (saved.length > 0) {
     quests.forEach((q, i) => {
       quests[i] = { ...q, ...(saved[i] || q) };
     });
   }
-}*/
-export function loadQuestState() {
-  const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
-
-  quests.forEach((q, i) => {
-    // If saved[i] exists, merge it; otherwise keep original quest data
-    if (saved[i]) {
-      quests[i] = { ...q, ...saved[i] };
-    } else {
-      quests[i] = { ...q }; // ensure fresh copy, not reference
-    }
-  });
 }
 
 export function saveQuestState() {
