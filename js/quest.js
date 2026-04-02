@@ -376,7 +376,7 @@ export function loadQuestState() {
   const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
   if (saved.length > 0) {
     quests.forEach((q, i) => {
-      quests[i] = { ...q, ...saved[i] };
+      quests[i] = { ...q, ...(saved[i] || q) };
     });
   }
 }
@@ -386,8 +386,6 @@ export function saveQuestState() {
 }
 
 export function getQuest(id) {
-  const quest = quests.find(q => q.id === id);
-  alert(JSON.stringify(quest));
   return quests.find(q => q.id === id);
 }
 
