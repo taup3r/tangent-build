@@ -61,7 +61,9 @@ export function loadProgress() {
     player.weapon = data.playerWeapon;
   }
 
-  if (!playerStats.zone) {
+  if (playerStats.zone) {
+    //do nothing
+  } else {
     playerStats.zone = "townSquare";
   }
 
