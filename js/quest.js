@@ -450,7 +450,8 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
   }
 
   const quest = getQuest(id);
-  const zone = quest.zone || "townSquare";
+  quest.zone = quest.zone || "townSquare";
+  saveQuestState();
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
