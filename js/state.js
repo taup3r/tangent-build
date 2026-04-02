@@ -67,6 +67,12 @@ export function loadProgress() {
     playerStats.zone = "townSquare";
   }
 
+  if (playerStats.combatEncounter) {
+    //do nothing
+  } else {
+    playerStats.combatEncounter = false;
+  }
+
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
 }
