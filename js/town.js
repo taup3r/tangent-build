@@ -262,8 +262,8 @@ function questEncounters() {
     tryQuestEncounter("merchantGuild", 2);
   });
   tryQuestEncounter("lostChild", 0);
-  tryQuestEncounter("lostChild", 1);
-  tryQuestEncounter("lostChild", 3);
+  //tryQuestEncounter("lostChild", 1);
+  //tryQuestEncounter("lostChild", 3);
   //tryQuestEncounter("lostChild", 6, () => {
     //playerStats.gold += 100;
     //playerStats.reputation += 5;
