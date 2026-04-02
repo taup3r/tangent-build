@@ -39,7 +39,6 @@ function getMessage(id, action = null) {
 
 function getResidentialZone() {
   randomArea.innerHTML = "";
-  loadQuestState();
   const buttons = [
     {
       label: "Hearthwhistle Cottage",
@@ -158,7 +157,6 @@ function getTownSquareZone() {
     }
   ];
 
-  loadQuestState();
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
 
@@ -281,6 +279,7 @@ function explore() {
   // After animation ends, regenerate and animate in
   setTimeout(() => {
     loadProgress();
+    loadQuestState();
     updateHeaderStats();
     generateTownLayout();
     questEncounters();
@@ -296,6 +295,7 @@ itemButton.onclick = () => showItemList();
 
 // Main
 loadProgress();
+loadQuestState();
 updateHeaderStats();
 generateTownLayout();
 questEncounters();
