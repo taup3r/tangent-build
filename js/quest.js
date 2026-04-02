@@ -320,13 +320,6 @@ export const quests = [
     active: false
   },
   {
-    id: "lostChild",
-    chance: 10,
-    stage: 0,
-    zone: "residential",
-    active: false
-  },
-  {
     id: "h1",
     chance: 100,
     stage: 1, // starts at 1 for view
@@ -366,6 +359,13 @@ export const quests = [
     id: "h7",
     chance: 100,
     stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "lostChild",
+    chance: 10,
+    stage: 0,
+    zone: "residential",
     active: false
   }
 ];
