@@ -450,7 +450,7 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
   }
 
   const quest = getQuest(id);
-  if (!quest) alert(id + " quest not found");
+  if (quest) alert(JSON.stringify(quest));
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
