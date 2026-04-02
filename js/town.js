@@ -39,6 +39,7 @@ function getMessage(id, action = null) {
 
 function getResidentialZone() {
   randomArea.innerHTML = "";
+  loadQuestState();
   const buttons = [
     {
       label: "Hearthwhistle Cottage",
