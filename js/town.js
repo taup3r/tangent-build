@@ -261,7 +261,7 @@ function questEncounters() {
 
     tryQuestEncounter("merchantGuild", 2);
   });
-  //tryQuestEncounter("lostChild", 0);
+  tryQuestEncounter("lostChild", 0);
   //tryQuestEncounter("lostChild", 1);
   //tryQuestEncounter("lostChild", 3);
   //tryQuestEncounter("lostChild", 6, () => {
