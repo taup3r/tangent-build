@@ -187,7 +187,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  if (blacksmithDone === true && merchantGuildDone === true) {
+  if (blacksmithDone === false && merchantGuildDone === false) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
