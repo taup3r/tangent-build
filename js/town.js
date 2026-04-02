@@ -264,11 +264,11 @@ function questEncounters() {
   tryQuestEncounter("lostChild", 0);
   tryQuestEncounter("lostChild", 1);
   tryQuestEncounter("lostChild", 3);
-  tryQuestEncounter("lostChild", 6, () => {
-    playerStats.gold += 100;
-    playerStats.reputation += 5;
-    saveProgress();
-  });
+  //tryQuestEncounter("lostChild", 6, () => {
+    //playerStats.gold += 100;
+    //playerStats.reputation += 5;
+    //saveProgress();
+  //});
 }
 
 function explore() {
