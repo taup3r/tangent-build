@@ -216,7 +216,7 @@ export function getItems(type) {
   return itemList;
 }
 
-export function triggerItem(item, action = null, isView = false) {
+export function triggerItem(item, action = null, isView = false, label = "Pick up") {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
