@@ -372,6 +372,7 @@ export const quests = [
 
 loadQuestState();
 
+/*
 export function loadQuestState() {
   const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
   if (saved.length > 0) {
@@ -380,6 +381,20 @@ export function loadQuestState() {
     });
   }
   //alert(JSON.stringify(quests));
+}
+*/
+
+export function loadQuestState() {
+  const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
+
+  quests.forEach((q, i) => {
+    // If saved[i] exists, merge it; otherwise keep original quest data
+    if (saved[i]) {
+      quests[i] = { ...q, ...saved[i] };
+    } else {
+      quests[i] = { ...q }; // ensure fresh copy, not reference
+    }
+  });
 }
 
 export function saveQuestState() {
