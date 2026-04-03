@@ -3,7 +3,7 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
-import { showItemList } from "./items.js";
+import { showItemList, getItems } from "./items.js";
 import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
@@ -41,18 +41,12 @@ function loadShopInventory() {
   }
 
   const newInventory = [];
+  const itemList = getItems("craft");
 
-  while (newInventory.length < 5) {
-    const item = {
-      id: "Tar",
-      count: 10
-    }
-
-    // prevent duplicates by name
-    if (!newInventory.some(i => i.id === item.id)) {
-      newInventory.push(item);
-    }
-  }
+  itemList.foreach((i, c) => {
+    i.count = 5;
+    newInventory.push(i);
+  });
 
   localStorage.setItem(playerItemShopTimestamp, hourKey);
   saveShopInventory(newInventory);
