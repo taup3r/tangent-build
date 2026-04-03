@@ -3,8 +3,8 @@ import { updateHeaderStats } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { openCompareWeapon } from "./modal.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
-import { showItemList, getItems } from "./items.js";
-import { weaponShopDiscount } from "./reputation.js";
+import { showItemList, getItems, itemData, getColorByRarity } from "./items.js";
+//import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
 loadQuestState();
@@ -44,7 +44,7 @@ function loadShopInventory() {
   const itemList = getItems("craft");
 
   itemList.foreach((i, c) => {
-    i.count = 5;
+    i.count = 1;
     newInventory.push(i);
   });
 
@@ -72,7 +72,8 @@ function renderShop() {
   }
 
   inventory.forEach((i, index) => {
-    const itemInfo = itemData[i.id];
+    let itemInfo = itemData[i.id];
+    let color = getColorByRarity(itemInfo.rarity);
     let price = itemInfo.use;
     price = Math.floor(price * (100-discountPercent)/100);    
 
@@ -81,7 +82,7 @@ function renderShop() {
 
     el.innerHTML = `
       <div class="shop-row">
-        <span class="item-name" style="color:${itemInfo.color}">${itemInfo.name}</span>
+        <span class="item-name" style="color:${color}">${itemInfo.name}</span>
         <button class="buy-btn">${price}g</button>
       </div>
     `;
@@ -92,7 +93,7 @@ function renderShop() {
       player.items.push(i);
       playerStats.gold -= price;
 
-      // Remove weapon from shop
+      // Remove item from shop
       const updated = loadShopInventory();
       updated.splice(index, 1);
       saveShopInventory(updated);
@@ -108,14 +109,6 @@ function renderShop() {
 function questEncounters() {
   loadProgress();
   loadQuestState();
-  tryQuestEncounter("merchantGuild", 0);
-  tryQuestEncounter("merchantGuild", 3);
-  tryQuestEncounter("merchantGuild", 7, () => {
-    playerStats.gold += 500;
-    playerStats.reputation += 3;
-    saveProgress();
-    tryQuestEncounter("merchantGuild", 8);
-  });
 }
 
 renderShop();
