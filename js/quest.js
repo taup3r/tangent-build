@@ -395,6 +395,7 @@ export function loadQuestState() {
       quests[i] = { ...q }; // ensure fresh copy, not reference
     }
   });
+  alert(JSON.stringify(quests));
 }
 
 export function saveQuestState() {
