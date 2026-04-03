@@ -35,6 +35,7 @@ export const itemData = {
     name: "White Ore",
     chance: 12,
     maxCount: 99,
+    type: "ore",
     use: 1000,
     rarity: "Common",
     lore: "Common ore found on the most basic dungeons."
@@ -43,6 +44,7 @@ export const itemData = {
     name: "Green Ore",
     chance: 10,
     maxCount: 99,
+    type: "ore",
     use: 2000,
     rarity: "Uncommon",
     lore: "Uncommon ore found on dungeons."
@@ -51,6 +53,7 @@ export const itemData = {
     name: "Blue Ore",
     chance: 8,
     maxCount: 99,
+    type: "ore",
     use: 3000,
     rarity: "Rare",
     lore: "Rare ore used for powerful weapon refinements."
@@ -59,6 +62,7 @@ export const itemData = {
     name: "Purple Ore",
     chance: 6,
     maxCount: 99,
+    type: "ore",
     use: 4000,
     rarity: "Epic",
     lore: "Very rare ore used to refine already powerful weapons."
@@ -67,6 +71,7 @@ export const itemData = {
     name: "Orange Ore",
     chance: 4,
     maxCount: 99,
+    type: "ore",
     use: 5000,
     rarity: "Legendary",
     lore: "One-of-a-kind ore found in deep treacherous dungeons."
@@ -75,6 +80,7 @@ export const itemData = {
     name: "Red Ore",
     chance: 2,
     maxCount: 99,
+    type: "ore",
     use: 8000,
     rarity: "Mythic",
     lore: "Mythical ores rumored by blacksmiths as 'the Ones'."
@@ -83,6 +89,7 @@ export const itemData = {
     name: "Ironbark Wood",
     chance: 10,
     maxCount: 99,
+    type: "craft",
     use: 100,
     rarity: "Common",
     lore: "Dense, fire-resistant wood used for sturdy handles and bows."
@@ -91,6 +98,7 @@ export const itemData = {
     name: "Binding Twine",
     chance: 10,
     maxCount: 99,
+    type: "craft",
     use: 100,
     rarity: "Common",
     lore: "Simple but essential for assembling gear."
@@ -99,6 +107,7 @@ export const itemData = {
     name: "Polished Rivets",
     chance: 10,
     maxCount: 99,
+    type: "craft",
     use: 100,
     rarity: "Common",
     lore: "Reinforcement components for weapons and tools."
@@ -195,6 +204,16 @@ export function getNameByRarity(rarity) {
 
 export function getItem(id) {
   return items.find(q => q.id === id);
+}
+
+export function getItems(type) {
+  const itemList = [];
+  items.forEach((q, i) => {
+    if (itemData[q.id].type === type) {
+      itemList.push(q);
+    }
+  });
+  return itemList;
 }
 
 export function triggerItem(item, action = null, isView = false) {
