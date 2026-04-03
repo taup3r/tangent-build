@@ -216,7 +216,7 @@ export function getItems(type) {
   return itemList;
 }
 
-export function triggerItem(item, action = null, isView = false, label = "Pick up") {
+export function triggerItem(item, action = null, isView = false) {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
@@ -264,7 +264,7 @@ export function ignoreItem(action = null) {
   if (action) action();
 }
 
-export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null) {
+export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null, label = "Pick up") {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
@@ -283,7 +283,7 @@ export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, i
 
   if (Math.random() < (itemData[item.id].chance/100) &&
 (item.count + 1) < itemData[item.id].maxCount) {
-    triggerItem(item, acceptAction || alwaysAction);
+    triggerItem(item, acceptAction || alwaysAction, false, label);
   } else {
     if (ignoreAction) {
       ignoreAction();
