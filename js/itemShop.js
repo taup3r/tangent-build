@@ -40,6 +40,7 @@ function loadShopInventory() {
 
   const newInventory = [];
   const itemList = getItems("craft");
+  alert(`itemList ${JSON.stringify(itemList)}`);
 
   itemList.foreach((i, c) => {
     i.count = 1;
