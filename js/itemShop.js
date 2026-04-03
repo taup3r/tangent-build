@@ -86,7 +86,7 @@ function renderShop() {
 
     el.querySelector(".buy-btn").onclick = () => {
       if (playerStats.gold < price) return;
-      triggerItem(i, () = {
+      //triggerItem(i, () = {
         playerStats.gold -= price;
 
         // Remove item from shop
@@ -96,7 +96,7 @@ function renderShop() {
 
         saveProgress();
         renderShop();
-      }, false, `Buy ${price}g`);
+      //}, false, `Buy ${price}g`);
     };
 
     shopList.appendChild(el);
