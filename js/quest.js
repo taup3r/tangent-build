@@ -379,7 +379,7 @@ export function loadQuestState() {
       quests[i] = { ...q, ...(saved[i] || q) };
     });
   }
-  alert(JSON.stringify(quests));
+  //alert(JSON.stringify(quests));
 }
 
 export function saveQuestState() {
