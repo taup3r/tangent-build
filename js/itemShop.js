@@ -85,18 +85,18 @@ function renderShop() {
     `;
 
     el.querySelector(".buy-btn").onclick = () => {
-      // Deduct gold
       if (playerStats.gold < price) return;
-      player.items.push(i);
-      playerStats.gold -= price;
+      triggerItem(i, () = {
+        playerStats.gold -= price;
 
-      // Remove item from shop
-      const updated = loadShopInventory();
-      updated.splice(index, 1);
-      saveShopInventory(updated);
+        // Remove item from shop
+        const updated = loadShopInventory();
+        updated.splice(index, 1);
+        saveShopInventory(updated);
 
-      saveProgress();
-      renderShop();
+        saveProgress();
+        renderShop();
+      }, false, `Buy ${price}g`);
     };
 
     shopList.appendChild(el);
