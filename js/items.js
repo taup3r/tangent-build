@@ -110,6 +110,7 @@ export const items = [
 
 loadItems();
 
+/*
 export function loadItems() {
   const saved = playerStats.items || "[]";
   if (saved.length > 0) {
@@ -117,6 +118,20 @@ export function loadItems() {
       items[i] = { ...q, ...saved[i] };
     });
   }
+}
+*/
+
+export function loadItems() {
+  const saved = playerStats.items || "[]";
+
+  items.forEach((q, i) => {
+    // If saved[i] exists, merge it; otherwise keep original quest data
+    if (saved[i] && saved[i].id === q.id) {
+      items[i] = { ...q, ...saved[i] };
+    } else {
+      items[i] = { ...q }; // ensure fresh copy, not reference
+    }
+  });
 }
 
 export function getColorByRarity(rarity) {
