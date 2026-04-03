@@ -87,7 +87,7 @@ export const itemData = {
   },
   "ironbarkWood": {
     name: "Ironbark Wood",
-    chance: 10,
+    chance: 100,
     maxCount: 99,
     type: "craft",
     use: 10,
@@ -96,7 +96,7 @@ export const itemData = {
   },
   "bindingTwine": {
     name: "Binding Twine",
-    chance: 10,
+    chance: 100,
     maxCount: 99,
     type: "craft",
     use: 20,
@@ -105,7 +105,7 @@ export const itemData = {
   },
   "polishedRivets": {
     name: "Polished Rivets",
-    chance: 10,
+    chance: 100,
     maxCount: 99,
     type: "craft",
     use: 30,
