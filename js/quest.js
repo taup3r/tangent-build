@@ -389,7 +389,7 @@ export function loadQuestState() {
 
   quests.forEach((q, i) => {
     // If saved[i] exists, merge it; otherwise keep original quest data
-    if (saved[i]) {
+    if (saved[i] && saved[i].id === q.id) {
       quests[i] = { ...q, ...saved[i] };
     } else {
       quests[i] = { ...q }; // ensure fresh copy, not reference
