@@ -154,6 +154,12 @@ function getTownSquareZone() {
       class: "btn-shop",
       action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
+    },
+    {
+      label: "Item Shop",
+      class: "btn-shop",
+      action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
+      disabled: false
     }
   ];
 
