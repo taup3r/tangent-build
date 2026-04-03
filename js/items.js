@@ -86,6 +86,22 @@ export const itemData = {
     use: 100,
     rarity: "Common",
     lore: "Dense, fire-resistant wood used for sturdy handles and bows."
+  },
+  "bindingTwine": {
+    name: "Binding Twine",
+    chance: 10,
+    maxCount: 99,
+    use: 100,
+    rarity: "Common",
+    lore: "Simple but essential for assembling gear."
+  },
+  "polishedRivets": {
+    name: "Polished Rivets",
+    chance: 10,
+    maxCount: 99,
+    use: 100,
+    rarity: "Common",
+    lore: "Reinforcement components for weapons and tools."
   }
 };
 
@@ -116,6 +132,14 @@ export const items = [
   },
   {
     id: "ironbarkWood",
+    count: 0
+  },
+  {
+    id: "bindingTwine",
+    count: 0
+  },
+  {
+    id: "polishedRivets",
     count: 0
   }
 ];
