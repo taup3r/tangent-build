@@ -1,7 +1,5 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { generateWeapon } from "./weapon.js";
-import { openCompareWeapon } from "./modal.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
 import { showItemList, getItems, itemData, getColorByRarity } from "./items.js";
 //import { weaponShopDiscount } from "./reputation.js";
@@ -60,6 +58,7 @@ function saveShopInventory(inv) {
 }
 
 function renderShop() {
+  alert("renderShop");
   const inventory = loadShopInventory();
   shopList.innerHTML = "";
 
