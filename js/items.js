@@ -78,6 +78,14 @@ export const itemData = {
     use: 8000,
     rarity: "Mythic",
     lore: "Mythical ores rumored by blacksmiths as 'the Ones'."
+  },
+  "ironbarkWood": {
+    name: "Ironbark Wood",
+    chance: 10,
+    maxCount: 99,
+    use: 100,
+    rarity: "Common",
+    lore: "Dense, fire-resistant wood used for sturdy handles and bows."
   }
 };
 
@@ -105,21 +113,14 @@ export const items = [
   {
     id: "ore-r",
     count: 0
+  },
+  {
+    id: "ironbarkWood",
+    count: 0
   }
 ];
 
 loadItems();
-
-/*
-export function loadItems() {
-  const saved = playerStats.items || "[]";
-  if (saved.length > 0) {
-    items.forEach((q, i) => {
-      items[i] = { ...q, ...saved[i] };
-    });
-  }
-}
-*/
 
 export function loadItems() {
   const saved = playerStats.items || "[]";
