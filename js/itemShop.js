@@ -1,7 +1,7 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
-import { showItemList, getItems, itemData, getColorByRarity } from "./items.js";
+import { showItemList, getItems, itemData, getColorByRarity, loadItems } from "./items.js";
 //import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
@@ -45,7 +45,8 @@ function loadShopInventory() {
     i.count = 1;
     newInventory.push(i);
   });
-  alert(JSON.stringify(newInventory));
+  //revert saved data
+  loadItems();
 
   localStorage.setItem(playerItemShopTimestamp, hourKey);
   saveShopInventory(newInventory);
