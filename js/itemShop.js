@@ -47,6 +47,7 @@ function loadShopInventory() {
     i.count = 1;
     newInventory.push(i);
   });
+  alert(JSON.stringify(newInventory));
 
   localStorage.setItem(playerItemShopTimestamp, hourKey);
   saveShopInventory(newInventory);
