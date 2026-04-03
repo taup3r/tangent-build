@@ -1,7 +1,7 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
-import { showItemList, getItems, itemData, getColorByRarity, loadItems, triggerItem } from "./items.js";
+import { showItemList, getItems, itemData, getColorByRarity, loadItems, tryItemEncounter } from "./items.js";
 //import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
@@ -86,7 +86,7 @@ function renderShop() {
 
     el.querySelector(".buy-btn").onclick = () => {
       if (playerStats.gold < price) return;
-      triggerItem(i, () => {
+      tryItemEncounter(i.id, null, () => {
         playerStats.gold -= price;
 
         // Remove item from shop
@@ -96,7 +96,7 @@ function renderShop() {
 
         saveProgress();
         renderShop();
-      }, false, `Buy ${price}g`);
+      }, null, `Buy ${price}g`);
     };
 
     shopList.appendChild(el);
