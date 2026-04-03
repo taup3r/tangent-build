@@ -72,15 +72,16 @@ function renderShop() {
   }
 
   inventory.forEach((i, index) => {
-    let price = 10;
-    price = Math.floor(price * (100-discountPercent)/100);
+    const itemInfo = itemData[i.id];
+    let price = itemInfo.use;
+    price = Math.floor(price * (100-discountPercent)/100);    
 
     const el = document.createElement("div");
     el.classList.add("shop-item");
 
     el.innerHTML = `
       <div class="shop-row">
-        <span class="item-name">${i.id}</span>
+        <span class="item-name" style="color:${itemInfo.color}">${itemInfo.name}</span>
         <button class="buy-btn">${price}g</button>
       </div>
     `;
