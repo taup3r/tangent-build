@@ -55,24 +55,10 @@ function getAlleyZone() {
     {
       label: "Great Wall",
       class: "btn-dungeon",
-      action: () => getMessage("e1"),
-      disabled: false
-    },
-    {
-      label: "Treasure Chest",
-      class: "btn-train",
-      action: () => getMessage("e2", () => {
+      action: () => getMessage("e1", () => {
         playerStats.reputation -= 10;
+        playerStats.gold -= 100;
         saveProgress();
-      }),
-      disabled: false
-    },
-    {
-      label: "Treasure Chest",
-      class: "btn-train",
-      action: () => getMessage("e3", () => {
-        const weapon = upgradeWeapon(player.weapon, 1);
-        openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
       }),
       disabled: false
     },
@@ -87,6 +73,30 @@ function getAlleyZone() {
       disabled: false
     }
   ];
+
+  const isTreasure = (Math.random() < 0.2);
+  if (isTreasure) {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e3", () => {
+        const weapon = upgradeWeapon(player.weapon, 1);
+        openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+      }),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e2", () => {
+        playerStats.combatEncounter = true;
+        saveProgress();
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      }),
+      disabled: false
+    });
+  }
 
   zoneName.textContent = "Wayfarer's Edge";
   return buttons;
