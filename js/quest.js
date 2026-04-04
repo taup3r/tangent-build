@@ -285,6 +285,42 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "e1": {
+    title: "Trap",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You stepped on a trap and got entangled on it. You successfully broke free and did not gain any bruises but just lost some of your ego.",
+        nextChance: 100
+      }
+    ]
+  },
+  "e2": {
+    title: "Ambush",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You found a big cache of what seems to be treasure but upon observing did not find any. Too late to realize thus was just a trap laid by bandits.",
+        nextChance: 100
+      }
+    ]
+  },
+  "e3": {
+    title: "Treasure",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You found treasure! You are now too cautious as you open it and was granted with great relief. There really are treasures still in this place.",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -366,6 +402,24 @@ export const quests = [
     chance: 10,
     stage: 0,
     zone: "residential",
+    active: false
+  },
+  {
+    id: "e1",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "e2",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "e3",
+    chance: 100,
+    stage: 1, // starts at 1 for view
     active: false
   }
 ];
