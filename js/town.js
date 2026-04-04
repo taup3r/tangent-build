@@ -148,20 +148,25 @@ function getTownSquareZone() {
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
-    },
-    {
+    }
+  ];
+
+  const shopWeapon = (Math.random() < 0.5);
+  if (shopWeapon) {
+    buttons.push({
       label: "Weapon Shop",
       class: "btn-shop",
       action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
-    },
-    {
+    });
+  } else {
+    buttons.push({
       label: "Item Shop",
       class: "btn-shop",
       action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
-    }
-  ];
+    });
+  }
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
