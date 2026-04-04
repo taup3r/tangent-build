@@ -217,6 +217,16 @@
   </div>
 
   <!-- Player Info Modal -->
+  <div id="player-info-modal-container"></div>
+  <script>
+    fetch("player-info-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("player-info-modal-container").innerHTML = html;
+    });
+  </script>
+
+  <!-- Player Info Modal 
   <div id="playerModal" class="modal" style="display:none;">
     <div class="modal-content player-info-box">
 
@@ -253,7 +263,7 @@
 
       <button onclick="closePlayerInfo()" class="close-btn">Close</button>
     </div>
-  </div>
+  </div> -->
 
   <!-- Compare Modal -->
   <div id="compare-modal-container"></div>
