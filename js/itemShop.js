@@ -95,8 +95,8 @@ function renderShop() {
         saveShopInventory(updated);
 
         saveProgress();
-        renderShop();
-      }, null, `Buy ${price}g`);
+        location.reload();
+      }, () => location.reload, `Buy ${price}g`);
     };
 
     shopList.appendChild(el);
