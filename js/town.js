@@ -74,7 +74,7 @@ function getAlleyZone() {
     }
   ];
 
-  const isTreasure = (Math.random() < 0.2);
+  const isTreasure = (Math.random() < 0.05);
   if (isTreasure) {
     buttons.push({
       label: "Treasure Chest",
