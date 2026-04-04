@@ -437,7 +437,8 @@ export function openPlayerInfoModal() {
 
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
-window.closePlayerInfo = closePlayerInfo;
+document.getElementById("playerInfoCloseBtn").onclick = () => closePlayerInfo();
+//window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
 const questButton = document.getElementById("questButton");
