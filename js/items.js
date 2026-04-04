@@ -260,6 +260,7 @@ export function saveItems() {
 }
 
 export function ignoreItem(action = null) {
+alert("ignoreItem");
   document.getElementById("item-modal").style.display = "none";
   if (action) action();
 }
