@@ -221,7 +221,7 @@ export function triggerItem(item, action = null, isView = false, label = "Pick u
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
   const acceptButton = document.getElementById("acceptButton");
-  const ignoreButton = document.getElementById("ignoreButton");
+  const ignoreButton = document.getElementById("itemIgnoreButton");
 
   const currentItem = itemData[item.id];
 
@@ -266,7 +266,7 @@ alert("ignoreItem");
 }
 
 export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null, label = "Pick up") {
-  const ignoreButton = document.getElementById("ignoreButton");
+  const ignoreButton = document.getElementById("itemIgnoreButton");
   if (ignoreButton) {
     alert("ignoreButton");
     ignoreButton.textContent = "Ignore";
