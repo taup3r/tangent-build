@@ -270,6 +270,7 @@ export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, i
   if (ignoreButton) {
     alert("ignoreButton");
     ignoreButton.onclick = () => {
+      alert("ignoreButtonClick");
       ignoreItem(ignoreAction || alwaysAction);
     };
   }
