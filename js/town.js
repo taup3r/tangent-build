@@ -70,7 +70,10 @@ function getAlleyZone() {
     {
       label: "Treasure Chest",
       class: "btn-train",
-      action: () => getMessage("e3"),
+      action: () => getMessage("e3", () => {
+        const weapon = upgradeWeapon(player.weapon, 1);
+        openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+      }),
       disabled: false
     },
     {
@@ -162,6 +165,16 @@ function getResidentialZone() {
         location.reload();
       },
       disabled: false
+    },
+    {
+      label: "Go to the Back Alleys",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "backAlley";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
     }
   ];
 
@@ -200,25 +213,14 @@ function getTownSquareZone() {
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
-    }
-  ];
-
-  const shopWeapon = (Math.random() < 0.5);
-  if (shopWeapon) {
-    buttons.push({
+    },
+    {
       label: "Weapon Shop",
       class: "btn-shop",
       action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
-    });
-  } else {
-    buttons.push({
-      label: "Item Shop",
-      class: "btn-shop",
-      action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
-      disabled: false
-    });
-  }
+    }
+  ];
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
@@ -271,6 +273,8 @@ function generateTownLayout() {
   const zone = playerStats.zone;
   if (zone === "residential") {
     buttons = getResidentialZone();
+  } else if (zone === "backAlley") {
+    buttons = getAlleyZone();
   } else {
     buttons = getTownSquareZone();
   }
