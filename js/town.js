@@ -56,8 +56,16 @@ function getAlleyZone() {
       label: "Great Wall",
       class: "btn-dungeon",
       action: () => getMessage("e1", () => {
-        playerStats.reputation -= 10;
-        playerStats.gold -= 100;
+        if (playerStats.reputation >= 10) {
+          playerStats.reputation -= 10;
+        } else {
+          playerStats.reputation = 0;
+        }
+        if (playerStats.gold >= 100) {
+          playerStats.gold -= 100;
+        } else {
+          playerStats.gold = 0;
+        }
         saveProgress();
       }),
       disabled: false
