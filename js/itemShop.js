@@ -1,7 +1,7 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, loadQuestState, tryQuestEncounter, getQuest, questData } from "./quest.js";
-import { showItemList, getItems, itemData, getColorByRarity, loadItems, tryItemEncounter } from "./items.js";
+import { showItemList, getItems, itemData, getColorByRarity, loadItems, tryItemEncounter, ignoreItem } from "./items.js";
 //import { weaponShopDiscount } from "./reputation.js";
 
 loadProgress();
