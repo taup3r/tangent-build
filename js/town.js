@@ -37,6 +37,79 @@ function getMessage(id, action = null) {
   triggerQuest(quest, action, true);
 }
 
+function getAlleyZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Item Shop",
+      class: "btn-shop",
+      action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
+      disabled: false
+    },
+    {
+      label: "Abandoned Shack",
+      class: "btn-arena",
+      action: () => getMessage("h7"),
+      disabled: false
+    },
+    {
+      label: "Great Wall",
+      class: "btn-dungeon",
+      action: () => getMessage("e1", () => {
+        if (playerStats.reputation >= 10) {
+          playerStats.reputation -= 10;
+        } else {
+          playerStats.reputation = 0;
+        }
+        if (playerStats.gold >= 100) {
+          playerStats.gold -= 100;
+        } else {
+          playerStats.gold = 0;
+        }
+        saveProgress();
+      }),
+      disabled: false
+    },
+    {
+      label: "Go back to Village",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "residential";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    }
+  ];
+
+  const isTreasure = (Math.random() < 0.05);
+  if (isTreasure) {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e3", () => {
+        const weapon = upgradeWeapon(player.weapon, 1);
+        openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+      }),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e2", () => {
+        playerStats.combatEncounter = true;
+        saveProgress();
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      }),
+      disabled: false
+    });
+  }
+
+  zoneName.textContent = "Wayfarer's Edge";
+  return buttons;
+}
+
 function getResidentialZone() {
   randomArea.innerHTML = "";
   const buttons = [
@@ -110,6 +183,16 @@ function getResidentialZone() {
         location.reload();
       },
       disabled: false
+    },
+    {
+      label: "Go to the Back Alleys",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "backAlley";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
     }
   ];
 
@@ -148,25 +231,14 @@ function getTownSquareZone() {
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
-    }
-  ];
-
-  const shopWeapon = (Math.random() < 0.5);
-  if (shopWeapon) {
-    buttons.push({
+    },
+    {
       label: "Weapon Shop",
       class: "btn-shop",
       action: () => window.location.href = `weaponshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
-    });
-  } else {
-    buttons.push({
-      label: "Item Shop",
-      class: "btn-shop",
-      action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
-      disabled: false
-    });
-  }
+    }
+  ];
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
@@ -219,6 +291,8 @@ function generateTownLayout() {
   const zone = playerStats.zone;
   if (zone === "residential") {
     buttons = getResidentialZone();
+  } else if (zone === "backAlley") {
+    buttons = getAlleyZone();
   } else {
     buttons = getTownSquareZone();
   }
