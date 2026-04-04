@@ -90,7 +90,7 @@ export const itemData = {
     chance: 100,
     maxCount: 99,
     type: "craft",
-    use: 10,
+    use: 100,
     rarity: "Common",
     lore: "Dense, fire-resistant wood used for sturdy handles and bows."
   },
@@ -99,7 +99,7 @@ export const itemData = {
     chance: 100,
     maxCount: 99,
     type: "craft",
-    use: 20,
+    use: 200,
     rarity: "Common",
     lore: "Simple but essential for assembling gear."
   },
@@ -108,7 +108,7 @@ export const itemData = {
     chance: 100,
     maxCount: 99,
     type: "craft",
-    use: 30,
+    use: 300,
     rarity: "Common",
     lore: "Reinforcement components for weapons and tools."
   }
