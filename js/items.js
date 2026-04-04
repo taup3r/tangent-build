@@ -268,6 +268,7 @@ alert("ignoreItem");
 export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null, label = "Pick up") {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
+    alert("ignoreButton");
     ignoreButton.onclick = () => {
       ignoreItem(ignoreAction || alwaysAction);
     };
