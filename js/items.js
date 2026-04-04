@@ -220,7 +220,7 @@ export function triggerItem(item, action = null, isView = false, label = "Pick u
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
-  const acceptButton = document.getElementById("acceptButton");
+  const acceptButton = document.getElementById("itemAcceptButton");
   const ignoreButton = document.getElementById("itemIgnoreButton");
 
   const currentItem = itemData[item.id];
