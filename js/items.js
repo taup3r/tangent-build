@@ -260,7 +260,6 @@ export function saveItems() {
 }
 
 export function ignoreItem(action = null) {
-alert("ignoreItem");
   document.getElementById("item-modal").style.display = "none";
   if (action) action();
 }
@@ -268,11 +267,7 @@ alert("ignoreItem");
 export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null, label = "Pick up") {
   const ignoreButton = document.getElementById("itemIgnoreButton");
   if (ignoreButton) {
-    alert("ignoreButton");
-    ignoreButton.textContent = "Ignore";
-    ignoreButton.style.display = "flex";
     ignoreButton.onclick = () => {
-      alert("ignoreButtonClick");
       ignoreItem(ignoreAction || alwaysAction);
     };
   }
