@@ -37,6 +37,58 @@ function getMessage(id, action = null) {
   triggerQuest(quest, action, true);
 }
 
+function getAlleyZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Item Shop",
+      class: "btn-shop",
+      action: () => window.location.href = `itemshop.html?player=${encodeURIComponent(player.name)}`,
+      disabled: false
+    },
+    {
+      label: "Abandoned Shack",
+      class: "btn-arena",
+      action: () => getMessage("h7"),
+      disabled: false
+    },
+    {
+      label: "Great Wall",
+      class: "btn-dungeon",
+      action: () => getMessage("e1"),
+      disabled: false
+    },
+    {
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e2", () => {
+        playerStats.reputation -= 10;
+        saveProgress();
+      }),
+      disabled: false
+    },
+    {
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e3"),
+      disabled: false
+    },
+    {
+      label: "Go back to Village",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "residential";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    }
+  ];
+
+  zoneName.textContent = "Wayfarer's Edge";
+  return buttons;
+}
+
 function getResidentialZone() {
   randomArea.innerHTML = "";
   const buttons = [
