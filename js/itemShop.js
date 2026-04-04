@@ -59,11 +59,11 @@ function renderShop() {
   const inventory = loadShopInventory();
   shopList.innerHTML = "";
 
-  let discountPercent = weaponShopDiscount();
+    let discountPercent = 0;
   const merchantGuild = getQuest("merchantGuild");
   if (merchantGuild) {
     if (merchantGuild.stage >= questData["merchantGuild"].maxStage) {
-      discountPercent = 0;
+      discountPercent = weaponShopDiscount();
       document.getElementById("discountDisplay").textContent = `You enjoy a ${discountPercent}% discount from the Merchant Guild.`;
     }
   }
