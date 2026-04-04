@@ -35,6 +35,7 @@ export const itemData = {
     name: "White Ore",
     chance: 12,
     maxCount: 99,
+    type: "ore",
     use: 1000,
     rarity: "Common",
     lore: "Common ore found on the most basic dungeons."
@@ -43,6 +44,7 @@ export const itemData = {
     name: "Green Ore",
     chance: 10,
     maxCount: 99,
+    type: "ore",
     use: 2000,
     rarity: "Uncommon",
     lore: "Uncommon ore found on dungeons."
@@ -51,6 +53,7 @@ export const itemData = {
     name: "Blue Ore",
     chance: 8,
     maxCount: 99,
+    type: "ore",
     use: 3000,
     rarity: "Rare",
     lore: "Rare ore used for powerful weapon refinements."
@@ -59,6 +62,7 @@ export const itemData = {
     name: "Purple Ore",
     chance: 6,
     maxCount: 99,
+    type: "ore",
     use: 4000,
     rarity: "Epic",
     lore: "Very rare ore used to refine already powerful weapons."
@@ -67,6 +71,7 @@ export const itemData = {
     name: "Orange Ore",
     chance: 4,
     maxCount: 99,
+    type: "ore",
     use: 5000,
     rarity: "Legendary",
     lore: "One-of-a-kind ore found in deep treacherous dungeons."
@@ -75,9 +80,37 @@ export const itemData = {
     name: "Red Ore",
     chance: 2,
     maxCount: 99,
+    type: "ore",
     use: 8000,
     rarity: "Mythic",
     lore: "Mythical ores rumored by blacksmiths as 'the Ones'."
+  },
+  "ironbarkWood": {
+    name: "Ironbark Wood",
+    chance: 100,
+    maxCount: 99,
+    type: "craft",
+    use: 10,
+    rarity: "Common",
+    lore: "Dense, fire-resistant wood used for sturdy handles and bows."
+  },
+  "bindingTwine": {
+    name: "Binding Twine",
+    chance: 100,
+    maxCount: 99,
+    type: "craft",
+    use: 20,
+    rarity: "Common",
+    lore: "Simple but essential for assembling gear."
+  },
+  "polishedRivets": {
+    name: "Polished Rivets",
+    chance: 100,
+    maxCount: 99,
+    type: "craft",
+    use: 30,
+    rarity: "Common",
+    lore: "Reinforcement components for weapons and tools."
   }
 };
 
@@ -105,6 +138,18 @@ export const items = [
   {
     id: "ore-r",
     count: 0
+  },
+  {
+    id: "ironbarkWood",
+    count: 0
+  },
+  {
+    id: "bindingTwine",
+    count: 0
+  },
+  {
+    id: "polishedRivets",
+    count: 0
   }
 ];
 
@@ -112,11 +157,15 @@ loadItems();
 
 export function loadItems() {
   const saved = playerStats.items || "[]";
-  if (saved.length > 0) {
-    items.forEach((q, i) => {
+
+  items.forEach((q, i) => {
+    // If saved[i] exists, merge it; otherwise keep original quest data
+    if (saved[i] && saved[i].id === q.id) {
       items[i] = { ...q, ...saved[i] };
-    });
-  }
+    } else {
+      items[i] = { ...q }; // ensure fresh copy, not reference
+    }
+  });
 }
 
 export function getColorByRarity(rarity) {
@@ -157,12 +206,22 @@ export function getItem(id) {
   return items.find(q => q.id === id);
 }
 
-export function triggerItem(item, action = null, isView = false) {
+export function getItems(type) {
+  const itemList = [];
+  items.forEach((q, i) => {
+    if (itemData[q.id].type === type) {
+      itemList.push(q);
+    }
+  });
+  return itemList;
+}
+
+export function triggerItem(item, action = null, isView = false, label = "Pick up") {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
-  const acceptButton = document.getElementById("acceptButton");
-  const ignoreButton = document.getElementById("ignoreButton");
+  const acceptButton = document.getElementById("itemAcceptButton");
+  const ignoreButton = document.getElementById("itemIgnoreButton");
 
   const currentItem = itemData[item.id];
 
@@ -172,7 +231,7 @@ export function triggerItem(item, action = null, isView = false) {
   if (isView === true) {
     acceptButton.textContent = "Close";
   } else {
-    acceptButton.textContent = "Pick up";
+    acceptButton.textContent = label;
   }
 
   if (isView === true) {
@@ -205,8 +264,8 @@ export function ignoreItem(action = null) {
   if (action) action();
 }
 
-export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null) {
-  const ignoreButton = document.getElementById("ignoreButton");
+export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, ignoreAction = null, label = "Pick up") {
+  const ignoreButton = document.getElementById("itemIgnoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
       ignoreItem(ignoreAction || alwaysAction);
@@ -224,7 +283,7 @@ export function tryItemEncounter(id, alwaysAction = null, acceptAction = null, i
 
   if (Math.random() < (itemData[item.id].chance/100) &&
 (item.count + 1) < itemData[item.id].maxCount) {
-    triggerItem(item, acceptAction || alwaysAction);
+    triggerItem(item, acceptAction || alwaysAction, false, label);
   } else {
     if (ignoreAction) {
       ignoreAction();
