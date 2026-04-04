@@ -373,13 +373,14 @@ export function closeEnemyInfo() {
   document.getElementById("enemyInfoModal").style.display = "none";
 }
 
-export function closePlayerInfo() {
-  document.getElementById("playerModal").style.display = "none";
-}
+//export function closePlayerInfo() {
+//document.getElementById("playerModal").style.display = "none";
+//}
 
 export function openPlayerInfoModal() {
   const modal = document.getElementById("playerModal");
   modal.style.display = "flex";
+  document.getElementById("playerInfoCloseBtn").onclick = () => modal.style.display = "none";
 
   // Portrait
   document.getElementById("playerInfoPortrait").src =
@@ -437,7 +438,6 @@ export function openPlayerInfoModal() {
 
 window.openEnemyInfo = openEnemyInfo;
 window.closeEnemyInfo = closeEnemyInfo;
-document.getElementById("playerInfoCloseBtn").onclick = () => closePlayerInfo();
 //window.closePlayerInfo = closePlayerInfo;
 window.openCompareWeaponModal = openCompareWeaponModal;
 
