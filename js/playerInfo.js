@@ -1,8 +1,6 @@
 import { player, playerStats } from "./state.js";
-import { loadProgress } from "./state.js";
 
 export function openPlayerInfoModal() {
-  loadProgress();
   const modal = document.getElementById("playerModal");
   modal.style.display = "flex";
   document.getElementById("playerInfoCloseBtn").onclick = () => modal.style.display = "none";
