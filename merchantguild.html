@@ -91,6 +91,16 @@
     });
   </script>
 
+  <!-- Player Info Modal -->
+  <div id="player-info-modal-container"></div>
+  <script>
+    fetch("player-info-modal.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("player-info-modal-container").innerHTML = html;
+    });
+  </script>
+
   <!-- Scrolling Lore Text -->
   <div id="loreScroller">
     <span id="loreText"></span>
