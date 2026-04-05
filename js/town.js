@@ -246,7 +246,7 @@ function getTownSquareZone() {
   let blacksmithDone = false;
   let merchantGuildDone = false;
 
-  //if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
+  if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
@@ -256,8 +256,8 @@ function getTownSquareZone() {
       disabled: false
     });
     blacksmithDone = true;
-  //}
-  //if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
+  }
+  if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
     buttons.push({
       label: "Merchant Guild",
       class: "btn-merchant-guild",
@@ -267,9 +267,9 @@ function getTownSquareZone() {
       disabled: false
     });
     merchantGuildDone = true;
-  //}
+  }
 
-  //if (blacksmithDone === true && merchantGuildDone === true) {
+  if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
@@ -280,7 +280,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
-  //}
+  }
 
   zoneName.textContent = "Wayfarer's Rest";
   return buttons;
