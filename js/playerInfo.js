@@ -6,8 +6,7 @@ export function openPlayerInfoModal() {
   document.getElementById("playerInfoCloseBtn").onclick = () => modal.style.display = "none";
 
   // Portrait
-  document.getElementById("playerInfoPortrait").src =
-    document.getElementById("playerPortrait").src;
+  document.getElementById("playerInfoPortrait").src = "assets/player.png";
 
   // Name + Level
   document.getElementById("playerInfoName").textContent = player.name;
