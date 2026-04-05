@@ -10,6 +10,7 @@ import { showQuestList, tryQuestEncounter, questIncrement } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
+import { openPlayerInfoModal } from "./playerInfo.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
@@ -377,7 +378,7 @@ export function closeEnemyInfo() {
 //document.getElementById("playerModal").style.display = "none";
 //}
 
-export function openPlayerInfoModal() {
+export function openPlayerInfoModal1() {
   const modal = document.getElementById("playerModal");
   modal.style.display = "flex";
   document.getElementById("playerInfoCloseBtn").onclick = () => modal.style.display = "none";
