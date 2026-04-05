@@ -13,6 +13,7 @@
 
 import { player, enemy } from "./state.js";
 import { playerStats } from "./state.js";
+import { openPlayerInfoModal } from "./playerInfo.js";
 
 /* -------------------------
    UPDATE HEADER (LEVEL + EXP)
@@ -23,6 +24,7 @@ export function updateHeaderStats() {
   document.getElementById("playerExpDisplay").textContent =
     `${playerStats.exp} / ${playerStats.expToNext}`;
     document.getElementById("playerGoldDisplay").textContent = playerStats.gold;
+document.getElementById("profileButton").onclick = () => openPlayerInfoModal();
 }
 
 /* -------------------------
