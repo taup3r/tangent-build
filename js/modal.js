@@ -10,7 +10,6 @@ import { showQuestList, tryQuestEncounter, questIncrement } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
-import { openPlayerInfoModal } from "./playerInfo.js";
 
 /* ============================================
    HELPERS: THEMES, EXP ANIMATION, DANGER RATING
