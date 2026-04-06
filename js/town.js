@@ -6,6 +6,7 @@ import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
+import { clampReputation } from "./reputation.js";
 
 const randomArea = document.getElementById("randomArea");
 const exploreBtn = document.getElementById("exploreBtn");
@@ -342,6 +343,7 @@ function questEncounters() {
   tryQuestEncounter("merchantGuild", 1, () => {
     playerStats.gold += 20;
     playerStats.reputation = (playerStats.reputation || 0) + 1;
+    clampReputation();
     saveProgress();
 
     tryQuestEncounter("merchantGuild", 2);
@@ -352,6 +354,7 @@ function questEncounters() {
   tryQuestEncounter("lostChild", 6, () => {
     playerStats.gold += 100;
     playerStats.reputation += 5;
+    clampReputation();
     saveProgress();
   });
 }
