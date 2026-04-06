@@ -33,8 +33,7 @@ export function gainReputation(tier) {
 
   playerStats.reputation += rep;
 
-  //max reputation capped at 100
-  if (playerStats.reputation > 100) playerStats.reputation = 100;
+  clampReputation();
 
   saveProgress();
   return rep;
@@ -53,11 +52,16 @@ export function loseReputation(tier) {
 
   playerStats.reputation -= rep;
 
-  //min reputation capped at 1
-  if (playerStats.reputation < 1) playerStats.reputation = 1;
+  clampReputation();
 
   saveProgress();
   return rep;
+}
+
+export function clampReputation() {
+  if (playerStats.reputation > 100) playerStats.reputation = 100;
+  if (playerStats.reputation < 1)
+playerStats.reputation = 1;
 }
 
 export function getReputationTier(rep) {
