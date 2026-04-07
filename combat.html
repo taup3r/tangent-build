@@ -95,7 +95,14 @@
         <div class="action-row">
           <button id="attackBtn" class="btn-attack">⚔️ Attack</button>
           <button id="defendBtn" class="btn-defend">🛡️ Defend</button>
-          <button id="skillBtn" class="btn-skill">✨ Skill</button>
+          <div class="skill-dropdown">
+            <button id="skillBtn" class="btn-skill">✨ Skills ▴</button>
+
+            <div id="skillMenu" class="skill-menu">
+              <button class="skill-option" onclick="useSkill('tackle')">Tackle</button>
+              <button class="skill-option" onclick="useSkill('blunt')">Blunt Strike</button>
+            </div>
+          </div>
         </div>
 
         <button id="hitBtn" class="hit-button" style="display:none;">HIT!</button>
