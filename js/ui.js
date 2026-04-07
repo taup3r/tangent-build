@@ -167,6 +167,13 @@ export function updateUI() {
   updateHP();
   renderAPIcons();
   updateHeaderStats();
+  updateStunVisual();
+}
+
+function updateStunVisual() {
+  const card = document.getElementById("enemyCard");
+  if (enemy.stunned.active) card.classList.add("stunned");
+  else card.classList.remove("stunned");
 }
 
 export function updatePlayerWeaponUI() {
