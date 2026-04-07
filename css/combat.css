@@ -17,7 +17,8 @@
 }
 
 .skill-option {
-  padding: 6px 6px;
+  padding: 6px;
+  margin: 2px;
   background: #2a2a2a;
   border: none;
   text-align: left;
