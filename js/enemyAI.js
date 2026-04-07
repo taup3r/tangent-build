@@ -96,8 +96,8 @@ export function enemyTurn() {
     log(`${enemy.name} is stunned and cannot act!`);
     enemy.stunned.duration--;
 
-    if (enemy.stunDuration <= 0) {
-      enemy.stunned = false;
+    if (enemy.stunned.duration <= 0) {
+      enemy.stunned.active = false;
       log(`${enemy.name} recovers from stun.`);
     }
 
