@@ -196,14 +196,6 @@ function playerBluntStrike() {
   clampAP();
   disableButtons();
 
-  // Hit check
-  if (!rollHit(player, enemy)) {
-    log("Your Blunt Strike missed!");
-    floatDamage("MISS", "enemyCard");
-    updateUI();
-    return enemyTurn();
-  }
-
   // 10% stun chance
   if (Math.random() < 0.10) {
     enemy.stunned = true;
@@ -213,6 +205,14 @@ function playerBluntStrike() {
     floatDamage("STUN", "enemyCard");
     animateCard("enemyCard", "skill-anim");
 
+    updateUI();
+    return enemyTurn();
+  }
+
+  // Hit check
+  if (!rollHit(player, enemy)) {
+    log("Your Blunt Strike missed!");
+    floatDamage("MISS", "enemyCard");
     updateUI();
     return enemyTurn();
   }
@@ -241,7 +241,7 @@ function playerBluntStrike() {
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
-  log(`Blunt Strike deals ${dmg} damage!`);
+  log(`Blunt Strike fails, deals ${dmg} damage!`);
   floatDamage(dmg, "enemyCard");
   animateCard("enemyCard", "skill-anim");
 
