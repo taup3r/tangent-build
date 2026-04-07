@@ -91,6 +91,19 @@ function decideEnemyAction() {
 ------------------------- */
 
 export function enemyTurn() {
+  // If stunned, skip turn
+  if (enemy.stunned.active && enemy.stunned.duration > 0) {
+    log(`${enemy.name} is stunned and cannot act!`);
+    enemy.stunned.duration--;
+
+    if (enemy.stunDuration <= 0) {
+      enemy.stunned = false;
+      log(`${enemy.name} recovers from stun.`);
+    }
+
+    return startPlayerTurn();
+  }
+
   log(`\n--- Enemy Turn (${enemy.name}) ---`);
 
   // AP gain
