@@ -120,11 +120,21 @@ export function floatDamage(amount, cardId) {
 
 function getTooltipText(ap) {
   return `
+    <h3>Action Points: ${ap}</h3>
+    <div class="skill-title">Attack</div>
+    <div class="skill-desc">Normal base attack, 1 action point</div>
+    <div class="skill-title">Defend</div>
+    <div class="skill-desc">Halves incomung damage, 0 action point</div>
+    <div class="skill-title">Skills</div>
+    <div class="skill-desc">Activate skills, 2 action points</div>
+  `;
+  /*return `
     <b>Action Points: ${ap}</b><br>
     Attack: normal base attack, 1 action point<br>
     Defend: halves incoming damage, 0 action point<br>
     Skill: activate skill, 2 action points
   `;
+  */
 }
 
 export function attachAPTooltips() {
