@@ -120,11 +120,21 @@ export function floatDamage(amount, cardId) {
 
 function getTooltipText(ap) {
   return `
+    <div class="skill-title">Action Points: ${ap}</div>
+    <div class="skill-title">Attack</div>
+    <div class="skill-desc">Normal base attack, 1 action point</div>
+    <div class="skill-title">Defend</div>
+    <div class="skill-desc">Halves incomung damage, 0 action point</div>
+    <div class="skill-title">Skills</div>
+    <div class="skill-desc">Activate skills, 2 action points</div>
+  `;
+  /*return `
     <b>Action Points: ${ap}</b><br>
     Attack: normal base attack, 1 action point<br>
     Defend: halves incoming damage, 0 action point<br>
     Skill: activate skill, 2 action points
   `;
+  */
 }
 
 export function attachAPTooltips() {
@@ -167,6 +177,23 @@ export function updateUI() {
   updateHP();
   renderAPIcons();
   updateHeaderStats();
+  updateStunVisual();
+}
+
+function updateStunVisual() {
+  const card = document.getElementById("enemyCard");
+  const enemyStatus = document.getElementById("enemyStatus");
+  if (enemy.stunned.active) {
+    card.classList.add("stunned");
+    enemyStatus.style.display = "inline";
+    if (!enemyStatus.textContent) enemyStatus.textContent = "💫";
+  } else {
+    card.classList.remove("stunned");
+    if (enemyStatus) {
+      enemyStatus.textContent = "";
+      enemyStatus.style.display = "none";
+    }
+  }
 }
 
 export function updatePlayerWeaponUI() {

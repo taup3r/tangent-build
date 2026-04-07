@@ -1,6 +1,6 @@
 import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex, setEnemyName } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
-import { playerAttack, playerDefend, playerSkill, startPlayerTurn } from "./combat.js";
+import { playerAttack, playerDefend, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
 import { openEnemyInfo, showDungeonIntro } from "./modal.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -38,7 +38,18 @@ window.addEventListener("DOMContentLoaded", () => {
   }
  document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
-  document.getElementById("skillBtn").addEventListener("click", playerSkill);
+
+  const skillBtn = document.getElementById("skillBtn");
+  const skillMenu = document.getElementById("skillMenu");
+
+  skillBtn.onclick = () => {
+  skillMenu.style.display = skillMenu.style.display === "flex" ? "none" : "flex";
+};
+  document.addEventListener("click", (e) => {
+  if (!skillBtn.contains(e.target) && !skillMenu.contains(e.target)) {
+    skillMenu.style.display = "none";
+  }
+});
 
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);
   document.getElementById("enemyInfoBtn").addEventListener("click", openEnemyInfo);

@@ -142,7 +142,16 @@ export function playerDefend() {
    PLAYER SKILL
 ------------------------- */
 
-export function playerSkill() {
+export function useSkill(type) {
+  document.getElementById("skillMenu").style.display = "none"; // close menu
+
+  if (type === "tackle") return playerSkill();        // your existing skill
+  if (type === "blunt") return playerBluntStrike();   // new stun skill
+}
+
+window.useSkill = useSkill;
+
+function playerSkill() {
   resetSkillTiming();
 
   if (player.ap < 2) return log("Not enough AP!");
@@ -173,6 +182,71 @@ export function playerSkill() {
     animateCard("enemyCard", "skill-anim", 300);
     startSkillTiming();
   }, 1000);
+}
+
+function playerBluntStrike() {
+  resetSkillTiming();
+
+  if (player.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  player.ap -= 2;
+  clampAP();
+  disableButtons();
+
+  // 10% stun chance
+  if (Math.random() < 0.20) {
+    enemy.stunned.active = true;
+    enemy.stunned.duration = 2;
+
+    log("Blunt Strike stuns the enemy!");
+    floatDamage("STUN", "enemyCard");
+    animateCard("enemyCard", "skill-anim");
+
+    updateUI();
+    return enemyTurn();
+  }
+
+  // Hit check
+  if (!rollHit(player, enemy)) {
+    log("Your Blunt Strike missed!");
+    floatDamage("MISS", "enemyCard");
+    updateUI();
+    return enemyTurn();
+  }
+
+  // Otherwise deal 30% damage
+  let base;
+  if (player.weapon) {
+    const w = player.weapon;
+    base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+
+    const weaponSTR = Number(w.stats.STR) || 0;
+    const totalSTR = player.STR + weaponSTR;
+    base = computeDamage(base, totalSTR);
+  } else {
+    base = Math.floor(Math.random() * 6) + 4;
+    base = computeDamage(base, player.STR);
+  }
+
+  let dmg = Math.floor(base * 0.3);
+
+  if (enemy.defending) {
+    dmg = Math.floor(dmg / 2);
+    log(enemy.name + " defended! Damage halved.");
+  }
+
+  enemy.hp -= dmg;
+  if (enemy.hp < 0) enemy.hp = 0;
+
+  log(`Blunt Strike fails, deals ${dmg} damage!`);
+  floatDamage(dmg, "enemyCard");
+  animateCard("enemyCard", "skill-anim");
+
+  updateUI();
+  if (!checkWin()) enemyTurn();
 }
 
 /* -------------------------

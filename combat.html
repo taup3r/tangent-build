@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/stats.css">
   <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/combat.css">
 </head>
 
 <body>
@@ -45,6 +46,7 @@
           <div id="enemyAPIcons" class="ap-icon-row"></div>
 
           <div style="display:flex; align-items:center; gap:6px;">
+            <span id="enemyStatus" class="status-icon" style="display:none;"></span>
             <h3 id="enemyName" class="small-name" style="margin:0;">Enemy</h3>
             <span id="enemyInfoBtn" style="cursor:pointer; font-size:1.2rem;">🔍</span>
           </div>
@@ -95,7 +97,21 @@
         <div class="action-row">
           <button id="attackBtn" class="btn-attack">⚔️ Attack</button>
           <button id="defendBtn" class="btn-defend">🛡️ Defend</button>
-          <button id="skillBtn" class="btn-skill">✨ Skill</button>
+          <div class="skill-dropdown">
+            <button id="skillBtn" class="btn-skill">✨ Skills ▴</button>
+
+            <div id="skillMenu" class="skill-menu">
+              <button class="skill-option" onclick="useSkill('tackle')">
+                <div class="skill-title">Shield Bash</div>
+                <div class="skill-desc">Guaranteed timed hit</div>
+              </button>
+              <button class="skill-option" onclick="useSkill('blunt')">
+                <div class="skill-title">Blunt Strike</div>
+                <div class="skill-desc">20% base chance stun else 30% damage</div>
+              </button>
+            </div>
+
+          </div>
         </div>
 
         <button id="hitBtn" class="hit-button" style="display:none;">HIT!</button>
