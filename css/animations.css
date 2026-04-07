@@ -49,6 +49,10 @@
   animation: floatUp 1s ease-out forwards;
 }
 
+.stunned {
+  filter: brightness(0.7) saturate(0.5);
+}
+
 @keyframes floatUp {
   0% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-40px); }
