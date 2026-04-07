@@ -12,7 +12,7 @@
   border-radius: 6px;
   display: none;
   flex-direction: column;
-  min-width: 120px;
+  min-width: 200px;
   z-index: 20;
 }
 
