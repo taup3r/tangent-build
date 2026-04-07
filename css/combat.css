@@ -28,3 +28,10 @@
 .skill-option:hover {
   background: #3a3a3a;
 }
+
+.status-icon {
+  margin-right: 6px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 2px #000);
+}
