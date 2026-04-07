@@ -287,6 +287,11 @@ export function generateEnemy(playerLevel) {
   const stats = randomEnemyStats(level);
   const weapon = generateWeapon(level);
 
+  const stunned = {
+    active: false,
+    duration: 0
+  };
+
   return {
     baseMaxHP: 30,
     hp: 0,
@@ -308,7 +313,8 @@ export function generateEnemy(playerLevel) {
     hint: tierHint || baseType.hint,
     stats,
     weapon,
-    gold: level * 4
+    gold: level * 4,
+    stunned
   };
 }
 
