@@ -198,8 +198,8 @@ function playerBluntStrike() {
 
   // 10% stun chance
   if (Math.random() < 0.10) {
-    enemy.stunned = true;
-    enemy.stunDuration = 2;
+    enemy.stunned.active = true;
+    enemy.stunned.duration = 2;
 
     log("Blunt Strike stuns the enemy!");
     floatDamage("STUN", "enemyCard");
