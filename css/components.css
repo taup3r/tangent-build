@@ -115,8 +115,8 @@ button:disabled {
 }
 
 /* Colored buttons */
-.btn-attack { background: #ff5f6d; width: 30%; }
-.btn-defend { background: #4cff9c; width: 30%; }
+.btn-attack { background: #ff5f6d; }
+.btn-defend { background: #4cff9c; }
 .btn-skill  { background: #6d8bff; }
 
 .btn-attack:hover { background: #ff7a85; }
