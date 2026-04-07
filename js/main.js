@@ -38,7 +38,13 @@ window.addEventListener("DOMContentLoaded", () => {
   }
  document.getElementById("attackBtn").addEventListener("click", playerAttack);
   document.getElementById("defendBtn").addEventListener("click", playerDefend);
-  document.getElementById("skillBtn").addEventListener("click", playerSkill);
+
+  const skillMenu = document.getElementById("skillMenu");
+
+document.getElementById("skillBtn").onclick = () => {
+  skillMenu.style.display = skillMenu.style.display === "flex" ? "none" : "flex";
+};
+  //document.getElementById("skillBtn").addEventListener("click", playerSkill);
 
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);
   document.getElementById("enemyInfoBtn").addEventListener("click", openEnemyInfo);
