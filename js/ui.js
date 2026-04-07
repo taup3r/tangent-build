@@ -172,8 +172,15 @@ export function updateUI() {
 
 function updateStunVisual() {
   const card = document.getElementById("enemyCard");
-  if (enemy.stunned.active) card.classList.add("stunned");
-  else card.classList.remove("stunned");
+  const enemyStatus = document.getElementById("enemyStatus");
+  if (enemy.stunned.active) {
+    card.classList.add("stunned");
+    enemyStatus.style.display = "inline";
+    enemyStatus.textContent += "💫";
+  } else {
+    card.classList.remove("stunned");
+    if (enemyStatus) enemyStatus.style.display = "none";
+  }
 }
 
 export function updatePlayerWeaponUI() {
