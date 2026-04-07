@@ -149,6 +149,8 @@ export function useSkill(type) {
   if (type === "blunt") return playerBluntStrike();   // new stun skill
 }
 
+window.useSkill = useSkill;
+
 export function playerSkill() {
   resetSkillTiming();
 
