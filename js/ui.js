@@ -120,7 +120,7 @@ export function floatDamage(amount, cardId) {
 
 function getTooltipText(ap) {
   return `
-    <h3>Action Points: ${ap}</h3>
+    <div class="skill-title">Action Points: ${ap}</div>
     <div class="skill-title">Attack</div>
     <div class="skill-desc">Normal base attack, 1 action point</div>
     <div class="skill-title">Defend</div>
