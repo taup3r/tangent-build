@@ -176,7 +176,7 @@ function updateStunVisual() {
   if (enemy.stunned.active) {
     card.classList.add("stunned");
     enemyStatus.style.display = "inline";
-    if (!enemyStatus.textContent.contains("💫")) enemyStatus.textContent += "💫";
+    if (!enemyStatus.textContent) enemyStatus.textContent = "💫";
   } else {
     card.classList.remove("stunned");
     if (enemyStatus) {
