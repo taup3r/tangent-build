@@ -179,7 +179,10 @@ function updateStunVisual() {
     enemyStatus.textContent += "💫";
   } else {
     card.classList.remove("stunned");
-    if (enemyStatus) enemyStatus.style.display = "none";
+    if (enemyStatus) {
+      enemyStatus.textContent = "";
+      enemyStatus.style.display = "none";
+    }
   }
 }
 
