@@ -151,7 +151,7 @@ export function useSkill(type) {
 
 window.useSkill = useSkill;
 
-export function playerSkill() {
+function playerSkill() {
   resetSkillTiming();
 
   if (player.ap < 2) return log("Not enough AP!");
@@ -197,7 +197,7 @@ function playerBluntStrike() {
   disableButtons();
 
   // 10% stun chance
-  if (Math.random() < 0.10) {
+  if (Math.random() < 0.20) {
     enemy.stunned.active = true;
     enemy.stunned.duration = 2;
 
