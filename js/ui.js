@@ -66,6 +66,8 @@ export function renderAPIcons() {
     enemyRow.appendChild(e);
   }
 
+  document.getElementById("skillBtn").disabled = (player.ap < 2);
+
   attachAPTooltips();
 }
 
