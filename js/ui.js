@@ -66,8 +66,6 @@ export function renderAPIcons() {
     enemyRow.appendChild(e);
   }
 
-  document.getElementById("skillBtn").disabled = (player.ap < 2);
-
   attachAPTooltips();
 }
 
@@ -93,7 +91,7 @@ export function disableButtons() {
 export function enableButtons() {
   document.getElementById("attackBtn").disabled = false;
   document.getElementById("defendBtn").disabled = false;
-  document.getElementById("skillBtn").disabled = false;
+  document.getElementById("skillBtn").disabled = (player.ap < 2);
 }
 
 /* -------------------------
