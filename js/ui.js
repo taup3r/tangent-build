@@ -91,7 +91,7 @@ export function disableButtons() {
 export function enableButtons() {
   document.getElementById("attackBtn").disabled = false;
   document.getElementById("defendBtn").disabled = false;
-  document.getElementById("skillBtn").disabled = false;
+  document.getElementById("skillBtn").disabled = (player.ap < 2);
 }
 
 /* -------------------------
