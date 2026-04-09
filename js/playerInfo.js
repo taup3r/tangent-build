@@ -57,3 +57,21 @@ export function openPlayerInfoModal() {
     document.getElementById("playerProfileWeaponLore").textContent = "";
   }
 }
+
+function updateDerivedStats() {
+  const STR = playerStats.STR;
+  const DEX = playerStats.DEX;
+  const AGI = playerStats.AGI;
+  const CON = playerStats.CON;
+
+  // You can tune these formulas later
+  const damageAdjust = Math.floor(STR * 1);
+  const hitChance = 80 + Math.floor(DEX * 1);
+  const evadeChance = 0 + Math.floor(AGI * 1);
+  const hpAdjust = Math.floor(CON * 5);
+
+  document.getElementById("derivedDamage").textContent = `+${damageAdjust}`;
+  document.getElementById("derivedHit").textContent = `${hitChance}%`;
+  document.getElementById("derivedEvade").textContent = `${evadeChance}%`;
+  document.getElementById("derivedHP").textContent = `+${hpAdjust}`;
+}
