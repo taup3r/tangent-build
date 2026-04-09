@@ -74,7 +74,7 @@ function computeDamage(baseDamage, attacker, defender) {
 
   let attackerSTR = attacker.STR;
   if (attacker.weapon) {
-    attackerSTR += Number(attacker.weapon.stats.STR) || 0
+    attackerSTR += Number(attacker.weapon.stats.STR) || 0;
   }
   
   return baseDamage + attackerSTR - dmgRedux;
