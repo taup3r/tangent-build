@@ -353,7 +353,7 @@ export function enemyAttackAction() {
 
   // --- Final damage using your existing formula ---
   //let dmg = computeDamage(base, totalSTR);
-  dmg = computeDamage(base, enemy, player);
+  let dmg = computeDamage(base, enemy, player);
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
