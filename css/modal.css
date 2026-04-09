@@ -196,13 +196,13 @@
   width: 120px;
   height: 120px;
   border-radius: 6px;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .player-info-subheader {
   font-size: 1rem;
   opacity: 0.8;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .player-info-stats {
