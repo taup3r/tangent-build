@@ -70,14 +70,20 @@ function computeDamage(baseDamage, attacker, defender) {
     defenderCON += Number(defender.weapon.stats.CON) || 0;
     defenderAGI += Number(defender.weapon.stats.AGI) || 0;
   }
-  const dmgRedux = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
+
+  let dmgReduction = 0;
+  //Damage Reduction formula is 2CON+1AGI
+  if (defenderAGI > 0 && defenderCON > defenderAGI * 2) {
+    defenderCON = defenderAGI * 2;
+    dmgReduction = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
+  }
 
   let attackerSTR = attacker.STR;
   if (attacker.weapon) {
     attackerSTR += Number(attacker.weapon.stats.STR) || 0;
   }
   
-  return baseDamage + attackerSTR - dmgRedux;
+  return baseDamage + attackerSTR - dmgReduction;
 }
 
 /* -------------------------
