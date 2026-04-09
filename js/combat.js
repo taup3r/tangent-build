@@ -62,7 +62,7 @@ export function rollHit(attacker, defender) {
   //return baseRoll + (STR || 0);
 //}
 
-export function computeDamage(baseDamage, attacker, defender) {
+function computeDamage(baseDamage, attacker, defender) {
 
   let defenderCON = defender.CON;
   let defenderAGI = defender.AGI;
@@ -77,7 +77,7 @@ export function computeDamage(baseDamage, attacker, defender) {
     attackerSTR += Number(attacker.weapon.stats.STR) || 0
   }
   
-  return baseRoll + attackerSTR - dmgRedux;
+  return baseDamage + attackerSTR - dmgRedux;
 }
 
 /* -------------------------
