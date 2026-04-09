@@ -56,6 +56,8 @@ export function openPlayerInfoModal() {
     document.getElementById("playerProfileWeaponStats").textContent = "";
     document.getElementById("playerProfileWeaponLore").textContent = "";
   }
+
+  updateDerivedStats();
 }
 
 function updateDerivedStats() {
