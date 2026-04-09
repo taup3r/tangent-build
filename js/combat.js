@@ -58,8 +58,26 @@ export function rollHit(attacker, defender) {
    DAMAGE WITH STR MODIFIER
 ------------------------- */
 
-export function computeDamage(baseRoll, STR) {
-  return baseRoll + (STR || 0);
+//export function computeDamage(baseRoll, STR) {
+  //return baseRoll + (STR || 0);
+//}
+
+export function computeDamage(baseDamage, attacker, defender) {
+
+  let defenderCON = defender.CON;
+  let defenderAGI = defender.AGI;
+  if (defender.weapon) {
+    defenderCON += Number(defender.weapon.stats.CON) || 0;
+    defenderAGI += Number(defender.weapon.stats.AGI) || 0;
+  }
+  const dmgRedux = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
+
+  let attackerSTR = attacker.STR;
+  if (attacker.weapon) {
+    attackerSTR += Number(attacker.weapon.stats.STR) || 0
+  }
+  
+  return baseRoll + attackerSTR - dmgRedux;
 }
 
 /* -------------------------
@@ -94,16 +112,18 @@ export function playerAttack() {
     base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
     // Add weapon STR to player STR
-    const weaponSTR = Number(w.stats.STR) || 0;
-    const totalSTR = player.STR + weaponSTR;
+    //const weaponSTR = Number(w.stats.STR) || 0;
+    //const totalSTR = player.STR + weaponSTR;
 
     // Compute final damage
-    var dmg = computeDamage(base, totalSTR);
+    //var dmg = computeDamage(base, totalSTR);
+    var dmg = computeDamage(base, player, enemy);
 
   } else {
     // --- Original unarmed damage ---
     base = Math.floor(Math.random() * 6) + 4;
-    var dmg = computeDamage(base, player.STR);
+    //var dmg = computeDamage(base, player.STR);
+    var dmg = computeDamage(base, player, enemy);
   }
 
   if (enemy.defending) {
@@ -223,12 +243,14 @@ function playerBluntStrike() {
     const w = player.weapon;
     base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
-    const weaponSTR = Number(w.stats.STR) || 0;
-    const totalSTR = player.STR + weaponSTR;
-    base = computeDamage(base, totalSTR);
+    //const weaponSTR = Number(w.stats.STR) || 0;
+    //const totalSTR = player.STR + weaponSTR;
+    //base = computeDamage(base, totalSTR);
+    base = computeDamage(base, player, enemy);
   } else {
     base = Math.floor(Math.random() * 6) + 4;
-    base = computeDamage(base, player.STR);
+    //base = computeDamage(base, player.STR);
+    base = computeDamage(base, player, enemy);
   }
 
   let dmg = Math.floor(base * 0.3);
@@ -263,15 +285,17 @@ export function applySkillDamage(perfect) {
     const w = player.weapon;
     base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
-    const weaponSTR = Number(w.stats.STR) || 0;
-    const totalSTR = player.STR + weaponSTR;
+    //const weaponSTR = Number(w.stats.STR) || 0;
+    //const totalSTR = player.STR + weaponSTR;
 
-    base = computeDamage(base, totalSTR);
+    //base = computeDamage(base, totalSTR);
+    base = computeDamage(base, player, enemy);
 
   } else {
     // Original unarmed damage
     base = Math.floor(Math.random() * 6) + 4;
-    base = computeDamage(base, player.STR);
+    //base = computeDamage(base, player.STR);
+    base = computeDamage(base, player, enemy);
   }
 
   let dmg;
@@ -322,13 +346,14 @@ export function enemyAttackAction() {
   const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Weapon STR modifier ---
-  const weaponSTR = Number(w.stats.STR) || 0;
+  //const weaponSTR = Number(w.stats.STR) || 0;
 
   // --- Total STR used in computeDamage ---
-  const totalSTR = enemy.STR + weaponSTR;
+  //const totalSTR = enemy.STR + weaponSTR;
 
   // --- Final damage using your existing formula ---
-  let dmg = computeDamage(base, totalSTR);
+  //let dmg = computeDamage(base, totalSTR);
+  dmg = computeDamage(base, enemy, player);
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -371,13 +396,14 @@ export function enemySkillAction() {
   const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Weapon STR modifier ---
-  const weaponSTR = Number(w.stats.STR) || 0;
+  //const weaponSTR = Number(w.stats.STR) || 0;
 
   // --- Total STR used in computeDamage ---
-  const totalSTR = enemy.STR + weaponSTR;
+  //const totalSTR = enemy.STR + weaponSTR;
 
   // --- Final damage using your existing formula ---
-  let dmg = computeDamage(base, totalSTR);
+  //let dmg = computeDamage(base, totalSTR);
+  let dmg = computeDamage(base, enemy, player);
 
   if (enemy.behavior === "assassin") {
     // crit chance increase damage
