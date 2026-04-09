@@ -79,7 +79,7 @@ function updateDerivedStats() {
   const wEvadeChance = 0 + Math.floor((AGI + wAGI) * 2);
   const hpAdjust = Math.floor(CON * 5);
   const wHpAdjust = Math.floor((CON + wCON) * 5);
-  document.getElementById("derivedDamage").textContent = `+${damageAdjust} (+${wDamageAdjust})`;
+  document.getElementById("derivedDamage").textContent = `+${damageAdjust}` + (wSTR > 0) ? ` (+${wDamageAdjust})` : "";
   document.getElementById("derivedHit").textContent = `${hitChance}% (${wHitChance}%)`;
   document.getElementById("derivedEvade").textContent = `${evadeChance}% (${wEvadeChance}%)`;
   document.getElementById("derivedHP").textContent = `+${hpAdjust} (+${wHpAdjust})`;
