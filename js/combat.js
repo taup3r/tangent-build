@@ -110,20 +110,6 @@ export function playerAttack() {
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
 
-  // --- Weapon damage roll if player has a weapon ---
-  //if (player.weapon) {
-    //const w = player.weapon;
-    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-    // Compute final damage
-    //var dmg = computeDamage(base, player, enemy);
-
-  //} else {
-    // --- Original unarmed damage ---
-    //base = Math.floor(Math.random() * 6) + 4;
-    //var dmg = computeDamage(base, player, enemy);
-  //}
-
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
     log(enemy.name + " defended! Damage halved.");
@@ -236,22 +222,21 @@ function playerBluntStrike() {
   }
 
   // Otherwise deal 30% damage
-  let base;
-  if (player.weapon) {
-    const w = player.weapon;
-    base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+  let base = getBaseDamage(player);
+  let dmg = computeDamage(base, player, enemy);
 
-    //const weaponSTR = Number(w.stats.STR) || 0;
-    //const totalSTR = player.STR + weaponSTR;
-    //base = computeDamage(base, totalSTR);
-    base = computeDamage(base, player, enemy);
-  } else {
-    base = Math.floor(Math.random() * 6) + 4;
-    //base = computeDamage(base, player.STR);
-    base = computeDamage(base, player, enemy);
-  }
+  //if (player.weapon) {
+    //const w = player.weapon;
+    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
-  let dmg = Math.floor(base * 0.3);
+    //base = computeDamage(base, player, enemy);
+  //} else {
+    //base = Math.floor(Math.random() * 6) + 4;
+    //base = computeDamage(base, player, enemy);
+  //}
+
+  //reduced skill damage
+  dmg = Math.floor(dmg * 0.3);
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
@@ -277,32 +262,27 @@ function playerBluntStrike() {
 export function applySkillDamage(perfect) {
   resetSkillTiming();
 
-  let base;
+  let base = getBaseDamage(player);
+  let dmg = computeDamage(base, player, enemy);
 
-  if (player.weapon) {
-    const w = player.weapon;
-    base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+  //if (player.weapon) {
+    //const w = player.weapon;
+    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
-    //const weaponSTR = Number(w.stats.STR) || 0;
-    //const totalSTR = player.STR + weaponSTR;
+    //base = computeDamage(base, player, enemy);
 
-    //base = computeDamage(base, totalSTR);
-    base = computeDamage(base, player, enemy);
-
-  } else {
+  //} else {
     // Original unarmed damage
-    base = Math.floor(Math.random() * 6) + 4;
-    //base = computeDamage(base, player.STR);
-    base = computeDamage(base, player, enemy);
-  }
+    //base = Math.floor(Math.random() * 6) + 4;
+    //base = computeDamage(base, player, enemy);
+  //}
 
-  let dmg;
   if (perfect === true) {
-    dmg = base * 2;      // Perfect timing
+    dmg = dmg * 2; // Perfect timing
   } else if (perfect === false) {
-    dmg = base * 1.5;        // Normal timing
+    dmg = Math.floor(dmg * 1.5); // Normal timing
   } else {
-    dmg = base * 1;        // No click → 100%
+    dmg = dmg * 1; // No click → 100%
   }
 
   if (enemy.defending) {
