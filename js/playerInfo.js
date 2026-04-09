@@ -77,8 +77,8 @@ function updateDerivedStats() {
   const wHitChance = 80 + Math.floor((DEX + wDEX) * 2);
   const evadeChance = 0 + Math.floor(AGI * 2);
   const wEvadeChance = 0 + Math.floor((AGI + wAGI) * 2);
-  const hpAdjust = Math.floor(CON * 5);
-  const wHpAdjust = Math.floor((CON + wCON) * 5);
+  const hpAdjust = 30 + Math.floor(CON * 5);
+  const wHpAdjust = 30 + Math.floor((CON + wCON) * 5);
 
   let wSTRvalue = "";
   if (wSTR > 0) wSTRvalue = ` (+${wDamageAdjust})`;
@@ -93,6 +93,6 @@ function updateDerivedStats() {
   document.getElementById("derivedEvade").textContent = `${evadeChance}%${wAGIvalue}`;
 
   let wCONvalue = "";
-  if (wCON > 0) wCONvalue = ` (+${wHpAdjust})`;
-  document.getElementById("derivedHP").textContent = `+${hpAdjust}${wCONvalue}`;
+  if (wCON > 0) wCONvalue = ` (${wHpAdjust})`;
+  document.getElementById("derivedHP").textContent = `${hpAdjust}${wCONvalue}`;
 }
