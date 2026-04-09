@@ -202,14 +202,14 @@
 .player-info-subheader {
   font-size: 1rem;
   opacity: 0.8;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 
 .player-info-stats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 6px;
-  margin-bottom: 12px;
+  margin: 12px 0px;
 }
 
 .player-info-weapon {
