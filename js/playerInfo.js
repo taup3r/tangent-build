@@ -66,10 +66,10 @@ function updateDerivedStats() {
   const DEX = playerStats.DEX;
   const AGI = playerStats.AGI;
   const CON = playerStats.CON;
-  const wSTR = player.weapon.stats.STR || 0;
-  const wDEX = player.weapon.stats.DEX || 0;
-  const wAGI = player.weapon.stats.AGI || 0;
-  const wCON = player.weapon.stats.CON || 0;
+  const wSTR = player.weapon?.stats.STR || 0;
+  const wDEX = player.weapon?.stats.DEX || 0;
+  const wAGI = player.weapon?.stats.AGI || 0;
+  const wCON = player.weapon?.stats.CON || 0;
 
   const damageAdjust = Math.floor(STR);
   const wDamageAdjust = Math.floor(STR + wSTR);
@@ -83,7 +83,16 @@ function updateDerivedStats() {
   let wSTRvalue = "";
   if (wSTR > 0) wSTRvalue = ` (+${wDamageAdjust})`;
   document.getElementById("derivedDamage").textContent = `+${damageAdjust}${wSTRvalue}`;
-  document.getElementById("derivedHit").textContent = `${hitChance}% (${wHitChance}%)`;
-  document.getElementById("derivedEvade").textContent = `${evadeChance}% (${wEvadeChance}%)`;
-  document.getElementById("derivedHP").textContent = `+${hpAdjust} (+${wHpAdjust})`;
+
+  let wDEXvalue = "";
+  if (wDEX > 0) wDEXvalue = ` (${wHitChance}%)`;
+  document.getElementById("derivedHit").textContent = `${hitChance}%${wDEXvalue}`;
+
+  let wAGIvalue = "";
+  if (wAGI > 0) wAGIvalue = ` (${wEvadeChance}%)`;
+  document.getElementById("derivedEvade").textContent = `${evadeChance}%${wAGIvalue}`;
+
+  let wCONvalue = "";
+  if (wCON > 0) wCONvalue = ` (+${wHpAdjust})`;
+  document.getElementById("derivedHP").textContent = `+${hpAdjust}${wCONvalue}`;
 }
