@@ -21,6 +21,7 @@ import {
 import { startSkillTiming, resetSkillTiming } from "./skillTiming.js";
 import { enemyTurn } from "./enemyAI.js";
 import { checkWin } from "./modal.js";
+import { getBaseDamage } from "./weapon.js";
 
 /* -------------------------
    HIT / MISS CHECK
@@ -55,12 +56,8 @@ export function rollHit(attacker, defender) {
 }
 
 /* -------------------------
-   DAMAGE WITH STR MODIFIER
+   DAMAGE WITH MODIFIER
 ------------------------- */
-
-//export function computeDamage(baseRoll, STR) {
-  //return baseRoll + (STR || 0);
-//}
 
 function computeDamage(baseDamage, attacker, defender) {
 
@@ -110,27 +107,22 @@ export function playerAttack() {
 
   animateCard("enemyCard", "attack-anim");
 
-  let base;
+  let base = getBaseDamage(player);
+  let dmg = computeDamage(base, player, enemy);
 
   // --- Weapon damage roll if player has a weapon ---
-  if (player.weapon) {
-    const w = player.weapon;
-    base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-    // Add weapon STR to player STR
-    //const weaponSTR = Number(w.stats.STR) || 0;
-    //const totalSTR = player.STR + weaponSTR;
+  //if (player.weapon) {
+    //const w = player.weapon;
+    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
     // Compute final damage
-    //var dmg = computeDamage(base, totalSTR);
-    var dmg = computeDamage(base, player, enemy);
+    //var dmg = computeDamage(base, player, enemy);
 
-  } else {
+  //} else {
     // --- Original unarmed damage ---
-    base = Math.floor(Math.random() * 6) + 4;
-    //var dmg = computeDamage(base, player.STR);
-    var dmg = computeDamage(base, player, enemy);
-  }
+    //base = Math.floor(Math.random() * 6) + 4;
+    //var dmg = computeDamage(base, player, enemy);
+  //}
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
