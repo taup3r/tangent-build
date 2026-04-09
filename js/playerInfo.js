@@ -66,8 +66,8 @@ function updateDerivedStats() {
 
   // You can tune these formulas later
   const damageAdjust = Math.floor(STR * 1);
-  const hitChance = 80 + Math.floor(DEX * 1);
-  const evadeChance = 0 + Math.floor(AGI * 1);
+  const hitChance = 80 + Math.floor(DEX * 2);
+  const evadeChance = 0 + Math.floor(AGI * 2);
   const hpAdjust = Math.floor(CON * 5);
 
   document.getElementById("derivedDamage").textContent = `+${damageAdjust}`;
