@@ -282,16 +282,17 @@
 .derived-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 4px;
+  padding: 2px;
   background: #1f1f1f;
-  border-radius: 4px;
+  border-radius: 0px;
   border: 1px solid #333;
-  align-items: left;
+  align-items: center;
 }
 
 .derived-label {
   font-size: 0.85rem;
   color: #aaa;
+  text-align: left;
 }
 
 .derived-value {
