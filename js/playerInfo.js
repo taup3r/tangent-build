@@ -13,6 +13,7 @@ export function openPlayerInfoModal() {
   document.getElementById("playerInfoLevel").textContent = playerStats.level;
   document.getElementById("playerInfoExp").textContent = `${playerStats.exp}/${playerStats.expToNext}`;
   document.getElementById("playerInfoGold").textContent = playerStats.gold || 0;
+  document.getElementById("playerInfoReputation").textContent = playerStats.reputation || 0;
 
   // Stats (after weapon bonuses)
   document.getElementById("playerInfoSTR").textContent = player.STR;
