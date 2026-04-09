@@ -399,3 +399,13 @@ export function upgradeWeapon(inputWeapon, remaining) {
     lore
   };
 }
+
+export function getBaseDamage(attacker) {
+  if (attacker.weapon) {
+    const w = attacker.weapon;
+    return Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
+  }
+
+  // --- Original unarmed damage ---
+  return Math.floor(Math.random() * 4) + 2;
+}
