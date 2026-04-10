@@ -287,7 +287,7 @@ export function generateEnemy(playerLevel) {
 
   const stats = randomEnemyStats(level);
   const weapon = generateWeapon(level);
-  const tenacity = 0;
+  const tenacity = getTenacity(stats, weapon);
 
   const stunned = {
     active: false,
@@ -414,6 +414,21 @@ export function applyStatsToCombat(player, playerStats) {
   player.CON = Number(playerStats.CON) || 0;
 }
 
-function applyAttributes() {
-  //todo
+function getTenacity(stats, weapon) {
+  let statsCON = stats.CON;
+  let statsAGI = stats.AGI;
+  if (weapon) {
+    statsCON += Number(weapon.stats.CON) || 0;
+    statsAGI += Number(weapon.stats.AGI) || 0;
+  }
+
+  let dmgReduction = 0;
+  //Damage Reduction formula is 2CON+1AGI
+  if (statsAGI > 0 && statsCON >= statsAGI * 2) {
+    statsCON = statsAGI * 2;
+
+    return Math.floor(statsCON * 0.25) + Math.floor(statsAGI * 0.5);
+  }
+
+  return 0;
 }
