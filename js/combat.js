@@ -365,7 +365,7 @@ export function enemySkillAction() {
   animateSkillDouble("playerCard");
 
   const base = getBaseDamage(enemy);
-  //const w = enemy.weapon;
+  const w = enemy.weapon;
 
   // --- Weapon base damage roll ---
   //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
