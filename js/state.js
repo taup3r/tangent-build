@@ -437,3 +437,25 @@ export function getTenacity(stats, weapon) {
 
   return Math.floor((xCON * 0.25) + (xAGI * 0.5));
 }
+
+export function getPrecision(stats, weapon) {
+  let statsDEX = stats.DEX;
+  let statsAGI = stats.AGI;
+  if (weapon) {
+    statsDEX += Number(weapon.stats.DEX) || 0;
+    statsAGI += Number(weapon.stats.AGI) || 0;
+  }
+
+  let xAGI = 0;
+  let xDEX = 0;
+  do {
+    if (statsAGI > 1 && statsDEX > 0) {
+      statsAGI -= 2;
+      xAGI += 2;
+      statsDEX -= 1;
+      xDEX += 1;
+    } else break;
+  } while (true);
+
+  return Math.floor((xAGI * 0.25) + (xDEX * 0.5));
+}
