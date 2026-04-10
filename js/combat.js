@@ -328,6 +328,8 @@ export function enemyAttackAction() {
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
 
+  alert(`computed ${dmg}`);
+
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
     log("You defended! Damage halved.");
