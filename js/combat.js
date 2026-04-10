@@ -281,8 +281,6 @@ export function applySkillDamage(perfect) {
     dmg = dmg * 2; // Perfect timing
   } else if (perfect === false) {
     dmg = Math.floor(dmg * 1.5); // Normal timing
-  } else {
-    dmg = dmg * 1; // No click → 100%
   }
 
   if (enemy.defending) {
@@ -318,19 +316,13 @@ export function enemyAttackAction() {
 
   animateCard("playerCard", "attack-anim");
 
-  const w = enemy.weapon;
+  const base = getBaseDamage(enemy);
+  //const w = enemy.weapon;
 
   // --- Weapon base damage roll ---
-  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-  // --- Weapon STR modifier ---
-  //const weaponSTR = Number(w.stats.STR) || 0;
-
-  // --- Total STR used in computeDamage ---
-  //const totalSTR = enemy.STR + weaponSTR;
+  //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Final damage using your existing formula ---
-  //let dmg = computeDamage(base, totalSTR);
   let dmg = computeDamage(base, enemy, player);
 
   if (player.defending) {
@@ -368,19 +360,13 @@ export function enemySkillAction() {
 
   animateSkillDouble("playerCard");
 
-  const w = enemy.weapon;
+  const base = getBaseDamage(enemy);
+  //const w = enemy.weapon;
 
   // --- Weapon base damage roll ---
-  const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-  // --- Weapon STR modifier ---
-  //const weaponSTR = Number(w.stats.STR) || 0;
-
-  // --- Total STR used in computeDamage ---
-  //const totalSTR = enemy.STR + weaponSTR;
+  //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Final damage using your existing formula ---
-  //let dmg = computeDamage(base, totalSTR);
   let dmg = computeDamage(base, enemy, player);
 
   if (enemy.behavior === "assassin") {
