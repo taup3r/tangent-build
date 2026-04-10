@@ -66,7 +66,7 @@ function computeDamage(baseDamage, attacker, defender) {
   }
   let dmgReduction = defender.tenacity;
   
-  if (dmgReduction > (baseDamage + attackerSTR)) return 0; 
+  if (dmgReduction > (baseDamage + attackerSTR)) return 1; 
   return baseDamage + attackerSTR - dmgReduction;
 }
 
@@ -102,6 +102,7 @@ export function playerAttack() {
     log(enemy.name + " defended! Damage halved.");
   }
 
+  if (dmg < 1) dmg = 1;
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
@@ -220,6 +221,7 @@ function playerBluntStrike() {
     log(enemy.name + " defended! Damage halved.");
   }
 
+  if (dmg < 1) dmg = 1;
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
@@ -253,7 +255,7 @@ export function applySkillDamage(perfect) {
     log(enemy.name + " defended! Damage halved.");
   }
 
-  dmg = Math.floor(dmg);
+  if (dmg < 1) dmg = 1;
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
@@ -291,6 +293,7 @@ export function enemyAttackAction() {
     log("You defended! Damage halved.");
   }
 
+  if (dmg < 1) dmg = 1;
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
@@ -350,6 +353,7 @@ export function enemySkillAction() {
     log("You defended! Damage halved.");
   }
 
+  if (dmg < 1) dmg = 1;
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
