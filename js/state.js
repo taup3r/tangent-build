@@ -432,5 +432,17 @@ export function getTenacity(stats, weapon) {
     return Math.floor((statsCON * 0.25) + (statsAGI * 0.5));
   }
 
-  return 0;
+  let xAGI = 0;
+  let xCON = 0;
+  do {
+    if (statsAGI > 1 && statsCON > 0) {
+      statsAGI -= 2;
+      xAGI += 2;
+      statsCON -= 1;
+      xCON += 1;
+    } else break;
+  } while (true);
+
+  return Math.floor((xCON * 0.25) + (xAGI * 0.5));
+  //return 0;
 }
