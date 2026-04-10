@@ -60,20 +60,6 @@ export function rollHit(attacker, defender) {
 ------------------------- */
 
 function computeDamage(baseDamage, attacker, defender) {
-
-  //let defenderCON = defender.CON;
-  //let defenderAGI = defender.AGI;
-  //if (defender.weapon) {
-    //defenderCON += Number(defender.weapon.stats.CON) || 0;
-    //defenderAGI += Number(defender.weapon.stats.AGI) || 0;
-  //}
-
-  //let dmgReduction = 0;
-  //if (defenderAGI > 0 && defenderCON >= defenderAGI * 2) {
-    //defenderCON = defenderAGI * 2;
-    //dmgReduction = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
-  //}
-
   let attackerSTR = attacker.STR;
   if (attacker.weapon) {
     attackerSTR += Number(attacker.weapon.stats.STR) || 0;
@@ -226,16 +212,6 @@ function playerBluntStrike() {
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
 
-  //if (player.weapon) {
-    //const w = player.weapon;
-    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-    //base = computeDamage(base, player, enemy);
-  //} else {
-    //base = Math.floor(Math.random() * 6) + 4;
-    //base = computeDamage(base, player, enemy);
-  //}
-
   //reduced skill damage
   dmg = Math.floor(dmg * 0.3);
 
@@ -265,18 +241,6 @@ export function applySkillDamage(perfect) {
 
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
-
-  //if (player.weapon) {
-    //const w = player.weapon;
-    //base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
-
-    //base = computeDamage(base, player, enemy);
-
-  //} else {
-    // Original unarmed damage
-    //base = Math.floor(Math.random() * 6) + 4;
-    //base = computeDamage(base, player, enemy);
-  //}
 
   if (perfect === true) {
     dmg = dmg * 2; // Perfect timing
@@ -318,10 +282,6 @@ export function enemyAttackAction() {
   animateCard("playerCard", "attack-anim");
 
   const base = getBaseDamage(enemy);
-  const w = enemy.weapon;
-
-  // --- Weapon base damage roll ---
-  //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
@@ -334,7 +294,7 @@ export function enemyAttackAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
+  log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
 
@@ -362,10 +322,6 @@ export function enemySkillAction() {
   animateSkillDouble("playerCard");
 
   const base = getBaseDamage(enemy);
-  const w = enemy.weapon;
-
-  // --- Weapon base damage roll ---
-  //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
 
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
@@ -397,7 +353,7 @@ export function enemySkillAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} unleashes ${w.name} for ${dmg} damage!`);
+  log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 }
 
