@@ -173,13 +173,11 @@ export function attachAPTooltips() {
 ------------------------- */
 
 export function updateUI() {
-  alert("updateUI");
   document.getElementById("playerName").textContent = player.name;
   updateHP();
   renderAPIcons();
   updateHeaderStats();
   updateStunVisual();
-  alert("done updateUI");
 }
 
 function updateStunVisual() {
