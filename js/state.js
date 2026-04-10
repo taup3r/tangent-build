@@ -16,7 +16,8 @@ export let player = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  weapon: null
+  weapon: null,
+  tenacity: 0
 };
 
 /* ================================
@@ -75,6 +76,8 @@ export function loadProgress() {
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
+
+  player.tenacity = getTenacity(playerStats, player.weapon);
 }
 
 export function saveProgress() {
@@ -286,6 +289,7 @@ export function generateEnemy(playerLevel) {
 
   const stats = randomEnemyStats(level);
   const weapon = generateWeapon(level);
+  const tenacity = getTenacity(stats, weapon);
 
   const stunned = {
     active: false,
@@ -314,7 +318,9 @@ export function generateEnemy(playerLevel) {
     stats,
     weapon,
     gold: level * 4,
-    stunned
+    stunned,
+
+    tenacity
   };
 }
 
@@ -408,4 +414,23 @@ export function applyStatsToCombat(player, playerStats) {
   player.DEX = Number(playerStats.DEX) || 0;
   player.AGI = Number(playerStats.AGI) || 0;
   player.CON = Number(playerStats.CON) || 0;
+}
+
+export function getTenacity(stats, weapon) {
+  let statsCON = stats.CON;
+  let statsAGI = stats.AGI;
+  if (weapon) {
+    statsCON += Number(weapon.stats.CON) || 0;
+    statsAGI += Number(weapon.stats.AGI) || 0;
+  }
+
+  let dmgReduction = 0;
+  //Damage Reduction formula is 2CON+1AGI
+  if (statsAGI > 0 && statsCON >= statsAGI * 2) {
+    statsCON = statsAGI * 2;
+
+    return Math.floor((statsCON * 0.25) + (statsAGI * 0.5));
+  }
+
+  return 0;
 }

@@ -197,3 +197,7 @@ button:disabled {
   border: none;
   border-top: 1px solid #444;
 }
+
+.slim {
+  margin: 1px 0;
+}

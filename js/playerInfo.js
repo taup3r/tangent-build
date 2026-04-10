@@ -1,4 +1,4 @@
-import { player, playerStats } from "./state.js";
+import { player, playerStats, getTenacity } from "./state.js";
 
 export function openPlayerInfoModal() {
   const modal = document.getElementById("playerModal");
@@ -71,8 +71,13 @@ function updateDerivedStats() {
   const wAGI = player.weapon?.stats.AGI || 0;
   const wCON = player.weapon?.stats.CON || 0;
 
+  const TEN = getTenacity(playerStats, null);
+  const wTEN = getTenacity(playerStats, player.weapon);
+
   const damageAdjust = Math.floor(STR);
   const wDamageAdjust = Math.floor(STR + wSTR);
+  const damageRedux = Math.floor(TEN);
+  const wDamageRedux = Math.floor(wTEN);
   const hitChance = 80 + Math.floor(DEX * 2);
   const wHitChance = 80 + Math.floor((DEX + wDEX) * 2);
   const evadeChance = 0 + Math.floor(AGI * 2);
@@ -83,6 +88,10 @@ function updateDerivedStats() {
   let wSTRvalue = "";
   if (wSTR > 0) wSTRvalue = ` (+${wDamageAdjust})`;
   document.getElementById("derivedDamage").textContent = `+${damageAdjust}${wSTRvalue}`;
+
+  let wTENvalue = "";
+  if (wTEN > TEN) wTENvalue = ` (-${wDamageRedux})`;
+  document.getElementById("derivedDamageRedux").textContent = `-${damageRedux}${wTENvalue}`;
 
   let wDEXvalue = "";
   if (wDEX > 0) wDEXvalue = ` (${wHitChance}%)`;
