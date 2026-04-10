@@ -430,7 +430,7 @@ function getTenacity(stats, weapon) {
   if (statsAGI > 0 && statsCON >= statsAGI * 2) {
     statsCON = statsAGI * 2;
 
-    return Math.floor(statsCON * 0.25) + Math.floor(statsAGI * 0.5);
+    return Math.floor((statsCON * 0.25) + (statsAGI * 0.5));
   }
 
   return 0;
