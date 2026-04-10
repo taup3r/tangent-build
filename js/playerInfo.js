@@ -72,16 +72,25 @@ function updateDerivedStats() {
   const wCON = player.weapon?.stats.CON || 0;
 
   const TEN = getTenacity(playerStats, null);
+  const PRE = getPrecision(playerStats, null);
   const wTEN = player.tenacity;
+  const wPRE = player.precision;
 
   const damageAdjust = Math.floor(STR);
   const wDamageAdjust = Math.floor(STR + wSTR);
+
   const damageRedux = Math.floor(TEN);
   const wDamageRedux = Math.floor(wTEN);
+
   const hitChance = 80 + Math.floor(DEX * 2);
   const wHitChance = 80 + Math.floor((DEX + wDEX) * 2);
+
   const evadeChance = 0 + Math.floor(AGI * 2);
   const wEvadeChance = 0 + Math.floor((AGI + wAGI) * 2);
+
+  const critChance = 5 + Math.floor(PRE);
+  const wCritChance = 5 + Math.floor(wPRE);
+
   const hpAdjust = 30 + Math.floor(CON * 5);
   const wHpAdjust = 30 + Math.floor((CON + wCON) * 5);
 
@@ -96,6 +105,10 @@ function updateDerivedStats() {
   let wDEXvalue = "";
   if (wDEX > 0) wDEXvalue = ` (${wHitChance}%)`;
   document.getElementById("derivedHit").textContent = `${hitChance}%${wDEXvalue}`;
+
+  let wPREvalue = "";
+  if (wPRE > PRE) wPREvalue = ` (${wCritChance}%)`;
+  document.getElementById("derivedCritChance").textContent = `${critChance}%${wPREvalue}`;
 
   let wAGIvalue = "";
   if (wAGI > 0) wAGIvalue = ` (${wEvadeChance}%)`;
