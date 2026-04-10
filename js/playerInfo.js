@@ -90,7 +90,7 @@ function updateDerivedStats() {
   document.getElementById("derivedDamage").textContent = `+${damageAdjust}${wSTRvalue}`;
 
   let wTENvalue = "";
-  if (wTEN > 0) wTENvalue = ` (-${wDamageRedux})`;
+  if (wTEN > TEN) wTENvalue = ` (-${wDamageRedux})`;
   document.getElementById("derivedDamageRedux").textContent = `-${damageRedux}${wTENvalue}`;
 
   let wDEXvalue = "";
