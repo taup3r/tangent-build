@@ -17,7 +17,8 @@ export let player = {
   AGI: 0,
   CON: 0,
   weapon: null,
-  tenacity: 0
+  tenacity: 0,
+  precision: 0
 };
 
 /* ================================
@@ -78,6 +79,7 @@ export function loadProgress() {
   applyConstitution(player);
 
   player.tenacity = getTenacity(playerStats, player.weapon);
+  player.precision = getPrecision(playerStats, player.weapon);
 }
 
 export function saveProgress() {
@@ -290,6 +292,7 @@ export function generateEnemy(playerLevel) {
   const stats = randomEnemyStats(level);
   const weapon = generateWeapon(level);
   const tenacity = getTenacity(stats, weapon);
+  const precision = getPrecision(stats, weapon);
 
   const stunned = {
     active: false,
@@ -320,7 +323,8 @@ export function generateEnemy(playerLevel) {
     gold: level * 4,
     stunned,
 
-    tenacity
+    tenacity,
+    precision
   };
 }
 
