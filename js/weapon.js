@@ -401,7 +401,6 @@ export function upgradeWeapon(inputWeapon, remaining) {
 }
 
 export function getBaseDamage(attacker) {
-  alert(`getBaseDamage ${attacker.name}`);
 
   if (attacker.weapon) {
     const w = attacker.weapon;
