@@ -435,11 +435,11 @@ export function getTenacity(stats, weapon) {
   let xAGI = 0;
   let xCON = 0;
   do {
-    if (statsAGI > 1 && statsCON > 0) {
-      statsAGI -= 2;
-      xAGI += 2;
-      statsCON -= 1;
-      xCON += 1;
+    if (statsAGI > 0 && statsCON > 1) {
+      statsAGI -= 1;
+      xAGI += 1;
+      statsCON -= 2;
+      xCON += 2;
     } else break;
   } while (true);
 
