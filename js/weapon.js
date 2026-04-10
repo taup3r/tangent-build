@@ -408,5 +408,5 @@ export function getBaseDamage(attacker) {
   }
 
   // --- Original unarmed damage ---
-  return Math.floor(Math.random() * 4) + 12;
+  return Math.floor(Math.random() * 3) + 3;
 }
