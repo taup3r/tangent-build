@@ -70,6 +70,14 @@ function computeDamage(baseDamage, attacker, defender) {
   return baseDamage + attackerSTR - dmgReduction;
 }
 
+function criticalDamage(baseDamage, attacker) {
+  let critChance = 5 + attacker.precision;
+  if ((Math.random() * 100) < critChance) {
+    return Math.floor(baseDamage * 0.5);
+  }
+  return 0;
+}
+
 /* -------------------------
    PLAYER ATTACK
 ------------------------- */
@@ -96,6 +104,8 @@ export function playerAttack() {
 
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
+  const critDamage = criticalDamage(dmg, player);
+  dmg += critDamage;
 
   if (enemy.defending) {
     dmg = Math.floor(dmg / 2);
@@ -106,7 +116,8 @@ export function playerAttack() {
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
-  log(`You attack for ${dmg}!`);
+  if (critDamage > 0) log(`Critical attack for ${dmg}!`);
+  else log(`You attack for ${dmg}!`);
   floatDamage(dmg, "enemyCard");
 
   updateUI();
@@ -212,6 +223,8 @@ function playerBluntStrike() {
   // Otherwise deal 30% damage
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
+  const critDamage = criticalDamage(dmg, player);
+  dmg += critDamage;
 
   //reduced skill damage
   dmg = Math.floor(dmg * 0.3);
@@ -225,7 +238,8 @@ function playerBluntStrike() {
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
-  log(`Blunt Strike fails, deals ${dmg} damage!`);
+  if (critDamage > 0) log(`Blunt Strike fails, deals ${dmg} critical damage!`);
+  else log(`Blunt Strike fails, deals ${dmg} damage!`);
   floatDamage(dmg, "enemyCard");
   animateCard("enemyCard", "skill-anim");
 
@@ -243,6 +257,8 @@ export function applySkillDamage(perfect) {
 
   let base = getBaseDamage(player);
   let dmg = computeDamage(base, player, enemy);
+  const critDamage = criticalDamage(dmg, player);
+  dmg += critDamage;
 
   if (perfect === true) {
     dmg = dmg * 2; // Perfect timing
@@ -259,7 +275,8 @@ export function applySkillDamage(perfect) {
   enemy.hp -= dmg;
   if (enemy.hp < 0) enemy.hp = 0;
 
-  log(`You attack for ${dmg}!`);
+  if (critDamage > 0) log(`You used skilled critical attack for ${dmg}!`);
+  else log(`You used skilled attack for ${dmg}!`);
   floatDamage(dmg, "enemyCard");
   updateUI();
 
@@ -287,6 +304,8 @@ export function enemyAttackAction() {
 
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
+  const critDamage = criticalDamage(dmg, enemy);
+  dmg += critDamage;
 
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
@@ -297,7 +316,8 @@ export function enemyAttackAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
+  if (critDamage > 0) log(`${enemy.name} critically attacks with ${enemy.weapon.name} for ${dmg}!`);
+  else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
 
@@ -328,6 +348,8 @@ export function enemySkillAction() {
 
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
+  const critDamage = criticalDamage(dmg, enemy);
+  dmg += critDamage;
 
   if (enemy.behavior === "assassin") {
     // crit chance increase damage
@@ -357,7 +379,8 @@ export function enemySkillAction() {
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
-  log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
+  if (critDamage > 0) log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} critical damage!`);
+  else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 }
 
