@@ -16,7 +16,8 @@ export let player = {
   DEX: 0,
   AGI: 0,
   CON: 0,
-  weapon: null
+  weapon: null,
+  tenacity: 0
 };
 
 /* ================================
@@ -286,6 +287,7 @@ export function generateEnemy(playerLevel) {
 
   const stats = randomEnemyStats(level);
   const weapon = generateWeapon(level);
+  const tenacity = 0;
 
   const stunned = {
     active: false,
@@ -314,7 +316,9 @@ export function generateEnemy(playerLevel) {
     stats,
     weapon,
     gold: level * 4,
-    stunned
+    stunned,
+
+    tenacity
   };
 }
 
@@ -408,4 +412,8 @@ export function applyStatsToCombat(player, playerStats) {
   player.DEX = Number(playerStats.DEX) || 0;
   player.AGI = Number(playerStats.AGI) || 0;
   player.CON = Number(playerStats.CON) || 0;
+}
+
+function applyAttributes() {
+  //todo
 }
