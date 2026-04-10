@@ -417,6 +417,7 @@ export function applyStatsToCombat(player, playerStats) {
 }
 
 function getTenacity(stats, weapon) {
+  alert(JSON.stringify(stats));
   let statsCON = stats.CON;
   let statsAGI = stats.AGI;
   if (weapon) {
