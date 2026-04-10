@@ -70,8 +70,10 @@ function updateDerivedStats() {
   const wDEX = player.weapon?.stats.DEX || 0;
   const wAGI = player.weapon?.stats.AGI || 0;
   const wCON = player.weapon?.stats.CON || 0;
+  const TEN = player.tenacity || 0;
 
   const damageAdjust = Math.floor(STR);
+  const damageRedux = Math.floor(TEN);
   const wDamageAdjust = Math.floor(STR + wSTR);
   const hitChance = 80 + Math.floor(DEX * 2);
   const wHitChance = 80 + Math.floor((DEX + wDEX) * 2);
@@ -83,6 +85,7 @@ function updateDerivedStats() {
   let wSTRvalue = "";
   if (wSTR > 0) wSTRvalue = ` (+${wDamageAdjust})`;
   document.getElementById("derivedDamage").textContent = `+${damageAdjust}${wSTRvalue}`;
+  document.getElementById("derivedDamageRedux").textContent = `-${damageRedux}`;
 
   let wDEXvalue = "";
   if (wDEX > 0) wDEXvalue = ` (${wHitChance}%)`;
