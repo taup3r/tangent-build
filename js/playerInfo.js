@@ -72,7 +72,7 @@ function updateDerivedStats() {
   const wCON = player.weapon?.stats.CON || 0;
 
   const TEN = getTenacity(playerStats, null);
-  cost wTEN = getTenacity(playerStats, player.weapon);
+  const wTEN = getTenacity(playerStats, player.weapon);
 
   const damageAdjust = Math.floor(STR);
   const wDamageAdjust = Math.floor(STR + wSTR);
