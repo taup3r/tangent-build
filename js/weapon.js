@@ -401,6 +401,8 @@ export function upgradeWeapon(inputWeapon, remaining) {
 }
 
 export function getBaseDamage(attacker) {
+  alert(`getBaseDamage ${attacker.name}`);
+
   if (attacker.weapon) {
     const w = attacker.weapon;
     return Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
