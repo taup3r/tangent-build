@@ -60,7 +60,7 @@ export function rollHit(attacker, defender) {
 ------------------------- */
 
 function computeDamage(baseDamage, attacker, defender) {
-  alert("computeDamage");
+  alert(`computeDamage ${attacker.name}`);
 
   let defenderCON = defender.CON;
   let defenderAGI = defender.AGI;
@@ -69,7 +69,7 @@ function computeDamage(baseDamage, attacker, defender) {
     defenderAGI += Number(defender.weapon.stats.AGI) || 0;
   }
 
-  alert("computeWdamage");
+  alert(`computeWdamage ${attacker.name}`);
 
   let dmgReduction = 0;
   //Damage Reduction formula is 2CON+1AGI
