@@ -78,7 +78,6 @@ export function loadProgress() {
   applyConstitution(player);
 
   player.tenacity = getTenacity(playerStats, player.weapon);
-  alert(player.tenacity);
 }
 
 export function saveProgress() {
