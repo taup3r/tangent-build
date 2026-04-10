@@ -338,6 +338,7 @@ export function enemyAttackAction() {
   alert("after defend");
 
   player.hp -= dmg;
+  alert(`playerHp ${player.hp}`);
   if (player.hp < 0) player.hp = 0;
 
   log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
