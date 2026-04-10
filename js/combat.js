@@ -73,7 +73,7 @@ function computeDamage(baseDamage, attacker, defender) {
 
   let dmgReduction = 0;
   //Damage Reduction formula is 2CON+1AGI
-  if (defenderAGI > 0 && defenderCON > defenderAGI * 2) {
+  if (defenderAGI > 0 && defenderCON >= defenderAGI * 2) {
     defenderCON = defenderAGI * 2;
     dmgReduction = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
   }
@@ -83,6 +83,7 @@ function computeDamage(baseDamage, attacker, defender) {
     attackerSTR += Number(attacker.weapon.stats.STR) || 0;
   }
   
+  if (dmgReduction > (baseDamage + attackerSTR)) return 0; 
   return baseDamage + attackerSTR - dmgReduction;
 }
 
