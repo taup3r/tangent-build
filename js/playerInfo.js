@@ -1,4 +1,4 @@
-import { player, playerStats, getTenacity } from "./state.js";
+import { player, playerStats, getTenacity, getPrecision } from "./state.js";
 
 export function openPlayerInfoModal() {
   const modal = document.getElementById("playerModal");
