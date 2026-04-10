@@ -321,7 +321,7 @@ export function enemyAttackAction() {
   animateCard("playerCard", "attack-anim");
 
   const base = getBaseDamage(enemy);
-  //const w = enemy.weapon;
+  const w = enemy.weapon;
 
   // --- Weapon base damage roll ---
   //const base = Math.floor(Math.random() * (w.damage.max - w.damage.min + 1)) + w.damage.min;
@@ -329,20 +329,14 @@ export function enemyAttackAction() {
   // --- Final damage using your existing formula ---
   let dmg = computeDamage(base, enemy, player);
 
-  alert(`computed ${dmg}`);
-
   if (player.defending) {
     dmg = Math.floor(dmg / 2);
     log("You defended! Damage halved.");
   }
 
-  alert("after defend");
-
   player.hp -= dmg;
-  alert(`playerHp ${player.hp}`);
   if (player.hp < 0) player.hp = 0;
 
-  alert(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
