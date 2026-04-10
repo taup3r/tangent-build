@@ -335,11 +335,12 @@ export function enemyAttackAction() {
     log("You defended! Damage halved.");
   }
 
+  alert("after defend");
+
   player.hp -= dmg;
   if (player.hp < 0) player.hp = 0;
 
   log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
-  alert(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
 
