@@ -424,14 +424,6 @@ export function getTenacity(stats, weapon) {
     statsAGI += Number(weapon.stats.AGI) || 0;
   }
 
-  let dmgReduction = 0;
-  //Damage Reduction formula is 2CON+1AGI
-  if (statsAGI > 0 && statsCON >= statsAGI * 2) {
-    statsCON = statsAGI * 2;
-
-    return Math.floor((statsCON * 0.25) + (statsAGI * 0.5));
-  }
-
   let xAGI = 0;
   let xCON = 0;
   do {
@@ -444,5 +436,4 @@ export function getTenacity(stats, weapon) {
   } while (true);
 
   return Math.floor((xCON * 0.25) + (xAGI * 0.5));
-  //return 0;
 }
