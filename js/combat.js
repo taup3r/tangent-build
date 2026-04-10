@@ -61,24 +61,24 @@ export function rollHit(attacker, defender) {
 
 function computeDamage(baseDamage, attacker, defender) {
 
-  let defenderCON = defender.CON;
-  let defenderAGI = defender.AGI;
-  if (defender.weapon) {
-    defenderCON += Number(defender.weapon.stats.CON) || 0;
-    defenderAGI += Number(defender.weapon.stats.AGI) || 0;
-  }
+  //let defenderCON = defender.CON;
+  //let defenderAGI = defender.AGI;
+  //if (defender.weapon) {
+    //defenderCON += Number(defender.weapon.stats.CON) || 0;
+    //defenderAGI += Number(defender.weapon.stats.AGI) || 0;
+  //}
 
-  let dmgReduction = 0;
-  //Damage Reduction formula is 2CON+1AGI
-  if (defenderAGI > 0 && defenderCON >= defenderAGI * 2) {
-    defenderCON = defenderAGI * 2;
-    dmgReduction = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
-  }
+  //let dmgReduction = 0;
+  //if (defenderAGI > 0 && defenderCON >= defenderAGI * 2) {
+    //defenderCON = defenderAGI * 2;
+    //dmgReduction = Math.floor(defenderCON * 0.25) + Math.floor(defenderAGI * 0.5);
+  //}
 
   let attackerSTR = attacker.STR;
   if (attacker.weapon) {
     attackerSTR += Number(attacker.weapon.stats.STR) || 0;
   }
+  let dmgReduction = defender.tenacity;
   
   if (dmgReduction > (baseDamage + attackerSTR)) return 0; 
   return baseDamage + attackerSTR - dmgReduction;
