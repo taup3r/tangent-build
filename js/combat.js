@@ -341,6 +341,7 @@ export function enemyAttackAction() {
   alert(`playerHp ${player.hp}`);
   if (player.hp < 0) player.hp = 0;
 
+  alert(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   log(`${enemy.name} attacks with ${w.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 }
