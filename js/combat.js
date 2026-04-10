@@ -420,6 +420,7 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  alert("start player turn");
   player.ap += 1;
   clampAP();
 
