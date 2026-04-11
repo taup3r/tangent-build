@@ -426,7 +426,7 @@ export const quests = [
   {
     id: "lostChild",
     chance: 10,
-    stage: 0,
+    stage: 7,
     zone: "residential",
     active: false
   },
