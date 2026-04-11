@@ -371,9 +371,7 @@ function questEncounters() {
     clampReputation();
     saveProgress();
   });
-  if (questCompleted("lostChild")) {
-    tryQuestEncounter("smuggler", 0);
-  }
+  tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
 }
 
 function explore() {
