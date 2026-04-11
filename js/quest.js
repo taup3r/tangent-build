@@ -620,3 +620,8 @@ export function showQuestList()
 
   document.getElementById("quest-list-modal").style.display = "flex";
 }
+
+export function questCompleted(id) {
+  const quest = getQuest(id);
+  return (quest.stage === questData[id].maxStage);
+}
