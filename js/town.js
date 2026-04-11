@@ -91,6 +91,7 @@ function getAlleyZone() {
       action: () => getMessage("e3", () => {
         const weapon = upgradeWeapon(player.weapon, 1);
         openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
+        location.reload();
       }),
       disabled: false
     });
