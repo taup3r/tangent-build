@@ -541,7 +541,7 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
-export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
+export function tryQuestEncounter(id, stage, action = null, ignoreAction = null, require = true) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
@@ -553,7 +553,7 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage && playerStats.zone === (quest.zone || "townSquare")) {
+quest.stage < questData[quest.id].maxStage && playerStats.zone === (quest.zone || "townSquare") && require === true) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
