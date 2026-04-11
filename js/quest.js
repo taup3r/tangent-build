@@ -158,6 +158,19 @@ export const questData = {
       }
     ]
   },
+  "smuggler": {
+    title: "The Smuggler Hideout",
+    type: "backAlley",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Suspicious Man",
+        message: "So you're the adventurer. The people are saying you are a hero for saving that kidnapped child. I don't want any trouble but I hear the Guard Captain is looking for you.",
+        submit: "Okay",
+        nextChance: 100
+      }
+    ]
+  },
   "arenaNormal": {
     title: "Test your Mettle I",
     type: "repeatable",
@@ -439,6 +452,12 @@ export const quests = [
     id: "t1",
     chance: 100,
     stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "smuggler",
+    chance: 100,
+    stage: 0,
     active: false
   }
 ];
