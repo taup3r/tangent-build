@@ -59,7 +59,12 @@ function renderQuests() {
     `;
 
     el.querySelector(".guild-quest-btn").onclick = () => {
-        alert(JSON.stringify(q));
+        //bug fix wrong zone
+        if (q.zone !== "townSquare") {
+          q.zone = "townSquare";
+          saveQuestState();
+        }
+
         if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
         if (q.stage === 1) triggerQuest(q, null, true);
         if (q.stage === 2) {
