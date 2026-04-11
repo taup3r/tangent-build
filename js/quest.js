@@ -427,9 +427,9 @@ export const quests = [
 loadQuestState();
 
 export function loadQuestState() {
-  let saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
+  let list = JSON.parse(localStorage.getItem(playerQuests) || "[]");
 
-  saved = [
+  let saved = [
   ...new Map(list.map(item => [item.id, item])).values()
 ];
 
