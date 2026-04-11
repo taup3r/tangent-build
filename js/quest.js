@@ -7,7 +7,7 @@ const playerQuests = `${player.name}_quests`;
 export const questData = {
   "blacksmith": {
     title: "The Lost Hammer",
-    type: "town",
+    type: "townSquare",
     maxStage: 5, // set to 0 to turn off quest
     flow: [
       {
@@ -43,7 +43,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    type: "town",
+    type: "townSquare",
     maxStage: 9, // set to 0 to turn off quest
     flow: [
       {
@@ -167,13 +167,15 @@ export const questData = {
         npc: "Suspicious Man",
         message: "So you're the adventurer. The people are saying you are a hero for saving that kidnapped child. I don't want any trouble but I hear the Guard Captain is looking for you.",
         submit: "Okay",
-        nextChance: 100
+        nextChance: 100,
+        nextZone: "townSquare"
       },
       {
         npc: "Guard Captain Orval",
         message: "I hear you're quite the hero. Oh, you must have met my informant, yeah I need them as a wide network of information is required to keep this town safe. Anyway, can you investigate the back alley please. My informant is only good on words, but I trust you are good in a fight as well. He will tell you more.",
         submit: "Accept",
-        nextChance: 10
+        nextChance: 10,
+        nextZone: "backAlley"
       },
       {
         npc: "Orval's informant",
@@ -538,6 +540,7 @@ export function triggerQuest(quest, action = null, isView = false) {
     if (isView === false) {
       quest.stage += 1;
       quest.chance = currentQuestStage.nextChance;
+      quest.zone = currentQuestStage.nextZone;
       quest.active = true;
       saveQuestState();
     }
@@ -637,10 +640,4 @@ export function showQuestList()
 export function questCompleted(id) {
   const quest = getQuest(id);
   return (quest.stage === questData[id].maxStage);
-}
-
-export function switchZone(id, zone) {
-  const quest = getQuest(id);
-  quest.zone = zone;
-  saveQuestState();
 }
