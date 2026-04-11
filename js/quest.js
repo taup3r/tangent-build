@@ -200,6 +200,19 @@ export const questData = {
       }
     ]
   },
+  "t1": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Guard Captain Orval",
+        message: "Welcome to Tangent Town, this is a small yet humble town. Please don't worry about anything as I try to keep the place safe for all the townsfolk.",
+        submit: "Goodbye",
+        nextChance: 100
+      }
+    ]
+  },
   "h1": {
     title: "",
     type: "chat",
@@ -418,6 +431,12 @@ export const quests = [
   },
   {
     id: "e3",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "t1",
     chance: 100,
     stage: 1, // starts at 1 for view
     active: false
