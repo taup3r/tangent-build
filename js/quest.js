@@ -639,8 +639,8 @@ export function questCompleted(id) {
   return (quest.stage === questData[id].maxStage);
 }
 
-export function switchZone(id) {
+export function switchZone(id, zone) {
   const quest = getQuest(id);
-  quest.zone = "townSquare";
+  quest.zone = zone;
   saveQuestState();
 }
