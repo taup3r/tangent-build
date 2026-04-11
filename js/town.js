@@ -211,12 +211,6 @@ function getTownSquareZone() {
 
   const buttons = [
     {
-      label: "Train Stats",
-      class: "btn-train",
-      action: () => showStatsModal(),
-      disabled: playerStats.statPoints <= 0
-    },
-    {
       label: "Fight in Arena",
       class: "btn-arena",
       action: () => {
@@ -244,6 +238,22 @@ function getTownSquareZone() {
       disabled: false
     }
   ];
+
+  if (playerStats.statPoints <= 0) {
+    buttons.push({
+      label: "Guard Post",
+      class: "btn-train",
+      action: () => getMessage("t1"),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Train Stats",
+      class: "btn-train",
+      action: () => showStatsModal(),
+      disabled: false
+    });
+  }
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
