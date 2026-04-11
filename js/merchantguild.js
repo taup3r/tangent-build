@@ -59,6 +59,7 @@ function renderQuests() {
     `;
 
     el.querySelector(".guild-quest-btn").onclick = () => {
+        if (q.active === false) q.stage = 0;
         if (q.stage === 0) tryQuestEncounter(q.id, 0, () => location.reload());
         if (q.stage === 1) triggerQuest(q, null, true);
         if (q.stage === 2) {
