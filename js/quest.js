@@ -161,13 +161,25 @@ export const questData = {
   "smuggler": {
     title: "The Smuggler Hideout",
     type: "backAlley",
-    maxStage: 1,
+    maxStage: 3,
     flow: [
       {
         npc: "Suspicious Man",
         message: "So you're the adventurer. The people are saying you are a hero for saving that kidnapped child. I don't want any trouble but I hear the Guard Captain is looking for you.",
         submit: "Okay",
         nextChance: 100
+      },
+      {
+        npc: "Guard Captain Orval",
+        message: "I hear you're quite the hero. Oh, you must have met my informant, yeah I need them as a wide network of information is required to keep this town safe. Anyway, can you investigate the back alley please. My informant is only good on words, but I trust you are good in a fight as well. He will tell you more.",
+        submit: "Okay",
+        nextChance: 10
+      },
+      {
+        npc: "Orval's informant",
+        message: "Hey man - please keep a low profile, I don't want to break my cover. I have heard of whispers of a smuggler network here in Wayfarer. I guess you could say an abandoned place would be a good cover for their activities.",
+        submit: "Thank you, I got this.",
+        nextChance: 25
       }
     ]
   },
