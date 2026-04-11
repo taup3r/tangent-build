@@ -458,6 +458,7 @@ export const quests = [
     id: "smuggler",
     chance: 100,
     stage: 0,
+    zone: "backAlley",
     active: false
   }
 ];
