@@ -207,7 +207,7 @@ export const questData = {
     flow: [
       {
         npc: "Guard Captain Orval",
-        message: "Welcome to Tangent Town, this is a small yet humble town. Please don't worry about anything as I try to keep the place safe for all the townsfolk.",
+        message: "Welcome to Wayfarer! This is a small yet humble town full of lively people and adventure. Please don't worry about anything as I try to keep the place safe for all the townsfolk.",
         submit: "Goodbye",
         nextChance: 100
       }
