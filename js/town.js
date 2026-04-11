@@ -90,8 +90,11 @@ function getAlleyZone() {
       class: "btn-train",
       action: () => getMessage("e3", () => {
         const weapon = upgradeWeapon(player.weapon, 1);
-        openCompareWeapon(weapon, "Equip", () => player.weapon = weapon);
-        location.reload();
+        openCompareWeapon(weapon, "Equip", () => {
+          player.weapon = weapon;
+          saveProgress();
+          location.reload();
+        });
       }),
       disabled: false
     });
