@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, switchZone } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -371,7 +371,7 @@ function questEncounters() {
     clampReputation();
     saveProgress();
   });
-  tryQuestEncounter("smuggler", 0, () => switchZone("smuggler", "townSquare"), null, questCompleted("lostChild"));
+  tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
   tryQuestEncounter("smuggler", 2);
 }
 
