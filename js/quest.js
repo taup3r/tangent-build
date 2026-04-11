@@ -426,19 +426,12 @@ export const quests = [
 
 loadQuestState();
 
-/*
 export function loadQuestState() {
-  const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
-  if (saved.length > 0) {
-    quests.forEach((q, i) => {
-      quests[i] = { ...q, ...(saved[i] || q) };
-    });
-  }
-}
-*/
+  let saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
 
-export function loadQuestState() {
-  const saved = JSON.parse(localStorage.getItem(playerQuests) || "[]");
+  saved = [
+  ...new Map(list.map(item => [item.id, item])).values()
+];
 
   quests.forEach((q, i) => {
     // If saved[i] exists, merge it; otherwise keep original quest data
