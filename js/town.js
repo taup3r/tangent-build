@@ -243,7 +243,7 @@ function getTownSquareZone() {
     buttons.push({
       label: "Guard Post",
       class: "btn-train",
-      action: () => getMessage("t1"),
+      action: () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")),
       disabled: false
     });
   } else {
@@ -372,6 +372,7 @@ function questEncounters() {
     saveProgress();
   });
   tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
+  tryQuestEncounter("smuggler", 2);
 }
 
 function explore() {
