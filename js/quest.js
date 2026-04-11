@@ -172,7 +172,7 @@ export const questData = {
       {
         npc: "Guard Captain Orval",
         message: "I hear you're quite the hero. Oh, you must have met my informant, yeah I need them as a wide network of information is required to keep this town safe. Anyway, can you investigate the back alley please. My informant is only good on words, but I trust you are good in a fight as well. He will tell you more.",
-        submit: "Okay",
+        submit: "Accept",
         nextChance: 10
       },
       {
