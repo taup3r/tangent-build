@@ -161,7 +161,7 @@ export const questData = {
   "smuggler": {
     title: "The Smuggler Hideout",
     type: "backAlley",
-    maxStage: 3,
+    maxStage: 5,
     flow: [
       {
         npc: "Suspicious Man",
@@ -179,9 +179,23 @@ export const questData = {
       },
       {
         npc: "Orval's informant",
-        message: "Hey man - please keep a low profile, I don't want to break my cover. I have heard of whispers of a smuggler network here in Wayfarer. I guess you could say an abandoned place would be a good cover for their activities.",
+        message: "Hey man - please keep a low profile, I don't want to break my cover. I have heard of whispers of a smuggler network here in Wayfarer. I then saw shady men dragging crates into an abandoned shack. They had a strange symbol on their sleeves...",
         submit: "Thank you, I got this.",
-        nextChance: 25
+        nextChance: 30
+      },
+      {
+        npc: "",
+        message: "You can see men moving boxes, all of them are busy. One of them is standing far back, closer to you and somehow oblivious to your presence.",
+        submit: "Pick his pocket",
+        cancel: "Fight him",
+        nextChance: 100
+      },
+      {
+        npc: "",
+        message: "You got an odd looking key and a very faint sketch of a house in the residential area. Time to investigate.",
+        submit: "Continue",
+        nextZone: "residential",
+        nextChance: 20
       }
     ]
   },
