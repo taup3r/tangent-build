@@ -502,6 +502,12 @@ export const quests = [
     stage: 0,
     zone: "backAlley",
     active: false
+  },
+  {
+    id: "e4",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
   }
 ];
 
