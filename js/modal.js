@@ -289,8 +289,9 @@ export function checkWin() {
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => showResultModal(true));
     } else {
-      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () =>
- showResultModal(true)))));
+      tryQuestEncounter("smuggler", 4);
+      questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
+ showResultModal(true))));
     }
     return true;
   }
