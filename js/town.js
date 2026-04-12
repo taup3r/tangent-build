@@ -52,6 +52,7 @@ function getAlleyZone() {
       class: "btn-arena",
       action: () => {
         tryQuestEncounter("smuggler", 3, () => {
+          alert("smuggler3");
           //if (Math.random() < 0.05) {
             //location.reload();
           //} else {
