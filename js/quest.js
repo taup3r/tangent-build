@@ -687,7 +687,9 @@ export function questCompleted(id) {
 }
 
 export function revertQuest(id, stage) {
-  const quest = getQuest(id);
-  quest.stage -= 1;
-  saveQuestState();
+  checkQuest(id, stage, () => {
+    const quest = getQuest(id);
+    quest.stage -= 1;
+    saveQuestState();
+  });
 }
