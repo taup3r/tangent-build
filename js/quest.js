@@ -591,6 +591,16 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
+export function checkQuest(id, stage, action) {
+  const quest = getQuest(id);
+
+  // Only trigger if quest not started
+  if (quest.stage === stage && Math.random() < (quest.chance/100) &&
+quest.stage < questData[quest.id].maxStage) {
+    action();
+  }
+}
+
 export function tryQuestEncounter(id, stage, action = null, ignoreAction = null, require = true) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
