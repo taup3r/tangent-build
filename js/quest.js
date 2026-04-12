@@ -181,20 +181,23 @@ export const questData = {
         npc: "Orval's informant",
         message: "Hey man - please keep a low profile, I don't want to break my cover. I have heard of whispers of a smuggler network here in Wayfarer. I then saw shady men dragging crates into an abandoned shack. They had a strange symbol on their sleeves...",
         submit: "Thank you, I got this.",
-        nextChance: 30
+        nextChance: 30,
+        nextZone: "backAlley"
       },
       {
         npc: "",
         message: "You can see men moving boxes, all of them are busy. One of them is standing far back, closer to you and somehow oblivious to your presence.",
         submit: "Pick his pocket",
-        nextChance: 100
+        nextChance: 100,
+        nextZone: "backAlley"
       },
       {
         npc: "",
         message: "You got an odd looking key and a very faint sketch of a house in the residential area. Time to investigate.",
         submit: "Continue",
         nextZone: "residential",
-        nextChance: 20
+        nextChance: 20,
+        nextZone: "backAlley"
       }
     ]
   },
