@@ -51,7 +51,16 @@ function getAlleyZone() {
       label: "Abandoned Shack",
       class: "btn-arena",
       action: () => {
-        tryQuestEncounter("smuggler", 3, null, getMessage("h7"));
+        tryQuestEncounter("smuggler", 3, () => {
+          if (Math.random < 0.25) {
+            return location.reload();
+          }
+          getMessage("e4, () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        }, getMessage("h7"));
       },
       disabled: false
     },
