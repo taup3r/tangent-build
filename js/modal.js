@@ -6,7 +6,7 @@ import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnem
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { showQuestList, tryQuestEncounter, questIncrement, checkQuest, getQuest } from "./quest.js";
+import { showQuestList, tryQuestEncounter, questIncrement, revertQuest } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
@@ -299,11 +299,7 @@ export function checkWin() {
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
 
-    checkQuest("smuggler", 4, () => {
-      const quest = getQuest("smuggler");
-      quest.stage -= 1;
-      saveQuestState();
-    });
+    revertQuest("smuggler", 4);
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;
