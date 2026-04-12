@@ -6,7 +6,7 @@ import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnem
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { showQuestList, tryQuestEncounter, questIncrement } from "./quest.js";
+import { showQuestList, tryQuestEncounter, questIncrement, revertQuest } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
@@ -288,6 +288,7 @@ export function checkWin() {
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => showResultModal(true));
+      tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true));
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true))));
@@ -298,6 +299,7 @@ export function checkWin() {
   if (player.hp <= 0) {
     document.getElementById("log").textContent += "You were defeated!\n";
 
+    revertQuest("smuggler", 4);
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;

@@ -7,7 +7,7 @@ const playerQuests = `${player.name}_quests`;
 export const questData = {
   "blacksmith": {
     title: "The Lost Hammer",
-    type: "town",
+    type: "townSquare",
     maxStage: 5, // set to 0 to turn off quest
     flow: [
       {
@@ -43,7 +43,7 @@ export const questData = {
   },
   "merchantGuild": {
     title: "Merchant's Guild Problems",
-    type: "town",
+    type: "townSquare",
     maxStage: 9, // set to 0 to turn off quest
     flow: [
       {
@@ -158,6 +158,48 @@ export const questData = {
       }
     ]
   },
+  "smuggler": {
+    title: "The Smuggler Hideout",
+    type: "backAlley",
+    maxStage: 0,
+    flow: [
+      {
+        npc: "Suspicious Man",
+        message: "So you're the adventurer. The people are saying you are a hero for saving that kidnapped child. I don't want any trouble but I hear the Guard Captain is looking for you.",
+        submit: "Okay",
+        nextChance: 100,
+        nextZone: "townSquare"
+      },
+      {
+        npc: "Guard Captain Orval",
+        message: "I hear you're quite the hero. Oh, you must have met my informant, yeah I need them as a wide network of information is required to keep this town safe. Anyway, can you investigate the back alley please. My informant is only good on words, but I trust you are good in a fight as well. He will tell you more.",
+        submit: "Accept",
+        nextChance: 10,
+        nextZone: "backAlley"
+      },
+      {
+        npc: "Orval's informant",
+        message: "Hey man - please keep a low profile, I don't want to break my cover. I have heard of whispers of a smuggler network here in Wayfarer. I then saw shady men dragging crates into an abandoned shack. They had a strange symbol on their sleeves...",
+        submit: "Thank you, I got this.",
+        nextChance: 30,
+        nextZone: "backAlley"
+      },
+      {
+        npc: "",
+        message: "You can see men moving boxes, all of them are busy. One of them is standing far back, closer to you and somehow oblivious to your presence.",
+        submit: "Pick his pocket",
+        nextChance: 100,
+        nextZone: "backAlley"
+      },
+      {
+        npc: "",
+        message: "You got an odd looking key and a very faint sketch of a house in the residential area. Time to investigate.",
+        submit: "Continue",
+        nextChance: 20,
+        nextZone: "residential"
+      }
+    ]
+  },
   "arenaNormal": {
     title: "Test your Mettle I",
     type: "repeatable",
@@ -196,6 +238,19 @@ export const questData = {
         npc: "Old man Calidore",
         message: "That is very fine work! I've sent your reward through the merchant guild. Thanks again!",
         submit: "Accept",
+        nextChance: 100
+      }
+    ]
+  },
+  "t1": {
+    title: "",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Guard Captain Orval",
+        message: "Welcome to Wayfarer! This is a small yet humble town full of lively people and adventure. Please don't worry about anything as I try to keep the place safe for all the townsfolk.",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
@@ -321,6 +376,18 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "e4": {
+    title: "Fight",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You try to be quiet as you make your way but the man turned, you've been made! Time to fight!",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -400,7 +467,7 @@ export const quests = [
   {
     id: "lostChild",
     chance: 10,
-    stage: 0,
+    stage: 7,
     zone: "residential",
     active: false
   },
@@ -420,6 +487,25 @@ export const quests = [
     id: "e3",
     chance: 100,
     stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "t1",
+    chance: 100,
+    stage: 1, // starts at 1 for view
+    active: false
+  },
+  {
+    id: "smuggler",
+    chance: 15,
+    stage: 0,
+    zone: "backAlley",
+    active: false
+  },
+  {
+    id: "e4",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
     active: false
   }
 ];
@@ -487,6 +573,7 @@ export function triggerQuest(quest, action = null, isView = false) {
     if (isView === false) {
       quest.stage += 1;
       quest.chance = currentQuestStage.nextChance;
+      quest.zone = currentQuestStage.nextZone;
       quest.active = true;
       saveQuestState();
     }
@@ -503,7 +590,17 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
-export function tryQuestEncounter(id, stage, action = null, ignoreAction = null) {
+export function checkQuest(id, stage, action) {
+  const quest = getQuest(id);
+
+  // Only trigger if quest not started
+  if (quest.stage === stage && Math.random() < (quest.chance/100) &&
+quest.stage < questData[quest.id].maxStage) {
+    action();
+  }
+}
+
+export function tryQuestEncounter(id, stage, action = null, ignoreAction = null, require = true) {
   const ignoreButton = document.getElementById("ignoreButton");
   if (ignoreButton) {
     ignoreButton.onclick = () => {
@@ -515,7 +612,7 @@ export function tryQuestEncounter(id, stage, action = null, ignoreAction = null)
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
-quest.stage < questData[quest.id].maxStage && playerStats.zone === (quest.zone || "townSquare")) {
+quest.stage < questData[quest.id].maxStage && playerStats.zone === (quest.zone || "townSquare") && require === true) {
     triggerQuest(quest, action);
   } else {
     if (ignoreAction) ignoreAction();
@@ -581,4 +678,20 @@ export function showQuestList()
 };
 
   document.getElementById("quest-list-modal").style.display = "flex";
+}
+
+export function questCompleted(id) {
+  const quest = getQuest(id);
+  return (quest.stage === questData[id].maxStage);
+}
+
+export function revertQuest(id, stage) {
+  checkQuest(id, stage, () => {
+    const quest = getQuest(id);
+    quest.stage -= 1;
+    const prevQuest = questData[id].flow[quest.stage - 1];
+    quest.chance = prevQuest.nextChance;
+    quest.zone = prevQuest.nextZone;
+    saveQuestState();
+  });
 }

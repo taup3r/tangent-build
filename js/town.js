@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -50,7 +50,19 @@ function getAlleyZone() {
     {
       label: "Abandoned Shack",
       class: "btn-arena",
-      action: () => getMessage("h7"),
+      action: () => {
+        tryQuestEncounter("smuggler", 3, () => {
+          if (Math.random() < 0.15) {
+            tryQuestEncounter("smuggler", 4);
+          } else {
+            getMessage("e4", () => {
+              playerStats.combatEncounter = true;
+              saveProgress();
+              window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+            });
+          }
+        }, () => getMessage("h7"));
+      },
       disabled: false
     },
     {
@@ -211,12 +223,6 @@ function getTownSquareZone() {
 
   const buttons = [
     {
-      label: "Train Stats",
-      class: "btn-train",
-      action: () => showStatsModal(),
-      disabled: playerStats.statPoints <= 0
-    },
-    {
       label: "Fight in Arena",
       class: "btn-arena",
       action: () => {
@@ -244,6 +250,22 @@ function getTownSquareZone() {
       disabled: false
     }
   ];
+
+  if (playerStats.statPoints <= 0) {
+    buttons.push({
+      label: "Guard Post",
+      class: "btn-train",
+      action: () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Train Stats",
+      class: "btn-train",
+      action: () => showStatsModal(),
+      disabled: false
+    });
+  }
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
@@ -361,6 +383,8 @@ function questEncounters() {
     clampReputation();
     saveProgress();
   });
+  tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
+  tryQuestEncounter("smuggler", 2);
 }
 
 function explore() {
