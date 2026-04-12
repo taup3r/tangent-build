@@ -195,9 +195,8 @@ export const questData = {
         npc: "",
         message: "You got an odd looking key and a very faint sketch of a house in the residential area. Time to investigate.",
         submit: "Continue",
-        nextZone: "residential",
         nextChance: 20,
-        nextZone: "backAlley"
+        nextZone: "residential"
       }
     ]
   },
@@ -690,6 +689,9 @@ export function revertQuest(id, stage) {
   checkQuest(id, stage, () => {
     const quest = getQuest(id);
     quest.stage -= 1;
+    const prevQuest = questData[id].flow[quest.stage - 1];
+    quest.chance = prevQuest.nextChance;
+    quest.zone = prevQuest.nextZone;
     saveQuestState();
   });
 }
