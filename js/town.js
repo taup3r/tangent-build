@@ -53,7 +53,7 @@ function getAlleyZone() {
       action: () => {
         tryQuestEncounter("smuggler", 3, () => {
           if (Math.random() < 0.15) {
-            location.reload();
+            tryQuestEncounter("smuggler", 4);
           } else {
             getMessage("e4", () => {
               playerStats.combatEncounter = true;
