@@ -187,7 +187,6 @@ export const questData = {
         npc: "",
         message: "You can see men moving boxes, all of them are busy. One of them is standing far back, closer to you and somehow oblivious to your presence.",
         submit: "Pick his pocket",
-        cancel: "Fight him",
         nextChance: 100
       },
       {
@@ -372,6 +371,18 @@ export const questData = {
       {
         npc: "",
         message: "You found treasure! You are now too cautious as you open it and was granted with great relief. There really are treasures still in this place.",
+        nextChance: 100
+      }
+    ]
+  },
+  "e4": {
+    title: "Fight",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You try to be quiet as you make your way but the man turned, you've been made! Time to fight!",
         nextChance: 100
       }
     ]
