@@ -685,3 +685,9 @@ export function questCompleted(id) {
   const quest = getQuest(id);
   return (quest.stage === questData[id].maxStage);
 }
+
+export function revertQuest(id, stage) {
+  const quest = getQuest(id);
+  quest.stage -= 1;
+  saveQuestState();
+}
