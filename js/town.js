@@ -55,7 +55,7 @@ function getAlleyZone() {
           if (Math.random < 0.25) {
             return location.reload();
           }
-          getMessage("e4, () => {
+          getMessage("e4", () => {
             playerStats.combatEncounter = true;
             saveProgress();
             window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
