@@ -61,7 +61,7 @@ function getAlleyZone() {
               window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
             });
           }
-        }, getMessage("h7"));
+        }, () => getMessage("h7"));
       },
       disabled: false
     },
