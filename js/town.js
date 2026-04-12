@@ -53,13 +53,14 @@ function getAlleyZone() {
       action: () => {
         tryQuestEncounter("smuggler", 3, () => {
           if (Math.random < 0.25) {
-            return location.reload();
+            location.reload();
+          } else {
+            getMessage("e4", () => {
+              playerStats.combatEncounter = true;
+              saveProgress();
+              window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+            });
           }
-          getMessage("e4", () => {
-            playerStats.combatEncounter = true;
-            saveProgress();
-            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
-          });
         }, getMessage("h7"));
       },
       disabled: false
