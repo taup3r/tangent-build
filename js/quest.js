@@ -161,7 +161,7 @@ export const questData = {
   "smuggler": {
     title: "The Smuggler Hideout",
     type: "backAlley",
-    maxStage: 5,
+    maxStage: 0,
     flow: [
       {
         npc: "Suspicious Man",
@@ -497,7 +497,7 @@ export const quests = [
   },
   {
     id: "smuggler",
-    chance: 100,
+    chance: 15,
     stage: 0,
     zone: "backAlley",
     active: false
