@@ -50,7 +50,9 @@ function getAlleyZone() {
     {
       label: "Abandoned Shack",
       class: "btn-arena",
-      action: () => getMessage("h7"),
+      action: () => {
+        tryQuestEncounter("smuggler", 3, null, getMessage("h7"));
+      },
       disabled: false
     },
     {
