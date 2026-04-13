@@ -270,7 +270,7 @@ function getTownSquareZone() {
     buttons.push({
       label: "Guard Post",
       class: "btn-train",
-      action: () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")),
+      action: () => tryQuestEncounter("smuggler", 6, null, () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1"))),
       disabled: false
     });
   } else {
