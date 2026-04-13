@@ -285,10 +285,9 @@ export function checkWin() {
       if (enemy.name === "Guild Smuggler") {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
       }
-      tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
+      tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("smuggler", 5, () => showResultModal(true), () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true))))));
     } else if (playerStats.combatEncounter === true) {
-      tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => showResultModal(true));
-      tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true));
+      tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true)));
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true))));
@@ -300,6 +299,7 @@ export function checkWin() {
     document.getElementById("log").textContent += "You were defeated!\n";
 
     revertQuest("smuggler", 4);
+    revertQuest("smuggler", 5);
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;
