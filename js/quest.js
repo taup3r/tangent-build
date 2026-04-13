@@ -604,13 +604,15 @@ export function ignoreQuest(action = null) {
   if (action) action();
 }
 
-export function checkQuest(id, stage, action) {
+export function checkQuest(id, stage, action, otherAction = null) {
   const quest = getQuest(id);
 
   // Only trigger if quest not started
   if (quest.stage === stage && Math.random() < (quest.chance/100) &&
 quest.stage < questData[quest.id].maxStage) {
     action();
+  } else {
+    if (otherAction) otherAction();
   }
 }
 
