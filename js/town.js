@@ -150,12 +150,6 @@ function getResidentialZone() {
       disabled: false
     },
     {
-      label: "Willowbend Homestead",
-      class: "btn-dungeon",
-      action: () => getMessage("h3"),
-      disabled: false
-    },
-    {
       label: "Mosslight Cabin",
       class: "btn-train",
       action: () => {
@@ -223,6 +217,13 @@ function getResidentialZone() {
         startDungeon("smuggler");
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
+      disabled: false
+    });
+  }, () => {
+    buttons.push({
+      label: "Willowbend Homestead",
+      class: "btn-dungeon",
+      action: () => getMessage("h3"),
       disabled: false
     });
   });
