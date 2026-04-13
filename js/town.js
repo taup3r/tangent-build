@@ -213,6 +213,22 @@ function getResidentialZone() {
     }
   ];
 
+  //checkQuest("smuggler", 5, () =>
+  if (true) {
+    buttons.push({
+      label: "Enter Smuggler Hideout",
+      class: "btn-dungeon",
+      action: () => {
+        // Start dungeon
+        setDungeonMode(true);
+        startDungeon(dungeonType.type);
+
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    });
+  }
+
   zoneName.textContent = "Wayfarer's Keep";
   return buttons;
 }
