@@ -161,7 +161,7 @@ export const questData = {
   "smuggler": {
     title: "The Smuggler Hideout",
     type: "backAlley",
-    maxStage: 0,
+    maxStage: 7,
     flow: [
       {
         npc: "Suspicious Man",
@@ -195,8 +195,22 @@ export const questData = {
         npc: "",
         message: "You got an odd looking key and a very faint sketch of a house in the residential area. Time to investigate.",
         submit: "Continue",
-        nextChance: 20,
+        nextChance: 100,
         nextZone: "residential"
+      },
+      {
+        npc: "",
+        message: "The smugglers were transporting a strange obsidian shard. Someone powerful must be behind this... I should report this to Orval.",
+        submit: "Pick up shard",
+        nextChance: 100,
+        nextZone: "townSquare"
+      },
+      {
+        npc: "Guard Captain Orval",
+        message: "This shard... I’ve seen something like it before. There’s someone you need to meet. I'll get back to you on this as soon as I can.",
+        submit: "Understood",
+        nextChance: 100,
+        nextZone: "townSquare"
       }
     ]
   },
