@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -213,16 +213,14 @@ function getResidentialZone() {
     }
   ];
 
-  //checkQuest("smuggler", 5, () =>
-  if (true) {
+  checkQuest("smuggler", 5, () => {
     buttons.push({
       label: "Enter Smuggler Hideout",
       class: "btn-dungeon",
       action: () => {
         // Start dungeon
         setDungeonMode(true);
-        startDungeon(dungeonType.type);
-
+        startDungeon("smuggler");
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
