@@ -299,7 +299,6 @@ export function checkWin() {
     document.getElementById("log").textContent += "You were defeated!\n";
 
     revertQuest("smuggler", 4);
-    revertQuest("smuggler", 5);
     tryQuestEncounter("merchantGuild", 4, () => showResultModal(false), () =>
  showResultModal(false));
     return true;
