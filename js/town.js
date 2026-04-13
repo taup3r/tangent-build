@@ -225,7 +225,7 @@ function getResidentialZone() {
       },
       disabled: false
     });
-  }
+  });
 
   zoneName.textContent = "Wayfarer's Keep";
   return buttons;
