@@ -285,7 +285,7 @@ export function checkWin() {
       if (enemy.name === "Guild Smuggler") {
         tryQuestEncounter("merchantGuild", 6, () => clearEnemyName());
       }
-      tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("smuggler", 5, () => showResultModal(true), () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true))))));
+      tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true)));
     } else {
@@ -454,6 +454,7 @@ export function startNewBattle() {
     // Dungeon complete → return to town
     setDungeonMode(false);
     showDungeonSummary();
+    tryQuestEncounter("smuggler", 5);
     return;
   }
 
