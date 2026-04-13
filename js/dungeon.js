@@ -33,10 +33,10 @@ export const dungeonTypes = {
     rewardBonus: 8
   },
   smuggler: {
-    type: "hard",
+    type: "normal",
     name: "Smuggler Hideout",
-    enemies: 2,
-    elites: 2,
+    enemies: 4,
+    elites: 1,
     veterans: 1,
     bosses: 1,
     intro: "The townsfolk whisper about a place beneath the old trade roads — a forgotten wine cellar carved into the bedrock long before the town existed. Now, its stone corridors echo with the low murmur of contraband deals and the clatter of crates dragged across the floor.",
