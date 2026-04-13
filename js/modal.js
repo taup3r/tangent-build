@@ -453,8 +453,7 @@ export function startNewBattle() {
 
     // Dungeon complete → return to town
     setDungeonMode(false);
-    showDungeonSummary();
-    tryQuestEncounter("smuggler", 5);
+    tryQuestEncounter("smuggler", 5, () => showDungeonSummary(), () => showDungeonSummary());
     return;
   }
 
