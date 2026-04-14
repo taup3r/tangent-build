@@ -31,6 +31,17 @@ export const dungeonTypes = {
     intro: "A cursed wind howls through the obsidian halls. Only the strongest return from this place.",
     epilogue: "The nightmare fades as the final monstrosity falls. You feel changed by what you survived.",
     rewardBonus: 8
+  },
+  smuggler: {
+    type: "normal",
+    name: "Smuggler Hideout",
+    enemies: 4,
+    elites: 1,
+    veterans: 1,
+    bosses: 1,
+    intro: "The townsfolk whisper about a place beneath the old trade roads — a forgotten wine cellar carved into the bedrock long before the town existed. Now, its stone corridors echo with the low murmur of contraband deals and the clatter of crates dragged across the floor.",
+    epilogue: "The last smuggler collapses, their torch clattering across the stone floor. The hideout falls silent — no more whispered deals, no more crates dragged through the dark. Only the drip of water and the faint smell of smoke remain.",
+    rewardBonus: 6
   }
 };
 

@@ -1,7 +1,7 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -150,12 +150,6 @@ function getResidentialZone() {
       disabled: false
     },
     {
-      label: "Willowbend Homestead",
-      class: "btn-dungeon",
-      action: () => getMessage("h3"),
-      disabled: false
-    },
-    {
       label: "Mosslight Cabin",
       class: "btn-train",
       action: () => {
@@ -213,6 +207,27 @@ function getResidentialZone() {
     }
   ];
 
+  checkQuest("smuggler", 5, () => {
+    buttons.push({
+      label: "Enter Smuggler Hideout",
+      class: "btn-dungeon",
+      action: () => {
+        // Start dungeon
+        setDungeonMode(true);
+        startDungeon("smuggler");
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    });
+  }, () => {
+    buttons.push({
+      label: "Willowbend Homestead",
+      class: "btn-dungeon",
+      action: () => getMessage("h3"),
+      disabled: false
+    });
+  });
+
   zoneName.textContent = "Wayfarer's Keep";
   return buttons;
 }
@@ -255,7 +270,7 @@ function getTownSquareZone() {
     buttons.push({
       label: "Guard Post",
       class: "btn-train",
-      action: () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")),
+      action: () => tryQuestEncounter("smuggler", 6, null, () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1"))),
       disabled: false
     });
   } else {
