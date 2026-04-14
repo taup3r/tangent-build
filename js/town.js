@@ -311,7 +311,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  //if (blacksmithDone === true && merchantGuildDone === true) {
+  if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
@@ -322,7 +322,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
-  //}
+  }
 
   zoneName.textContent = "Wayfarer's Rest";
   return buttons;
