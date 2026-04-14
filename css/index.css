@@ -38,10 +38,10 @@ h3 {
 }
 
 h4 {
-  margin: 0 0 30px;
-  font-size: 0.8rem;
-  color: #9aa0a6;
-  font-weight: 400;
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #4dd0e1;
+  text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
 }
 
 button {
