@@ -37,6 +37,13 @@ h3 {
   text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
 }
 
+h4 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #4dd0e1;
+  text-shadow: 0 0 12px rgba(77, 208, 225, 0.4);
+}
+
 button {
   width: 100%;
   padding: 14px 22px;
