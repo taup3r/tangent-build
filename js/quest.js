@@ -540,6 +540,11 @@ export function loadQuestState() {
     } else {
       quests[i] = { ...q }; // ensure fresh copy, not reference
     }
+
+    //bugfix
+    if (quests[i].id === "lostChild" && quests[i].active === false) {
+      quests[i].stage = 0;
+    }
   });
 }
 
