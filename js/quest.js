@@ -301,7 +301,7 @@ export const questData = {
     maxStage: 1,
     flow: [
       {
-        npc: "Guard Captain Thorne",
+        npc: "Guard Captain Orval",
         message: "The wind’s been restless today. When it carries a stranger to my door, I take it as a sign. Tell me your name, traveler — and whether trouble follows behind you.",
         nextChance: 100
       }
