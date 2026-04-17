@@ -117,11 +117,11 @@ export const itemData = {
 export const items = [
   {
     id: "ore-w",
-    count: 0
+    count: 100
   },
   {
     id: "ore-g",
-    count: 0
+    count: 100
   },
   {
     id: "ore-b",
