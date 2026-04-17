@@ -116,45 +116,52 @@ export const questData = {
         message: "Have you seen my son? He hasn't come home since yesterday...",
         submit: "Offer Help",
         cancel: "Ignore",
-        nextChance: 25
+        nextChance: 25,
+        nextZone: "residential"
       },
       {
         npc: "",
         message: "You found small footprints towards the the different houses. The kid must be playing around somewhere.",
         submit: "Investigate",
-        nextChance: 50
+        nextChance: 50,
+        nextZone: "residential"
       },
       {
         npc: "",
         message: "A hooded figure flees as you are looking around the boxes.",
         submit: "Leave",
-        nextChance: 10
+        nextChance: 10,
+        nextZone: "residential"
       },
       {
         npc: "",
         message: "Looking through posters throughout the village you found a note: 'Bring the boy to the abandoned house'.",
         submit: "Continue",
         cancel: "Ignore",
-        nextChance: 100
+        nextChance: 100,
+        nextZone: "residential"
       },
       {
         npc: "",
         message: "As you searched around the house you found the missing boy tied up inside. A hooded figure is guarding him. Time to fight.",
         submit: "Fight",
         cancel: "Escape",
-        nextChance: 100
+        nextChance: 100,
+        nextZone: "residential"
       },
       {
         npc: "Lost Child",
         message: "Thank you kind sir. I was just playing outside the village when that hooded man took me. Can you take me home now please.",
         submit: "Finish",
-        nextChance: 100
+        nextChance: 100,
+        nextZone: "residential"
       },
       {
         npc: "Thankful Mother",
         message: "Thank you so much for finding and saving my son. I don't know what I'd do without your help. Please accept this small token of appreciation.",
         submit: "Accept",
-        nextChance: 10
+        nextChance: 10,
+        nextZone: "residential"
       }
     ]
   },
