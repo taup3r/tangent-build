@@ -14,7 +14,8 @@ import {
   enemyAttackAction,
   enemySkillAction,
   enemyDefendAction,
-  enemySkipAction
+  enemySkipAction,
+  skillBalancedThrust
 } from "./combat.js";
 
 /* -------------------------
@@ -63,6 +64,13 @@ function decideEnemyAction() {
       return "defend";
     }
     return "defend";
+  }
+
+  // TRAINOR — Balanced Thrust
+  if (type === "bthrust") {
+    if (enemy.ap >= 2) return type;
+    if (enemy.ap >= 1) return "defend";
+    return "attack";
   }
 
   // ============================
@@ -121,6 +129,9 @@ export function enemyTurn() {
   }
   else if (action === "defend") {
     enemyDefendAction();
+  }
+  else if (action === "bthrust") {
+    skillBalancedThrust(enemy, player);
   }
   else {
     enemySkipAction();
