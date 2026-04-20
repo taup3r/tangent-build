@@ -301,9 +301,9 @@ function skillBalancedThrust(attacker, defender) {
   animateCard(defenderCard, "skill-anim");
 
   //20% chance ap refund
-  if (Math.random() < 0.8) {
+  if (Math.random() < 0.2) {
     attacker.ap += 1;
-    log("Balanced Thrust succeeds refunding 1 ap!");
+    log("Success, refunding 1 ap!");
   }
 
   updateUI();
