@@ -150,7 +150,7 @@ export function useSkill(type) {
 
   if (type === "tackle") return playerSkill();        // your existing skill
   if (type === "blunt") return playerBluntStrike();   // new stun skill
-  if (type === "bthrust") return playerBalancedThrust();
+  if (type === "bthrust") return skillBalancedThrust(player, enemy);
 }
 
 window.useSkill = useSkill;
