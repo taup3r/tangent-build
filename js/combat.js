@@ -150,6 +150,7 @@ export function useSkill(type) {
 
   if (type === "tackle") return playerSkill();        // your existing skill
   if (type === "blunt") return playerBluntStrike();   // new stun skill
+  if (type === "bthrust") return playerBalancedThrust();
 }
 
 window.useSkill = useSkill;
@@ -242,6 +243,58 @@ function playerBluntStrike() {
   else log(`Blunt Strike fails, deals ${dmg} damage!`);
   floatDamage(dmg, "enemyCard");
   animateCard("enemyCard", "skill-anim");
+
+  updateUI();
+  if (!checkWin()) enemyTurn();
+}
+
+function playerBalancedThrust() {
+  resetSkillTiming();
+
+  if (player.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  player.ap -= 2;
+  clampAP();
+  disableButtons();
+
+  // Hit check
+  if (!rollHit(player, enemy)) {
+    log("Your Balanced Thrust missed!");
+    floatDamage("MISS", "enemyCard");
+    updateUI();
+    return enemyTurn();
+  }
+
+  let base = getBaseDamage(player);
+  let dmg = computeDamage(base, player, enemy);
+  const critDamage = criticalDamage(dmg, player);
+  dmg += critDamage;
+
+  //Deal 150% skill damage
+  dmg = Math.floor(dmg * 1.5);
+
+  if (enemy.defending) {
+    dmg = Math.floor(dmg / 2);
+    log(enemy.name + " defended! Damage halved.");
+  }
+
+  if (dmg < 1) dmg = 1;
+  enemy.hp -= dmg;
+  if (enemy.hp < 0) enemy.hp = 0;
+
+  if (critDamage > 0) log(`Balanced Thrust deals ${dmg} critical damage!`);
+  else log(`Balanced Thrust deals ${dmg} damage!`);
+  floatDamage(dmg, "enemyCard");
+  animateCard("enemyCard", "skill-anim");
+
+  //20% chance ap refund
+  if (Math.random() < 0.2) {
+    player.ap += 1;
+    log("Balanced Thrust succeeds refunding 1 ap!");
+  }
 
   updateUI();
   if (!checkWin()) enemyTurn();
