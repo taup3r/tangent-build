@@ -248,7 +248,7 @@ function playerBluntStrike() {
   if (!checkWin()) enemyTurn();
 }
 
-function skillBalancedThrust(attacker, defender) {
+export function skillBalancedThrust(attacker, defender) {
   const isPlayer = (attacker.name === player.name);
   let attackerCard = "playerCard";
   let defenderCard = "enemyCard";
