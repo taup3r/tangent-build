@@ -259,7 +259,7 @@ export function setEnemy(playerLevel, enemyType) {
     type: "Trainor",
     behavior: enemyType,
     hint: "Trainor"
-  };
+  });
 }
 
 export function generateEnemy(playerLevel, enemyType = null) {
