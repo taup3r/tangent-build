@@ -1,4 +1,4 @@
-import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress, setEnemy } from "./state.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
@@ -242,6 +242,7 @@ function getTownSquareZone() {
       class: "btn-arena",
       action: () => {
         // Normal single battle
+        setEnemy(player.level + 2, "bthrust");
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
