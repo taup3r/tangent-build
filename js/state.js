@@ -201,6 +201,7 @@ const playerDungeonType = `dungeonType_${player.name}`;
 const playerDungeonQueue = `dungeonQueue_${player.name}`;
 const playerDungeonIndex = `dungeonIndex_${player.name}`;
 const playerEnemyName = `enemyName_${player.name}`;
+const playerEnemyType = `enemyType_${player.name}`;
 
 export function setDungeonMode(enable) {
   if (enable) {
@@ -232,6 +233,14 @@ export let dungeonQueue = JSON.parse(localStorage.getItem(playerDungeonQueue) ||
 export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
 export let enemyName = localStorage.getItem(playerEnemyName);
+
+export function setEnemyType(type) {
+  localStorage.setItem(playerEnemyType, type);
+}
+
+export function clearEnemyType() {
+  localStorage.removeItem(playerEnemyType);
+}
 
 export function setEnemyName(name) {
   localStorage.setItem(playerEnemyName, name);
