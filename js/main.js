@@ -1,4 +1,4 @@
-import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex, setEnemyName, generateEnemy } from "./state.js";
+import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex, setEnemyName, setEnemy } from "./state.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
@@ -29,11 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
   initializePortraits();
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
-  //enemy = generateEnemy(2);
-  //{
-    //behavior: "bthrust",
-    //hint: "Trainor"
-  //};
+  setEnemy(2, "bthrust");
   applyConstitution(enemy);
   updateUI();
   updatePlayerWeaponUI();
