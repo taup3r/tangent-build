@@ -6,7 +6,7 @@
    - Turn transitions
 ============================================ */
 
-import { player, enemy, clampAP } from "./state.js";
+import { player, enemy, clampAP, clearEnemyType } from "./state.js";
 import {
   updateUI,
   log,
