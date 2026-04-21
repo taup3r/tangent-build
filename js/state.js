@@ -353,7 +353,8 @@ const enemyPortraits = {
   warlock: "assets/enemy_warlock.png",
   assassin: "assets/enemy_assassin.png",
   sentinel: "assets/enemy_sentinel.png",
-  berserker: "assets/enemy_berserker.png"
+  berserker: "assets/enemy_berserker.png",
+  bthrust: "assets/enemy_berserker.png"
 };
 
 export function initializePortraits() {
