@@ -234,6 +234,8 @@ export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
 export let enemyName = localStorage.getItem(playerEnemyName);
 
+export let enemyType = localStorage.getItem(playerEnemyType);
+
 export function setEnemyType(type) {
   localStorage.setItem(playerEnemyType, type);
 }
@@ -263,15 +265,7 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
-export function setEnemy(playerLevel, enemyType) {
-  enemy = generateEnemy(playerLevel, {
-    type: "Trainor",
-    behavior: enemyType,
-    hint: "Trainor"
-  });
-}
-
-export function generateEnemy(playerLevel, enemyType = null) {
+export function generateEnemy(playerLevel) {
   let tier;
   if (dungeonMode) {
     tier = getNextDungeonTier();
@@ -290,7 +284,11 @@ export function generateEnemy(playerLevel, enemyType = null) {
 
   // Base type
   let baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
-  if (enemyType) baseType = enemyType;
+  if (enemyType) baseType = {
+    type: "Trainor",
+    behavior: enemyType,
+    hint: "Trainor"
+  };
 
   let name = randomName();
 
