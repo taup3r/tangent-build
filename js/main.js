@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
     return location.reload();
   });
 
-  //setEnemy(2, "bthrust");
+  setEnemy(2, "bthrust");
   initializePortraits();
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
