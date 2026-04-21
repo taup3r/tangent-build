@@ -26,10 +26,10 @@ window.addEventListener("DOMContentLoaded", () => {
     return location.reload();
   });
 
+  setEnemy(2, "bthrust");
   initializePortraits();
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
-  setEnemy(2, "bthrust");
   applyConstitution(enemy);
   updateUI();
   updatePlayerWeaponUI();
