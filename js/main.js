@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
   initializePortraits();
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
-  enemy = generateEnemy(2);
+  //enemy = generateEnemy(2);
   //{
     //behavior: "bthrust",
     //hint: "Trainor"
