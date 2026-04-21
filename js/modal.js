@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName, clearEnemyType } from "./state.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
@@ -278,6 +278,7 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 
 export function checkWin() {
   if (enemy.hp <= 0) {
+    clearEnemyType();
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
 
@@ -296,6 +297,7 @@ export function checkWin() {
   }
 
   if (player.hp <= 0) {
+    clearEnemyType();
     document.getElementById("log").textContent += "You were defeated!\n";
 
     revertQuest("smuggler", 4);
