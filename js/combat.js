@@ -274,6 +274,7 @@ export function skillBalancedThrust(attacker, defender) {
     floatDamage("MISS", defenderCard);
     updateUI();
     if (isPlayer) return enemyTurn();
+    else return;
   }
 
   let base = getBaseDamage(attacker);
