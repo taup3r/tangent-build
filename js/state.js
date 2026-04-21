@@ -254,6 +254,14 @@ export function getNextDungeonTier() {
    ENEMY GENERATOR (TIERED)
 ================================ */
 
+export function setEnemy(playerLevel, enemyType) {
+  enemy = generateEnemy(playerLevel, {
+    type: "Trainor",
+    behavior: enemyType,
+    hint: "Trainor"
+  };
+}
+
 export function generateEnemy(playerLevel, enemyType = null) {
   let tier;
   if (dungeonMode) {
