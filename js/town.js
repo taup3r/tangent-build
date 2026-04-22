@@ -149,6 +149,8 @@ function getResidentialZone() {
       action: () => getMessage("h1", () => {
         //if (learn) {
           getMessage("s1", () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
             setEnemyType("bthrust");
             window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
           });
