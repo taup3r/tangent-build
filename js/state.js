@@ -138,7 +138,8 @@ const enemyTypes = [
   { type: "Silent Assassin", behavior: "assassin", hint: "This foe moves with deadly precision..." },
   { type: "Raging Berserker", behavior: "berserker", hint: "Its eyes burn with uncontrollable fury..." },
   { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." },
-  { type: "Balanced Thrust Veteran", behavior: "bthrust", hint: "Always ready for a quick spar..." }
+  { type: "Balanced Thrust Veteran", behavior: "bthrust", hint: "Always ready for a quick spar..." },
+  { type: "Blunt Strike Veteran", behavior: "bstrike", hint: "Always ready for a quick spar..." }
 ];
 
 // Tier roll:
@@ -358,7 +359,8 @@ const enemyPortraits = {
   assassin: "assets/enemy_assassin.png",
   sentinel: "assets/enemy_sentinel.png",
   berserker: "assets/enemy_berserker.png",
-  bthrust: "assets/enemy_berserker.png"
+  bthrust: "assets/enemy_berserker.png",
+  bstrike: "assets/enemy_sentinel.png"
 };
 
 export function initializePortraits() {
