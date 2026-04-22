@@ -146,7 +146,14 @@ function getResidentialZone() {
     {
       label: "Thistledown Rest",
       class: "btn-arena",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h1", () => {
+        //if (learn) {
+          getMessage("s1", () => {
+            setEnemyType("bthrust");
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        //}
+      }),
       disabled: false
     },
     {
@@ -157,14 +164,7 @@ function getResidentialZone() {
         if (quest.stage < questData["lostChild"].maxStage) {
           getMessage("h7", () => tryQuestEncounter("lostChild", 2));
         } else {
-          getMessage("h6", () => {
-            //if (learn) {
-              getMessage("s1", () => {
-                setEnemyType("bthrust");
-                window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
-              });
-            //}
-          });
+          getMessage("h6");
         }
       },
       disabled: false
