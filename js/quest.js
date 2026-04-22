@@ -409,6 +409,19 @@ export const questData = {
         nextChance: 100
       }
     ]
+  },
+  "s1": {
+    title: "Learn Balanced Thrust",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Trey Loudcry",
+        message: "Do you want to learn the skill 'Balanced Thrust'? Time to fight!",
+        submit: "Okay",
+        nextChance: 100
+      }
+    ]
   }
 };
 
@@ -525,6 +538,12 @@ export const quests = [
   },
   {
     id: "e4",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "s1",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false
