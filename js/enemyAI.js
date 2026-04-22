@@ -141,6 +141,9 @@ export function enemyTurn() {
   else if (action === "bthrust") {
     skillBalancedThrust(enemy, player);
   }
+  else if (action === "bstrike") {
+    skillBluntStrike(enemy, player);
+  }
   else {
     enemySkipAction();
   }
