@@ -18,3 +18,30 @@ export const skills = [
     level: 0
   }
 ]
+
+loadSkills();
+
+export function loadSkills() {
+  let list = JSON.parse(localStorage.getItem(playerSkills) || "[]");
+
+  let saved = [
+  ...new Map(list.map(item => [item.id, item])).values()
+];
+
+  skills.forEach((q, i) => {
+    // If saved[i] exists, merge it; otherwise keep original data
+    if (saved[i] && saved[i].id === q.id) {
+      skills[i] = { ...q, ...saved[i] };
+    } else {
+      skills[i] = { ...q }; // ensure fresh copy, not reference
+    }
+  });
+}
+
+export function saveSkills() {
+  localStorage.setItem(playerSkills, JSON.stringify(skills));
+}
+
+export function getSkill(id) {
+  return skills.find(q => q.id === id);
+}
