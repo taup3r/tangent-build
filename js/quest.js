@@ -416,7 +416,7 @@ export const questData = {
     maxStage: 1,
     flow: [
       {
-        npc: "Trey Loudcry",
+        npc: "Selra, Merchant Guild Clerk",
         message: "Do you want to learn the skill 'Balanced Thrust'? Time to fight!",
         submit: "Okay",
         nextChance: 100
