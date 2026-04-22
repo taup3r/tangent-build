@@ -1,5 +1,5 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress, setEnemyType } from "./state.js";
-import { hasSkill, levelSkill } from "./skill.js";
+import { hasSkill, levelSkill } from "./skills.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
