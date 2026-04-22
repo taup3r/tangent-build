@@ -162,7 +162,7 @@ function getResidentialZone() {
               getMessage("s1", () => {
                 setEnemyType("bthrust");
                 window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
-              }
+              });
             //}
           });
         }
