@@ -45,3 +45,14 @@ export function saveSkills() {
 export function getSkill(id) {
   return skills.find(q => q.id === id);
 }
+
+export function hasSkill(id) {
+  const skill = getSkill(id);
+  return skill.level > 0;
+}
+
+export function levelSkill(id) {
+  const skill = getSkill(id);
+  skill.level += 1;
+  saveSkills();
+}
