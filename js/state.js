@@ -272,7 +272,7 @@ export function generateEnemy(playerLevel) {
   if (dungeonMode) {
     tier = getNextDungeonTier();
   } else if (enemyType) {
-    tier = "veteran";
+    tier = "elite";
   } else {
     tier = rollEnemyTier();
   }
