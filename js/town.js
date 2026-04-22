@@ -1,4 +1,5 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress, setEnemyType } from "./state.js";
+import { hasSkill, levelSkill } from "./skill.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
@@ -147,14 +148,14 @@ function getResidentialZone() {
       label: "Thistledown Rest",
       class: "btn-arena",
       action: () => getMessage("h1", () => {
-        //if (learn) {
+        if (!hasSkill("bthrust")) {
           getMessage("s1", () => {
             playerStats.combatEncounter = true;
             saveProgress();
             setEnemyType("bthrust");
             window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
           });
-        //}
+        }
       }),
       disabled: false
     },
