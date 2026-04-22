@@ -271,9 +271,12 @@ export function generateEnemy(playerLevel) {
   let tier;
   if (dungeonMode) {
     tier = getNextDungeonTier();
+  } else if (enemyType) {
+    tier = "veteran";
   } else {
     tier = rollEnemyTier();
   }
+
   if (enemyName === "Guild Smuggler" && dungeonMode) {
     tier = "veteran";
   }
