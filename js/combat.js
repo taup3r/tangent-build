@@ -149,7 +149,7 @@ export function useSkill(type) {
   document.getElementById("skillMenu").style.display = "none"; // close menu
 
   if (type === "tackle") return playerSkill();        // your existing skill
-  if (type === "blunt") return playerBluntStrike();   // new stun skill
+  if (type === "blunt") return skillBluntStrike(player, enemy);   // new stun skill
   if (type === "bthrust") return skillBalancedThrust(player, enemy);
 }
 
@@ -246,6 +246,79 @@ function playerBluntStrike() {
 
   updateUI();
   if (!checkWin()) enemyTurn();
+}
+
+export function skillBluntStrike(attacker, defender) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
+
+  if (isPlayer) resetSkillTiming();
+
+  if (attacker.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  attacker.ap -= 2;
+  clampAP();
+  if (isPlayer) disableButtons();
+
+  // 20% stun chance
+  if (Math.random() < 0.20) {
+    defender.stunned.active = true;
+    defender.stunned.duration = 2;
+
+    log("Blunt Strike successful!");
+    floatDamage("STUN", defenderCard);
+    animateCard(defenderCard, "skill-anim");
+
+    updateUI();
+    if (isPlayer) return enemyTurn();
+    else return;
+  }
+
+  // Hit check
+  if (!rollHit(attacker, defender)) {
+    log("Blunt Strike missed!");
+    floatDamage("MISS", defenderCard);
+    updateUI();
+    if (isPlayer) return enemyTurn();
+    else return;
+  }
+
+  // Otherwise deal 30% damage
+  let base = getBaseDamage(attacker);
+  let dmg = computeDamage(base, attacker, defender);
+  const critDamage = criticalDamage(dmg, attacker);
+  dmg += critDamage;
+
+  //reduced skill damage
+  dmg = Math.floor(dmg * 0.3);
+
+  if (defender.defending) {
+    dmg = Math.floor(dmg / 2);
+    if (isPlayer) log(defender.name + " defended! Damage halved.");
+    else log("You defended! Damage halved.");
+  }
+
+  if (dmg < 1) dmg = 1;
+  defender.hp -= dmg;
+  if (defender.hp < 0) defender.hp = 0;
+
+  if (critDamage > 0) log(`Blunt Strike fails, deals ${dmg} critical damage!`);
+  else log(`Blunt Strike fails, deals ${dmg} damage!`);
+  floatDamage(dmg, defenderCard);
+  animateCard(defenderCard, "skill-anim");
+
+  updateUI();
+  if (isPlayer) {
+    if (!checkWin()) enemyTurn();
+  }
 }
 
 export function skillBalancedThrust(attacker, defender) {
