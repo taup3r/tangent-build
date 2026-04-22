@@ -15,6 +15,7 @@ import {
   enemySkillAction,
   enemyDefendAction,
   enemySkipAction,
+  skillBluntStrike,
   skillBalancedThrust
 } from "./combat.js";
 
@@ -69,8 +70,15 @@ function decideEnemyAction() {
   // TRAINOR — Balanced Thrust
   if (type === "bthrust") {
     if (enemy.ap >= 2) return type;
-    if (enemy.ap >= 1) return "defend";
-    return "attack";
+    if (enemy.ap >= 1) return Math.random() < 0.70 ? "defend": "attack";
+    return "defend";
+  }
+  // TRAINOR — Blunt Strike
+  if (type === "bstrike") {
+    if (enemy.ap > 2) return type;
+    if (enemy.ap === 2) return Math.random() < 0.70 ? type: "defend";
+    if (enemy.ap === 1) return Math.random() < 0.70 ? "defend": "attack";
+    return "defend";
   }
 
   // ============================
