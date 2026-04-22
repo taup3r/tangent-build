@@ -18,7 +18,8 @@ export let player = {
   CON: 0,
   weapon: null,
   tenacity: 0,
-  precision: 0
+  precision: 0,
+  stunned: null
 };
 
 /* ================================
@@ -74,6 +75,11 @@ export function loadProgress() {
   } else {
     playerStats.combatEncounter = false;
   }
+
+  player.stunned = {
+    active: false,
+    duration: 0
+  };
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
