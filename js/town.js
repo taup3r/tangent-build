@@ -242,7 +242,6 @@ function getTownSquareZone() {
       class: "btn-arena",
       action: () => {
         // Normal single battle
-        setEnemyType("bthrust");
         window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
       },
       disabled: false
