@@ -12,7 +12,7 @@ export const skillData = {
   }
 }
 
-export skills = [
+export const skills = [
   {
     id: "bthrust",
     level: 0
