@@ -478,6 +478,19 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  // If stunned, skip turn
+  if (player.stunned.active && player.stunned.duration > 0) {
+    log("You are stunned and cannot act!");
+    player.stunned.duration--;
+
+    if (player.stunned.duration <= 0) {
+      player.stunned.active = false;
+      log("You recover from stun.");
+    }
+
+    return enemyTurn();
+  }
+
   player.ap += 1;
   clampAP();
 
