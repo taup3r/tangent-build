@@ -188,66 +188,6 @@ function playerSkill() {
   }, 1000);
 }
 
-function playerBluntStrike() {
-  resetSkillTiming();
-
-  if (player.ap < 2) {
-    log("Not enough AP!");
-    return;
-  }
-
-  player.ap -= 2;
-  clampAP();
-  disableButtons();
-
-  // 10% stun chance
-  if (Math.random() < 0.20) {
-    enemy.stunned.active = true;
-    enemy.stunned.duration = 2;
-
-    log("Blunt Strike stuns the enemy!");
-    floatDamage("STUN", "enemyCard");
-    animateCard("enemyCard", "skill-anim");
-
-    updateUI();
-    return enemyTurn();
-  }
-
-  // Hit check
-  if (!rollHit(player, enemy)) {
-    log("Your Blunt Strike missed!");
-    floatDamage("MISS", "enemyCard");
-    updateUI();
-    return enemyTurn();
-  }
-
-  // Otherwise deal 30% damage
-  let base = getBaseDamage(player);
-  let dmg = computeDamage(base, player, enemy);
-  const critDamage = criticalDamage(dmg, player);
-  dmg += critDamage;
-
-  //reduced skill damage
-  dmg = Math.floor(dmg * 0.3);
-
-  if (enemy.defending) {
-    dmg = Math.floor(dmg / 2);
-    log(enemy.name + " defended! Damage halved.");
-  }
-
-  if (dmg < 1) dmg = 1;
-  enemy.hp -= dmg;
-  if (enemy.hp < 0) enemy.hp = 0;
-
-  if (critDamage > 0) log(`Blunt Strike fails, deals ${dmg} critical damage!`);
-  else log(`Blunt Strike fails, deals ${dmg} damage!`);
-  floatDamage(dmg, "enemyCard");
-  animateCard("enemyCard", "skill-anim");
-
-  updateUI();
-  if (!checkWin()) enemyTurn();
-}
-
 export function skillBluntStrike(attacker, defender) {
   const isPlayer = (attacker.name === player.name);
   let attackerCard = "playerCard";
