@@ -137,7 +137,8 @@ const enemyTypes = [
   { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." },
   { type: "Silent Assassin", behavior: "assassin", hint: "This foe moves with deadly precision..." },
   { type: "Raging Berserker", behavior: "berserker", hint: "Its eyes burn with uncontrollable fury..." },
-  { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." }
+  { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." },
+  { type: "Balanced Thrust Veteran", behavior: "bthrust", hint: "Always ready for a quick spar..." }
 ];
 
 // Tier roll:
@@ -284,11 +285,7 @@ export function generateEnemy(playerLevel) {
 
   // Base type
   let baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
-  if (enemyType) baseType = {
-    type: "Trainor",
-    behavior: enemyType,
-    hint: "Trainor"
-  };
+  if (enemyType) baseType = enemyTypes.find(t => t.behavior === enemyType);
 
   let name = randomName();
 
