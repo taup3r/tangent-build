@@ -293,10 +293,11 @@ export function checkWin() {
         if (enemyType === "bthrust") getMessage("e5", () => {
           levelSkill(enemyType);
           clearEnemyType();
-        } else if (enemyType === "bstrike") getMessage("e6", () => {
+        });
+        if (enemyType === "bstrike") getMessage("e6", () => {
           levelSkill(enemyType);
           clearEnemyType();
-        }
+        });
       }
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
