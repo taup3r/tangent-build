@@ -393,6 +393,37 @@ export function applySkillDamage(perfect) {
   }
 }
 
+function riposteAction(attacker, defender, miss) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
+
+  const multiplier = miss ? 2.2 : 1.8;
+  
+  const base = getBaseDamage(attacker);
+  let dmg = computeDamage(base, attacker, defender);
+  const critDamage = criticalDamage(dmg, attacker);
+  dmg += critDamage;
+
+  //use multiplier
+  dmg = Math.floor(dmg * multiplier);
+
+  if (dmg < 1) dmg = 1;
+  defender.hp -= dmg;
+  if (defender.hp < 0) defender.hp = 0;
+
+  const name = isPlayer ? "Your" : enemy.name;
+
+  if (miss) log(`${name} riposte succeeds dealing ${dmg} damage!`);
+  else log(`${name} riposte faltered but deals ${dmg} damage!`);
+
+  floatDamage(dmg, defenderCard);
+}
+
 /* -------------------------
    ENEMY ACTIONS (MOVED FROM enemyAI.js)
 ------------------------- */
@@ -403,6 +434,7 @@ export function enemyAttackAction() {
   if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
+    if (player.riposte) riposteAction(player, enemy, true);
     return;
   }
 
@@ -427,6 +459,8 @@ export function enemyAttackAction() {
   if (critDamage > 0) log(`${enemy.name} critically attacks with ${enemy.weapon.name} for ${dmg}!`);
   else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
+
+  if (player.riposte) riposteAction(player, enemy, false);
 }
 
 export function enemySkillAction() {
@@ -446,6 +480,7 @@ export function enemySkillAction() {
     if (!rollHit(enemy, player)) {
       log("Enemy missed!");
       floatDamage("MISS", "playerCard");
+      if (player.riposte) riposteAction(player, enemy, true);
       return;
     }
   }
@@ -490,6 +525,8 @@ export function enemySkillAction() {
   if (critDamage > 0) log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} critical damage!`);
   else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
+
+  if (player.riposte) riposteAction(player, enemy, false);
 }
 
 export function enemyDefendAction() {
