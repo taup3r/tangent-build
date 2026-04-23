@@ -1,4 +1,5 @@
 import { initializePortraits, player, playerStats, enemy, applyStatsToCombat, applyConstitution, dungeonMode, dungeonEnemiesLeft, dungeonType, dungeonQueue, dungeonIndex, setEnemyName } from "./state.js";
+import { hasSkill } from "./skills.js";
 import { updateUI, updatePlayerWeaponUI } from "./ui.js";
 import { playerAttack, playerDefend, startPlayerTurn } from "./combat.js";
 import { handleHitPress } from "./skillTiming.js";
@@ -49,6 +50,9 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!skillBtn.contains(e.target) && !skillMenu.contains(e.target)) {
     skillMenu.style.display = "none";
   }
+
+  if (hasSkill("bstrike")) document.getElementById("bStrikeBtn").style.display = "flex";
+  if (hasSkill("bthrust")) document.getElementById("bThrustBtn").style.display = "flex";
 });
 
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);
