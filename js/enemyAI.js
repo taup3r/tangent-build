@@ -109,6 +109,9 @@ function decideEnemyAction() {
 export function enemyTurn() {
   log(`\n--- Enemy Turn (${enemy.name}) ---`);
 
+  //reset riposte
+  enemy.riposte = false;
+
   // If stunned, skip turn
   if (enemy.stunned.active && enemy.stunned.duration > 0) {
     log(`${enemy.name} is stunned and cannot act!`);
