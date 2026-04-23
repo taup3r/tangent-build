@@ -753,6 +753,11 @@ export function questIncrement(id, condition = false, nextAction = null) {
   if (nextAction) nextAction();
 }
 
+export function getMessage(id, action = null) {
+  const quest = getQuest(id);
+  triggerQuest(quest, action, true);
+}
+
 export function showQuestList()
 {
   const container = document.getElementById("questListContainer");
