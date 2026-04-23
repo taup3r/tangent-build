@@ -1,5 +1,5 @@
 import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress, setEnemyType } from "./state.js";
-import { hasSkill, levelSkill } from "./skills.js";
+import { hasSkill } from "./skills.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
@@ -192,7 +192,16 @@ function getResidentialZone() {
     {
       label: "Oakroot Dwelling",
       class: "btn-blacksmith",
-      action: () => getMessage("h2"),
+      action: () => getMessage("h2", () => {
+        if (!hasSkill("bstrike")) {
+          getMessage("s2", () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            setEnemyType("bstrike");
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        }
+      }),
       disabled: false
     },
     {
