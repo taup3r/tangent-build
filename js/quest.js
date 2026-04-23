@@ -419,6 +419,32 @@ export const questData = {
       }
     ]
   },
+  "e5": {
+    title: "Learn Balanced Thrust",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You learned Balanced Thrust! You can use the skill moving forward.",
+        submit: "Okay",
+        nextChance: 100
+      }
+    ]
+  },
+  "e6": {
+    title: "Learn Blunt Strike",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You learned Blunt Strike! You can use the skill moving forward.",
+        submit: "Okay",
+        nextChance: 100
+      }
+    ]
+  },
   "s1": {
     title: "Learn Balanced Thrust",
     type: "chat",
@@ -426,7 +452,21 @@ export const questData = {
     flow: [
       {
         npc: "Selra, Merchant Guild Clerk",
-        message: "Do you want to learn the skill 'Balanced Thrust'? Time to fight!",
+        message: "Do you want to learn the skill 'Balanced Thrust'? Prove your might to learn the skill for yourself.",
+        submit: "Fight",
+        cancel: "Exit",
+        nextChance: 100
+      }
+    ]
+  },
+  "s2": {
+    title: "Learn Blunt Strike",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Selra, Merchant Guild Clerk",
+        message: "Do you want to learn the skill 'Blunt Strike'? Prove your might to learn the skill for yourself.",
         submit: "Fight",
         cancel: "Exit",
         nextChance: 100
@@ -554,6 +594,24 @@ export const quests = [
   },
   {
     id: "s1",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "e5",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "e6",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "s2",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false
