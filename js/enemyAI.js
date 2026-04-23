@@ -76,7 +76,7 @@ function decideEnemyAction() {
   // TRAINOR — Blunt Strike
   if (type === "bstrike") {
     if (enemy.ap > 2) return type;
-    if (enemy.ap === 2) return Math.random() < 0.70 ? type: "defend";
+    if (enemy.ap === 2) return (Math.random() < 0.70 && !player.stunned.active) ? type: "attack";
     if (enemy.ap === 1) return Math.random() < 0.70 ? "defend": "attack";
     return "defend";
   }
