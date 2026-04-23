@@ -465,7 +465,7 @@ export const questData = {
     maxStage: 1,
     flow: [
       {
-        npc: "Gardener Sheena",
+        npc: "Old Man Calidore",
         message: "Do you want to learn the skill 'Blunt Strike'? Prove your might to learn the skill for yourself.",
         submit: "Fight",
         cancel: "Exit",
