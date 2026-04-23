@@ -19,7 +19,8 @@ export let player = {
   weapon: null,
   tenacity: 0,
   precision: 0,
-  stunned: null
+  stunned: null,
+  riposte: false
 };
 
 /* ================================
@@ -328,6 +329,7 @@ export function generateEnemy(playerLevel) {
     max: 30,
     ap: 0,
     defending: false,
+    riposte: false,
 
     // Combat stats
     STR: stats.STR,
