@@ -9,12 +9,21 @@ export const skillData = {
     title: "Balanced Thrust",
     description: "Deal 150% base damage with a 20% chance to gain 1 ap back.",
     maxLevel: 1
+  },
+  "bstrike": {
+    title: "Blunt Strike",
+    description: "20% chance to stun for 2 turns or 30% base damage when failed.",
+    maxLevel: 1
   }
 }
 
 export const skills = [
   {
     id: "bthrust",
+    level: 0
+  },
+  {
+    id: "bstrike",
     level: 0
   }
 ]
