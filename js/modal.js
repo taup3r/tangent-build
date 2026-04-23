@@ -2,7 +2,7 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName, clearEnemyType } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName, enemyType, clearEnemyType } from "./state.js";
 import { hasSkill, levelSkill } from "./skills.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
