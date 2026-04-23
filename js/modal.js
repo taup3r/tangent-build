@@ -278,7 +278,6 @@ export function openCompareWeaponModal(weapon = enemy.weapon) {
 
 export function checkWin() {
   if (enemy.hp <= 0) {
-    clearEnemyType();
     document.getElementById("log").textContent += `You defeated ${enemy.name}!\n`;
         document.getElementById("log").textContent += `Gained ${enemy.gold} gold!\n`;
 
@@ -289,6 +288,10 @@ export function checkWin() {
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true)));
+      if (enemyType && !hasSkill(enemyType)) {
+        levelSkill(enemyType);
+        clearEnemyType();
+      }
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true))));
