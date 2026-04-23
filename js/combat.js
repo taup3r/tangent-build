@@ -188,6 +188,35 @@ function playerSkill() {
   }, 1000);
 }
 
+export function skillLeanRiposte(attacker, defender) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
+
+  if (isPlayer) resetSkillTiming();
+
+  if (attacker.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  attacker.ap -= 2;
+  clampAP();
+  if (isPlayer) disableButtons();
+
+  attacker.riposte = true;
+  log("Lean Riposte executed!");
+  animateCard(attackerCard, "skill-anim");
+
+  updateUI();
+  if (isPlayer) return enemyTurn();
+  else return;
+}
+
 export function skillBluntStrike(attacker, defender) {
   const isPlayer = (attacker.name === player.name);
   let attackerCard = "playerCard";
@@ -478,6 +507,9 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  //reset riposte
+  player.riposte = false;
+
   // If stunned, skip turn
   if (player.stunned.active && player.stunned.duration > 0) {
     log("You are stunned and cannot act!");
