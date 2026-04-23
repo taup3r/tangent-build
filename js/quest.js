@@ -310,6 +310,7 @@ export const questData = {
       {
         npc: "Guard Captain Orval",
         message: "The wind’s been restless today. When it carries a stranger to my door, I take it as a sign. Tell me your name, traveler — and whether trouble follows behind you.",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
@@ -322,6 +323,7 @@ export const questData = {
       {
         npc: "Blacksmith Roran",
         message: "Mind the kettle, it’s just about to sing. Oh! A visitor. Come warm your hands by the fire.",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
@@ -334,6 +336,7 @@ export const questData = {
       {
         npc: "Gardener Sheena",
         message: "Careful of the brambles — they’ve a mind of their own. Welcome, traveler. The stew’s simple, but it fills the bones.",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
@@ -346,6 +349,7 @@ export const questData = {
       {
         npc: "Trey Loudcry",
         message: "Don’t mind the moss — it grows where it pleases. Ah, someone new. Haven’t had company since the last thaw.",
+        submit: "Goodbye",
         nextChance: 100
       }
     ]
@@ -358,6 +362,7 @@ export const questData = {
       {
         npc: "",
         message: "The place is empty and you can see boxes stacked on one side of the house. There seems to be nobody here.",
+        submit: "Okay",
         nextChance: 100
       }
     ]
@@ -370,6 +375,7 @@ export const questData = {
       {
         npc: "",
         message: "You stepped on a trap and got entangled on it. You successfully broke free and did not gain any bruises but just lost some of your ego.",
+        submit: "Okay",
         nextChance: 100
       }
     ]
@@ -382,6 +388,7 @@ export const questData = {
       {
         npc: "",
         message: "You found a big cache of what seems to be treasure but upon observing did not find any. Too late to realize thus was just a trap laid by bandits.",
+        submit: "Okay",
         nextChance: 100
       }
     ]
@@ -394,6 +401,7 @@ export const questData = {
       {
         npc: "",
         message: "You found treasure! You are now too cautious as you open it and was granted with great relief. There really are treasures still in this place.",
+        submit: "Eureka!",
         nextChance: 100
       }
     ]
@@ -406,6 +414,7 @@ export const questData = {
       {
         npc: "",
         message: "You try to be quiet as you make your way but the man turned, you've been made! Time to fight!",
+        submit: "Fight",
         nextChance: 100
       }
     ]
@@ -418,7 +427,8 @@ export const questData = {
       {
         npc: "Selra, Merchant Guild Clerk",
         message: "Do you want to learn the skill 'Balanced Thrust'? Time to fight!",
-        submit: "Okay",
+        submit: "Fight",
+        cancel: "Exit",
         nextChance: 100
       }
     ]
@@ -599,15 +609,16 @@ export function triggerQuest(quest, action = null, isView = false) {
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
 
-  if (isView === true) {
-    npcButton.textContent = "Close";
-  } else {
+  //if (isView === true) {
+    //npcButton.textContent = "Close";
+  //} else {
     npcButton.textContent = currentQuestStage.submit;
-  }
+  //}
 
-  if (isView === true) {
-    ignoreButton.style.display = "none";
-  } else if (currentQuestStage.cancel) {
+  //if (isView === true) {
+    //ignoreButton.style.display = "none";
+  //} else 
+  if (currentQuestStage.cancel) {
     ignoreButton.textContent = currentQuestStage.cancel;
     ignoreButton.style.display = "flex";
   } else {
