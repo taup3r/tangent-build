@@ -7,7 +7,7 @@ import { hasSkill, levelSkill } from "./skills.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { showQuestList, tryQuestEncounter, questIncrement, revertQuest } from "./quest.js";
+import { showQuestList, tryQuestEncounter, questIncrement, revertQuest, getMessage } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
@@ -290,8 +290,13 @@ export function checkWin() {
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true)));
       if (enemyType && !hasSkill(enemyType)) {
-        levelSkill(enemyType);
-        clearEnemyType();
+        if (enemyType === "bthrust") getMessage("e5", () => {
+          levelSkill(enemyType);
+          clearEnemyType();
+        } else if (enemyType === "bstrike") getMessage("e6", () => {
+          levelSkill(enemyType);
+          clearEnemyType();
+        }
       }
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
