@@ -2,11 +2,12 @@
    MODAL MODULE
 ============================================ */
 
-import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName } from "./state.js";
+import { player, enemy, dungeonMode, dungeonEnemiesLeft, setDungeonMode, setEnemiesLeft, getNextDungeonIndex, dungeonIndex, dungeonQueue, dungeonType, playerStats, gainExp, loseExp, saveProgress, applyStatsToCombat, gainGold, clearEnemyName, enemyType, clearEnemyType } from "./state.js";
+import { hasSkill, levelSkill } from "./skills.js";
 import { updatePlayerWeaponUI } from "./ui.js";
 import { generateWeapon } from "./weapon.js";
 import { dungeonTypes } from "./dungeon.js";
-import { showQuestList, tryQuestEncounter, questIncrement, revertQuest } from "./quest.js";
+import { showQuestList, tryQuestEncounter, questIncrement, revertQuest, getMessage } from "./quest.js";
 import { showItemList, tryItemEncounter } from "./items.js";
 import { showStatsModal } from "./stats.js";
 import { gainReputation, loseReputation } from "./reputation.js";
@@ -288,6 +289,16 @@ export function checkWin() {
       tryItemEncounter("ore-b", () => tryItemEncounter("ore-g", () => tryItemEncounter("ore-w", () => tryQuestEncounter("blacksmith", 1, () => showResultModal(true), () => showResultModal(true)))));
     } else if (playerStats.combatEncounter === true) {
       tryQuestEncounter("lostChild", 5, () => showResultModal(true), () => tryQuestEncounter("smuggler", 4, () => showResultModal(true), () => showResultModal(true)));
+      if (enemyType && !hasSkill(enemyType)) {
+        if (enemyType === "bthrust") getMessage("e5", () => {
+          levelSkill(enemyType);
+          clearEnemyType();
+        });
+        if (enemyType === "bstrike") getMessage("e6", () => {
+          levelSkill(enemyType);
+          clearEnemyType();
+        });
+      }
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
  showResultModal(true))));
@@ -296,6 +307,7 @@ export function checkWin() {
   }
 
   if (player.hp <= 0) {
+    clearEnemyType();
     document.getElementById("log").textContent += "You were defeated!\n";
 
     revertQuest("smuggler", 4);

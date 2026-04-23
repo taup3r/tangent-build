@@ -1,7 +1,8 @@
-import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress } from "./state.js";
+import { player, playerStats, setDungeonMode, startDungeon, loadProgress, saveProgress, setEnemyType } from "./state.js";
+import { hasSkill } from "./skills.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
-import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest } from "./quest.js";
+import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest, getMessage } from "./quest.js";
 import { showItemList } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
@@ -33,10 +34,10 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-function getMessage(id, action = null) {
-  const quest = getQuest(id);
-  triggerQuest(quest, action, true);
-}
+//function getMessage(id, action = null) {
+  //const quest = getQuest(id);
+  //triggerQuest(quest, action, true);
+//}
 
 function getAlleyZone() {
   randomArea.innerHTML = "";
@@ -146,7 +147,16 @@ function getResidentialZone() {
     {
       label: "Thistledown Rest",
       class: "btn-arena",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h1", () => {
+        if (!hasSkill("bthrust")) {
+          getMessage("s1", () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            setEnemyType("bthrust");
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        }
+      }),
       disabled: false
     },
     {
@@ -182,7 +192,16 @@ function getResidentialZone() {
     {
       label: "Oakroot Dwelling",
       class: "btn-blacksmith",
-      action: () => getMessage("h2"),
+      action: () => getMessage("h2", () => {
+        if (!hasSkill("bstrike")) {
+          getMessage("s2", () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            setEnemyType("bstrike");
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        }
+      }),
       disabled: false
     },
     {

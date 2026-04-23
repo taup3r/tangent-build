@@ -14,7 +14,9 @@ import {
   enemyAttackAction,
   enemySkillAction,
   enemyDefendAction,
-  enemySkipAction
+  enemySkipAction,
+  skillBluntStrike,
+  skillBalancedThrust
 } from "./combat.js";
 
 /* -------------------------
@@ -62,6 +64,20 @@ function decideEnemyAction() {
       if (!player.defending) return "attack";
       return "defend";
     }
+    return "defend";
+  }
+
+  // TRAINOR — Balanced Thrust
+  if (type === "bthrust") {
+    if (enemy.ap >= 2) return type;
+    if (enemy.ap >= 1) return Math.random() < 0.70 ? "defend": "attack";
+    return "defend";
+  }
+  // TRAINOR — Blunt Strike
+  if (type === "bstrike") {
+    if (enemy.ap > 2) return type;
+    if (enemy.ap === 2) return (Math.random() < 0.70 && !player.stunned.active) ? type: "attack";
+    if (enemy.ap === 1) return Math.random() < 0.70 ? "defend": "attack";
     return "defend";
   }
 
@@ -121,6 +137,12 @@ export function enemyTurn() {
   }
   else if (action === "defend") {
     enemyDefendAction();
+  }
+  else if (action === "bthrust") {
+    skillBalancedThrust(enemy, player);
+  }
+  else if (action === "bstrike") {
+    skillBluntStrike(enemy, player);
   }
   else {
     enemySkipAction();

@@ -18,7 +18,8 @@ export let player = {
   CON: 0,
   weapon: null,
   tenacity: 0,
-  precision: 0
+  precision: 0,
+  stunned: null
 };
 
 /* ================================
@@ -74,6 +75,11 @@ export function loadProgress() {
   } else {
     playerStats.combatEncounter = false;
   }
+
+  player.stunned = {
+    active: false,
+    duration: 0
+  };
 
   applyStatsToCombat(player, playerStats);
   applyConstitution(player);
@@ -137,7 +143,9 @@ const enemyTypes = [
   { type: "Cunning Warlock", behavior: "warlock", hint: "A strange aura surrounds this enemy..." },
   { type: "Silent Assassin", behavior: "assassin", hint: "This foe moves with deadly precision..." },
   { type: "Raging Berserker", behavior: "berserker", hint: "Its eyes burn with uncontrollable fury..." },
-  { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." }
+  { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." },
+  { type: "Balanced Thrust Veteran", behavior: "bthrust", hint: "Always ready for a quick spar..." },
+  { type: "Blunt Strike Veteran", behavior: "bstrike", hint: "Always ready for a quick spar..." }
 ];
 
 // Tier roll:
@@ -201,6 +209,7 @@ const playerDungeonType = `dungeonType_${player.name}`;
 const playerDungeonQueue = `dungeonQueue_${player.name}`;
 const playerDungeonIndex = `dungeonIndex_${player.name}`;
 const playerEnemyName = `enemyName_${player.name}`;
+const playerEnemyType = `enemyType_${player.name}`;
 
 export function setDungeonMode(enable) {
   if (enable) {
@@ -233,6 +242,16 @@ export let dungeonIndex = Number(localStorage.getItem(playerDungeonIndex) || 0);
 
 export let enemyName = localStorage.getItem(playerEnemyName);
 
+export let enemyType = localStorage.getItem(playerEnemyType);
+
+export function setEnemyType(type) {
+  localStorage.setItem(playerEnemyType, type);
+}
+
+export function clearEnemyType() {
+  localStorage.removeItem(playerEnemyType);
+}
+
 export function setEnemyName(name) {
   localStorage.setItem(playerEnemyName, name);
 }
@@ -258,9 +277,12 @@ export function generateEnemy(playerLevel) {
   let tier;
   if (dungeonMode) {
     tier = getNextDungeonTier();
+  } else if (enemyType) {
+    tier = "elite";
   } else {
     tier = rollEnemyTier();
   }
+
   if (enemyName === "Guild Smuggler" && dungeonMode) {
     tier = "veteran";
   }
@@ -272,7 +294,8 @@ export function generateEnemy(playerLevel) {
   if (tier === "boss") level += 3;
 
   // Base type
-  const baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+  let baseType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+  if (enemyType) baseType = enemyTypes.find(t => t.behavior === enemyType);
 
   let name = randomName();
 
@@ -344,7 +367,9 @@ const enemyPortraits = {
   warlock: "assets/enemy_warlock.png",
   assassin: "assets/enemy_assassin.png",
   sentinel: "assets/enemy_sentinel.png",
-  berserker: "assets/enemy_berserker.png"
+  berserker: "assets/enemy_berserker.png",
+  bthrust: "assets/enemy_berserker.png",
+  bstrike: "assets/enemy_sentinel.png"
 };
 
 export function initializePortraits() {

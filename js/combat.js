@@ -149,7 +149,8 @@ export function useSkill(type) {
   document.getElementById("skillMenu").style.display = "none"; // close menu
 
   if (type === "tackle") return playerSkill();        // your existing skill
-  if (type === "blunt") return playerBluntStrike();   // new stun skill
+  if (type === "blunt") return skillBluntStrike(player, enemy);   // new stun skill
+  if (type === "bthrust") return skillBalancedThrust(player, enemy);
 }
 
 window.useSkill = useSkill;
@@ -187,64 +188,142 @@ function playerSkill() {
   }, 1000);
 }
 
-function playerBluntStrike() {
-  resetSkillTiming();
+export function skillBluntStrike(attacker, defender) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
 
-  if (player.ap < 2) {
+  if (isPlayer) resetSkillTiming();
+
+  if (attacker.ap < 2) {
     log("Not enough AP!");
     return;
   }
 
-  player.ap -= 2;
+  attacker.ap -= 2;
   clampAP();
-  disableButtons();
+  if (isPlayer) disableButtons();
 
-  // 10% stun chance
+  // 20% stun chance
   if (Math.random() < 0.20) {
-    enemy.stunned.active = true;
-    enemy.stunned.duration = 2;
+    defender.stunned.active = true;
+    defender.stunned.duration = 2;
 
-    log("Blunt Strike stuns the enemy!");
-    floatDamage("STUN", "enemyCard");
-    animateCard("enemyCard", "skill-anim");
+    log("Blunt Strike successful!");
+    floatDamage("STUN", defenderCard);
+    animateCard(defenderCard, "skill-anim");
 
     updateUI();
-    return enemyTurn();
+    if (isPlayer) return enemyTurn();
+    else return;
   }
 
   // Hit check
-  if (!rollHit(player, enemy)) {
-    log("Your Blunt Strike missed!");
-    floatDamage("MISS", "enemyCard");
+  if (!rollHit(attacker, defender)) {
+    log("Blunt Strike missed!");
+    floatDamage("MISS", defenderCard);
     updateUI();
-    return enemyTurn();
+    if (isPlayer) return enemyTurn();
+    else return;
   }
 
   // Otherwise deal 30% damage
-  let base = getBaseDamage(player);
-  let dmg = computeDamage(base, player, enemy);
-  const critDamage = criticalDamage(dmg, player);
+  let base = getBaseDamage(attacker);
+  let dmg = computeDamage(base, attacker, defender);
+  const critDamage = criticalDamage(dmg, attacker);
   dmg += critDamage;
 
   //reduced skill damage
   dmg = Math.floor(dmg * 0.3);
 
-  if (enemy.defending) {
+  if (defender.defending) {
     dmg = Math.floor(dmg / 2);
-    log(enemy.name + " defended! Damage halved.");
+    if (isPlayer) log(defender.name + " defended! Damage halved.");
+    else log("You defended! Damage halved.");
   }
 
   if (dmg < 1) dmg = 1;
-  enemy.hp -= dmg;
-  if (enemy.hp < 0) enemy.hp = 0;
+  defender.hp -= dmg;
+  if (defender.hp < 0) defender.hp = 0;
 
   if (critDamage > 0) log(`Blunt Strike fails, deals ${dmg} critical damage!`);
   else log(`Blunt Strike fails, deals ${dmg} damage!`);
-  floatDamage(dmg, "enemyCard");
-  animateCard("enemyCard", "skill-anim");
+  floatDamage(dmg, defenderCard);
+  animateCard(defenderCard, "skill-anim");
 
   updateUI();
-  if (!checkWin()) enemyTurn();
+  if (isPlayer) {
+    if (!checkWin()) enemyTurn();
+  }
+}
+
+export function skillBalancedThrust(attacker, defender) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
+
+  if (isPlayer) resetSkillTiming();
+
+  if (attacker.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  attacker.ap -= 2;
+  clampAP();
+  if (isPlayer) disableButtons();
+
+  // Hit check
+  if (!rollHit(attacker, defender)) {
+    log("Balanced Thrust missed!");
+    floatDamage("MISS", defenderCard);
+    updateUI();
+    if (isPlayer) return enemyTurn();
+    else return;
+  }
+
+  let base = getBaseDamage(attacker);
+  let dmg = computeDamage(base, attacker, defender);
+  const critDamage = criticalDamage(dmg, attacker);
+  dmg += critDamage;
+
+  //Deal 150% skill damage
+  dmg = Math.floor(dmg * 1.5);
+
+  if (defender.defending) {
+    dmg = Math.floor(dmg / 2);
+    if (isPlayer) log(defender.name + " defended! Damage halved.");
+    else log("You defended! Damage halved.");
+  }
+
+  if (dmg < 1) dmg = 1;
+  defender.hp -= dmg;
+  if (defender.hp < 0) defender.hp = 0;
+
+  if (critDamage > 0) log(`Balanced Thrust deals ${dmg} critical damage!`);
+  else log(`Balanced Thrust deals ${dmg} damage!`);
+
+  floatDamage(dmg, defenderCard);
+  animateCard(defenderCard, "skill-anim");
+
+  //20% chance ap refund
+  if (Math.random() < 0.2) {
+    attacker.ap += 1;
+    log("Success, refunding 1 ap!");
+  }
+
+  updateUI();
+  if (isPlayer) {
+    if (!checkWin()) enemyTurn();
+  }
 }
 
 /* -------------------------
@@ -399,6 +478,19 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  // If stunned, skip turn
+  if (player.stunned.active && player.stunned.duration > 0) {
+    log("You are stunned and cannot act!");
+    player.stunned.duration--;
+
+    if (player.stunned.duration <= 0) {
+      player.stunned.active = false;
+      log("You recover from stun.");
+    }
+
+    return enemyTurn();
+  }
+
   player.ap += 1;
   clampAP();
 
