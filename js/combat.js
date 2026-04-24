@@ -97,6 +97,8 @@ export function playerAttack() {
     log("You missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
+    riposteAction(enemy, player, true);
+    if (checkWin()) return;
     return enemyTurn();
   }
 
@@ -122,6 +124,7 @@ export function playerAttack() {
 
   updateUI();
 
+  if (!checkWin()) riposteAction(enemy, player, false);
   if (!checkWin()) enemyTurn();
 }
 
@@ -168,6 +171,8 @@ function playerSkill() {
     log("Your skill missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
+    riposteAction(enemy, player, true);
+    if (checkWin()) return;
     return enemyTurn();
   }
 
@@ -388,9 +393,8 @@ export function applySkillDamage(perfect) {
   floatDamage(dmg, "enemyCard");
   updateUI();
 
-  if (!checkWin()) {
-    enemyTurn();
-  }
+  if (!checkWin()) riposteAction(enemy, player, false);
+  if (!checkWin()) enemyTurn();
 }
 
 export function riposteAction(attacker, defender, miss) {
@@ -461,6 +465,7 @@ export function enemyAttackAction() {
   else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 
+  if (checkWin()) return;
   return riposteAction(player, enemy, false);
 }
 
@@ -526,6 +531,7 @@ export function enemySkillAction() {
   else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 
+  if (checkWin()) return;
   return riposteAction(player, enemy, false);
 }
 
