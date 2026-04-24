@@ -465,7 +465,7 @@ export function enemyAttackAction() {
   else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 
-  if (checkWin()) return;
+  if (player.hp === 0) return;
   return riposteAction(player, enemy, false);
 }
 
@@ -531,7 +531,7 @@ export function enemySkillAction() {
   else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 
-  if (checkWin()) return;
+  if (player.hp === 0) return;
   return riposteAction(player, enemy, false);
 }
 
