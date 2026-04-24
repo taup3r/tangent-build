@@ -393,7 +393,9 @@ export function applySkillDamage(perfect) {
   }
 }
 
-function riposteAction(attacker, defender, miss) {
+export function riposteAction(attacker, defender, miss) {
+  if (!attacker.riposte) return;
+
   const isPlayer = (attacker.name === player.name);
   let attackerCard = "playerCard";
   let defenderCard = "enemyCard";
@@ -434,8 +436,7 @@ export function enemyAttackAction() {
   if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
-    if (player.riposte) riposteAction(player, enemy, true);
-    return;
+    return riposteAction(player, enemy, true);
   }
 
   animateCard("playerCard", "attack-anim");
@@ -460,7 +461,7 @@ export function enemyAttackAction() {
   else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
 
-  if (player.riposte) riposteAction(player, enemy, false);
+  return riposteAction(player, enemy, false);
 }
 
 export function enemySkillAction() {
@@ -480,8 +481,7 @@ export function enemySkillAction() {
     if (!rollHit(enemy, player)) {
       log("Enemy missed!");
       floatDamage("MISS", "playerCard");
-      if (player.riposte) riposteAction(player, enemy, true);
-      return;
+      return riposteAction(player, enemy, true);
     }
   }
 
@@ -526,7 +526,7 @@ export function enemySkillAction() {
   else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
 
-  if (player.riposte) riposteAction(player, enemy, false);
+  return riposteAction(player, enemy, false);
 }
 
 export function enemyDefendAction() {
