@@ -261,7 +261,11 @@ export function skillBluntStrike(attacker, defender) {
     log("Blunt Strike missed!");
     floatDamage("MISS", defenderCard);
     updateUI();
-    if (isPlayer) return enemyTurn();
+    riposteAction(defender, attacker, true);
+    if (isPlayer) {
+      if (checkWin()) return;
+      return enemyTurn();
+    }
     else return;
   }
 
@@ -291,7 +295,12 @@ export function skillBluntStrike(attacker, defender) {
 
   updateUI();
   if (isPlayer) {
+    if (!checkWin()) riposteAction(defender, attacker, false);
     if (!checkWin()) enemyTurn();
+  }
+  else {
+    if (defender.hp === 0) return;
+    return riposteAction(defender, attacker, false);
   }
 }
 
@@ -320,7 +329,11 @@ export function skillBalancedThrust(attacker, defender) {
     log("Balanced Thrust missed!");
     floatDamage("MISS", defenderCard);
     updateUI();
-    if (isPlayer) return enemyTurn();
+    riposteAction(defender, attacker, true);
+    if (isPlayer) {
+      if (checkWin()) return;
+      return enemyTurn();
+    }
     else return;
   }
 
@@ -356,7 +369,12 @@ export function skillBalancedThrust(attacker, defender) {
 
   updateUI();
   if (isPlayer) {
+    if (!checkWin()) riposteAction(defender, attacker, false);
     if (!checkWin()) enemyTurn();
+  }
+  else {
+    if (defender.hp === 0) return;
+    return riposteAction(defender, attacker, false);
   }
 }
 
