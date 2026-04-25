@@ -242,7 +242,16 @@ function getResidentialZone() {
     buttons.push({
       label: "Willowbend Homestead",
       class: "btn-dungeon",
-      action: () => getMessage("h3"),
+      action: () => getMessage("h3", () => {
+        if (!hasSkill("lriposte")) {
+          getMessage("s3", () => {
+            playerStats.combatEncounter = true;
+            saveProgress();
+            setEnemyType("lriposte");
+            window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+          });
+        }
+      }),
       disabled: false
     });
   });
