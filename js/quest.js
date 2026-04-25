@@ -445,6 +445,19 @@ export const questData = {
       }
     ]
   },
+  "e7": {
+    title: "Learn Lean Riposte",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "You learned Lean Riposte! You can use the skill moving forward.",
+        submit: "Okay",
+        nextChance: 100
+      }
+    ]
+  },
   "s1": {
     title: "Learn Balanced Thrust",
     type: "chat",
@@ -467,6 +480,20 @@ export const questData = {
       {
         npc: "Old Man Calidore",
         message: "Do you want to learn the skill 'Blunt Strike'? Prove your might to learn the skill for yourself.",
+        submit: "Fight",
+        cancel: "Exit",
+        nextChance: 100
+      }
+    ]
+  },
+  "s3": {
+    title: "Learn Lean Riposte",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "Guard Captain Orval",
+        message: "Do you want to learn the skill 'Lean Riposte'? Prove your might to learn the skill for yourself.",
         submit: "Fight",
         cancel: "Exit",
         nextChance: 100
@@ -612,6 +639,18 @@ export const quests = [
   },
   {
     id: "s2",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "e7",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "s3",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false

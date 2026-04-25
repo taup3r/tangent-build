@@ -16,7 +16,8 @@ import {
   enemyDefendAction,
   enemySkipAction,
   skillBluntStrike,
-  skillBalancedThrust
+  skillBalancedThrust,
+  skillLeanRiposte
 } from "./combat.js";
 
 /* -------------------------
@@ -80,6 +81,12 @@ function decideEnemyAction() {
     if (enemy.ap === 1) return Math.random() < 0.70 ? "defend": "attack";
     return "defend";
   }
+  // TRAINOR — Lean Riposte
+  if (type === "lriposte") {
+    if (enemy.ap >= 2) return type;
+    if (enemy.ap >= 1) return Math.random() < 0.90 ? "defend": "attack";
+    return "defend";
+  }
 
   // ============================
   // EXISTING BEHAVIORS
@@ -108,6 +115,9 @@ function decideEnemyAction() {
 
 export function enemyTurn() {
   log(`\n--- Enemy Turn (${enemy.name}) ---`);
+
+  //reset riposte
+  enemy.riposte = false;
 
   // If stunned, skip turn
   if (enemy.stunned.active && enemy.stunned.duration > 0) {
@@ -143,6 +153,9 @@ export function enemyTurn() {
   }
   else if (action === "bstrike") {
     skillBluntStrike(enemy, player);
+  }
+  else if (action === "lriposte") {
+    skillLeanRiposte(enemy, player);
   }
   else {
     enemySkipAction();

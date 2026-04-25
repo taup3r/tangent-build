@@ -53,6 +53,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (hasSkill("bstrike")) document.getElementById("bStrikeBtn").style.display = "flex";
   if (hasSkill("bthrust")) document.getElementById("bThrustBtn").style.display = "flex";
+  if (hasSkill("lriposte")) document.getElementById("lRiposteBtn").style.display = "flex";
 });
 
   document.getElementById("hitBtn").addEventListener("click", handleHitPress);

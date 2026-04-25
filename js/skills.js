@@ -14,6 +14,11 @@ export const skillData = {
     title: "Blunt Strike",
     description: "20% chance to stun for 2 turns or 30% base damage when failed.",
     maxLevel: 1
+  },
+  "lriposte": {
+    title: "Lean Riposte",
+    description: "Riposte, when enemy attacks and misses counter with 220% base damage, otherwise 180% when hit.",
+    maxLevel: 1
   }
 }
 
@@ -24,6 +29,10 @@ export const skills = [
   },
   {
     id: "bstrike",
+    level: 0
+  },
+  {
+    id: "lriposte",
     level: 0
   }
 ]

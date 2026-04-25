@@ -97,6 +97,8 @@ export function playerAttack() {
     log("You missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
+    riposteAction(enemy, player, true);
+    if (checkWin()) return;
     return enemyTurn();
   }
 
@@ -121,6 +123,9 @@ export function playerAttack() {
   floatDamage(dmg, "enemyCard");
 
   updateUI();
+
+  if (!checkWin()) riposteAction(enemy, player, false);
+  else return;
 
   if (!checkWin()) enemyTurn();
 }
@@ -151,6 +156,7 @@ export function useSkill(type) {
   if (type === "tackle") return playerSkill();        // your existing skill
   if (type === "blunt") return skillBluntStrike(player, enemy);   // new stun skill
   if (type === "bthrust") return skillBalancedThrust(player, enemy);
+  if (type === "lriposte") return skillLeanRiposte(player, enemy);
 }
 
 window.useSkill = useSkill;
@@ -168,6 +174,8 @@ function playerSkill() {
     log("Your skill missed!");
     floatDamage("MISS", "enemyCard");
     updateUI();
+    riposteAction(enemy, player, true);
+    if (checkWin()) return;
     return enemyTurn();
   }
 
@@ -186,6 +194,35 @@ function playerSkill() {
     animateCard("enemyCard", "skill-anim", 300);
     startSkillTiming();
   }, 1000);
+}
+
+export function skillLeanRiposte(attacker, defender) {
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
+  }
+
+  if (isPlayer) resetSkillTiming();
+
+  if (attacker.ap < 2) {
+    log("Not enough AP!");
+    return;
+  }
+
+  attacker.ap -= 2;
+  clampAP();
+  if (isPlayer) disableButtons();
+
+  attacker.riposte = true;
+  log("Lean Riposte executed!");
+  animateCard(attackerCard, "skill-anim");
+
+  updateUI();
+  if (isPlayer) return enemyTurn();
+  else return;
 }
 
 export function skillBluntStrike(attacker, defender) {
@@ -227,7 +264,11 @@ export function skillBluntStrike(attacker, defender) {
     log("Blunt Strike missed!");
     floatDamage("MISS", defenderCard);
     updateUI();
-    if (isPlayer) return enemyTurn();
+    riposteAction(defender, attacker, true);
+    if (isPlayer) {
+      if (checkWin()) return;
+      return enemyTurn();
+    }
     else return;
   }
 
@@ -257,7 +298,14 @@ export function skillBluntStrike(attacker, defender) {
 
   updateUI();
   if (isPlayer) {
+    if (!checkWin()) riposteAction(defender, attacker, false);
+    else return;
+
     if (!checkWin()) enemyTurn();
+  }
+  else {
+    if (defender.hp === 0) return;
+    return riposteAction(defender, attacker, false);
   }
 }
 
@@ -286,7 +334,11 @@ export function skillBalancedThrust(attacker, defender) {
     log("Balanced Thrust missed!");
     floatDamage("MISS", defenderCard);
     updateUI();
-    if (isPlayer) return enemyTurn();
+    riposteAction(defender, attacker, true);
+    if (isPlayer) {
+      if (checkWin()) return;
+      return enemyTurn();
+    }
     else return;
   }
 
@@ -322,7 +374,12 @@ export function skillBalancedThrust(attacker, defender) {
 
   updateUI();
   if (isPlayer) {
+    if (!checkWin()) riposteAction(defender, attacker, false);
     if (!checkWin()) enemyTurn();
+  }
+  else {
+    if (defender.hp === 0) return;
+    return riposteAction(defender, attacker, false);
   }
 }
 
@@ -359,9 +416,43 @@ export function applySkillDamage(perfect) {
   floatDamage(dmg, "enemyCard");
   updateUI();
 
-  if (!checkWin()) {
-    enemyTurn();
+  if (!checkWin()) riposteAction(enemy, player, false);
+  else return;
+
+  if (!checkWin()) enemyTurn();
+}
+
+export function riposteAction(attacker, defender, miss) {
+  if (!attacker.riposte) return;
+
+  const isPlayer = (attacker.name === player.name);
+  let attackerCard = "playerCard";
+  let defenderCard = "enemyCard";
+  if (!isPlayer) {
+    attackerCard = "enemyCard";
+    defenderCard = "playerCard";
   }
+
+  const multiplier = miss ? 2.2 : 1.8;
+  
+  const base = getBaseDamage(attacker);
+  let dmg = computeDamage(base, attacker, defender);
+  const critDamage = criticalDamage(dmg, attacker);
+  dmg += critDamage;
+
+  //use multiplier
+  dmg = Math.floor(dmg * multiplier);
+
+  if (dmg < 1) dmg = 1;
+  defender.hp -= dmg;
+  if (defender.hp < 0) defender.hp = 0;
+
+  const name = isPlayer ? "Your" : enemy.name;
+
+  if (miss) log(`${name} riposte succeeds dealing ${dmg} damage!`);
+  else log(`${name} riposte faltered but deals ${dmg} damage!`);
+
+  floatDamage(dmg, defenderCard);
 }
 
 /* -------------------------
@@ -374,7 +465,7 @@ export function enemyAttackAction() {
   if (!rollHit(enemy, player)) {
     log("Enemy missed!");
     floatDamage("MISS", "playerCard");
-    return;
+    return riposteAction(player, enemy, true);
   }
 
   animateCard("playerCard", "attack-anim");
@@ -398,6 +489,9 @@ export function enemyAttackAction() {
   if (critDamage > 0) log(`${enemy.name} critically attacks with ${enemy.weapon.name} for ${dmg}!`);
   else log(`${enemy.name} attacks with ${enemy.weapon.name} for ${dmg}!`);
   floatDamage(dmg, "playerCard");
+
+  if (player.hp === 0) return;
+  return riposteAction(player, enemy, false);
 }
 
 export function enemySkillAction() {
@@ -417,7 +511,7 @@ export function enemySkillAction() {
     if (!rollHit(enemy, player)) {
       log("Enemy missed!");
       floatDamage("MISS", "playerCard");
-      return;
+      return riposteAction(player, enemy, true);
     }
   }
 
@@ -461,6 +555,9 @@ export function enemySkillAction() {
   if (critDamage > 0) log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} critical damage!`);
   else log(`${enemy.name} unleashes ${enemy.weapon.name} for ${dmg} damage!`);
   floatDamage(dmg, "playerCard");
+
+  if (player.hp === 0) return;
+  return riposteAction(player, enemy, false);
 }
 
 export function enemyDefendAction() {
@@ -478,6 +575,9 @@ export function enemySkipAction() {
 ------------------------- */
 
 export function startPlayerTurn() {
+  //reset riposte
+  player.riposte = false;
+
   // If stunned, skip turn
   if (player.stunned.active && player.stunned.duration > 0) {
     log("You are stunned and cannot act!");

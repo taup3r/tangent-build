@@ -19,7 +19,8 @@ export let player = {
   weapon: null,
   tenacity: 0,
   precision: 0,
-  stunned: null
+  stunned: null,
+  riposte: false
 };
 
 /* ================================
@@ -145,7 +146,8 @@ const enemyTypes = [
   { type: "Raging Berserker", behavior: "berserker", hint: "Its eyes burn with uncontrollable fury..." },
   { type: "Iron Sentinel", behavior: "sentinel", hint: "A towering guardian stands unmoved..." },
   { type: "Balanced Thrust Veteran", behavior: "bthrust", hint: "Always ready for a quick spar..." },
-  { type: "Blunt Strike Veteran", behavior: "bstrike", hint: "Always ready for a quick spar..." }
+  { type: "Blunt Strike Veteran", behavior: "bstrike", hint: "Muscles reveal a heavy knockout on my end when hit..." },
+  { type: "Lean Riposte Veteran", behavior: "lriposte", hint: "Be on guard, as the enemy stays on guard..." }
 ];
 
 // Tier roll:
@@ -328,6 +330,7 @@ export function generateEnemy(playerLevel) {
     max: 30,
     ap: 0,
     defending: false,
+    riposte: false,
 
     // Combat stats
     STR: stats.STR,
@@ -369,7 +372,8 @@ const enemyPortraits = {
   sentinel: "assets/enemy_sentinel.png",
   berserker: "assets/enemy_berserker.png",
   bthrust: "assets/enemy_berserker.png",
-  bstrike: "assets/enemy_sentinel.png"
+  bstrike: "assets/enemy_sentinel.png",
+  lriposte: "assets/enemy_assassin.png",
 };
 
 export function initializePortraits() {

@@ -298,6 +298,10 @@ export function checkWin() {
           levelSkill(enemyType);
           clearEnemyType();
         });
+        if (enemyType === "lriposte") getMessage("e7", () => {
+          levelSkill(enemyType);
+          clearEnemyType();
+        });
       }
     } else {
       questIncrement("arenaElite", (enemy.type === "elite"), () => questIncrement("arenaNormal", (enemy.type === "normal"), () => tryQuestEncounter("blacksmith", 4, () => showResultModal(true), () =>
