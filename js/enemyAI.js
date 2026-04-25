@@ -154,6 +154,9 @@ export function enemyTurn() {
   else if (action === "bstrike") {
     skillBluntStrike(enemy, player);
   }
+  else if (action === "lriposte") {
+    skillLeanRiposte(enemy, player);
+  }
   else {
     enemySkipAction();
   }
