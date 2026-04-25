@@ -125,6 +125,8 @@ export function playerAttack() {
   updateUI();
 
   if (!checkWin()) riposteAction(enemy, player, false);
+  else return;
+
   if (!checkWin()) enemyTurn();
 }
 
@@ -297,6 +299,8 @@ export function skillBluntStrike(attacker, defender) {
   updateUI();
   if (isPlayer) {
     if (!checkWin()) riposteAction(defender, attacker, false);
+    else return;
+
     if (!checkWin()) enemyTurn();
   }
   else {
@@ -413,6 +417,8 @@ export function applySkillDamage(perfect) {
   updateUI();
 
   if (!checkWin()) riposteAction(enemy, player, false);
+  else return;
+
   if (!checkWin()) enemyTurn();
 }
 
