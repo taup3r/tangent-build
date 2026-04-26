@@ -69,6 +69,7 @@ function renderQuests() {
         if (q.stage === 1) triggerQuest(q, null, true);
         if (q.stage === 2) {
           playerStats.reputation = (playerStats.reputation || 0) + 5;
+          if (playerStats.reputation > 100) playerStats.reputation = 100;
           playerStats.gold += 300;
           saveProgress();
           q.stage = 0;
