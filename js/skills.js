@@ -8,17 +8,59 @@ export const skillData = {
   "bthrust": {
     title: "Balanced Thrust",
     description: "Deal 150% base damage with a 20% chance to gain 1 ap back.",
-    maxLevel: 1
+    maxLevel: 1,
+    flow: [
+      {
+        level: 1,
+        type: "damage",
+        baseDmgPct: 150,
+        apGainChance: 20,
+        apGainCount: 1,
+        stunChance: 0,
+        stunTurns: 0,
+        failDmgPct: 0,
+        counterMissDmgPct: 0,
+        counterHitDmgPct: 0
+      }
+    ]
   },
   "bstrike": {
     title: "Blunt Strike",
     description: "20% chance to stun for 2 turns or 30% base damage when failed.",
-    maxLevel: 1
+    maxLevel: 1,
+    flow: [
+      {
+        level: 1,
+        type: "status",
+        baseDmgPct: 0,
+        apGainChance: 0,
+        apGainCount: 0,
+        stunChance: 20,
+        stunTurns: 2,
+        failDmgPct: 30,
+        counterMissDmgPct: 0,
+        counterHitDmgPct: 0
+      }
+    ]
   },
   "lriposte": {
     title: "Lean Riposte",
     description: "Riposte, when enemy attacks and misses counter with 220% base damage, otherwise 180% when hit.",
-    maxLevel: 1
+    maxLevel: 1,
+    flow: [
+      {
+        level: 1,
+        type: "counter",
+        baseDmgPct: 0,
+        apGainChance: 0,
+        apGainCount: 0,
+        stunChance: 0,
+        stunTurns: 0,
+        failDmgPct: 0,
+        counterMissDmgPct: 220,
+        counterHitDmgPct: 180
+      }
+    ]
   }
 }
 
