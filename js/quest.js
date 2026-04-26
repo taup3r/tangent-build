@@ -387,7 +387,7 @@ export const questData = {
     flow: [
       {
         npc: "",
-        message: "You found a big cache of what seems to be treasure but upon observing did not find any. Too late to realize thus was just a trap laid by bandits.",
+        message: "You found a big cache of what seems to be treasure but upon observing did not find any. Too late to realize that it was just a trap laid by bandits.",
         submit: "Okay",
         nextChance: 100
       }
