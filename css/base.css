@@ -18,3 +18,11 @@ html, body {
 h1, h2, h3, button {
   font-family: 'Cinzel', serif;
 }
+
+body {
+  background-image: url('assets/battlecry.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
