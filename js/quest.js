@@ -380,6 +380,20 @@ export const questData = {
       }
     ]
   },
+  "h9": {
+    title: "Underground Cave",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "Moisture drips steadily from the jagged ceiling, each drop echoing through the cavern like a distant footstep.
+The walls glisten with mineral sheen, shifting between dull grey and faint, eerie blue as your light flickers across them. Strange markings — clawed, carved, or something in between — scar the stone near the entrance. A low rumble vibrates beneath your boots. Not loud. Not constant. But alive. Something in this cave is breathing.",
+        submit: "Exit",
+        nextChance: 100
+      }
+    ]
+  },
   "e1": {
     title: "Trap",
     type: "chat",
@@ -670,6 +684,12 @@ export const quests = [
   },
   {
     id: "h8",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h9",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false
