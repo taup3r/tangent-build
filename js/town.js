@@ -260,6 +260,37 @@ function getResidentialZone() {
   return buttons;
 }
 
+function getOutskirtsZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Old Watchtower",
+      class: "btn-shop",
+      action: () => getMessage("h1"),
+      disabled: false
+    },
+    {
+      label: "Ruined Chapel",
+      class: "btn-arena",
+      action: () => getMessage("h1"),
+      disabled: false
+    },
+    {
+      label: "Go to Town Square",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "townSquare";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    }
+  ];
+
+  zoneName.textContent = "Wayfarer's Ourskirts";
+  return buttons;
+}
+
 function getTownSquareZone() {
   randomArea.innerHTML = "";
   const dungeonType = getRandomDungeonType();
@@ -312,9 +343,23 @@ function getTownSquareZone() {
 
   const blacksmithQuest = getQuest("blacksmith");
   const merchantGuildQuest = getQuest("merchantGuild");
+  const smugglerQuest = getQuest("smuggler");
 
   let blacksmithDone = false;
   let merchantGuildDone = false;
+
+  //if (smugglerQuest && smugglerQuest.stage >= questData["smuggler"].maxStage) {
+    buttons.push({
+      label: "Go to Outskirts",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "outskirts";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    });
+  //}
 
   if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
     buttons.push({
@@ -363,6 +408,8 @@ function generateTownLayout() {
     buttons = getResidentialZone();
   } else if (zone === "backAlley") {
     buttons = getAlleyZone();
+  } else if (zone === "outskirts") {
+    buttons = getOutskirtsZone();
   } else {
     buttons = getTownSquareZone();
   }
