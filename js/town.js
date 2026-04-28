@@ -271,8 +271,13 @@ function getOutskirtsZone() {
     },
     {
       label: "Ruined Chapel",
-      class: "btn-arena",
-      action: () => getMessage("h1"),
+      class: "btn-dungeon",
+      action: () => {
+        // Start dungeon
+        setDungeonMode(true);
+        startDungeon("chapel");
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
       disabled: false
     },
     {
