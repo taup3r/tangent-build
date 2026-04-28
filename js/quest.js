@@ -374,9 +374,7 @@ export const questData = {
     flow: [
       {
         npc: "",
-        message: "A cold wind coils through the broken archways, carrying the faint rattle of loose iron and something else… a whisper, too soft to place.
-Moss clings to the steps leading upward, each one worn by centuries of forgotten patrols. The air feels heavier here, as if the tower itself remembers what it once guarded — and what it failed to keep out.
-A single lantern flickers inside the entry hall. Someone has been here recently.",
+        message: "A cold wind coils through the broken archways, carrying the faint rattle of loose iron and something else... a whisper, too soft to place. Moss clings to the steps leading upward, each one worn by centuries of forgotten patrols. The air feels heavier here, as if the tower itself remembers what it once guarded — and what it failed to keep out. A single lantern flickers inside the entry hall. Someone has been here recently.",
         submit: "Exit",
         nextChance: 100
       }
