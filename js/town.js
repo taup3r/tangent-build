@@ -34,11 +34,6 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-//function getMessage(id, action = null) {
-  //const quest = getQuest(id);
-  //triggerQuest(quest, action, true);
-//}
-
 function getAlleyZone() {
   randomArea.innerHTML = "";
   const buttons = [
@@ -326,7 +321,7 @@ function getOutskirtsZone() {
     });
   }
 
-  zoneName.textContent = "Wayfarer's Outskirts";
+  zoneName.textContent = "Wayfarer's Crest";
   return buttons;
 }
 
