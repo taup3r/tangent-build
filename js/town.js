@@ -278,7 +278,7 @@ function getOutskirtsZone() {
     {
       label: "Underground Cave",
       class: "btn-blacksmith",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h9"),
       disabled: false
     },
     {
