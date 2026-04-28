@@ -375,14 +375,10 @@ function getTownSquareZone() {
     });
   }
 
-  const blacksmithQuest = getQuest("blacksmith");
-  const merchantGuildQuest = getQuest("merchantGuild");
-  const smugglerQuest = getQuest("smuggler");
-
   let blacksmithDone = false;
   let merchantGuildDone = false;
 
-  //if (smugglerQuest && smugglerQuest.stage >= questData["smuggler"].maxStage) {
+  //if (questCompleted("smuggler")) {
     buttons.push({
       label: "Go to Outskirts",
       class: "btn-zone",
@@ -395,7 +391,7 @@ function getTownSquareZone() {
     });
   //}
 
-  if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
+  if (questCompleted("blacksmith")) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
@@ -406,7 +402,7 @@ function getTownSquareZone() {
     });
     blacksmithDone = true;
   }
-  if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
+  if (questCompleted("merchantGuild")) {
     buttons.push({
       label: "Merchant Guild",
       class: "btn-merchant-guild",
