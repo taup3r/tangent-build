@@ -266,7 +266,7 @@ function getOutskirtsZone() {
     {
       label: "Old Watchtower",
       class: "btn-shop",
-      action: () => getMessage("h1"),
+      action: () => getMessage("h8"),
       disabled: false
     },
     {
