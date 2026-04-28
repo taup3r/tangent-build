@@ -276,6 +276,12 @@ function getOutskirtsZone() {
       disabled: false
     },
     {
+      label: "Underground Cave",
+      class: "btn-blacksmith",
+      action: () => getMessage("h1"),
+      disabled: false
+    },
+    {
       label: "Go to Town Square",
       class: "btn-zone",
       action: () => {
@@ -287,7 +293,35 @@ function getOutskirtsZone() {
     }
   ];
 
-  zoneName.textContent = "Wayfarer's Ourskirts";
+  const isTreasure = (Math.random() < 0.05);
+  if (isTreasure) {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e3", () => {
+        const weapon = upgradeWeapon(player.weapon, 1);
+        openCompareWeapon(weapon, "Equip", () => {
+          player.weapon = weapon;
+          saveProgress();
+          location.reload();
+        });
+      }),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e2", () => {
+        playerStats.combatEncounter = true;
+        saveProgress();
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      }),
+      disabled: false
+    });
+  }
+
+  zoneName.textContent = "Wayfarer's Outskirts";
   return buttons;
 }
 
