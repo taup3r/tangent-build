@@ -367,6 +367,21 @@ export const questData = {
       }
     ]
   },
+  "h8": {
+    title: "Old Watchtower",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "A cold wind coils through the broken archways, carrying the faint rattle of loose iron and something else… a whisper, too soft to place.
+Moss clings to the steps leading upward, each one worn by centuries of forgotten patrols. The air feels heavier here, as if the tower itself remembers what it once guarded — and what it failed to keep out.
+A single lantern flickers inside the entry hall. Someone has been here recently.",
+        submit: "Exit",
+        nextChance: 100
+      }
+    ]
+  },
   "e1": {
     title: "Trap",
     type: "chat",
@@ -651,6 +666,12 @@ export const quests = [
   },
   {
     id: "s3",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h8",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false
