@@ -34,11 +34,6 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-//function getMessage(id, action = null) {
-  //const quest = getQuest(id);
-  //triggerQuest(quest, action, true);
-//}
-
 function getAlleyZone() {
   randomArea.innerHTML = "";
   const buttons = [
@@ -260,6 +255,76 @@ function getResidentialZone() {
   return buttons;
 }
 
+function getOutskirtsZone() {
+  randomArea.innerHTML = "";
+  const buttons = [
+    {
+      label: "Old Watchtower",
+      class: "btn-shop",
+      action: () => getMessage("h8"),
+      disabled: false
+    },
+    {
+      label: "Ruined Chapel",
+      class: "btn-dungeon",
+      action: () => {
+        // Start dungeon
+        setDungeonMode(true);
+        startDungeon("chapel");
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      },
+      disabled: false
+    },
+    {
+      label: "Underground Cave",
+      class: "btn-blacksmith",
+      action: () => getMessage("h9"),
+      disabled: false
+    },
+    {
+      label: "Go to Town Square",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "townSquare";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    }
+  ];
+
+  const isTreasure = (Math.random() < 0.05);
+  if (isTreasure) {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e3", () => {
+        const weapon = upgradeWeapon(player.weapon, 1);
+        openCompareWeapon(weapon, "Equip", () => {
+          player.weapon = weapon;
+          saveProgress();
+          location.reload();
+        });
+      }),
+      disabled: false
+    });
+  } else {
+    buttons.push({
+      label: "Treasure Chest",
+      class: "btn-train",
+      action: () => getMessage("e2", () => {
+        playerStats.combatEncounter = true;
+        saveProgress();
+        window.location.href = `combat.html?player=${encodeURIComponent(player.name)}`;
+      }),
+      disabled: false
+    });
+  }
+
+  zoneName.textContent = "Wayfarer's Crest";
+  return buttons;
+}
+
 function getTownSquareZone() {
   randomArea.innerHTML = "";
   const dungeonType = getRandomDungeonType();
@@ -310,13 +375,23 @@ function getTownSquareZone() {
     });
   }
 
-  const blacksmithQuest = getQuest("blacksmith");
-  const merchantGuildQuest = getQuest("merchantGuild");
-
   let blacksmithDone = false;
   let merchantGuildDone = false;
 
-  if (blacksmithQuest && blacksmithQuest.stage >= questData["blacksmith"].maxStage) {
+  //if (questCompleted("smuggler")) {
+    buttons.push({
+      label: "Go to Outskirts",
+      class: "btn-zone",
+      action: () => {
+        playerStats.zone = "outskirts";
+        saveProgress();
+        location.reload();
+      },
+      disabled: false
+    });
+  //}
+
+  if (questCompleted("blacksmith")) {
     buttons.push({
       label: "Blacksmith's Forge",
       class: "btn-blacksmith",
@@ -327,7 +402,7 @@ function getTownSquareZone() {
     });
     blacksmithDone = true;
   }
-  if (merchantGuildQuest && merchantGuildQuest.stage >= questData["merchantGuild"].maxStage) {
+  if (questCompleted("merchantGuild")) {
     buttons.push({
       label: "Merchant Guild",
       class: "btn-merchant-guild",
@@ -363,6 +438,8 @@ function generateTownLayout() {
     buttons = getResidentialZone();
   } else if (zone === "backAlley") {
     buttons = getAlleyZone();
+  } else if (zone === "outskirts") {
+    buttons = getOutskirtsZone();
   } else {
     buttons = getTownSquareZone();
   }
