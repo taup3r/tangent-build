@@ -221,6 +221,62 @@ export const questData = {
       }
     ]
   },
+  "theWatcher": {
+    title: "The Watcher at the Old Tower",
+    type: "townSquare",
+    maxStage: 7,
+    flow: [
+      {
+        npc: "Guard Captain Orval",
+        message: "I’ve sent word to someone who knows more about that shard you found. Travel to the Old Watchtower outside town. She will be waiting for you.",
+        submit: "Travel",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a ...— I need it to observe it more closely!",
+        submit: "Fetch",
+        nextChance: 100,
+        nextZone: "backAlley"
+      },
+      {
+        npc: "",
+        message: "You got the item that Elyndra is asking for. Time to go back to her.",
+        submit: "Okay",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "I am not mistaken, this clearly the shard I've been looking for. Tell me—did the smugglers speak of a Broker?",
+        submit: "Listen",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "These shards resonate with each other. Another has awakened nearby, at the Ruined Chapel. If the Broker seeks them, we must act quickly.",
+        submit: "Continue",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "",
+        message: "You defeated the Boss and recovered the second Obsidian Shard. Its energy hums violently in your hands.",
+        submit: "Take Shard",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "Two shards awakened in such a short time... The Heart stirs. We must move quickly. I will prepare the next steps.",
+        submit: "Understood",
+        nextChance: 100,
+        nextZone: "townSquare"
+      }
+    ]
+  },
   "arenaNormal": {
     title: "Test your Mettle I",
     type: "repeatable",
