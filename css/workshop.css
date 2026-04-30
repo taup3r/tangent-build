@@ -4,11 +4,13 @@
 }
 
 .recipe-list {
-  width: 40%;
+  width: 100%; /*40%;*/
   max-height: 400px;
   overflow-y: auto;
-  border-right: 2px solid #333;
-  padding-right: 10px;
+  /*border-right: 2px solid #333;*/
+  border: 2px solid #333;
+  /*padding-right: 10px;*/
+  padding: 2px;
 }
 
 .recipe-item {
@@ -31,7 +33,7 @@
 }
 
 .recipe-preview {
-  width: 60%;
+  width: 100% /*60%;*/
   padding: 10px;
   background: #222;
   border-radius: 8px;
