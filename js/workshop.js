@@ -56,7 +56,7 @@ function renderRecipePreview(recipe) {
     <h4>${recipe.name}</h4>
     <p><strong>Output:</strong> ${recipe.outputType} (Rank ${recipe.outputRank})</p>
     <p><strong>Gold Cost:</strong> ${recipe.goldCost}</p>
-    <h4>Required Materials:</h4>
+    <hr class="divider">
     <ul>${materialHTML}</ul>
   `;
 }
