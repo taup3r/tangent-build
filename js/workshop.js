@@ -53,7 +53,7 @@ function renderRecipePreview(recipe) {
     .join("");
 
   preview.innerHTML = `
-    <h3>${recipe.name}</h3>
+    <h4>${recipe.name}</h4>
     <p><strong>Output:</strong> ${recipe.outputType} (Rank ${recipe.outputRank})</p>
     <p><strong>Gold Cost:</strong> ${recipe.goldCost}</p>
     <h4>Required Materials:</h4>
