@@ -10,15 +10,16 @@ document.getElementById("loreText").textContent = `Select a recipe and craft and
 
 const craftingRecipes = [
   {
-    id: "iron_sword",
-    name: "Iron Sword",
-    outputType: "weapon",
-    outputRank: 5,
+    id: "spectroscope",
+    name: "Spectroscope",
+    outputType: "gadget",
+    outputRank: 1,
     materials: [
-      { itemId: "iron_ore", qty: 10 },
-      { itemId: "wood", qty: 2 }
+      { itemId: "iWood", qty: 1 },
+      { itemId: "bTwine", qty: 2 },
+      { itemId: "pRivets", qty: 4 }
     ],
-    goldCost: 50
+    goldCost: 2000
   }
 ];
 
