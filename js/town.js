@@ -378,7 +378,7 @@ function getTownSquareZone() {
   let blacksmithDone = false;
   let merchantGuildDone = false;
 
-  //if (questCompleted("smuggler")) {
+  if (questCompleted("smuggler")) {
     buttons.push({
       label: "Go to Outskirts",
       class: "btn-zone",
@@ -389,7 +389,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
-  //}
+  }
 
   if (questCompleted("blacksmith")) {
     buttons.push({
