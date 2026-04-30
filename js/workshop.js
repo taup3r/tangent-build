@@ -6,29 +6,11 @@ import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveIt
 loadProgress();
 updateHeaderStats();
 
-document.getElementById("loreText").textContent = `Upgrading current weapon costs 1 ${name}, and charges ${price} gold when you decide to go with it.`;
+document.getElementById("loreText").textContent = `Select a recipe and craft and item here.`;
 
-const refineButton = document.getElementById("ore-list");
-refineButton.onclick = () => {
-  let refined;
-  if (playerStats.gold >= price && weaponOre.count >= 1) {
-    // immediately reduces ore on attempt
-    weaponOre.count -= 1;
-    saveItems();
-
-    if (weapon) {
-      refined = upgradeWeapon(weapon, 1);
-    } else {
-      refined = generateWeapon(2);
-    }
-    openCompareWeapon(refined, "Equip", () => {
-      // then charges gold when equipped
-      playerStats.gold -= price;
-      player.weapon = refined;
-      saveProgress();
-      location.reload();
-    });
-  }  
+const craftButton = document.getElementById("craftButton");
+craftButton.onclick = () => {
+  //todo
 };
 
 questButton.onclick = () => showQuestList();
