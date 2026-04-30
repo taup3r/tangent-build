@@ -221,6 +221,62 @@ export const questData = {
       }
     ]
   },
+  "theWatcher": {
+    title: "The Watcher at the Old Tower",
+    type: "townSquare",
+    maxStage: 7,
+    flow: [
+      {
+        npc: "Guard Captain Orval",
+        message: "I’ve sent word to someone who knows more about that shard you found. Travel to the Old Watchtower outside town. She will be waiting for you.",
+        submit: "Travel",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a ...— I need it to observe it more closely!",
+        submit: "Fetch",
+        nextChance: 100,
+        nextZone: "backAlley"
+      },
+      {
+        npc: "",
+        message: "You got the item that Elyndra is asking for. Time to go back to her.",
+        submit: "Okay",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "I am not mistaken, this clearly the shard I've been looking for. Tell me—did the smugglers speak of a Broker?",
+        submit: "Listen",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "These shards resonate with each other. Another has awakened nearby, at the Ruined Chapel. If the Broker seeks them, we must act quickly.",
+        submit: "Continue",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "",
+        message: "You defeated the Boss and recovered the second Obsidian Shard. Its energy hums violently in your hands.",
+        submit: "Take Shard",
+        nextChance: 100,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "Two shards awakened in such a short time... The Heart stirs. We must move quickly. I will prepare the next steps.",
+        submit: "Understood",
+        nextChance: 100,
+        nextZone: "townSquare"
+      }
+    ]
+  },
   "arenaNormal": {
     title: "Test your Mettle I",
     type: "repeatable",
@@ -363,6 +419,32 @@ export const questData = {
         npc: "",
         message: "The place is empty and you can see boxes stacked on one side of the house. There seems to be nobody here.",
         submit: "Okay",
+        nextChance: 100
+      }
+    ]
+  },
+  "h8": {
+    title: "Old Watchtower",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "A cold wind coils through the broken archways, carrying the faint rattle of loose iron and something else... a whisper, too soft to place. Moss clings to the steps leading upward, each one worn by centuries of forgotten patrols. The air feels heavier here, as if the tower itself remembers what it once guarded — and what it failed to keep out. A single lantern flickers inside the entry hall. Someone has been here recently.",
+        submit: "Exit",
+        nextChance: 100
+      }
+    ]
+  },
+  "h9": {
+    title: "Underground Cave",
+    type: "chat",
+    maxStage: 1,
+    flow: [
+      {
+        npc: "",
+        message: "Moisture drips steadily from the jagged ceiling, each drop echoing through the cavern like a distant footstep. The walls glisten with mineral sheen, shifting between dull grey and faint, eerie blue as your light flickers across them. Strange markings — clawed, carved, or something in between — scar the stone near the entrance. A low rumble vibrates beneath your boots. Not loud. Not constant. But alive. Something in this cave is breathing.",
+        submit: "Exit",
         nextChance: 100
       }
     ]
@@ -651,6 +733,18 @@ export const quests = [
   },
   {
     id: "s3",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h8",
+    chance: 100,
+    stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "h9",
     chance: 100,
     stage: 1,  // starts at 1 for view
     active: false

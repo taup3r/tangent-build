@@ -42,6 +42,17 @@ export const dungeonTypes = {
     intro: "The townsfolk whisper about a place beneath the old trade roads — a forgotten wine cellar carved into the bedrock long before the town existed. Now, its stone corridors echo with the low murmur of contraband deals and the clatter of crates dragged across the floor.",
     epilogue: "The last smuggler collapses, their torch clattering across the stone floor. The hideout falls silent — no more whispered deals, no more crates dragged through the dark. Only the drip of water and the faint smell of smoke remain.",
     rewardBonus: 6
+  },
+  chapel: {
+    type: "normal",
+    name: "Ruined Chapel",
+    enemies: 4,
+    elites: 1,
+    veterans: 1,
+    bosses: 1,
+    intro: "The chapel stands in silent collapse, its once‑proud spire snapped like a broken spear. Moonlight filters through shattered stained glass, scattering fractured colors across the dust‑choked floor. The air is thick with the scent of old incense and something far less holy — a metallic tang that clings to the back of your throat. Wooden pews lie overturned, clawed, and splintered. Faded murals peel from the walls, their saints’ faces scratched away by desperate hands. A faint hum vibrates beneath the stone tiles, pulsing like a heartbeat buried deep below.",
+    epilogue: "The final echo of battle fades, swallowed by the chapel’s hollow acoustics. Dust settles over the broken altar as the unnatural hum beneath the floor finally dies, leaving behind a silence that feels almost relieved. Among the rubble, you uncover fragments of ritual chalk, torn pages of scripture rewritten in a trembling hand, and a symbol scorched into the stone — a mark that radiates faint warmth even now. Whatever happened here wasn’t an isolated act of madness. It was preparation. And the one who began it has already moved on.",
+    rewardBonus: 6
   }
 };
 
