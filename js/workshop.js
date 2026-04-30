@@ -8,10 +8,110 @@ updateHeaderStats();
 
 document.getElementById("loreText").textContent = `Select a recipe and craft and item here.`;
 
+const craftingRecipes = [
+  {
+    id: "iron_sword",
+    name: "Iron Sword",
+    outputType: "weapon",
+    outputRank: 5,
+    materials: [
+      { itemId: "iron_ore", qty: 10 },
+      { itemId: "wood", qty: 2 }
+    ],
+    goldCost: 50
+  }
+];
+
+let selectedRecipe = null;
+
+function renderRecipeList() {
+  const list = document.getElementById("recipeList");
+  list.innerHTML = "";
+
+  craftingRecipes.forEach(recipe => {
+    const div = document.createElement("div");
+    div.classList.add("recipe-item");
+    div.innerText = recipe.name;
+
+    div.onclick = () => {
+      document.querySelectorAll(".recipe-item").forEach(i => i.classList.remove("selected"));
+      div.classList.add("selected");
+      selectedRecipe = recipe;
+      renderRecipePreview(recipe);
+      updateCraftButtonState();
+    };
+
+    list.appendChild(div);
+  });
+}
+
+function renderRecipePreview(recipe) {
+  const preview = document.getElementById("recipePreview");
+
+  let materialHTML = recipe.materials
+    .map(m => `<li>${m.qty} × ${m.itemId}</li>`)
+    .join("");
+
+  preview.innerHTML = `
+    <h3>${recipe.name}</h3>
+    <p><strong>Output:</strong> ${recipe.outputType} (Rank ${recipe.outputRank})</p>
+    <p><strong>Gold Cost:</strong> ${recipe.goldCost}</p>
+    <h4>Required Materials:</h4>
+    <ul>${materialHTML}</ul>
+  `;
+}
+
+function updateCraftButtonState() {
+  const btn = document.getElementById("craftButton");
+
+  if (!selectedRecipe) {
+    disableCraftButton();
+    return;
+  }
+
+  if (!hasMaterials(selectedRecipe, player.inventory) || player.gold < selectedRecipe.goldCost) {
+    disableCraftButton();
+    return;
+  }
+
+  btn.classList.remove("disabled");
+  btn.disabled = false;
+}
+
+function disableCraftButton() {
+  const btn = document.getElementById("craftButton");
+  btn.classList.add("disabled");
+  btn.disabled = true;
+}
+
+function craftSelectedRecipe() {
+  if (!selectedRecipe) return;
+
+  if (!hasMaterials(selectedRecipe, player.inventory)) {
+    alert("You lack the required materials.");
+    return;
+  }
+
+  if (player.gold < selectedRecipe.goldCost) {
+    alert("Not enough gold.");
+    return;
+  }
+
+  consumeMaterials(selectedRecipe, player.inventory);
+  player.gold -= selectedRecipe.goldCost;
+
+  const crafted = craftItem(selectedRecipe);
+  player.inventory.push(crafted);
+
+  alert(`Crafted: ${crafted.name}`);
+
+  updateCraftButtonState();
+}
+
 const craftButton = document.getElementById("craftButton");
-craftButton.onclick = () => {
-  //todo
-};
+craftButton.onclick = () => craftSelectedRecipe();
+
+renderRecipeList();
 
 questButton.onclick = () => showQuestList();
 itemButton.onclick = () => showItemList();
