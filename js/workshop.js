@@ -97,10 +97,11 @@ function craftSelectedRecipe() {
   consumeMaterials(selectedRecipe, playerStats.items || []);
   player.gold -= itemData[selectedRecipe.id].use;
 
-  const crafted = craftItem(selectedRecipe);
+  const crafted = getItem(selectedRecipe.id);
   playerStats.items.push(crafted);
 
   alert(`Crafted: ${itemData[crafted.id].name}`);
+  saveItems();
 
   updateCraftButtonState();
 }
