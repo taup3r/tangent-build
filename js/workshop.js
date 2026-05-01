@@ -33,7 +33,7 @@ function renderRecipeList() {
   craftingRecipes.forEach(recipe => {
     const div = document.createElement("div");
     div.classList.add("recipe-item");
-    div.innerText = recipe.name;
+    div.innerText = itemData[recipe.id].name;
 
     div.onclick = () => {
       document.querySelectorAll(".recipe-item").forEach(i => i.classList.remove("selected"));
@@ -55,9 +55,9 @@ function renderRecipePreview(recipe) {
     .join("");
 
   preview.innerHTML = `
-    <h4>${recipe.name}</h4>
-    <p>${recipe.outputType} (Rank ${recipe.outputRank})</p>
-    <p><strong>🪙:</strong> ${recipe.goldCost} g</p>
+    <h4>${itemData[recipe.id].name}</h4>
+    <p>${itemData[recipe.id].type} (${itemData[recipe.id].rarity})</p>
+    <p><strong>Cost:</strong> ${itemData[recipe.id].use} g</p>
     ${materialHTML}
   `;
 }
