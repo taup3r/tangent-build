@@ -98,7 +98,7 @@ function craftSelectedRecipe() {
   playerStats.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = getItem(selectedRecipe.id);
-  triggerItem(crafted, () => location.reload(), false, "Accept");
+  triggerItem(crafted, () => location.reload(), false, "Accept", false);
 }
 
 function hasMaterials(recipe) {
