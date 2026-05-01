@@ -56,9 +56,8 @@ function renderRecipePreview(recipe) {
 
   preview.innerHTML = `
     <h4>${recipe.name}</h4>
-    <p><strong>Output:</strong> ${recipe.outputType} (Rank ${recipe.outputRank})</p>
-    <p><strong>Gold Cost:</strong> ${recipe.goldCost}</p>
-    <hr class="divider">
+    <p>${recipe.outputType} (Rank ${recipe.outputRank})</p>
+    <p><strong>🪙:</strong> ${recipe.goldCost} g</p>
     ${materialHTML}
   `;
 }
