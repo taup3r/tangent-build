@@ -70,7 +70,7 @@ function updateCraftButtonState() {
     return;
   }
 
-  if (!hasMaterials(selectedRecipe, player.inventory) || player.gold < selectedRecipe.goldCost) {
+  if (!hasMaterials(selectedRecipe, player.inventory) || player.gold < itemData[selectedRecipe.id].use) {
     disableCraftButton();
     return;
   }
@@ -93,18 +93,18 @@ function craftSelectedRecipe() {
     return;
   }
 
-  if (player.gold < selectedRecipe.goldCost) {
+  if (player.gold < itemData[selectedRecipe.id].use) {
     alert("Not enough gold.");
     return;
   }
 
   consumeMaterials(selectedRecipe, player.inventory);
-  player.gold -= selectedRecipe.goldCost;
+  player.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = craftItem(selectedRecipe);
   player.inventory.push(crafted);
 
-  alert(`Crafted: ${crafted.name}`);
+  alert(`Crafted: ${itemData[crafted.id].name}`);
 
   updateCraftButtonState();
 }
