@@ -1,7 +1,7 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, questData, getQuest } from "./quest.js";
-import { itemData, getItem, loadItems, showItemList, triggerItem } from "./items.js";
+import { items, itemData, getItem, loadItems, showItemList, triggerItem } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -9,7 +9,7 @@ loadItems();
 
 document.getElementById("loreText").textContent = `Select a recipe to view details.`;
 
-const craftingRecipes = [
+/*const craftingRecipes = [
   {
     id: "spectroscope",
     materials: [
@@ -18,7 +18,9 @@ const craftingRecipes = [
       { id: "polishedRivets", qty: 1 }
     ]
   }
-];
+];*/
+
+const craftingRecipes = items.filter(i => i.type === "craftable").map(itemData[i.id]);
 
 let selectedRecipe = null;
 
