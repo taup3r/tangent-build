@@ -101,6 +101,7 @@ function craftSelectedRecipe() {
   playerStats.items.push(crafted);
 
   alert(`Crafted: ${itemData[crafted.id].name}`);
+
   saveItems();
 
   updateCraftButtonState();
@@ -110,6 +111,15 @@ function hasMaterials(recipe, inventory) {
   return recipe.materials.every(req => {
     const invItem = inventory.find(i => i.id === req.id);
     return invItem && invItem.count >= req.qty;
+  });
+}
+
+function consumeMaterials(recipe, inventory) {
+  recipe.materials.forEach(req => {
+    const invItem = inventory.find(i => i.id === req.id);
+    if (invItem) {
+      invItem.count -= req.qty;
+    }
   });
 }
 
