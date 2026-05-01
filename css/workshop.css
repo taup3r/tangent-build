@@ -1,7 +1,7 @@
-.workshop-body {
+/*.workshop-body {
   display: flex;
   gap: 20px;
-}
+}*/
 
 .recipe-list {
   width: 100%; /*40%;*/
@@ -34,7 +34,7 @@
 
 .recipe-preview {
   width: 100% /*60%;*/
-  padding: 10px;
+  padding: 2px;
   background: #222;
   border-radius: 8px;
   min-height: 200px;
