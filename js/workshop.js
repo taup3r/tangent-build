@@ -17,8 +17,8 @@ const craftingRecipes = [
     outputRank: 1,
     materials: [
       { id: "ironbarkWood", qty: 1 },
-      { id: "bindingTwine", qty: 2 },
-      { id: "polishedRivets", qty: 4 }
+      { id: "bindingTwine", qty: 1 },
+      { id: "polishedRivets", qty: 1 }
     ],
     goldCost: 2000
   }
