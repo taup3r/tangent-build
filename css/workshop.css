@@ -1,3 +1,8 @@
+p {
+  margin-bottom: -1em;
+  margin-top: 0em;
+}
+
 .recipe-list {
   width: 100%;
   max-height: 400px;
