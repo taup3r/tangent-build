@@ -1,7 +1,7 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
 import { showQuestList, questData, getQuest } from "./quest.js";
-import { itemData, getItem, loadItems, showItemList, saveItems } from "./items.js";
+import { itemData, getItem, loadItems, showItemList, triggerItem } from "./items.js";
 
 loadProgress();
 updateHeaderStats();
@@ -98,12 +98,7 @@ function craftSelectedRecipe() {
   playerStats.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = getItem(selectedRecipe.id);
-  crafted.count += 1;
-
-  alert(`Crafted: ${itemData[crafted.id].name}`);
-
-  saveItems();
-  location.reload();
+  triggerItem(crafted, () => location.reload(), false, "Accept");
 }
 
 function hasMaterials(recipe) {
