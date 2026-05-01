@@ -111,6 +111,15 @@ export const itemData = {
     use: 300,
     rarity: "Common",
     lore: "Reinforcement components for weapons and tools."
+  },
+  "spectroscope": {
+    name: "Spectroscope",
+    chance: 100,
+    maxCount: 99,
+    type: "gadget",
+    use: 2000,
+    rarity: "Common",
+    lore: "Handy tool to identify rare jewels."
   }
 };
 
