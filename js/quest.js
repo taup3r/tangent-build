@@ -224,7 +224,7 @@ export const questData = {
   "theWatcher": {
     title: "The Watcher at the Old Tower",
     type: "townSquare",
-    maxStage: 7,
+    maxStage: 8,
     flow: [
       {
         npc: "Guard Captain Orval",
