@@ -12,15 +12,11 @@ document.getElementById("loreText").textContent = `Select a recipe to view detai
 const craftingRecipes = [
   {
     id: "spectroscope",
-    name: "Spectroscope",
-    outputType: "gadget",
-    outputRank: 1,
     materials: [
       { id: "ironbarkWood", qty: 1 },
       { id: "bindingTwine", qty: 1 },
       { id: "polishedRivets", qty: 1 }
-    ],
-    goldCost: 2000
+    ]
   }
 ];
 
@@ -70,7 +66,7 @@ function updateCraftButtonState() {
     return;
   }
 
-  if (!hasMaterials(selectedRecipe, player.inventory) || player.gold < itemData[selectedRecipe.id].use) {
+  if (!hasMaterials(selectedRecipe, playerStats.items || []) || player.gold < itemData[selectedRecipe.id].use) {
     disableCraftButton();
     return;
   }
@@ -88,7 +84,7 @@ function disableCraftButton() {
 function craftSelectedRecipe() {
   if (!selectedRecipe) return;
 
-  if (!hasMaterials(selectedRecipe, player.inventory)) {
+  if (!hasMaterials(selectedRecipe, playerStats.items || [])) {
     alert("You lack the required materials.");
     return;
   }
@@ -98,15 +94,22 @@ function craftSelectedRecipe() {
     return;
   }
 
-  consumeMaterials(selectedRecipe, player.inventory);
+  consumeMaterials(selectedRecipe, playerStats.items || []);
   player.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = craftItem(selectedRecipe);
-  player.inventory.push(crafted);
+  playerStats.items.push(crafted);
 
   alert(`Crafted: ${itemData[crafted.id].name}`);
 
   updateCraftButtonState();
+}
+
+function hasMaterials(recipe, inventory) {
+  return recipe.materials.every(req => {
+    const invItem = inventory.find(i => i.id === req.id);
+    return invItem && invItem.count >= req.qty;
+  });
 }
 
 const craftButton = document.getElementById("craftButton");
