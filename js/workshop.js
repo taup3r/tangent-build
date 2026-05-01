@@ -66,7 +66,7 @@ function updateCraftButtonState() {
     return;
   }
 
-  if (!hasMaterials(selectedRecipe, playerStats.items || []) || player.gold < itemData[selectedRecipe.id].use) {
+  if (!hasMaterials(selectedRecipe) || player.gold < itemData[selectedRecipe.id].use) {
     disableCraftButton();
     return;
   }
@@ -84,7 +84,7 @@ function disableCraftButton() {
 function craftSelectedRecipe() {
   if (!selectedRecipe) return;
 
-  if (!hasMaterials(selectedRecipe, playerStats.items || [])) {
+  if (!hasMaterials(selectedRecipe)) {
     alert("You lack the required materials.");
     return;
   }
@@ -94,28 +94,28 @@ function craftSelectedRecipe() {
     return;
   }
 
-  consumeMaterials(selectedRecipe, playerStats.items || []);
-  player.gold -= itemData[selectedRecipe.id].use;
+  consumeMaterials(selectedRecipe);
+  playerStats.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = getItem(selectedRecipe.id);
-  playerStats.items.push(crafted);
+  crafted.count += 1;
 
   alert(`Crafted: ${itemData[crafted.id].name}`);
 
-  saveProgress();
+  saveItems();
   location.reload();
 }
 
-function hasMaterials(recipe, inventory) {
+function hasMaterials(recipe) {
   return recipe.materials.every(req => {
-    const invItem = inventory.find(i => i.id === req.id);
+    const invItem = getItem(req.id);
     return invItem && invItem.count >= req.qty;
   });
 }
 
-function consumeMaterials(recipe, inventory) {
+function consumeMaterials(recipe) {
   recipe.materials.forEach(req => {
-    const invItem = inventory.find(i => i.id === req.id);
+    const invItem = getItem(req.id);
     if (invItem) {
       invItem.count -= req.qty;
     }
