@@ -159,6 +159,10 @@ export const items = [
   {
     id: "polishedRivets",
     count: 0
+  },
+  {
+    id: "spectroscope",
+    count: 0
   }
 ];
 
