@@ -116,7 +116,7 @@ export const itemData = {
     name: "Spectroscope",
     chance: 100,
     maxCount: 99,
-    type: "gadget",
+    type: "craftable",
     use: 2000,
     rarity: "Common",
     lore: "Handy tool to identify rare jewels."
