@@ -229,7 +229,7 @@ export function getItems(type) {
   return itemList;
 }
 
-export function triggerItem(item, action = null, isView = false, label = "Pick up") {
+export function triggerItem(item, action = null, isView = false, label = "Pick up", showCancel = true) {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
@@ -247,7 +247,7 @@ export function triggerItem(item, action = null, isView = false, label = "Pick u
     acceptButton.textContent = label;
   }
 
-  if (isView === true) {
+  if (isView === true || showCancel === false) {
     ignoreButton.style.display = "none";
   } else {
     ignoreButton.textContent = "Ignore";
