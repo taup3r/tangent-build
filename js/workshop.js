@@ -50,7 +50,7 @@ function renderRecipePreview(recipe) {
   const preview = document.getElementById("recipePreview");
 
   let materialHTML = recipe.materials
-    .map(m => `<li>${m.qty} × ${m.itemId}</li>`)
+    .map(m => `<p>${m.qty} × ${m.itemId}</p>`)
     .join("");
 
   preview.innerHTML = `
@@ -58,7 +58,7 @@ function renderRecipePreview(recipe) {
     <p><strong>Output:</strong> ${recipe.outputType} (Rank ${recipe.outputRank})</p>
     <p><strong>Gold Cost:</strong> ${recipe.goldCost}</p>
     <hr class="divider">
-    <ul>${materialHTML}</ul>
+    ${materialHTML}
   `;
 }
 
