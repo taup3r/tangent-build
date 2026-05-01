@@ -9,17 +9,6 @@ loadItems();
 
 document.getElementById("loreText").textContent = `Select a recipe to view details.`;
 
-/*const craftingRecipes = [
-  {
-    id: "spectroscope",
-    materials: [
-      { id: "ironbarkWood", qty: 1 },
-      { id: "bindingTwine", qty: 1 },
-      { id: "polishedRivets", qty: 1 }
-    ]
-  }
-];*/
-
 let selectedRecipe = null;
 
 function renderRecipeList() {
