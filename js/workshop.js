@@ -16,9 +16,9 @@ const craftingRecipes = [
     outputType: "gadget",
     outputRank: 1,
     materials: [
-      { itemId: "iWood", qty: 1 },
-      { itemId: "bTwine", qty: 2 },
-      { itemId: "pRivets", qty: 4 }
+      { id: "ironbarkWood", qty: 1 },
+      { id: "bindingTwine", qty: 2 },
+      { id: "polishedRivets", qty: 4 }
     ],
     goldCost: 2000
   }
@@ -51,7 +51,7 @@ function renderRecipePreview(recipe) {
   const preview = document.getElementById("recipePreview");
 
   let materialHTML = recipe.materials
-    .map(m => `<p>${m.qty} × ${m.itemId}</p>`)
+    .map(m => `<p>${m.qty} × ${itemData[m.id].name}</p>`)
     .join("");
 
   preview.innerHTML = `
