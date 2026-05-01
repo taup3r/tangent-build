@@ -20,7 +20,7 @@ document.getElementById("loreText").textContent = `Select a recipe to view detai
   }
 ];*/
 
-const craftingRecipes = items.filter(i => i.type === "craftable").map(itemData[i.id]);
+const craftingRecipes = items.filter(i => i.type === "craftable").map(i => itemData[i.id]);
 
 let selectedRecipe = null;
 
