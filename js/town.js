@@ -119,14 +119,14 @@ function getAlleyZone() {
     });
   }
 
-  //if (questCompleted("smuggler")) {
+  if (questCompleted("smuggler")) {
     buttons.push({
       label: "Crafting Workshop",
       class: "btn-blacksmith",
       action: () => window.location.href = `workshop.html?player=${encodeURIComponent(player.name)}`,
       disabled: false
     });
-  //}
+  }
 
   zoneName.textContent = "Wayfarer's Edge";
   return buttons;
@@ -423,7 +423,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  //if (blacksmithDone === true && merchantGuildDone === true) {
+  if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
@@ -434,7 +434,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
-  //}
+  }
 
   zoneName.textContent = "Wayfarer's Rest";
   return buttons;
