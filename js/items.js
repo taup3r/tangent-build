@@ -119,7 +119,12 @@ export const itemData = {
     type: "craftable",
     use: 2000,
     rarity: "Common",
-    lore: "Handy tool to identify rare jewels."
+    lore: "Handy tool to identify rare jewels.",
+    materials: [
+      { id: "ironbarkWood", qty: 1 },
+      { id: "bindingTwine", qty: 2 },
+      { id: "polishedRivets", qty: 2 }
+    ]
   }
 };
 
