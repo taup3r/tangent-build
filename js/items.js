@@ -116,15 +116,10 @@ export const itemData = {
     name: "Spectroscope",
     chance: 100,
     maxCount: 99,
-    type: "craftable",
+    type: "gadget",
     use: 2000,
     rarity: "Common",
-    lore: "Handy tool to identify rare jewels.",
-    materials: [
-      { id: "ironbarkWood", qty: 1 },
-      { id: "bindingTwine", qty: 2 },
-      { id: "polishedRivets", qty: 2 }
-    ]
+    lore: "Handy tool to identify rare jewels."
   }
 };
 
@@ -168,6 +163,17 @@ export const items = [
   {
     id: "spectroscope",
     count: 0
+  }
+];
+
+export const craftingRecipes = [
+  {
+    id: "spectroscope",
+    materials: [
+      { id: "ironbarkWood", qty: 1 },
+      { id: "bindingTwine", qty: 1 },
+      { id: "polishedRivets", qty: 1 }
+    ]
   }
 ];
 
