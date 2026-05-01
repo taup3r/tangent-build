@@ -111,6 +111,15 @@ export const itemData = {
     use: 300,
     rarity: "Common",
     lore: "Reinforcement components for weapons and tools."
+  },
+  "spectroscope": {
+    name: "Spectroscope",
+    chance: 100,
+    maxCount: 99,
+    type: "gadget",
+    use: 2000,
+    rarity: "Common",
+    lore: "Handy tool to identify rare jewels."
   }
 };
 
@@ -150,6 +159,21 @@ export const items = [
   {
     id: "polishedRivets",
     count: 0
+  },
+  {
+    id: "spectroscope",
+    count: 0
+  }
+];
+
+export const craftingRecipes = [
+  {
+    id: "spectroscope",
+    materials: [
+      { id: "ironbarkWood", qty: 1 },
+      { id: "bindingTwine", qty: 2 },
+      { id: "polishedRivets", qty: 2 }
+    ]
   }
 ];
 
@@ -216,7 +240,7 @@ export function getItems(type) {
   return itemList;
 }
 
-export function triggerItem(item, action = null, isView = false, label = "Pick up") {
+export function triggerItem(item, action = null, isView = false, label = "Pick up", showCancel = true) {
   const modal = document.getElementById("item-modal");
   const itemName = document.getElementById("itemName");
   const itemLore = document.getElementById("itemLore");
@@ -234,7 +258,7 @@ export function triggerItem(item, action = null, isView = false, label = "Pick u
     acceptButton.textContent = label;
   }
 
-  if (isView === true) {
+  if (isView === true || showCancel === false) {
     ignoreButton.style.display = "none";
   } else {
     ignoreButton.textContent = "Ignore";

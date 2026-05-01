@@ -1,0 +1,60 @@
+p {
+  margin-bottom: 1.1em;
+  margin-top: -1em;
+}
+
+.recipe-list {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 2px solid #333;
+  padding: 6px;
+}
+
+.recipe-item {
+  padding: 6px;
+  margin-bottom: 8px;
+  background: #222;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.recipe-item:hover {
+  background: #2d2d33;
+}
+
+.recipe-item.selected {
+  border-color: #6fa8dc;
+  background: #2b3a4a;
+}
+
+.recipe-preview {
+  width: 100%;
+  padding: 6px;
+  background: #222;
+  border-radius: 8px;
+  min-height: 100px;
+}
+
+.craft-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s;
+}
+
+.craft-btn.disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.craft-btn:not(.disabled):hover {
+  background: #5ecf63;
+}

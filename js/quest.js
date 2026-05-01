@@ -224,7 +224,7 @@ export const questData = {
   "theWatcher": {
     title: "The Watcher at the Old Tower",
     type: "townSquare",
-    maxStage: 7,
+    maxStage: 8,
     flow: [
       {
         npc: "Guard Captain Orval",
@@ -235,21 +235,28 @@ export const questData = {
       },
       {
         npc: "Elyndra, The Watcher",
-        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a ...— I need it to observe it more closely!",
+        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a Spectroscope — I need to observe it more closely!",
         submit: "Fetch",
         nextChance: 100,
         nextZone: "backAlley"
       },
       {
         npc: "",
-        message: "You got the item that Elyndra is asking for. Time to go back to her.",
+        message: "You got the Spectroscope that Elyndra is asking for. Time to go back to her.",
         submit: "Okay",
         nextChance: 100,
         nextZone: "outskirts"
       },
       {
         npc: "Elyndra, The Watcher",
-        message: "I am not mistaken, this clearly the shard I've been looking for. Tell me—did the smugglers speak of a Broker?",
+        message: "Thank you for this Spectroscope. Give me some time so I can study. Come back to see me when I'm done.",
+        submit: "Listen",
+        nextChance: 20,
+        nextZone: "outskirts"
+      },
+      {
+        npc: "Elyndra, The Watcher",
+        message: "I am not mistaken, this clearly the shard I've been looking for. Sorry I left the tower to look for you in haste. Tell me—did the smugglers speak of a Broker?",
         submit: "Listen",
         nextChance: 100,
         nextZone: "outskirts"

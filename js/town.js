@@ -119,6 +119,15 @@ function getAlleyZone() {
     });
   }
 
+  if (questCompleted("smuggler")) {
+    buttons.push({
+      label: "Crafting Workshop",
+      class: "btn-blacksmith",
+      action: () => window.location.href = `workshop.html?player=${encodeURIComponent(player.name)}`,
+      disabled: false
+    });
+  }
+
   zoneName.textContent = "Wayfarer's Edge";
   return buttons;
 }
