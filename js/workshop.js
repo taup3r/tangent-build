@@ -5,8 +5,9 @@ import { itemData, getItem, getNameByRarity, getColorByRarity, loadItems, saveIt
 
 loadProgress();
 updateHeaderStats();
+loadItems();
 
-document.getElementById("loreText").textContent = `Select a recipe and craft and item here.`;
+document.getElementById("loreText").textContent = `Select a recipe to view details.`;
 
 const craftingRecipes = [
   {
