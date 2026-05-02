@@ -230,7 +230,7 @@ export const questData = {
         npc: "Guard Captain Orval",
         message: "I’ve sent word to someone who knows more about that shard you found. Travel to the Old Watchtower outside town. She will be waiting for you.",
         submit: "Travel",
-        nextChance: 100,
+        nextChance: 70,
         nextZone: "outskirts"
       },
       {
