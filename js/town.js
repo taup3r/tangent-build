@@ -374,7 +374,7 @@ function getTownSquareZone() {
       class: "btn-train",
       action: () => {
         if (questCompleted("smuggler")) {
-          tryQuestEncounter("watchTower", 0);
+          tryQuestEncounter("theWatcher", 0);
         } else {
           tryQuestEncounter("smuggler", 6, null, () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")));
         }
