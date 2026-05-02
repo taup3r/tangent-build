@@ -235,7 +235,7 @@ export const questData = {
       },
       {
         npc: "Elyndra, The Watcher",
-        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a Spectroscope — I need to observe it more closely!",
+        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a Spectroscope — I need to observe it more closely! You need to craft it though, check the Crafting Workshop on the other side of town.",
         submit: "Fetch",
         nextChance: 100,
         nextZone: "backAlley"
