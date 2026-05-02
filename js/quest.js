@@ -700,7 +700,7 @@ export const quests = [
     chance: 15,
     stage: 7,
     zone: "backAlley",
-    active: false
+    active: true
   },
   {
     id: "e4",
