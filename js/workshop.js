@@ -1,6 +1,6 @@
 import { player, playerStats, loadProgress, saveProgress } from "./state.js";
 import { updateHeaderStats } from "./ui.js";
-import { showQuestList, questData, getQuest } from "./quest.js";
+import { showQuestList, questData, getQuest, tryQuestEncounter } from "./quest.js";
 import { items, itemData, getItem, loadItems, showItemList, triggerItem, craftingRecipes } from "./items.js";
 
 loadProgress();
@@ -87,7 +87,13 @@ function craftSelectedRecipe() {
   playerStats.gold -= itemData[selectedRecipe.id].use;
 
   const crafted = getItem(selectedRecipe.id);
-  triggerItem(crafted, () => location.reload(), false, "Accept", false);
+  triggerItem(crafted, () => {
+    if (crafted.id === "spectroscope") {
+      tryQuestEncounter("theWatcher", 2, null, () => location.reload());
+    } else {
+      location.reload();
+    }
+  }, false, "Accept", false);
 }
 
 function hasMaterials(recipe) {
