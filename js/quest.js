@@ -250,14 +250,14 @@ export const questData = {
       {
         npc: "Elyndra, The Watcher",
         message: "Thank you for this Spectroscope. Give me some time so I can study. Come back to see me when I'm done.",
-        submit: "Listen",
+        submit: "Leave",
         nextChance: 20,
         nextZone: "outskirts"
       },
       {
         npc: "Elyndra, The Watcher",
         message: "I am not mistaken, this clearly the shard I've been looking for. Sorry I left the tower to look for you in haste. Tell me—did the smugglers speak of a Broker?",
-        submit: "Listen",
+        submit: "Maybe... I'm not sure",
         nextChance: 100,
         nextZone: "outskirts"
       },
