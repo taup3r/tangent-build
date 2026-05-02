@@ -3,7 +3,7 @@ import { hasSkill } from "./skills.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest, getMessage } from "./quest.js";
-import { showItemList } from "./items.js";
+import { showItemList, getItem, saveItems } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
@@ -270,7 +270,11 @@ function getOutskirtsZone() {
     {
       label: "Old Watchtower",
       class: "btn-shop",
-      action: () => getMessage("h8"),
+      action: () => tryQuestEncounter("theWatcher", 3, () => {
+        const item = getItem("spectroscope");
+        item.count -= 1;
+        saveItems();
+      }, () => tryQuestEncounter("theWatcher", 1, null, () => getMessage("h8"))),
       disabled: false
     },
     {
@@ -372,7 +376,13 @@ function getTownSquareZone() {
     buttons.push({
       label: "Guard Post",
       class: "btn-train",
-      action: () => tryQuestEncounter("smuggler", 6, null, () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1"))),
+      action: () => {
+        if (questCompleted("smuggler")) {
+          tryQuestEncounter("theWatcher", 0, null, () => getMessage("t1"));
+        } else {
+          tryQuestEncounter("smuggler", 6, null, () => tryQuestEncounter("smuggler", 1, null, () => getMessage("t1")));
+        }
+      },
       disabled: false
     });
   } else {
@@ -423,7 +433,7 @@ function getTownSquareZone() {
     merchantGuildDone = true;
   }
 
-  if (blacksmithDone === true && merchantGuildDone === true) {
+  //if (blacksmithDone === true && merchantGuildDone === true) {
     buttons.push({
       label: "Go to the Village",
       class: "btn-zone",
@@ -434,7 +444,7 @@ function getTownSquareZone() {
       },
       disabled: false
     });
-  }
+  //}
 
   zoneName.textContent = "Wayfarer's Rest";
   return buttons;
@@ -514,6 +524,7 @@ function questEncounters() {
   });
   tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
   tryQuestEncounter("smuggler", 2);
+  tryQuestEncounter("theWatcher", 4, () => tryQuestEncounter("theWatcher", 5));
 }
 
 function explore() {

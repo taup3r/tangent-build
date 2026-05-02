@@ -230,12 +230,12 @@ export const questData = {
         npc: "Guard Captain Orval",
         message: "I’ve sent word to someone who knows more about that shard you found. Travel to the Old Watchtower outside town. She will be waiting for you.",
         submit: "Travel",
-        nextChance: 100,
+        nextChance: 70,
         nextZone: "outskirts"
       },
       {
         npc: "Elyndra, The Watcher",
-        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a Spectroscope — I need to observe it more closely!",
+        message: "You carry a shard of the Obsidian Heart. I felt its pulse the moment you approached. Can you fetch me a Spectroscope — I need to observe it more closely! You need to craft it though, check the Crafting Workshop on the other side of town.",
         submit: "Fetch",
         nextChance: 100,
         nextZone: "backAlley"
@@ -250,14 +250,14 @@ export const questData = {
       {
         npc: "Elyndra, The Watcher",
         message: "Thank you for this Spectroscope. Give me some time so I can study. Come back to see me when I'm done.",
-        submit: "Listen",
+        submit: "Leave",
         nextChance: 20,
         nextZone: "outskirts"
       },
       {
         npc: "Elyndra, The Watcher",
         message: "I am not mistaken, this clearly the shard I've been looking for. Sorry I left the tower to look for you in haste. Tell me—did the smugglers speak of a Broker?",
-        submit: "Listen",
+        submit: "Maybe... I'm not sure",
         nextChance: 100,
         nextZone: "outskirts"
       },
@@ -698,9 +698,9 @@ export const quests = [
   {
     id: "smuggler",
     chance: 15,
-    stage: 0,
+    stage: 7,
     zone: "backAlley",
-    active: false
+    active: true
   },
   {
     id: "e4",
@@ -754,6 +754,12 @@ export const quests = [
     id: "h9",
     chance: 100,
     stage: 1,  // starts at 1 for view
+    active: false
+  },
+  {
+    id: "theWatcher",
+    chance: 25,
+    stage: 0,
     active: false
   }
 ];
