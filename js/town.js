@@ -3,7 +3,7 @@ import { hasSkill } from "./skills.js";
 import { getRandomDungeonType } from "./dungeon.js";
 import { updateHeaderStats } from "./ui.js";
 import { tryQuestEncounter, loadQuestState, showQuestList, getQuest, questData, triggerQuest, questCompleted, checkQuest, getMessage } from "./quest.js";
-import { showItemList } from "./items.js";
+import { showItemList, getItem, saveItems } from "./items.js";
 import { openCompareWeapon } from "./modal.js";
 import { upgradeWeapon } from "./weapon.js";
 import { showStatsModal } from "./stats.js";
