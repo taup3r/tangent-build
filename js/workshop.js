@@ -88,11 +88,7 @@ function craftSelectedRecipe() {
 
   const crafted = getItem(selectedRecipe.id);
   triggerItem(crafted, () => {
-    if (crafted.id === "spectroscope") {
-      tryQuestEncounter("theWatcher", 2, null, () => location.reload());
-    } else {
-      location.reload();
-    }
+    tryQuestEncounter("theWatcher", 2, null, () => location.reload(), crafted.id === "spectroscope");
   }, false, "Accept", false);
 }
 
