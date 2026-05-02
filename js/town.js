@@ -524,6 +524,7 @@ function questEncounters() {
   });
   tryQuestEncounter("smuggler", 0, null, null, questCompleted("lostChild"));
   tryQuestEncounter("smuggler", 2);
+  tryQuestEncounter("theWatcher", 4, () => tryQuestEncounter("theWatcher", 5));
 }
 
 function explore() {
