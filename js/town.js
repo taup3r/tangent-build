@@ -270,7 +270,7 @@ function getOutskirtsZone() {
     {
       label: "Old Watchtower",
       class: "btn-shop",
-      action: () => tryQuestEncounter("theWatcher", 3, {
+      action: () => tryQuestEncounter("theWatcher", 3, () => {
         const item = getItem("spectroscope");
         item.count -= 1;
         saveItems();
