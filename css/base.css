@@ -20,7 +20,7 @@ h1, h2, h3, button {
 }
 
 body {
-  background-image: url('../assets/townsquare.jpg');
+  /*background-image: url('../assets/townsquare.jpg');*/
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
