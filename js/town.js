@@ -15,6 +15,7 @@ const loreText = document.getElementById("loreText");
 const questButton = document.getElementById("questButton");
 const itemButton = document.getElementById("itemButton");
 const zoneName = document.getElementById("zoneName");
+const townWrapper = document.getElementById("townWrapper");
 
 const loreSnippets = [
   "You wandered through the quiet market streets.",
@@ -451,6 +452,10 @@ function generateTownLayout() {
     buttons = getOutskirtsZone();
   } else {
     buttons = getTownSquareZone();
+  }
+
+  if (townWrapper) {
+    townWrapper.style.backgroundImage = `url('../assets/townsquare.jpg')`;
   }
 
   // Randomly decide how many buttons appear (1–4)
