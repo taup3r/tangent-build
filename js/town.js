@@ -17,6 +17,8 @@ const itemButton = document.getElementById("itemButton");
 const zoneName = document.getElementById("zoneName");
 const townWrapper = document.getElementById("townWrapper");
 
+townWrapper.background-image = url('../assets/townsquare.jpg');
+
 const loreSnippets = [
   "You wandered through the quiet market streets.",
   "A stray cat followed you for a few steps before losing interest.",
