@@ -455,7 +455,7 @@ function generateTownLayout() {
   }
 
   if (townWrapper) {
-    townWrapper.style.backgroundImage = `url('../assets/townsquare.jpg')`;
+    townWrapper.style.backgroundImage = `url('../assets/${zone}.jpg')`;
   }
 
   // Randomly decide how many buttons appear (1–4)
