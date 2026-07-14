@@ -17,10 +17,6 @@ const itemButton = document.getElementById("itemButton");
 const zoneName = document.getElementById("zoneName");
 const townWrapper = document.getElementById("townWrapper");
 
-if (townWrapper) {
-  townWrapper.style.backgroundImage = url('../assets/townsquare.jpg');
-}
-
 const loreSnippets = [
   "You wandered through the quiet market streets.",
   "A stray cat followed you for a few steps before losing interest.",
@@ -32,6 +28,12 @@ const loreSnippets = [
   "A child pointed at you excitedly, whispering about heroes."
 ];
 
+function setBackground(imageFile) {
+  if (townWrapper) {
+    townWrapper.style.backgroundImage = `url('../assets/${imageFile}.jpg')`;
+  }
+}
+
 function resetLoreAnimation() {
   const animation = loreText.style.animation;
   loreText.style.animation = "none";
@@ -39,10 +41,7 @@ function resetLoreAnimation() {
   loreText.style.animation = animation;
 }
 
-//function getMessage(id, action = null) {
-  //const quest = getQuest(id);
-  //triggerQuest(quest, action, true);
-//}
+setBackground('townsquare');
 
 function getAlleyZone() {
   randomArea.innerHTML = "";
