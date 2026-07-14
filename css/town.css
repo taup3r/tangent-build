@@ -2,6 +2,15 @@
   text-align: center;
   padding-top: 40px;
   padding-bottom: 140px; /* space for explore button */
+  position: fixed; /* stays in place */
+  top: 0;
+  left: 0;
+  width: 100vw; /* full viewport width */
+  height: 100vh; /* full viewport height */
+  background-size: cover; /* scales image to fill */
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* keeps it behind UI */
 }
 
 .town-title {
