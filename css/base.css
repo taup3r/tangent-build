@@ -21,8 +21,9 @@ h1, h2, h3, button {
 
 body {
   background-image: url('../assets/townsquare.jpg');
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  height: 100vh;
 }
