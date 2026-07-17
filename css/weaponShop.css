@@ -37,10 +37,9 @@
 }
 
 .wrapper {
-  width: 100vw; /* full viewport width */
-  height: 100vh; /* full viewport height */
+  height: 100vh;
   background-size: cover; /* scales image to fill */
-  background: url('assets/weaponShop.jpg');
+  background: url('../assets/weaponShop.jpg');
   background-position: center;
   background-repeat: no-repeat;
 }
