@@ -37,7 +37,9 @@
 }
 
 .wrapper {
-  height: 100vh;
+  position: fixed; /* stays in place */
+  width: 100vw; /* full viewport width */
+  height: 100vh; /* full viewport height */
   background-size: cover; /* scales image to fill */
   background: url('../assets/weaponShop.jpg');
   background-position: center;
