@@ -58,3 +58,12 @@ p {
 .craft-btn:not(.disabled):hover {
   background: #5ecf63;
 }
+
+.wrapper {
+  /*width: 100vw;  full viewport width */
+  /*height: 100vh;  full viewport height */
+  background-size: cover; /* scales image to fill */
+  background-image: url('../assets/workshop.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
