@@ -72,3 +72,12 @@
   white-space: nowrap;
   width: 20%;
 }
+
+.wrapper {
+  /*width: 100vw;  full viewport width */
+  /*height: 100vh;  full viewport height */
+  background-size: cover; /* scales image to fill */
+  background-image: url('../assets/merchantGuild.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
