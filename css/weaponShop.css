@@ -37,7 +37,6 @@
 }
 
 .wrapper {
-  position: fixed;
   width: 100vw; /* full viewport width */
   height: 100vh; /* full viewport height */
   background-size: cover; /* scales image to fill */
