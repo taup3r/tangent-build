@@ -469,7 +469,11 @@ export function startNewBattle() {
 
     // Dungeon complete → return to town
     setDungeonMode(false);
-    tryQuestEncounter("smuggler", 5, () => showDungeonSummary(), () => showDungeonSummary());
+    if (dungeonType === "chapel") {
+      tryQuestEncounter("theWatcher", 6, () => showDungeonSummary(), () => showDungeonSummary());
+    } else {
+      tryQuestEncounter("smuggler", 5, () => showDungeonSummary(), () => showDungeonSummary());
+    }
     return;
   }
 
