@@ -171,8 +171,8 @@ export const craftingRecipes = [
     id: "spectroscope",
     materials: [
       { id: "ironbarkWood", qty: 1 },
-      { id: "bindingTwine", qty: 1 },
-      { id: "polishedRivets", qty: 1 }
+      { id: "bindingTwine", qty: 2 },
+      { id: "polishedRivets", qty: 2 }
     ]
   }
 ];
