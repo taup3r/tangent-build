@@ -270,11 +270,11 @@ function getOutskirtsZone() {
     {
       label: "Old Watchtower",
       class: "btn-shop",
-      action: () => tryQuestEncounter("theWatcher", 3, () => {
+      action: () => tryQuestEncounter("theWatcher", 7, null, () => tryQuestEncounter("theWatcher", 3, () => {
         const item = getItem("spectroscope");
         item.count -= 1;
         saveItems();
-      }, () => tryQuestEncounter("theWatcher", 1, null, () => getMessage("h8"))),
+      }, () => tryQuestEncounter("theWatcher", 1, null, () => getMessage("h8")))),
       disabled: false
     },
     {
