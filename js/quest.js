@@ -270,7 +270,7 @@ export const questData = {
       },
       {
         npc: "",
-        message: "You defeated the Boss and recovered the second Obsidian Shard. Its energy hums violently in your hands.",
+        message: "You defeated the Boss and recovered the second Obsidian Shard. Its energy hums violently in your hands. Elyndra should know what to do.",
         submit: "Take Shard",
         nextChance: 100,
         nextZone: "outskirts"
