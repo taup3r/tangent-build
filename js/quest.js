@@ -832,11 +832,11 @@ export function triggerQuest(quest, action = null, isView = false) {
   npcName.textContent = currentQuestStage.npc;
   npcText.textContent = currentQuestStage.message;
 
-  //if (isView === true) {
-    //npcButton.textContent = "Close";
-  //} else {
+  if (isView === true) {
+    npcButton.textContent = "Close";
+  } else {
     npcButton.textContent = currentQuestStage.submit;
-  //}
+  }
 
   //if (isView === true) {
     //ignoreButton.style.display = "none";
