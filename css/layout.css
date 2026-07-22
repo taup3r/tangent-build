@@ -110,6 +110,12 @@
   background: #666;
 }
 
+#itemListContainer {
+  max-height: 200px;   /* fits ~5 items depending on your styling */
+  overflow-y: auto;
+  padding-right: 6px;  /* prevents scrollbar overlap */
+}
+
 /* Landscape mode */
 @media (min-width: 700px) {
   .battlefield {
