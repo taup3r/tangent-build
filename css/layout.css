@@ -110,7 +110,7 @@
   background: #666;
 }
 
-#itemListContainer {
+.scrollableList {
   max-height: 210px;   /* fits ~5 items depending on your styling */
   overflow-y: auto;
   padding-right: 6px;  /* prevents scrollbar overlap */
