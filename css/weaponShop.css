@@ -45,3 +45,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.container {
+  padding: 0 40px;
+}
