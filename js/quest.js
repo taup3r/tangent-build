@@ -12,7 +12,7 @@ export const questData = {
     flow: [
       {
         npc: "",
-        message: "You arrive in Wayfarer, a quiet town that feels safer than most — at least on the surface. But beneath its calm streets, something stirs. Smugglers move in the alleys. A shard of obsidian pulses with dark energy. And an unseen force watches from the wilds beyond. You didn’t come here seeking trouble. But trouble has already found you. Your journey begins.",
+        message: "You arrive in Wayfarer, a quiet town that feels safer than most — at least on the surface. But beneath its calm streets, something stirs. Smugglers move in the alleys. A shard of obsidian pulses with dark energy. And an unseen force watches from the wilds beyond. You didn’t come here seeking trouble. But trouble has already found you. Your journey begins.<br/><br/>You can visit the arena or explore the town and get to know rhe townsfolk to learn more.",
         submit: "Go",
         nextChance: 100
       }
