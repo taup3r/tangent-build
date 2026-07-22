@@ -774,6 +774,12 @@ export const quests = [
     chance: 25,
     stage: 0,
     active: false
+  },
+  {
+    id: "intro",
+    chance: 100,
+    stage: 0,
+    active: false
   }
 ];
 
