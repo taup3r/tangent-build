@@ -504,6 +504,7 @@ function questEncounters() {
   playerStats.combatEncounter = false;
   saveProgress();
 
+  tryQuestEncounter("intro", 0);
   tryQuestEncounter("blacksmith", 0);
   tryQuestEncounter("blacksmith", 2);
   tryQuestEncounter("blacksmith", 3, () => {
